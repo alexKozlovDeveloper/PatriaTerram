@@ -55,6 +55,8 @@
             this.stoneTopEdgeTextBox = new System.Windows.Forms.TextBox();
             this.lakeBottomEdgeTextBox = new System.Windows.Forms.TextBox();
             this.lakeTopEdgeTextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.beachSizeTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.mapPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -314,11 +316,30 @@
             this.lakeTopEdgeTextBox.TabIndex = 26;
             this.lakeTopEdgeTextBox.Text = "200";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 558);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 17);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "Beach size";
+            // 
+            // beachSizeTextBox
+            // 
+            this.beachSizeTextBox.Location = new System.Drawing.Point(12, 578);
+            this.beachSizeTextBox.Name = "beachSizeTextBox";
+            this.beachSizeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.beachSizeTextBox.TabIndex = 28;
+            this.beachSizeTextBox.Text = "5";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1053, 650);
+            this.Controls.Add(this.beachSizeTextBox);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.lakeTopEdgeTextBox);
             this.Controls.Add(this.lakeBottomEdgeTextBox);
             this.Controls.Add(this.stoneTopEdgeTextBox);
@@ -383,6 +404,8 @@
         private System.Windows.Forms.TextBox stoneTopEdgeTextBox;
         private System.Windows.Forms.TextBox lakeBottomEdgeTextBox;
         private System.Windows.Forms.TextBox lakeTopEdgeTextBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox beachSizeTextBox;
     }
 }
 

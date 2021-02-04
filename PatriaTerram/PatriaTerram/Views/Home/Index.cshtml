@@ -13,9 +13,12 @@
                 {
                     <td>
                         <div class="map-cell">
-                            @for (int k = 0; k < Model[i, j].Colors.Length; k++)
+                            @for (int k = 0; k < Model[i, j].Components.Count; k++)
                             {
-                                <div class="map-cell-item" style='background-color: rgb(@Model[i, j].Colors[k], @Model[i, j].Colors[k], @Model[i, j].Colors[k]);'></div>
+                                
+                                //Model[i, j].GetPointColor(out int r, out int g, out int b);
+                                
+                                <div class="map-cell-item @Model[i, j].Components[k].Terrain.Name" style='background-color: rgb(@Model[i, j].Components[k].Terrain.ColorR, @Model[i, j].Components[k].Terrain.ColorG, @Model[i, j].Components[k].Terrain.ColorB);'></div>
                             }
                         </div>
                     </td>
@@ -33,6 +36,13 @@
         <div class="layer-button" onclick="selectLeayer(@i)">Layer @i</div>
     }
 
+    Terrains:
+
+    @foreach (var item in PatriaTerram.Core.Models.Terrain.GetTerrains())
+    {
+        <div class="layer-button" onclick="selectTerain('@item.Key')">@item.Key</div>
+    }
+
     <div onclick="hideAll()">
         Hide all
     </div>
@@ -40,6 +50,7 @@
 </div>
 
 <script>
+
 
     function selectLeayer(layerId) {
         //debugger;
@@ -60,8 +71,8 @@
 
                 var color = items[j].innerHTML;
 
-                $(items[j]).css('background-color', 'rgb(' + color + ', ' + color + ', ' + color+ ')');
-            }            
+                $(items[j]).css('background-color', 'rgb(' + color + ', ' + color + ', ' + color + ')');
+            }
         }
     }
 
@@ -70,6 +81,14 @@
 
         $(".map-cell-item")
             .addClass("hidden-cell-item")
+    }
+
+    function selectTerain(name) {
+        //debugger;
+        hideAll();
+
+        $("." + name)
+            .removeClass("hidden-cell-item")
     }
 
 </script>

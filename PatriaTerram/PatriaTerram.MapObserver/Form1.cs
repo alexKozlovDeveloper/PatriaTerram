@@ -99,6 +99,8 @@ namespace PatriaTerram.MapObserver
             int lakeBottomEdge = int.Parse(lakeBottomEdgeTextBox.Text as string);
             int lakeTopEdge = int.Parse(lakeTopEdgeTextBox.Text as string);
 
+            int beachSize = int.Parse(beachSizeTextBox.Text as string);
+
             var factory = new TerrainPaletteFactory(size, size, 
                 oceanEdge, 
                 mountainsEdge,
@@ -109,12 +111,13 @@ namespace PatriaTerram.MapObserver
                 stoneBottomEdge,
                 stoneTopEdge,
                 lakeBottomEdge,
-                lakeTopEdge
+                lakeTopEdge,
+                beachSize
                 );
 
             var palette = factory.GetPalette();
 
-            Bitmap image = new Bitmap(palette.Width, palette.Height);
+            Bitmap image = new Bitmap(palette.Width * 2, palette.Height * 2);
 
             for (int x = 0; x < palette.Width; x++)
             {
@@ -124,7 +127,10 @@ namespace PatriaTerram.MapObserver
 
                     point.GetPointColor(out int r, out int g, out int b);
 
-                    image.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    image.SetPixel(x * 2, y * 2, Color.FromArgb(r, g, b));
+                    image.SetPixel(x * 2, y * 2 + 1, Color.FromArgb(r, g, b));
+                    image.SetPixel(x * 2 + 1, y * 2, Color.FromArgb(r, g, b));
+                    image.SetPixel(x * 2 + 1, y * 2 + 1, Color.FromArgb(r, g, b));
                 }
             }
 

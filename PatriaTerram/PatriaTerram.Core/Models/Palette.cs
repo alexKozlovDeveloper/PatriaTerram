@@ -29,16 +29,16 @@ namespace PatriaTerram.Core.Models
                 return Points[0].Length;
             }
         }
-        //public int Depth
-        //{
-        //    get
-        //    {
-        //        var max = Points.Select(a => a.Max(b => b.Colors.Length))
-        //                        .Max();
+        public int Depth
+        {
+            get
+            {
+                var max = Points.Select(a => a.Max(b => b.Components.Count))
+                                .Max();
 
-        //        return max;
-        //    }
-        //}
+                return max;
+            }
+        }
 
         public PalettePoint this[int i, int j]
         {

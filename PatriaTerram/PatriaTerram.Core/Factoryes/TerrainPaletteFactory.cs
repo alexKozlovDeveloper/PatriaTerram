@@ -32,19 +32,22 @@ namespace PatriaTerram.Core.Factoryes
         private int _seed = 666;
         private int _maxValue = 256;
 
+        private int _beachSize;
+
         private PerlinNoiseGenerator _generator;
 
         public TerrainPaletteFactory(int width = 128, int height = 128, 
             int oceanEdge = 120, 
-            int mountainsEdge = 150,
-            int fertileSoilBottomEdge = 125,
-            int fertileSoilTopEdge = 130,
-            int woodBottomEdge = 125,
-            int woodTopEdge = 130,
-            int stoneBottomEdge = 125,
-            int stoneTopEdge = 130,
-            int lakeBottomEdge = 125,
-            int lakeTopEdge = 130
+            int mountainsEdge = 160,
+            int fertileSoilBottomEdge = 122,
+            int fertileSoilTopEdge = 139,
+            int woodBottomEdge = 124,
+            int woodTopEdge = 160,
+            int stoneBottomEdge = 165,
+            int stoneTopEdge = 200,
+            int lakeBottomEdge = 160,
+            int lakeTopEdge = 200,
+            int beachSize = 5
             )
         {
             _generator = new PerlinNoiseGenerator(_seed, _maxValue);
@@ -65,6 +68,8 @@ namespace PatriaTerram.Core.Factoryes
 
             _lakeBottomEdge = lakeBottomEdge;
             _lakeTopEdge = lakeTopEdge;
+
+            _beachSize = beachSize;
         }
 
         public Palette GetPalette()
@@ -73,10 +78,10 @@ namespace PatriaTerram.Core.Factoryes
 
             var altitudeMatrix = _generator.GetPerlinNoiseMatrix(_width, _height);
             var oceanMatrix = altitudeMatrix.ClearTopValue(_oceanEdge);
-            var groundMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge + 3);
+            var groundMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge + _beachSize);
             var mountainsMatrix = altitudeMatrix.ClearBottomValue(_mountainsEdge);
 
-            var beachMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge).ClearTopValue(_oceanEdge + 2);
+            var beachMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge).ClearTopValue(_oceanEdge + _beachSize);
 
             var terrains = Terrain.GetTerrains();
 
