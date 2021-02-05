@@ -30,9 +30,9 @@ namespace PatriaTerram.Core.Models
                         Name = Constants.Altitude,
                         IsAffectColor = false,
                         IntolerableTerrains = new string[] {},
-                        ColorR = 0,
-                        ColorG = 0,
-                        ColorB = 0
+                        ColorR = 50,
+                        ColorG = 50,
+                        ColorB = 50
                     }
                 },
                 {
@@ -69,7 +69,7 @@ namespace PatriaTerram.Core.Models
                             //Constants.Stone
                         },
                         ColorR = 0,
-                        ColorG = 220,
+                        ColorG = 200,
                         ColorB = 0
                     }
                 },
@@ -88,7 +88,7 @@ namespace PatriaTerram.Core.Models
                         },
                         ColorR = 0,
                         ColorG = 0,
-                        ColorB = 255
+                        ColorB = 200
                     }
                 },
                 {
@@ -100,7 +100,7 @@ namespace PatriaTerram.Core.Models
                         IntolerableTerrains = new string[] {},
                         ColorR = 0,
                         ColorG = 0,
-                        ColorB = 128
+                        ColorB = 100
                     }
                 },
                 {
@@ -116,8 +116,8 @@ namespace PatriaTerram.Core.Models
                             Constants.Lake
                         },
                         ColorR = 0,
-                        ColorG = 0,
-                        ColorB = 0
+                        ColorG = 50,
+                        ColorB = 50
                     }
                 },
                 {
@@ -168,8 +168,8 @@ namespace PatriaTerram.Core.Models
                         {
                             
                         },
-                        ColorR = 255,
-                        ColorG = 255,
+                        ColorR = 200,
+                        ColorG = 200,
                         ColorB = 0
                     }
                 }

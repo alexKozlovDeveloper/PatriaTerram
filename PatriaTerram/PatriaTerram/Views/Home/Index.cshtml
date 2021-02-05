@@ -15,10 +15,12 @@
                         <div class="map-cell">
                             @for (int k = 0; k < Model[i, j].Components.Count; k++)
                             {
-                                
+                                int r = (int)(Model[i, j].Components[k].Terrain.ColorR + (Model[i, j].Components[k].Value - 128) / 2.5);
+                                int g = (int)(Model[i, j].Components[k].Terrain.ColorG + (Model[i, j].Components[k].Value - 128) / 2.5);
+                                int b = (int)(Model[i, j].Components[k].Terrain.ColorB + (Model[i, j].Components[k].Value - 128) / 2.5);
                                 //Model[i, j].GetPointColor(out int r, out int g, out int b);
-                                
-                                <div class="map-cell-item @Model[i, j].Components[k].Terrain.Name" style='background-color: rgb(@Model[i, j].Components[k].Terrain.ColorR, @Model[i, j].Components[k].Terrain.ColorG, @Model[i, j].Components[k].Terrain.ColorB);'></div>
+
+                                <div class="map-cell-item @Model[i, j].Components[k].Terrain.Name" style='background-color: rgb(@r, @g, @b);'><div class="map-cell-item-value">@Model[i, j].Components[k].Value</div></div>
                             }
                         </div>
                     </td>
@@ -45,6 +47,17 @@
 
     <div onclick="hideAll()">
         Hide all
+    </div>
+
+    <div onclick="showAll()">
+        Show all
+    </div>
+
+    <div onclick="showValue()">
+        Show Value
+    </div>
+    <div onclick="hideValue()">
+        Hide Value
     </div>
 
 </div>
@@ -83,11 +96,30 @@
             .addClass("hidden-cell-item")
     }
 
+    function showAll(i) {
+        //debugger;
+
+        $(".map-cell-item")
+            .removeClass("hidden-cell-item")
+    }
+    //map-cell-item-value
     function selectTerain(name) {
         //debugger;
         hideAll();
 
         $("." + name)
+            .removeClass("hidden-cell-item")
+    }
+
+    function hideValue() {
+
+        $(".map-cell-item-value")
+            .addClass("hidden-cell-item")
+    }
+
+    function showValue() {
+
+        $(".map-cell-item-value")
             .removeClass("hidden-cell-item")
     }
 

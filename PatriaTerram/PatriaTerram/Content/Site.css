@@ -29,6 +29,8 @@ textarea {
 }
 
 .map-cell {
+    min-width: 5px;
+    min-height: 5px;
 }
 
 /*.shown-cell-item {
@@ -42,8 +44,16 @@ textarea {
     background-color: aqua;
 }
 
-.map-cell-item {
-    font-size: 0.1em;
+/*font-size: 0.5em;
     width: 5px;
     height: 5px;
+color: aqua;
+padding: 1px;*/
+
+.map-cell-item {
+    font-size: 0.5em;
+    color: aqua;
+    padding: 1px;
+    min-width: 5px;
+    min-height: 5px;
 }
