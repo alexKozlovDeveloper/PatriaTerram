@@ -167,5 +167,77 @@ namespace PerlinNoise
 
             return result;
         }
+
+        public static int[][] IncreaseOctave(this int[][] matrix, int multiplayer)
+        {
+            var result = new int[matrix.Length * multiplayer][];
+
+            for (int x = 0; x < matrix.Length * multiplayer; x++)
+            {
+                result[x] = new int[matrix[0].Length * multiplayer];
+            }
+
+            for (int x = 0; x < matrix.Length; x++)
+            {
+                for (int y = 0; y < matrix[0].Length; y++)
+                {
+                    for (double a = 0; a < multiplayer; a++)
+                    {
+                        for (double b = 0; b < multiplayer; b++)
+                        {
+                            if (a == 0 && b == 0)
+                            {
+                                result[x * multiplayer][y * multiplayer] = matrix[x][y];
+                                continue;
+                            }
+
+                            var point00 = matrix[x][y];
+                            var point01 = matrix[x][(y == matrix[0].Length - 1 ? -1 : y) + 1];
+                            var point10 = matrix[(x == matrix.Length - 1 ? -1 : x) + 1][y];
+                            var point11 = matrix[(x == matrix.Length - 1 ? -1 : x) + 1][(y == matrix[0].Length - 1 ? -1 : y) + 1];
+
+                            var t00 = 1 / Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+                            var t01 = 1 / Math.Sqrt(Math.Pow(a, 2) + Math.Pow(multiplayer - b, 2));
+                            var t10 = 1 / Math.Sqrt(Math.Pow(multiplayer - a, 2) + Math.Pow(b, 2));
+                            var t11 = 1 / Math.Sqrt(Math.Pow(multiplayer - a, 2) + Math.Pow(multiplayer - b, 2));
+
+                            var value = (point00 * t00 + point01 * t01 + point10 * t10 + point11 * t11) / (t00 + t01 + t10 + t11);
+
+                            result[x * multiplayer + (int)a][y * multiplayer + (int)b] = (int)value;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static int[][] DecreaseOctave(this int[][] matrix, int multiplayer)
+        {
+            int newWidth = matrix.Length / multiplayer;
+            int newHeight = matrix[0].Length / multiplayer; 
+
+            var result = new int[newWidth][];
+
+            for (int x = 0; x < newWidth; x++)
+            {
+                result[x] = new int[newHeight];
+            }
+
+            for (int x = 0; x < newWidth; x++)
+            {
+                for (int y = 0; y < newHeight; y++)
+                {
+                    result[x][y] = matrix[x * multiplayer][y * multiplayer];
+                }
+            }
+
+            return result;
+        }
+
+        public static int Lerp(int a, int b, int t)
+        {
+            return a + (b - a) * t;
+        }
     }
 }

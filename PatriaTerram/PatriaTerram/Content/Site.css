@@ -28,13 +28,12 @@ textarea {
    /* border: 1px solid black;*/
 }
 
+/* Map Styles*/
+
 .map-cell {
     min-width: 5px;
     min-height: 5px;
 }
-
-/*.shown-cell-item {
-}*/
 
 .hidden-cell-item {
     display: none;
@@ -43,12 +42,6 @@ textarea {
 .layer-button {
     background-color: aqua;
 }
-
-/*font-size: 0.5em;
-    width: 5px;
-    height: 5px;
-color: aqua;
-padding: 1px;*/
 
 .map-cell-item {
     font-size: 0.5em;

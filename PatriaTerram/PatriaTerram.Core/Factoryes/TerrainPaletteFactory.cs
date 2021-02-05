@@ -178,8 +178,6 @@ namespace PatriaTerram.Core.Factoryes
             }
 
             return model;
-        }
-
-        
+        }        
     }
 }

@@ -65,8 +65,7 @@ namespace PatriaTerram.Core.Models
                             Constants.Ocean,
                             Constants.Mountains,
                             Constants.Beach,
-                            Constants.Lake,
-                            //Constants.Stone
+                            Constants.Lake
                         },
                         ColorR = 0,
                         ColorG = 200,

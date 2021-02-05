@@ -274,7 +274,6 @@
             this.woodBottomEdgeTextBox.Size = new System.Drawing.Size(55, 22);
             this.woodBottomEdgeTextBox.TabIndex = 21;
             this.woodBottomEdgeTextBox.Text = "124";
-            this.woodBottomEdgeTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // woodTopEdgeTextBox
             // 

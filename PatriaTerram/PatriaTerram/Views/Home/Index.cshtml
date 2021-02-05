@@ -18,9 +18,13 @@
                                 int r = (int)(Model[i, j].Components[k].Terrain.ColorR + (Model[i, j].Components[k].Value - 128) / 2.5);
                                 int g = (int)(Model[i, j].Components[k].Terrain.ColorG + (Model[i, j].Components[k].Value - 128) / 2.5);
                                 int b = (int)(Model[i, j].Components[k].Terrain.ColorB + (Model[i, j].Components[k].Value - 128) / 2.5);
-                                //Model[i, j].GetPointColor(out int r, out int g, out int b);
 
                                 <div class="map-cell-item @Model[i, j].Components[k].Terrain.Name" style='background-color: rgb(@r, @g, @b);'><div class="map-cell-item-value">@Model[i, j].Components[k].Value</div></div>
+                            }
+
+                            @{
+                                Model[i, j].GetPointColor(out int red, out int green, out int blue);
+                                <div class="map-cell-item result" style='background-color: rgb(@red, @green, @blue);'></div>
                             }
                         </div>
                     </td>
@@ -44,6 +48,7 @@
     {
         <div class="layer-button" onclick="selectTerain('@item.Key')">@item.Key</div>
     }
+    <div class="layer-button" onclick="selectTerain('result')">result</div>
 
     <div onclick="hideAll()">
         Hide all
@@ -56,6 +61,11 @@
     <div onclick="showValue()">
         Show Value
     </div>
+
+    <div onclick="hideValue()">
+        Hide Value
+    </div>
+
     <div onclick="hideValue()">
         Hide Value
     </div>
@@ -66,7 +76,6 @@
 
 
     function selectLeayer(layerId) {
-        //debugger;
 
         var cells = $(".map-cell");
 
@@ -90,21 +99,16 @@
     }
 
     function hideAll(i) {
-        //debugger;
-
         $(".map-cell-item")
             .addClass("hidden-cell-item")
     }
 
     function showAll(i) {
-        //debugger;
-
         $(".map-cell-item")
             .removeClass("hidden-cell-item")
     }
-    //map-cell-item-value
+
     function selectTerain(name) {
-        //debugger;
         hideAll();
 
         $("." + name)

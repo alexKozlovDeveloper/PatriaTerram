@@ -136,10 +136,5 @@ namespace PatriaTerram.MapObserver
 
             mapPictureBox.Image = image;
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
