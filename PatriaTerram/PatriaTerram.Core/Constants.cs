@@ -16,6 +16,8 @@ namespace PatriaTerram.Core
         public const string Mountains = "mountains";
         public const string FertileSoil = "fertileSoil";
         public const string Beach = "beach";
-        public const string Stone = "stone"; 
+        public const string Stone = "stone";
+
+        public const string TownHall = "TownHall";
     }
 }

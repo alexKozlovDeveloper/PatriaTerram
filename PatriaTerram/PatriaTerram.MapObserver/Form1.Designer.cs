@@ -102,7 +102,7 @@
             this.sizeComboBox.Name = "sizeComboBox";
             this.sizeComboBox.Size = new System.Drawing.Size(127, 24);
             this.sizeComboBox.TabIndex = 2;
-            this.sizeComboBox.Text = "512";
+            this.sizeComboBox.Text = "128";
             // 
             // exponentiationButton
             // 

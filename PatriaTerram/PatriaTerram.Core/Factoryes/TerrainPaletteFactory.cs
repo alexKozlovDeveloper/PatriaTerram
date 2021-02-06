@@ -45,7 +45,7 @@ namespace PatriaTerram.Core.Factoryes
             int woodTopEdge = 160,
             int stoneBottomEdge = 165,
             int stoneTopEdge = 200,
-            int lakeBottomEdge = 160,
+            int lakeBottomEdge = 145,
             int lakeTopEdge = 200,
             int beachSize = 5
             )

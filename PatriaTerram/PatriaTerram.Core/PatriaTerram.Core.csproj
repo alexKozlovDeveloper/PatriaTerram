@@ -42,7 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildingConditions\BuildingConditionsProcessor.cs" />
+    <Compile Include="BuildingConditions\IConditionsResolver.cs" />
+    <Compile Include="BuildingConditions\TownHallConditionResolver.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Helpers\CoordHelper.cs" />
+    <Compile Include="Models\BuildingConditions.cs" />
+    <Compile Include="Models\Coord.cs" />
     <Compile Include="Models\Terrain.cs" />
     <Compile Include="Factoryes\SamplePaletteFactory.cs" />
     <Compile Include="Factoryes\TerrainPaletteFactory.cs" />

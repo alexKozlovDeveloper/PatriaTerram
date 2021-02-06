@@ -174,5 +174,10 @@ namespace PatriaTerram.Core.Models
                 }
             };
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

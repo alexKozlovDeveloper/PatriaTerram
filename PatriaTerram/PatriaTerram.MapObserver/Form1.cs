@@ -1,4 +1,7 @@
-﻿using PatriaTerram.Core.Factoryes;
+﻿using PatriaTerram.Core.BuildingConditions;
+using PatriaTerram.Core.Factoryes;
+using PatriaTerram.Core.Helpers;
+using PatriaTerram.Core.Models;
 using PerlinNoise;
 using System;
 using System.Collections.Generic;

@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Patria Terram";
+
+    
 }
 
 <div class="map-container">
@@ -25,6 +27,13 @@
                             @{
                                 Model[i, j].GetPointColor(out int red, out int green, out int blue);
                                 <div class="map-cell-item result" style='background-color: rgb(@red, @green, @blue);'></div>
+                            }
+
+                            @foreach (var condition in Model[i, j].BuildingConditions)
+                            {
+                                var r = (int)((condition.Value / (ViewBag.maxCondition * 1.0)) * 250);
+                                <div class="map-cell-item building-conditions @condition.BuildingType" style='background-color: rgb(@r, 0, 0 );'>@condition.Value</div>
+
                             }
                         </div>
                     </td>
@@ -68,6 +77,14 @@
 
     <div onclick="hideValue()">
         Hide Value
+    </div>
+
+    <div onclick="hideConditions()">
+        Hide Conditions
+    </div>
+
+    <div onclick="showConditions()">
+        Show Conditions
     </div>
 
 </div>
@@ -124,6 +141,18 @@
     function showValue() {
 
         $(".map-cell-item-value")
+            .removeClass("hidden-cell-item")
+    }
+
+    function hideConditions() {
+
+        $(".building-conditions")
+            .addClass("hidden-cell-item")
+    }
+
+    function showConditions() {
+
+        $(".building-conditions")
             .removeClass("hidden-cell-item")
     }
 
