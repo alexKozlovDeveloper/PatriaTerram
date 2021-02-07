@@ -2,6 +2,7 @@
 using PatriaTerram.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,8 @@ namespace PatriaTerram.Core.Configurations
 {
     public static class Configs
     {
-        public const string TerrainsJsonFilePath = @"Configurations\Terrains.json";
-        public const string PaletteConfigurationJsonFilePath = @"Configurations\PaletteConfigurations.json";
+        public static string TerrainsJsonFilePath = @"Configurations\Terrains.json";
+        public static string PaletteConfigurationJsonFilePath = @"Configurations\PaletteConfigurations.json";
 
         private static Dictionary<string, Terrain> _terrains;
         private static Dictionary<string, PaletteConfiguration> _paletteConfigs;
@@ -22,7 +23,7 @@ namespace PatriaTerram.Core.Configurations
             {
                 if(_terrains == null)
                 {
-                    var json = System.IO.File.ReadAllText(TerrainsJsonFilePath);
+                    var json = File.ReadAllText(TerrainsJsonFilePath);
                     _terrains = JsonConvert.DeserializeObject<Dictionary<string, Terrain>>(json);
                 }
 
@@ -36,7 +37,7 @@ namespace PatriaTerram.Core.Configurations
             {
                 if (_paletteConfigs == null)
                 {
-                    var json = System.IO.File.ReadAllText(PaletteConfigurationJsonFilePath);
+                    var json = File.ReadAllText(PaletteConfigurationJsonFilePath);
                     _paletteConfigs = JsonConvert.DeserializeObject<Dictionary<string, PaletteConfiguration>>(json);
                 }
 

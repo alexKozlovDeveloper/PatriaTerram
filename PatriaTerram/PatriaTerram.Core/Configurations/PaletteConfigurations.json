@@ -25,30 +25,30 @@
     "BeachSize": 15,
     "SmoothingSize": 2
   },
-  "sample": {
-    "Width": 128,
-    "Height": 128,
+  "web": {
+    "Width": 64,
+    "Height": 64,
     "Seed": 666,
     "MaxAltitudeValue": 256,
-    "OceanEdge": 120,
-    "MountainsEdge": 160,
+    "OceanEdge": 100,
+    "MountainsEdge": 170,
     "FertileSoilRange": {
-      "Bottom": 122,
-      "Top": 139
+      "Bottom": 70,
+      "Top": 150
     },
     "WoodRange": {
-      "Bottom": 124,
-      "Top": 160
+      "Bottom": 90,
+      "Top": 180
     },
     "StoneRange": {
-      "Bottom": 165,
-      "Top": 200
+      "Bottom": 195,
+      "Top": 255
     },
     "LakeRange": {
-      "Bottom": 160,
-      "Top": 200
+      "Bottom": 180,
+      "Top": 255
     },
-    "BeachSize": 5,
-    "SmoothingSize": 1
+    "BeachSize": 10,
+    "SmoothingSize": 2
   }
 }

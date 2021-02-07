@@ -16,17 +16,24 @@ namespace PatriaTerram.Controllers
     {
         public ActionResult Index()
         {
-            IPaletteFactory factory = new TerrainPaletteFactory(Configs.PaletteConfigs["main"]);
-            //IPaletteFactory factory = new SamplePaletteFactory();
+            Configs.PaletteConfigurationJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\PaletteConfigurations.json";
+            Configs.TerrainsJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Terrains.json";
+            
+            IPaletteFactory factory = new TerrainPaletteFactory(Configs.PaletteConfigs["web"]);
 
             var model = factory.GetPalette();
-
-            // test conditions
 
             var processor = new BuildingConditionsProcessor();
 
             processor.Resolve(model);
 
+            ViewBag.maxCondition = GetMaxCondition(model);
+
+            return View(model);
+        }    
+        
+        private int GetMaxCondition(Palette model)
+        {
             var points = new List<PalettePoint>();
 
             for (int x = 0; x < model.Width; x++)
@@ -47,16 +54,7 @@ namespace PatriaTerram.Controllers
                 }
             }
 
-            //var points = model.Points.Cast<PalettePoint>().ToList();
-            //points.Select(a => a.BuildingConditions).Cast<BuildingConditions>().ToList();
-
-            var max = conditions.Max(a => a.Value);
-
-            ViewBag.maxCondition = max;
-
-
-
-            return View(model);
-        }        
+            return conditions.Max(a => a.Value);
+        }
     }
 }

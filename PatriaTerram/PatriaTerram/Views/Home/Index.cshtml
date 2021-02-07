@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Patria Terram";
 
-    
+
 }
 
 <div class="map-container">
@@ -21,18 +21,22 @@
                                 int g = (int)(Model[i, j].Components[k].Terrain.ColorG + (Model[i, j].Components[k].Value - 128) / 2.5);
                                 int b = (int)(Model[i, j].Components[k].Terrain.ColorB + (Model[i, j].Components[k].Value - 128) / 2.5);
 
-                                <div class="map-cell-item @Model[i, j].Components[k].Terrain.Name" style='background-color: rgb(@r, @g, @b);'><div class="map-cell-item-value">@Model[i, j].Components[k].Value</div></div>
+                                <div class="map-cell-item terrain @Model[i, j].Components[k].Terrain.Name" style='background-color: rgb(@r, @g, @b);'>
+                                    <div class="map-cell-item-value">@Model[i, j].Components[k].Value</div>
+                                </div>
                             }
 
                             @{
                                 Model[i, j].GetPointColor(out int red, out int green, out int blue);
-                                <div class="map-cell-item result" style='background-color: rgb(@red, @green, @blue);'></div>
+                                <div class="map-cell-item terrain result" style='background-color: rgb(@red, @green, @blue);'></div>
                             }
 
                             @foreach (var condition in Model[i, j].BuildingConditions)
                             {
                                 var r = (int)((condition.Value / (ViewBag.maxCondition * 1.0)) * 250);
-                                <div class="map-cell-item building-conditions @condition.BuildingType" style='background-color: rgb(@r, 0, 0 );'>@condition.Value</div>
+                                <div class="map-cell-item building-conditions @condition.BuildingType" style='background-color: rgb(@r, 0, 0 );'>
+                                    <div class="map-cell-item-value">@condition.Value</div>
+                                </div>
 
                             }
                         </div>
@@ -44,116 +48,44 @@
 </div>
 
 <div>
-    layers: @Model.Depth
+    <div>
+        Terrains:
 
-    @for (int i = 0; i < Model.Depth; i++)
-    {
-        <div class="layer-button" onclick="selectLeayer(@i)">Layer @i</div>
-    }
+        @foreach (var item in PatriaTerram.Core.Configurations.Configs.Terrains)
+        {
+            <div class="layer-button" onclick="selectTerain('@item.Key')">@item.Key</div>
+        }
 
-    Terrains:
+        <div class="layer-button" onclick="selectTerain('result')">All terrains</div>
+        <div class="layer-button" onclick="showItems('.map-cell-item')">Show all terrains</div>
+        <div class="layer-button" onclick="hideItems('.map-cell-item')">Hide all terrains</div>
+        <div class="layer-button" onclick="showItems('.map-cell-item-value')">Show Values</div>
+        <div class="layer-button" onclick="hideItems('.map-cell-item-value')">Hide Values</div>
 
-    @foreach (var item in PatriaTerram.Core.Models.Terrain.GetTerrains())
-    {
-        <div class="layer-button" onclick="selectTerain('@item.Key')">@item.Key</div>
-    }
-    <div class="layer-button" onclick="selectTerain('result')">result</div>
-
-    <div onclick="hideAll()">
-        Hide all
     </div>
+    <div>
+        Conditions:
 
-    <div onclick="showAll()">
-        Show all
+        <div class="layer-button" onclick="showItems('.building-conditions')">Show Conditions</div>
+        <div class="layer-button" onclick="hideItems('.building-conditions')">Hide Conditions</div>
+
     </div>
-
-    <div onclick="showValue()">
-        Show Value
-    </div>
-
-    <div onclick="hideValue()">
-        Hide Value
-    </div>
-
-    <div onclick="hideValue()">
-        Hide Value
-    </div>
-
-    <div onclick="hideConditions()">
-        Hide Conditions
-    </div>
-
-    <div onclick="showConditions()">
-        Show Conditions
-    </div>
-
 </div>
 
 <script>
 
-
-    function selectLeayer(layerId) {
-
-        var cells = $(".map-cell");
-
-        for (var i = 0; i < cells.length; i++) {
-            var items = $(cells[i]).find(".map-cell-item")
-
-            for (var j = 0; j < items.length; j++) {
-
-                if (j == layerId) {
-                    $(items[j]).removeClass("hidden-cell-item")
-                }
-                else {
-                    $(items[j]).addClass("hidden-cell-item")
-                }
-
-                var color = items[j].innerHTML;
-
-                $(items[j]).css('background-color', 'rgb(' + color + ', ' + color + ', ' + color + ')');
-            }
-        }
+    function hideItems(selector) {
+        $(selector).addClass("hidden-cell-item")
     }
 
-    function hideAll(i) {
-        $(".map-cell-item")
-            .addClass("hidden-cell-item")
-    }
-
-    function showAll(i) {
-        $(".map-cell-item")
-            .removeClass("hidden-cell-item")
+    function showItems(selector) {
+        $(selector).removeClass("hidden-cell-item")
     }
 
     function selectTerain(name) {
-        hideAll();
+        hideItems('.map-cell-item');
 
-        $("." + name)
-            .removeClass("hidden-cell-item")
-    }
-
-    function hideValue() {
-
-        $(".map-cell-item-value")
-            .addClass("hidden-cell-item")
-    }
-
-    function showValue() {
-
-        $(".map-cell-item-value")
-            .removeClass("hidden-cell-item")
-    }
-
-    function hideConditions() {
-
-        $(".building-conditions")
-            .addClass("hidden-cell-item")
-    }
-
-    function showConditions() {
-
-        $(".building-conditions")
-            .removeClass("hidden-cell-item")
+        $("." + name).removeClass("hidden-cell-item")
     }
 
 </script>
