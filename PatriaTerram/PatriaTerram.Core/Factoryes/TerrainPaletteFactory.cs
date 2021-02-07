@@ -29,14 +29,16 @@ namespace PatriaTerram.Core.Factoryes
         private int _lakeBottomEdge;
         private int _lakeTopEdge;
 
-        private int _seed = 666;
+        private int _seed;
         private int _maxValue = 256;
 
         private int _beachSize;
+        private int _smoothingSize;
 
         private PerlinNoiseGenerator _generator;
 
-        public TerrainPaletteFactory(int width = 128, int height = 128, 
+        public TerrainPaletteFactory(int width = 32, int height = 32, 
+            int seed = 666,
             int oceanEdge = 120, 
             int mountainsEdge = 160,
             int fertileSoilBottomEdge = 122,
@@ -45,15 +47,17 @@ namespace PatriaTerram.Core.Factoryes
             int woodTopEdge = 160,
             int stoneBottomEdge = 165,
             int stoneTopEdge = 200,
-            int lakeBottomEdge = 145,
+            int lakeBottomEdge = 163,
             int lakeTopEdge = 200,
-            int beachSize = 5
+            int beachSize = 5,
+            int smoothingSize = 1
             )
         {
-            _generator = new PerlinNoiseGenerator(_seed, _maxValue);
+            _generator = new PerlinNoiseGenerator(seed, _maxValue);
 
             _width = width;
             _height = height;
+            _seed = seed;
             _oceanEdge = oceanEdge;
             _mountainsEdge = mountainsEdge;
 
@@ -70,13 +74,14 @@ namespace PatriaTerram.Core.Factoryes
             _lakeTopEdge = lakeTopEdge;
 
             _beachSize = beachSize;
+            _smoothingSize = smoothingSize;
         }
 
         public Palette GetPalette()
         {
             Palette model = CreateEmptyPalette(_width, _height);
 
-            var altitudeMatrix = _generator.GetPerlinNoiseMatrix(_width, _height);
+            var altitudeMatrix = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize);
             var oceanMatrix = altitudeMatrix.ClearTopValue(_oceanEdge);
             var groundMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge + _beachSize);
             var mountainsMatrix = altitudeMatrix.ClearBottomValue(_mountainsEdge);
@@ -90,40 +95,40 @@ namespace PatriaTerram.Core.Factoryes
             AddTerrain(model, mountainsMatrix, terrains[Constants.Mountains]);          
             AddTerrain(model, beachMatrix, terrains[Constants.Beach]);
 
-            var lakeMatrix = _generator.GetPerlinNoiseMatrix(_width, _height)
+            var lakeMatrix = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize)
                 .ClearBottomValue(_lakeBottomEdge)
                 .ClearTopValue(_lakeTopEdge);
             AddTerrain(model, lakeMatrix, terrains[Constants.Lake]);
-            var lakeMatrix2 = _generator.GetPerlinNoiseMatrix(_width, _height)
+            var lakeMatrix2 = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize)
                 .ClearBottomValue(_lakeBottomEdge)
                 .ClearTopValue(_lakeTopEdge);
             AddTerrain(model, lakeMatrix2, terrains[Constants.Lake]);
-            var lakeMatrix3 = _generator.GetPerlinNoiseMatrix(_width, _height)
+            var lakeMatrix3 = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize)
                 .ClearBottomValue(_lakeBottomEdge)
                 .ClearTopValue(_lakeTopEdge);
             AddTerrain(model, lakeMatrix3, terrains[Constants.Lake]);
 
-            var stoneMatrix = _generator.GetPerlinNoiseMatrix(_width, _height)
+            var stoneMatrix = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize)
                 .ClearBottomValue(_stoneBottomEdge)
                 .ClearTopValue(_stoneTopEdge);
             AddTerrain(model, stoneMatrix, terrains[Constants.Stone]);
-            var stoneMatrix2 = _generator.GetPerlinNoiseMatrix(_width, _height)
+            var stoneMatrix2 = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize)
                 .ClearBottomValue(_stoneBottomEdge)
                 .ClearTopValue(_stoneTopEdge);
             AddTerrain(model, stoneMatrix2, terrains[Constants.Stone]);
-            var stoneMatrix3 = _generator.GetPerlinNoiseMatrix(_width, _height)
+            var stoneMatrix3 = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize)
                 .ClearBottomValue(_stoneBottomEdge)
                 .ClearTopValue(_stoneTopEdge);
             AddTerrain(model, stoneMatrix3, terrains[Constants.Stone]);
 
             AddTerrain(model, groundMatrix, terrains[Constants.Ground]);
 
-            var fertileSoilMatrix = _generator.GetPerlinNoiseMatrix(_width, _height)
+            var fertileSoilMatrix = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize)
                 .ClearBottomValue(_fertileSoilBottomEdge)
                 .ClearTopValue(_fertileSoilTopEdge);
             AddTerrain(model, fertileSoilMatrix, terrains[Constants.FertileSoil]);
 
-            var woodMatrix = _generator.GetPerlinNoiseMatrix(_width, _height)
+            var woodMatrix = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize)
                 .ClearBottomValue(_woodBottomEdge)
                 .ClearTopValue(_woodTopEdge);
             AddTerrain(model, woodMatrix, terrains[Constants.Wood]);

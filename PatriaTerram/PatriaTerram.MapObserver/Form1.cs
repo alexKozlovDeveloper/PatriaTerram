@@ -29,9 +29,12 @@ namespace PatriaTerram.MapObserver
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            int size = int.Parse(sizeComboBox.SelectedItem as string);            
+            int size = int.Parse(sizeComboBox.SelectedItem as string);
+            int smoothingSize = int.Parse(SmoothingSizeTextBox.Text as string);
 
-            _matrix = _generator.GetPerlinNoiseMatrix(size, size);
+            _matrix = _generator.GetPerlinNoiseMatrix(size, smoothingSize);
+
+            _matrix = _matrix.StretchOnMaximumAndMinimumValue(10, 250).Smoothing();
 
             UpdateImage();
         }
@@ -87,6 +90,7 @@ namespace PatriaTerram.MapObserver
         private void paletteButton_Click(object sender, EventArgs e)
         {
             int size = int.Parse(sizeComboBox.SelectedItem as string);
+            int seed = int.Parse(seedTextBox.Text as string);
             int oceanEdge = int.Parse(oceanEdgeTextBox.Text as string);
             int mountainsEdge = int.Parse(mountainsTextBox.Text as string);
 
@@ -104,7 +108,11 @@ namespace PatriaTerram.MapObserver
 
             int beachSize = int.Parse(beachSizeTextBox.Text as string);
 
+            int pixelSize = int.Parse(pixelSizeTextBox.Text as string);
+            int smoothingSize = int.Parse(SmoothingSizeTextBox.Text as string);
+
             var factory = new TerrainPaletteFactory(size, size, 
+                seed,
                 oceanEdge, 
                 mountainsEdge,
                 fertileSoilBottomEdge,
@@ -120,24 +128,31 @@ namespace PatriaTerram.MapObserver
 
             var palette = factory.GetPalette();
 
-            Bitmap image = new Bitmap(palette.Width * 2, palette.Height * 2);
+            mapPictureBox.Image = GetBitmap(palette, pixelSize);
+        }
+
+        private Bitmap GetBitmap(Palette palette, int multiplayer)
+        {
+            var image = new Bitmap(palette.Width * multiplayer, palette.Height * multiplayer);
 
             for (int x = 0; x < palette.Width; x++)
             {
                 for (int y = 0; y < palette.Height; y++)
                 {
                     var point = palette[x, y];
-
                     point.GetPointColor(out int r, out int g, out int b);
 
-                    image.SetPixel(x * 2, y * 2, Color.FromArgb(r, g, b));
-                    image.SetPixel(x * 2, y * 2 + 1, Color.FromArgb(r, g, b));
-                    image.SetPixel(x * 2 + 1, y * 2, Color.FromArgb(r, g, b));
-                    image.SetPixel(x * 2 + 1, y * 2 + 1, Color.FromArgb(r, g, b));
+                    for (int i = 0; i < multiplayer; i++)
+                    {
+                        for (int j = 0; j < multiplayer; j++)
+                        {
+                            image.SetPixel(x * multiplayer + i, y * multiplayer + j, Color.FromArgb(r, g, b));
+                        }
+                    }                 
                 }
             }
 
-            mapPictureBox.Image = image;
+            return image;
         }
     }
 }
