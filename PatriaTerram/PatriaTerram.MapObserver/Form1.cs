@@ -1,4 +1,5 @@
-﻿using PatriaTerram.Core.BuildingConditions;
+﻿using Newtonsoft.Json;
+using PatriaTerram.Core.BuildingConditions;
 using PatriaTerram.Core.Factoryes;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
@@ -29,6 +30,8 @@ namespace PatriaTerram.MapObserver
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            _generator = new PerlinNoiseGenerator(seed: 666, maxValue: 256);
+
             int size = int.Parse(sizeComboBox.SelectedItem as string);
             int smoothingSize = int.Parse(SmoothingSizeTextBox.Text as string);
 
@@ -41,10 +44,10 @@ namespace PatriaTerram.MapObserver
 
         private void exponentiationButton_Click(object sender, EventArgs e)
         {
-            if(_matrix == null) { return; }
+            if (_matrix == null) { return; }
 
             _matrix = _matrix.Exponentiation(256);
-            
+
             UpdateImage();
         }
 
@@ -111,20 +114,56 @@ namespace PatriaTerram.MapObserver
             int pixelSize = int.Parse(pixelSizeTextBox.Text as string);
             int smoothingSize = int.Parse(SmoothingSizeTextBox.Text as string);
 
-            var factory = new TerrainPaletteFactory(size, size, 
-                seed,
-                oceanEdge, 
-                mountainsEdge,
-                fertileSoilBottomEdge,
-                fertileSoilTopEdge,
-                woodBottomEdge,
-                woodTopEdge,
-                stoneBottomEdge,
-                stoneTopEdge,
-                lakeBottomEdge,
-                lakeTopEdge,
-                beachSize
-                );
+            var config = new PaletteConfiguration
+            {
+                Width = size,
+                Height = size,
+                Seed = seed,
+                OceanEdge = oceanEdge,
+                MountainsEdge = mountainsEdge,
+                FertileSoilRange = new Range
+                {
+                    Bottom = fertileSoilBottomEdge,
+                    Top = fertileSoilTopEdge
+                },
+                WoodRange = new Range
+                {
+                    Bottom = woodBottomEdge,
+                    Top = woodTopEdge
+                },
+                StoneRange = new Range
+                {
+                    Bottom = stoneBottomEdge,
+                    Top = stoneTopEdge
+                },
+                LakeRange = new Range
+                {
+                    Bottom = lakeBottomEdge,
+                    Top = lakeTopEdge,
+                },
+                BeachSize = beachSize,
+                MaxAltitudeValue = 256,
+                SmoothingSize = smoothingSize
+            };
+
+            //Dictionary<string, Terrain> a1 = Content.Terrains;
+            //Dictionary<string, PaletteConfiguration> a2 = Content.PaletteConfigs;
+
+            var factory = new TerrainPaletteFactory(config);
+            //size, size, 
+            //seed,
+            //oceanEdge, 
+            //mountainsEdge,
+            //fertileSoilBottomEdge,
+            //fertileSoilTopEdge,
+            //woodBottomEdge,
+            //woodTopEdge,
+            //stoneBottomEdge,
+            //stoneTopEdge,
+            //lakeBottomEdge,
+            //lakeTopEdge,
+            //beachSize
+            //);
 
             var palette = factory.GetPalette();
 
@@ -148,7 +187,7 @@ namespace PatriaTerram.MapObserver
                         {
                             image.SetPixel(x * multiplayer + i, y * multiplayer + j, Color.FromArgb(r, g, b));
                         }
-                    }                 
+                    }
                 }
             }
 

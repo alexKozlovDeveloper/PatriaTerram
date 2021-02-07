@@ -56,7 +56,6 @@ namespace PatriaTerram.Core.Models
 
         public override int GetHashCode()
         {
-            //Calculate the hash code for the product.
             return X.GetHashCode() ^ Y.GetHashCode();
         }        
     }

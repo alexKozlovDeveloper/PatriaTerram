@@ -29,7 +29,7 @@ namespace PatriaTerram.Core.Models
                 return Points[0].Length;
             }
         }
-        public int Depth
+        public int ComponentsDepth
         {
             get
             {

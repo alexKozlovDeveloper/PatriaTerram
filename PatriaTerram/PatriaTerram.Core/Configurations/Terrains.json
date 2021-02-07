@@ -1,0 +1,112 @@
+{
+  "altitude": {
+    "Name": "altitude",
+    "IsAffectColor": false,
+    "IntolerableTerrains": [
+
+    ],
+    "ColorR": 50,
+    "ColorG": 50,
+    "ColorB": 50
+  },
+  "fertileSoil": {
+    "Name": "fertileSoil",
+    "IsAffectColor": true,
+    "IntolerableTerrains": [
+      "ocean",
+      "stone",
+      "mountains",
+      "beach",
+      "lake"
+    ],
+    "ColorR": 0,
+    "ColorG": 120,
+    "ColorB": 0
+  },
+  "ground": {
+    "Name": "ground",
+    "IsAffectColor": true,
+    "IntolerableTerrains": [
+      "ocean",
+      "mountains",
+      "beach",
+      "lake"
+    ],
+    "ColorR": 0,
+    "ColorG": 200,
+    "ColorB": 0
+  },
+  "lake": {
+    "Name": "lake",
+    "IsAffectColor": true,
+    "IntolerableTerrains": [
+      "ocean",
+      "mountains",
+      "stone",
+      "beach"
+    ],
+    "ColorR": 0,
+    "ColorG": 0,
+    "ColorB": 200
+  },
+  "ocean": {
+    "Name": "ocean",
+    "IsAffectColor": true,
+    "IntolerableTerrains": [
+
+    ],
+    "ColorR": 0,
+    "ColorG": 0,
+    "ColorB": 100
+  },
+  "stone": {
+    "Name": "stone",
+    "IsAffectColor": true,
+    "IntolerableTerrains": [
+      "ocean",
+      "mountains",
+      "lake"
+    ],
+    "ColorR": 0,
+    "ColorG": 50,
+    "ColorB": 50
+  },
+  "wood": {
+    "Name": "wood",
+    "IsAffectColor": true,
+    "IntolerableTerrains": [
+      "ocean",
+      "mountains",
+      "beach",
+      "lake",
+      "stone"
+    ],
+    "ColorR": 128,
+    "ColorG": 128,
+    "ColorB": 0
+  },
+  "mountains": {
+    "Name": "mountains",
+    "IsAffectColor": true,
+    "IntolerableTerrains": [
+      "ground",
+      "fertileSoil",
+      "lake",
+      "stone",
+      "wood"
+    ],
+    "ColorR": 100,
+    "ColorG": 100,
+    "ColorB": 100
+  },
+  "beach": {
+    "Name": "beach",
+    "IsAffectColor": true,
+    "IntolerableTerrains": [
+
+    ],
+    "ColorR": 200,
+    "ColorG": 200,
+    "ColorB": 0
+  }
+}

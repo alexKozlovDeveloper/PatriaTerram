@@ -98,17 +98,7 @@ namespace PerlinNoise
                         values.Add(matrix[point.Key][point.Value]);
                     }
 
-                    //var a1 = matrix[(x == 0 ? matrix.Length : x) - 1][(y == 0 ? matrix[0].Length : y) - 1];
-                    //var a2 = matrix[(x == 0 ? matrix.Length : x) - 1][y];
-                    //var a3 = matrix[(x == 0 ? matrix.Length : x) - 1][(y == matrix.Length - 1 ? -1 : y) + 1];
-                    //var a4 = matrix[x][(y == 0 ? matrix[0].Length : y) - 1];
-                    //var a5 = matrix[x][y];
-                    //var a6 = matrix[x][(y == matrix.Length - 1 ? -1 : y) + 1];
-                    //var a7 = matrix[(x == matrix.Length - 1 ? -1 : x) + 1][(y == 0 ? matrix[0].Length : y) - 1];
-                    //var a8 = matrix[(x == matrix.Length - 1 ? -1 : x) + 1][y];
-                    //var a9 = matrix[(x == matrix.Length - 1 ? -1 : x) + 1][(y == matrix.Length - 1 ? -1 : y) + 1];
-
-                    var value = (int)values.Average();//(a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9) / 9;
+                    var value = (int)values.Average();
 
                     result[x][y] = value;
                 }

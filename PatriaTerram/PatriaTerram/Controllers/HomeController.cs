@@ -1,4 +1,5 @@
 ﻿using PatriaTerram.Core.BuildingConditions;
+using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Factoryes;
 using PatriaTerram.Core.Interfaces;
 using PatriaTerram.Core.Models;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace PatriaTerram.Controllers
 {
@@ -14,7 +16,7 @@ namespace PatriaTerram.Controllers
     {
         public ActionResult Index()
         {
-            IPaletteFactory factory = new TerrainPaletteFactory();
+            IPaletteFactory factory = new TerrainPaletteFactory(Configs.PaletteConfigs["main"]);
             //IPaletteFactory factory = new SamplePaletteFactory();
 
             var model = factory.GetPalette();
@@ -51,6 +53,8 @@ namespace PatriaTerram.Controllers
             var max = conditions.Max(a => a.Value);
 
             ViewBag.maxCondition = max;
+
+
 
             return View(model);
         }        

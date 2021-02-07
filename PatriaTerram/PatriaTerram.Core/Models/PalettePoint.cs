@@ -10,6 +10,7 @@ namespace PatriaTerram.Core.Models
         public List<Component> Components { get; }
 
         private List<BuildingConditions> _buildingConditions;
+
         public IEnumerable<BuildingConditions> BuildingConditions 
         { 
             get
@@ -40,26 +41,25 @@ namespace PatriaTerram.Core.Models
 
         public void GetPointColor(out int r, out int g, out int b)
         {
-            r = 0;
-            g = 0;
-            b = 0;
+            var coloredComponents = Components.Where(a => a.Terrain.IsAffectColor);
 
-            int count = 0;
+            r = GetAvarageField(coloredComponents, a => a.Terrain.ColorR);
+            g = GetAvarageField(coloredComponents, a => a.Terrain.ColorG);
+            b = GetAvarageField(coloredComponents, a => a.Terrain.ColorB);
+        }
 
-            foreach (var component in Components)
+        private int GetAvarageField<T>(IEnumerable<T> items, Func<T, int> field)
+        {
+            var sum = 0;
+            var count = 0;
+
+            foreach (var item in items)
             {
-                if(component.Terrain.IsAffectColor == false) { continue; }
-
-                r += component.Terrain.ColorR;
-                g += component.Terrain.ColorG;
-                b += component.Terrain.ColorB;
-
+                sum += field(item);
                 count++;
             }
 
-            r /= count;
-            g /= count;
-            b /= count;
+            return sum / count;
         }
     }
 }

@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -46,9 +49,12 @@
     <Compile Include="BuildingConditions\IConditionsResolver.cs" />
     <Compile Include="BuildingConditions\TownHallConditionResolver.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Configurations\Configs.cs" />
     <Compile Include="Helpers\CoordHelper.cs" />
     <Compile Include="Models\BuildingConditions.cs" />
     <Compile Include="Models\Coord.cs" />
+    <Compile Include="Models\PaletteConfiguration.cs" />
+    <Compile Include="Models\Range.cs" />
     <Compile Include="Models\Terrain.cs" />
     <Compile Include="Factoryes\SamplePaletteFactory.cs" />
     <Compile Include="Factoryes\TerrainPaletteFactory.cs" />
@@ -63,6 +69,15 @@
       <Project>{2be58c75-a2c8-4c92-8fcf-e0207d5eaeeb}</Project>
       <Name>PerlinNoise</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configurations\PaletteConfigurations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Configurations\Terrains.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

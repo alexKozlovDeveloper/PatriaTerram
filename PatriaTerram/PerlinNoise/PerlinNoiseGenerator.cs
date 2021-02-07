@@ -42,7 +42,8 @@ namespace PerlinNoise
 
             var sum = matrixes.Average();
 
-            sum = sum.StretchOnMaximumAndMinimumValue(0, _maxValue).Smoothing(smoothingSize).Smoothing(smoothingSize);
+            sum = sum.StretchOnMaximumAndMinimumValue(0, _maxValue)
+                .Smoothing(smoothingSize);
 
             return sum;
         }
@@ -65,7 +66,7 @@ namespace PerlinNoise
 
             var sum = matrixes.Average();
 
-            return sum.Smoothing().Smoothing();
+            return sum.Smoothing();
         }
 
         /// <summary>

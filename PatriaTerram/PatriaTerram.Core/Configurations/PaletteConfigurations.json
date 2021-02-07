@@ -1,0 +1,54 @@
+{
+  "main": {
+    "Width": 128,
+    "Height": 128,
+    "Seed": 666,
+    "MaxAltitudeValue": 256,
+    "OceanEdge": 120,
+    "MountainsEdge": 160,
+    "FertileSoilRange": {
+      "Bottom": 122,
+      "Top": 139
+    },
+    "WoodRange": {
+      "Bottom": 124,
+      "Top": 160
+    },
+    "StoneRange": {
+      "Bottom": 165,
+      "Top": 200
+    },
+    "LakeRange": {
+      "Bottom": 160,
+      "Top": 200
+    },
+    "BeachSize": 5,
+    "SmoothingSize": 1
+  },
+  "sample": {
+    "Width": 128,
+    "Height": 128,
+    "Seed": 666,
+    "MaxAltitudeValue": 256,
+    "OceanEdge": 120,
+    "MountainsEdge": 160,
+    "FertileSoilRange": {
+      "Bottom": 122,
+      "Top": 139
+    },
+    "WoodRange": {
+      "Bottom": 124,
+      "Top": 160
+    },
+    "StoneRange": {
+      "Bottom": 165,
+      "Top": 200
+    },
+    "LakeRange": {
+      "Bottom": 160,
+      "Top": 200
+    },
+    "BeachSize": 5,
+    "SmoothingSize": 1
+  }
+}
