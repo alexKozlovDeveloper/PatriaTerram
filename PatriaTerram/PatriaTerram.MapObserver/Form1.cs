@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PatriaTerram.Core.BuildingConditions;
+using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Factoryes;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
@@ -19,49 +20,53 @@ namespace PatriaTerram.MapObserver
     public partial class Form1 : Form
     {
         private int[][] _matrix;
-        private PerlinNoiseGenerator _generator;
 
         public Form1()
         {
             InitializeComponent();
 
-            _generator = new PerlinNoiseGenerator(seed: 666, maxValue: 256);
+            foreach (var item in Configs.PaletteConfigs)
+            {
+                configsNamesComboBox.Items.Add(item.Key);
+            }
+
+            configsNamesComboBox.SelectedIndex = 0;
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            _generator = new PerlinNoiseGenerator(seed: 666, maxValue: 256);
-
             int size = int.Parse(sizeComboBox.SelectedItem as string);
             int smoothingSize = int.Parse(SmoothingSizeTextBox.Text as string);
+            int seed = int.Parse(seedTextBox.Text as string);
 
-            _matrix = _generator.GetPerlinNoiseMatrix(size, smoothingSize);
+            var generator = new PerlinNoiseGenerator(seed, 256);
 
-            _matrix = _matrix.StretchOnMaximumAndMinimumValue(10, 250).Smoothing();
+            _matrix = generator.GetPerlinNoiseMatrix(size, smoothingSize);
 
-            UpdateImage();
+            _matrix = _matrix.StretchOnMaximumAndMinimumValue(0, 255).Smoothing();
+
+            UpdateImage(_matrix);
         }
 
         private void exponentiationButton_Click(object sender, EventArgs e)
         {
-            if (_matrix == null) { return; }
-
+            _matrix = _matrix.StretchOnMaximumAndMinimumValue(0, 255).Smoothing();
             _matrix = _matrix.Exponentiation(256);
 
-            UpdateImage();
+            UpdateImage(_matrix);
         }
 
-        private void UpdateImage()
+        private void UpdateImage(int[][] matrix)
         {
-            if (_matrix == null) { return; }
+            if (matrix == null) { return; }
 
-            Bitmap image = new Bitmap(_matrix.Length, _matrix.Length);
+            Bitmap image = new Bitmap(matrix.Length, matrix.Length);
 
-            for (int x = 0; x < _matrix.Length; x++)
+            for (int x = 0; x < matrix.Length; x++)
             {
-                for (int y = 0; y < _matrix[0].Length; y++)
+                for (int y = 0; y < matrix[0].Length; y++)
                 {
-                    image.SetPixel(x, y, Color.FromArgb(_matrix[x][y], _matrix[x][y], _matrix[x][y]));
+                    image.SetPixel(x, y, Color.FromArgb(matrix[x][y], matrix[x][y], matrix[x][y]));
                 }
             }
 
@@ -76,7 +81,7 @@ namespace PatriaTerram.MapObserver
 
             _matrix = _matrix.ClearBottomValue(lowEdge);
 
-            UpdateImage();
+            UpdateImage(_matrix);
         }
 
         private void clearHighValueButton_Click(object sender, EventArgs e)
@@ -87,83 +92,46 @@ namespace PatriaTerram.MapObserver
 
             _matrix = _matrix.ClearTopValue(highEdge);
 
-            UpdateImage();
+            UpdateImage(_matrix);
         }
 
         private void paletteButton_Click(object sender, EventArgs e)
         {
-            int size = int.Parse(sizeComboBox.SelectedItem as string);
-            int seed = int.Parse(seedTextBox.Text as string);
-            int oceanEdge = int.Parse(oceanEdgeTextBox.Text as string);
-            int mountainsEdge = int.Parse(mountainsTextBox.Text as string);
-
-            int fertileSoilBottomEdge = int.Parse(fertileSoilBottomEdgeTextBox.Text as string);
-            int fertileSoilTopEdge = int.Parse(fertileSoilTopEdgeTextBox.Text as string);
-
-            int woodBottomEdge = int.Parse(woodBottomEdgeTextBox.Text as string);
-            int woodTopEdge = int.Parse(woodTopEdgeTextBox.Text as string);
-
-            int stoneBottomEdge = int.Parse(stoneBottomEdgeTextBox.Text as string);
-            int stoneTopEdge = int.Parse(stoneTopEdgeTextBox.Text as string);
-
-            int lakeBottomEdge = int.Parse(lakeBottomEdgeTextBox.Text as string);
-            int lakeTopEdge = int.Parse(lakeTopEdgeTextBox.Text as string);
-
-            int beachSize = int.Parse(beachSizeTextBox.Text as string);
-
             int pixelSize = int.Parse(pixelSizeTextBox.Text as string);
-            int smoothingSize = int.Parse(SmoothingSizeTextBox.Text as string);
 
             var config = new PaletteConfiguration
             {
-                Width = size,
-                Height = size,
-                Seed = seed,
-                OceanEdge = oceanEdge,
-                MountainsEdge = mountainsEdge,
+                Width = int.Parse(sizeComboBox.SelectedItem as string),
+                Height = int.Parse(sizeComboBox.SelectedItem as string),
+                Seed = int.Parse(seedTextBox.Text as string),
+                OceanEdge = int.Parse(oceanEdgeTextBox.Text as string),
+                MountainsEdge = int.Parse(mountainsTextBox.Text as string),
                 FertileSoilRange = new Range
                 {
-                    Bottom = fertileSoilBottomEdge,
-                    Top = fertileSoilTopEdge
+                    Bottom = int.Parse(fertileSoilBottomEdgeTextBox.Text as string),
+                    Top = int.Parse(fertileSoilTopEdgeTextBox.Text as string)
                 },
                 WoodRange = new Range
                 {
-                    Bottom = woodBottomEdge,
-                    Top = woodTopEdge
+                    Bottom = int.Parse(woodBottomEdgeTextBox.Text as string),
+                    Top = int.Parse(woodTopEdgeTextBox.Text as string)
                 },
                 StoneRange = new Range
                 {
-                    Bottom = stoneBottomEdge,
-                    Top = stoneTopEdge
+                    Bottom = int.Parse(stoneBottomEdgeTextBox.Text as string),
+                    Top = int.Parse(stoneTopEdgeTextBox.Text as string)
                 },
                 LakeRange = new Range
                 {
-                    Bottom = lakeBottomEdge,
-                    Top = lakeTopEdge,
+                    Bottom = int.Parse(lakeBottomEdgeTextBox.Text as string),
+                    Top = int.Parse(lakeTopEdgeTextBox.Text as string),
                 },
-                BeachSize = beachSize,
+                BeachSize = int.Parse(beachSizeTextBox.Text as string),
                 MaxAltitudeValue = 256,
-                SmoothingSize = smoothingSize
+                SmoothingSize = int.Parse(SmoothingSizeTextBox.Text as string)
             };
 
-            //Dictionary<string, Terrain> a1 = Content.Terrains;
-            //Dictionary<string, PaletteConfiguration> a2 = Content.PaletteConfigs;
-
             var factory = new TerrainPaletteFactory(config);
-            //size, size, 
-            //seed,
-            //oceanEdge, 
-            //mountainsEdge,
-            //fertileSoilBottomEdge,
-            //fertileSoilTopEdge,
-            //woodBottomEdge,
-            //woodTopEdge,
-            //stoneBottomEdge,
-            //stoneTopEdge,
-            //lakeBottomEdge,
-            //lakeTopEdge,
-            //beachSize
-            //);
 
             var palette = factory.GetPalette();
 
@@ -192,6 +160,35 @@ namespace PatriaTerram.MapObserver
             }
 
             return image;
+        }
+
+        private void loadConfigbutton_Click(object sender, EventArgs e)
+        {
+            string configName = configsNamesComboBox.SelectedItem.ToString();
+
+            var config = Configs.PaletteConfigs[configName];
+
+            sizeComboBox.SelectedItem = config.Width;
+            seedTextBox.Text = config.Seed.ToString();
+
+            oceanEdgeTextBox.Text = config.OceanEdge.ToString();
+            mountainsTextBox.Text = config.MountainsEdge.ToString();
+
+            fertileSoilBottomEdgeTextBox.Text = config.FertileSoilRange.Bottom.ToString();
+            fertileSoilTopEdgeTextBox.Text = config.FertileSoilRange.Top.ToString();
+
+            woodBottomEdgeTextBox.Text = config.WoodRange.Bottom.ToString();
+            woodTopEdgeTextBox.Text = config.WoodRange.Top.ToString();
+
+            stoneBottomEdgeTextBox.Text = config.StoneRange.Bottom.ToString();
+            stoneTopEdgeTextBox.Text = config.StoneRange.Top.ToString();
+
+            lakeBottomEdgeTextBox.Text = config.LakeRange.Bottom.ToString();
+            lakeTopEdgeTextBox.Text = config.LakeRange.Top.ToString();
+
+            beachSizeTextBox.Text = config.BeachSize.ToString();
+
+            SmoothingSizeTextBox.Text = config.SmoothingSize.ToString();
         }
     }
 }

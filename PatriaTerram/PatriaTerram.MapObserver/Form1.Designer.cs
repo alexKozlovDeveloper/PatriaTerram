@@ -63,12 +63,15 @@
             this.seedTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.SmoothingSizeTextBox = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.configsNamesComboBox = new System.Windows.Forms.ComboBox();
+            this.loadConfigbutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mapPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // mapPictureBox
             // 
-            this.mapPictureBox.Location = new System.Drawing.Point(145, 12);
+            this.mapPictureBox.Location = new System.Drawing.Point(195, 12);
             this.mapPictureBox.Name = "mapPictureBox";
             this.mapPictureBox.Size = new System.Drawing.Size(2500, 2500);
             this.mapPictureBox.TabIndex = 0;
@@ -76,10 +79,10 @@
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(12, 62);
+            this.startButton.Location = new System.Drawing.Point(8, 12);
             this.startButton.Name = "startButton";
             this.startButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.startButton.Size = new System.Drawing.Size(127, 28);
+            this.startButton.Size = new System.Drawing.Size(181, 44);
             this.startButton.TabIndex = 1;
             this.startButton.Text = "Start Perlin Noise";
             this.startButton.UseVisualStyleBackColor = true;
@@ -104,17 +107,17 @@
             "8192",
             "16 384",
             "32 768"});
-            this.sizeComboBox.Location = new System.Drawing.Point(12, 96);
+            this.sizeComboBox.Location = new System.Drawing.Point(93, 233);
             this.sizeComboBox.Name = "sizeComboBox";
-            this.sizeComboBox.Size = new System.Drawing.Size(127, 24);
+            this.sizeComboBox.Size = new System.Drawing.Size(96, 24);
             this.sizeComboBox.TabIndex = 2;
             this.sizeComboBox.Text = "128";
             // 
             // exponentiationButton
             // 
-            this.exponentiationButton.Location = new System.Drawing.Point(12, 154);
+            this.exponentiationButton.Location = new System.Drawing.Point(8, 152);
             this.exponentiationButton.Name = "exponentiationButton";
-            this.exponentiationButton.Size = new System.Drawing.Size(127, 47);
+            this.exponentiationButton.Size = new System.Drawing.Size(181, 25);
             this.exponentiationButton.TabIndex = 3;
             this.exponentiationButton.Text = "Exponentiation";
             this.exponentiationButton.UseVisualStyleBackColor = true;
@@ -122,7 +125,7 @@
             // 
             // lowEdgeTextBox
             // 
-            this.lowEdgeTextBox.Location = new System.Drawing.Point(11, 224);
+            this.lowEdgeTextBox.Location = new System.Drawing.Point(11, 79);
             this.lowEdgeTextBox.Name = "lowEdgeTextBox";
             this.lowEdgeTextBox.Size = new System.Drawing.Size(67, 22);
             this.lowEdgeTextBox.TabIndex = 4;
@@ -131,7 +134,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 204);
+            this.label1.Location = new System.Drawing.Point(12, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 17);
             this.label1.TabIndex = 5;
@@ -140,7 +143,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 255);
+            this.label2.Location = new System.Drawing.Point(12, 104);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 17);
             this.label2.TabIndex = 6;
@@ -148,7 +151,7 @@
             // 
             // highEdgeTextBox
             // 
-            this.highEdgeTextBox.Location = new System.Drawing.Point(11, 275);
+            this.highEdgeTextBox.Location = new System.Drawing.Point(11, 124);
             this.highEdgeTextBox.Name = "highEdgeTextBox";
             this.highEdgeTextBox.Size = new System.Drawing.Size(67, 22);
             this.highEdgeTextBox.TabIndex = 7;
@@ -156,10 +159,10 @@
             // 
             // clearLowValueButton
             // 
-            this.clearLowValueButton.Location = new System.Drawing.Point(84, 224);
+            this.clearLowValueButton.Location = new System.Drawing.Point(123, 62);
             this.clearLowValueButton.Name = "clearLowValueButton";
             this.clearLowValueButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.clearLowValueButton.Size = new System.Drawing.Size(54, 28);
+            this.clearLowValueButton.Size = new System.Drawing.Size(66, 39);
             this.clearLowValueButton.TabIndex = 8;
             this.clearLowValueButton.Text = "Clear";
             this.clearLowValueButton.UseVisualStyleBackColor = true;
@@ -167,10 +170,10 @@
             // 
             // clearHighValueButton
             // 
-            this.clearHighValueButton.Location = new System.Drawing.Point(84, 275);
+            this.clearHighValueButton.Location = new System.Drawing.Point(123, 107);
             this.clearHighValueButton.Name = "clearHighValueButton";
             this.clearHighValueButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.clearHighValueButton.Size = new System.Drawing.Size(54, 28);
+            this.clearHighValueButton.Size = new System.Drawing.Size(66, 39);
             this.clearHighValueButton.TabIndex = 9;
             this.clearHighValueButton.Text = "Clear";
             this.clearHighValueButton.UseVisualStyleBackColor = true;
@@ -178,10 +181,10 @@
             // 
             // paletteButton
             // 
-            this.paletteButton.Location = new System.Drawing.Point(12, 309);
+            this.paletteButton.Location = new System.Drawing.Point(8, 183);
             this.paletteButton.Name = "paletteButton";
             this.paletteButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.paletteButton.Size = new System.Drawing.Size(127, 47);
+            this.paletteButton.Size = new System.Drawing.Size(181, 44);
             this.paletteButton.TabIndex = 10;
             this.paletteButton.Text = "Start Palette";
             this.paletteButton.UseVisualStyleBackColor = true;
@@ -190,7 +193,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 359);
+            this.label3.Location = new System.Drawing.Point(13, 350);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 17);
             this.label3.TabIndex = 11;
@@ -198,7 +201,7 @@
             // 
             // oceanEdgeTextBox
             // 
-            this.oceanEdgeTextBox.Location = new System.Drawing.Point(12, 379);
+            this.oceanEdgeTextBox.Location = new System.Drawing.Point(122, 347);
             this.oceanEdgeTextBox.Name = "oceanEdgeTextBox";
             this.oceanEdgeTextBox.Size = new System.Drawing.Size(67, 22);
             this.oceanEdgeTextBox.TabIndex = 12;
@@ -207,7 +210,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 404);
+            this.label4.Location = new System.Drawing.Point(12, 378);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 17);
             this.label4.TabIndex = 13;
@@ -215,7 +218,7 @@
             // 
             // mountainsTextBox
             // 
-            this.mountainsTextBox.Location = new System.Drawing.Point(12, 424);
+            this.mountainsTextBox.Location = new System.Drawing.Point(122, 375);
             this.mountainsTextBox.Name = "mountainsTextBox";
             this.mountainsTextBox.Size = new System.Drawing.Size(67, 22);
             this.mountainsTextBox.TabIndex = 14;
@@ -224,7 +227,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 449);
+            this.label5.Location = new System.Drawing.Point(12, 406);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 17);
             this.label5.TabIndex = 15;
@@ -232,24 +235,24 @@
             // 
             // fertileSoilBottomEdgeTextBox
             // 
-            this.fertileSoilBottomEdgeTextBox.Location = new System.Drawing.Point(12, 469);
+            this.fertileSoilBottomEdgeTextBox.Location = new System.Drawing.Point(106, 403);
             this.fertileSoilBottomEdgeTextBox.Name = "fertileSoilBottomEdgeTextBox";
-            this.fertileSoilBottomEdgeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.fertileSoilBottomEdgeTextBox.Size = new System.Drawing.Size(39, 22);
             this.fertileSoilBottomEdgeTextBox.TabIndex = 16;
             this.fertileSoilBottomEdgeTextBox.Text = "122";
             // 
             // fertileSoilTopEdgeTextBox
             // 
-            this.fertileSoilTopEdgeTextBox.Location = new System.Drawing.Point(84, 469);
+            this.fertileSoilTopEdgeTextBox.Location = new System.Drawing.Point(150, 403);
             this.fertileSoilTopEdgeTextBox.Name = "fertileSoilTopEdgeTextBox";
-            this.fertileSoilTopEdgeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.fertileSoilTopEdgeTextBox.Size = new System.Drawing.Size(39, 22);
             this.fertileSoilTopEdgeTextBox.TabIndex = 17;
             this.fertileSoilTopEdgeTextBox.Text = "139";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 584);
+            this.label6.Location = new System.Drawing.Point(13, 490);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(39, 17);
             this.label6.TabIndex = 18;
@@ -258,7 +261,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 494);
+            this.label7.Location = new System.Drawing.Point(12, 434);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(45, 17);
             this.label7.TabIndex = 19;
@@ -267,7 +270,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 539);
+            this.label8.Location = new System.Drawing.Point(13, 462);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 17);
             this.label8.TabIndex = 20;
@@ -275,56 +278,56 @@
             // 
             // woodBottomEdgeTextBox
             // 
-            this.woodBottomEdgeTextBox.Location = new System.Drawing.Point(12, 514);
+            this.woodBottomEdgeTextBox.Location = new System.Drawing.Point(105, 431);
             this.woodBottomEdgeTextBox.Name = "woodBottomEdgeTextBox";
-            this.woodBottomEdgeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.woodBottomEdgeTextBox.Size = new System.Drawing.Size(39, 22);
             this.woodBottomEdgeTextBox.TabIndex = 21;
             this.woodBottomEdgeTextBox.Text = "124";
             // 
             // woodTopEdgeTextBox
             // 
-            this.woodTopEdgeTextBox.Location = new System.Drawing.Point(85, 514);
+            this.woodTopEdgeTextBox.Location = new System.Drawing.Point(150, 431);
             this.woodTopEdgeTextBox.Name = "woodTopEdgeTextBox";
-            this.woodTopEdgeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.woodTopEdgeTextBox.Size = new System.Drawing.Size(39, 22);
             this.woodTopEdgeTextBox.TabIndex = 22;
             this.woodTopEdgeTextBox.Text = "160";
             // 
             // stoneBottomEdgeTextBox
             // 
-            this.stoneBottomEdgeTextBox.Location = new System.Drawing.Point(12, 559);
+            this.stoneBottomEdgeTextBox.Location = new System.Drawing.Point(105, 459);
             this.stoneBottomEdgeTextBox.Name = "stoneBottomEdgeTextBox";
-            this.stoneBottomEdgeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.stoneBottomEdgeTextBox.Size = new System.Drawing.Size(39, 22);
             this.stoneBottomEdgeTextBox.TabIndex = 23;
             this.stoneBottomEdgeTextBox.Text = "165";
             // 
             // stoneTopEdgeTextBox
             // 
-            this.stoneTopEdgeTextBox.Location = new System.Drawing.Point(84, 559);
+            this.stoneTopEdgeTextBox.Location = new System.Drawing.Point(150, 459);
             this.stoneTopEdgeTextBox.Name = "stoneTopEdgeTextBox";
-            this.stoneTopEdgeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.stoneTopEdgeTextBox.Size = new System.Drawing.Size(39, 22);
             this.stoneTopEdgeTextBox.TabIndex = 24;
             this.stoneTopEdgeTextBox.Text = "200";
             // 
             // lakeBottomEdgeTextBox
             // 
-            this.lakeBottomEdgeTextBox.Location = new System.Drawing.Point(12, 604);
+            this.lakeBottomEdgeTextBox.Location = new System.Drawing.Point(105, 487);
             this.lakeBottomEdgeTextBox.Name = "lakeBottomEdgeTextBox";
-            this.lakeBottomEdgeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.lakeBottomEdgeTextBox.Size = new System.Drawing.Size(39, 22);
             this.lakeBottomEdgeTextBox.TabIndex = 25;
             this.lakeBottomEdgeTextBox.Text = "160";
             // 
             // lakeTopEdgeTextBox
             // 
-            this.lakeTopEdgeTextBox.Location = new System.Drawing.Point(84, 604);
+            this.lakeTopEdgeTextBox.Location = new System.Drawing.Point(150, 487);
             this.lakeTopEdgeTextBox.Name = "lakeTopEdgeTextBox";
-            this.lakeTopEdgeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.lakeTopEdgeTextBox.Size = new System.Drawing.Size(39, 22);
             this.lakeTopEdgeTextBox.TabIndex = 26;
             this.lakeTopEdgeTextBox.Text = "200";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 629);
+            this.label9.Location = new System.Drawing.Point(13, 518);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(77, 17);
             this.label9.TabIndex = 27;
@@ -332,16 +335,16 @@
             // 
             // beachSizeTextBox
             // 
-            this.beachSizeTextBox.Location = new System.Drawing.Point(12, 649);
+            this.beachSizeTextBox.Location = new System.Drawing.Point(122, 515);
             this.beachSizeTextBox.Name = "beachSizeTextBox";
-            this.beachSizeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.beachSizeTextBox.Size = new System.Drawing.Size(67, 22);
             this.beachSizeTextBox.TabIndex = 28;
             this.beachSizeTextBox.Text = "5";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 129);
+            this.label10.Location = new System.Drawing.Point(12, 266);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(66, 17);
             this.label10.TabIndex = 29;
@@ -349,16 +352,16 @@
             // 
             // pixelSizeTextBox
             // 
-            this.pixelSizeTextBox.Location = new System.Drawing.Point(84, 126);
+            this.pixelSizeTextBox.Location = new System.Drawing.Point(93, 263);
             this.pixelSizeTextBox.Name = "pixelSizeTextBox";
-            this.pixelSizeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.pixelSizeTextBox.Size = new System.Drawing.Size(96, 22);
             this.pixelSizeTextBox.TabIndex = 30;
             this.pixelSizeTextBox.Text = "4";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(9, 9);
+            this.label11.Location = new System.Drawing.Point(12, 294);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(41, 17);
             this.label11.TabIndex = 31;
@@ -366,16 +369,16 @@
             // 
             // seedTextBox
             // 
-            this.seedTextBox.Location = new System.Drawing.Point(56, 6);
+            this.seedTextBox.Location = new System.Drawing.Point(93, 291);
             this.seedTextBox.Name = "seedTextBox";
-            this.seedTextBox.Size = new System.Drawing.Size(82, 22);
+            this.seedTextBox.Size = new System.Drawing.Size(96, 22);
             this.seedTextBox.TabIndex = 32;
             this.seedTextBox.Text = "666";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(9, 35);
+            this.label12.Location = new System.Drawing.Point(13, 322);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(75, 17);
             this.label12.TabIndex = 33;
@@ -383,17 +386,48 @@
             // 
             // SmoothingSizeTextBox
             // 
-            this.SmoothingSizeTextBox.Location = new System.Drawing.Point(84, 34);
+            this.SmoothingSizeTextBox.Location = new System.Drawing.Point(93, 319);
             this.SmoothingSizeTextBox.Name = "SmoothingSizeTextBox";
-            this.SmoothingSizeTextBox.Size = new System.Drawing.Size(55, 22);
+            this.SmoothingSizeTextBox.Size = new System.Drawing.Size(96, 22);
             this.SmoothingSizeTextBox.TabIndex = 34;
             this.SmoothingSizeTextBox.Text = "1";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 236);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 17);
+            this.label13.TabIndex = 35;
+            this.label13.Text = "Size";
+            // 
+            // configsNamesComboBox
+            // 
+            this.configsNamesComboBox.FormattingEnabled = true;
+            this.configsNamesComboBox.Location = new System.Drawing.Point(106, 548);
+            this.configsNamesComboBox.Name = "configsNamesComboBox";
+            this.configsNamesComboBox.Size = new System.Drawing.Size(83, 24);
+            this.configsNamesComboBox.TabIndex = 36;
+            // 
+            // loadConfigbutton
+            // 
+            this.loadConfigbutton.Location = new System.Drawing.Point(8, 543);
+            this.loadConfigbutton.Name = "loadConfigbutton";
+            this.loadConfigbutton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.loadConfigbutton.Size = new System.Drawing.Size(92, 32);
+            this.loadConfigbutton.TabIndex = 37;
+            this.loadConfigbutton.Text = "Load confg";
+            this.loadConfigbutton.UseVisualStyleBackColor = true;
+            this.loadConfigbutton.Click += new System.EventHandler(this.loadConfigbutton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1243, 752);
+            this.Controls.Add(this.loadConfigbutton);
+            this.Controls.Add(this.configsNamesComboBox);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.SmoothingSizeTextBox);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.seedTextBox);
@@ -474,6 +508,9 @@
         private System.Windows.Forms.TextBox seedTextBox;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox SmoothingSizeTextBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox configsNamesComboBox;
+        private System.Windows.Forms.Button loadConfigbutton;
     }
 }
 
