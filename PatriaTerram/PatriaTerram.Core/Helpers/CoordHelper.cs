@@ -57,9 +57,55 @@ namespace PatriaTerram.Core.Helpers
                 .Where(a => a.X < width && a.Y < height);
         }
 
+        public static IEnumerable<Coord> GetAdjacentCoordsBeyond(Coord center, int radius, int width, int height)
+        {
+            var coords = GetAdjacentCoords(center, radius);
+
+            foreach (var coord in coords)
+            {
+                var x = coord.X;
+                var y = coord.Y;
+
+                if(x < 0)
+                {
+                    x += width;
+                } else if(x >= width)
+                {
+                    x -= width;
+                }
+
+                if (y < 0)
+                {
+                    y += height;
+                }
+                else if (y >= height)
+                {
+                    y -= height;
+                }
+
+                coord.X = x;
+                coord.Y = y;
+            }
+
+            return coords;
+        }
+
         public static double Distance(this Coord c1, Coord c2)
         {
             return Math.Sqrt(Math.Pow(c2.X - c1.X, 2) + Math.Pow(c2.Y - c1.Y, 2));
         }
+        public static double DistanceBeyond(this Coord c1, Coord c2, int width, int height)
+        {
+            var dx1 = Math.Abs(c2.X - c1.X);
+            var dx2 = width - dx1;
+
+            var dy1 = Math.Abs(c2.Y - c1.Y);
+            var dy2 = height - dy1;
+
+            var minX = new[] { dx1, dx2 }.Min();
+            var minY = new[] { dy1, dy2 }.Min();
+
+            return Math.Sqrt(Math.Pow(minX, 2) + Math.Pow(minY, 2));
+        }        
     }
 }

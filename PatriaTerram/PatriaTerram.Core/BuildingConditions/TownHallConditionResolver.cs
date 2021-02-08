@@ -42,11 +42,17 @@ namespace PatriaTerram.Core.BuildingConditions
                 {
                     var radius = _conditions[terrainName];
 
-                    var coords = CoordHelper.GetPositiveAdjacentCoords(new Coord { X = pointCoord.X, Y = pointCoord.Y }, radius, palette.Width, palette.Height);
+                    //var coords = CoordHelper.GetPositiveAdjacentCoords(new Coord { X = pointCoord.X, Y = pointCoord.Y }, radius, palette.Width, palette.Height);
+                    var coords = CoordHelper.GetAdjacentCoordsBeyond(new Coord { X = pointCoord.X, Y = pointCoord.Y }, radius, palette.Width, palette.Height);
 
                     foreach (var coord in coords)
                     {
-                        int value = (int)((radius - (int)coord.Distance(pointCoord)) * (100.0 / radius));
+                        int value = (int)((radius - (int)coord.DistanceBeyond(pointCoord, palette.Width, palette.Height )) * (100.0 / radius));
+
+                        if(value < 0)
+                        {
+
+                        }
 
                         palette.Points[coord.X][coord.Y].AddBuildingConditions(new Models.BuildingConditions
                         {
