@@ -1,9 +1,9 @@
-﻿@model PatriaTerram.Core.Models.Palette
+﻿@using PatriaTerram.Core.Helpers
+@using PatriaTerram.Core
+@model PatriaTerram.Core.Models.Palette
 
 @{
     ViewBag.Title = "Patria Terram";
-
-
 }
 
 <div class="map-container">
@@ -14,32 +14,7 @@
                 @for (int j = 0; j < Model.Height; j++)
                 {
                     <td>
-                        <div class="map-cell">
-                            @for (int k = 0; k < Model[i, j].Components.Count; k++)
-                            {
-                                int r = (int)(Model[i, j].Components[k].Terrain.ColorR + (Model[i, j].Components[k].Value - 128) / 2.5);
-                                int g = (int)(Model[i, j].Components[k].Terrain.ColorG + (Model[i, j].Components[k].Value - 128) / 2.5);
-                                int b = (int)(Model[i, j].Components[k].Terrain.ColorB + (Model[i, j].Components[k].Value - 128) / 2.5);
-
-                                <div class="map-cell-item terrain @Model[i, j].Components[k].Terrain.Name" style='background-color: rgb(@r, @g, @b);'>
-                                    <div class="map-cell-item-value">@Model[i, j].Components[k].Value</div>
-                                </div>
-                            }
-
-                            @{
-                                Model[i, j].GetPointColor(out int red, out int green, out int blue);
-                                <div class="map-cell-item terrain result" style='background-color: rgb(@red, @green, @blue);'></div>
-                            }
-
-                            @foreach (var condition in Model[i, j].BuildingConditions)
-                            {
-                                var r = (int)((condition.Value / (ViewBag.maxCondition * 1.0)) * 250);
-                                <div class="map-cell-item building-conditions @condition.BuildingType" style='background-color: rgb(@r, 0, 0 );'>
-                                    <div class="map-cell-item-value">@condition.Value</div>
-                                </div>
-
-                            }
-                        </div>
+                        @Html.Partial("PalettePoint", Model[i, j])
                     </td>
                 }
             </tr>
@@ -49,6 +24,10 @@
 
 <div>
     <div>
+        <div class="layer-button" onclick="showItems('.map-cell-item-value')">Show Values</div>
+        <div class="layer-button" onclick="hideItems('.map-cell-item-value')">Hide Values</div>
+    </div>
+    <div>
         Terrains:
 
         @foreach (var item in PatriaTerram.Core.Configurations.Configs.Terrains)
@@ -56,18 +35,22 @@
             <div class="layer-button" onclick="selectTerain('@item.Key')">@item.Key</div>
         }
 
-        <div class="layer-button" onclick="selectTerain('result')">All terrains</div>
-        <div class="layer-button" onclick="showItems('.map-cell-item')">Show all terrains</div>
-        <div class="layer-button" onclick="hideItems('.map-cell-item')">Hide all terrains</div>
-        <div class="layer-button" onclick="showItems('.map-cell-item-value')">Show Values</div>
-        <div class="layer-button" onclick="hideItems('.map-cell-item-value')">Hide Values</div>
-
+        <div class="layer-button" onclick="selectTerain('result')">Result terrains </div>
+        @*<div class="layer-button" onclick="showItems('.map-cell-item')">Show all terrains</div>
+            <div class="layer-button" onclick="hideItems('.map-cell-item')">Hide all terrains</div>*@
     </div>
     <div>
         Conditions:
 
-        <div class="layer-button" onclick="showItems('.building-conditions')">Show Conditions</div>
-        <div class="layer-button" onclick="hideItems('.building-conditions')">Hide Conditions</div>
+        @foreach (var item in PatriaTerram.Core.Configurations.Configs.Terrains)
+        {
+            <div class="layer-button" onclick="selectBuildingConditions('@Constants.TownHall', '@item.Key')">@item.Key condition</div>
+        }
+
+        <div class="layer-button" onclick="selectBuildingConditions('@Constants.TownHall', 'result')">Result condition</div>
+
+        @*<div class="layer-button" onclick="showItems('.@Constants.TownHall-building-conditions')">Show Conditions</div>
+        <div class="layer-button" onclick="hideItems('.@Constants.TownHall-building-conditions')">Hide Conditions</div>*@
 
     </div>
 </div>
@@ -85,7 +68,19 @@
     function selectTerain(name) {
         hideItems('.map-cell-item');
 
-        $("." + name).removeClass("hidden-cell-item")
+        $(".terrain." + name).removeClass("hidden-cell-item")
+    }
+
+    function selectBuildingConditions(buildingType, terrain) {
+        debugger;
+        hideItems('.map-cell-item');
+
+
+        var showSelector = '.building-condition.' + buildingType + '.' + terrain;
+
+        var ff = $(showSelector)
+
+        $(showSelector).removeClass("hidden-cell-item")
     }
 
 </script>

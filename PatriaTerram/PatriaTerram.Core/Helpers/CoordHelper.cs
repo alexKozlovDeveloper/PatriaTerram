@@ -9,7 +9,7 @@ namespace PatriaTerram.Core.Helpers
 {
     public static class CoordHelper
     {
-        public static IEnumerable<Coord> GetAdjacentCoords(Coord center, int radius)
+        public static IEnumerable<Coord> GetAdjacentCoords(this Coord center, int radius)
         {
             var result = new List<Coord>();
 
@@ -50,14 +50,14 @@ namespace PatriaTerram.Core.Helpers
             return result.Distinct();
         }
 
-        public static IEnumerable<Coord> GetPositiveAdjacentCoords(Coord center, int radius, int width = int.MaxValue, int height = int.MaxValue)
+        public static IEnumerable<Coord> GetPositiveAdjacentCoords(this Coord center, int radius, int width = int.MaxValue, int height = int.MaxValue)
         {
             return GetAdjacentCoords(center, radius)
                 .Where(a => a.IsPositive)
                 .Where(a => a.X < width && a.Y < height);
         }
 
-        public static IEnumerable<Coord> GetAdjacentCoordsBeyond(Coord center, int radius, int width, int height)
+        public static IEnumerable<Coord> GetAdjacentCoordsBeyond(this Coord center, int radius, int width, int height)
         {
             var coords = GetAdjacentCoords(center, radius);
 
@@ -94,6 +94,7 @@ namespace PatriaTerram.Core.Helpers
         {
             return Math.Sqrt(Math.Pow(c2.X - c1.X, 2) + Math.Pow(c2.Y - c1.Y, 2));
         }
+
         public static double DistanceBeyond(this Coord c1, Coord c2, int width, int height)
         {
             var dx1 = Math.Abs(c2.X - c1.X);

@@ -66,7 +66,7 @@ namespace PatriaTerram.MapObserver
             {
                 for (int y = 0; y < matrix[0].Length; y++)
                 {
-                    image.SetPixel(x, y, Color.FromArgb(matrix[x][y], matrix[x][y], matrix[x][y]));
+                    image.SetPixel(x, y, System.Drawing.Color.FromArgb(matrix[x][y], matrix[x][y], matrix[x][y]));
                 }
             }
 
@@ -153,7 +153,7 @@ namespace PatriaTerram.MapObserver
                     {
                         for (int j = 0; j < multiplayer; j++)
                         {
-                            image.SetPixel(x * multiplayer + i, y * multiplayer + j, Color.FromArgb(r, g, b));
+                            image.SetPixel(x * multiplayer + i, y * multiplayer + j, System.Drawing.Color.FromArgb(r, g, b));
                         }
                     }
                 }

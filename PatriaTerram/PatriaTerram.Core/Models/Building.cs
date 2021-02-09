@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Models
 {
-    public class BuildingConditions
+    public class Building
     {
-        public int Value { get; set; }
+        public string Type { get; set; }
 
-        public string BuildingType { get; set; }
-}
+        public Color Color { get; set; }
+    }
 }

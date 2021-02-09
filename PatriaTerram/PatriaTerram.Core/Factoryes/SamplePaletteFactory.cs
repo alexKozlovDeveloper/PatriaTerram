@@ -12,22 +12,17 @@ namespace PatriaTerram.Core.Factoryes
     {
         public Palette GetPalette()
         {
-            var model = new Palette
-            {
-                Points = new PalettePoint[2][]
-            };
+            var points = new PalettePoint[2][];
 
-            model.Points[0] = new PalettePoint[2];
-            model.Points[1] = new PalettePoint[2];
+            points[0] = new PalettePoint[2];
+            points[1] = new PalettePoint[2];
 
-            model[0, 0] = new PalettePoint();
+            points[0][0] = new PalettePoint {  };
+            points[0][1] = new PalettePoint {  };
+            points[1][0] = new PalettePoint {  };
+            points[1][1] = new PalettePoint {  };
 
-            model[0, 0] = new PalettePoint {  };
-            model[0, 1] = new PalettePoint {  };
-            model[1, 0] = new PalettePoint {  };
-            model[1, 1] = new PalettePoint {  };
-
-            return model;
+            return new Palette(points);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace PatriaTerram.Core.Factoryes
         private PerlinNoiseGenerator _generator;
 
         public TerrainPaletteFactory(PaletteConfiguration config)
-        {           
+        {
 
             _width = config.Width;
             _height = config.Height;
@@ -62,11 +62,11 @@ namespace PatriaTerram.Core.Factoryes
             var groundMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge + _beachSize);
             var mountainsMatrix = altitudeMatrix.ClearBottomValue(_mountainsEdge);
 
-            var beachMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge).ClearTopValue(_oceanEdge + _beachSize);            
+            var beachMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge).ClearTopValue(_oceanEdge + _beachSize);
 
             AddTerrain(model, altitudeMatrix, terrains[Constants.Altitude]);
             AddTerrain(model, oceanMatrix, terrains[Constants.Ocean]);
-            AddTerrain(model, mountainsMatrix, terrains[Constants.Mountains]);          
+            AddTerrain(model, mountainsMatrix, terrains[Constants.Mountains]);
             AddTerrain(model, beachMatrix, terrains[Constants.Beach]);
 
             AddRangedTerrain(model, terrains[Constants.Lake], _lakeRange);
@@ -100,45 +100,42 @@ namespace PatriaTerram.Core.Factoryes
                 {
                     if (terrainMatrix[x][y] == 0) { continue; }
 
-                    if (model[x, y].Components.FirstOrDefault(a => a.Terrain.Name == terrain.Name) != null) { continue; }
+                    if (model[x, y].Terrains.Keys.FirstOrDefault(a => a.Name == terrain.Name) != null) { continue; }
 
                     var isIntolerableTerrains = false;
 
                     for (int i = 0; i < terrain.IntolerableTerrains.Length; i++)
                     {
-                        if(model[x, y].Components.FirstOrDefault(a => a.Terrain.Name == terrain.IntolerableTerrains[i]) != null)
+                        if (model[x, y].Terrains.Keys.FirstOrDefault(a => a.Name == terrain.IntolerableTerrains[i]) != null)
                         {
                             isIntolerableTerrains = true;
                             break;
                         }
                     }
 
-                    if(isIntolerableTerrains == false)
+                    if (isIntolerableTerrains == false)
                     {
-                        model[x, y].Components.Add(new Component { Terrain = terrain, Value = terrainMatrix[x][y] });
-                    }                    
+                        model[x, y].Terrains.Add(terrain, terrainMatrix[x][y]);
+                    }
                 }
             }
         }
 
         private Palette CreateEmptyPalette(int width, int height)
         {
-            var model = new Palette
-            {
-                Points = new PalettePoint[width][]
-            };
+            var points = new PalettePoint[width][];
 
             for (int i = 0; i < width; i++)
             {
-                model.Points[i] = new PalettePoint[height];
+                points[i] = new PalettePoint[height];
 
                 for (int j = 0; j < height; j++)
                 {
-                    model[i, j] = new PalettePoint();
+                    points[i][j] = new PalettePoint();
                 }
             }
 
-            return model;
-        }        
+            return new Palette(points);
+        }
     }
 }
