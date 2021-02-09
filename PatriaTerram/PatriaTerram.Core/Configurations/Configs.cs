@@ -16,6 +16,7 @@ namespace PatriaTerram.Core.Configurations
 
         private static Dictionary<string, Terrain> _terrains;
         private static Dictionary<string, PaletteConfiguration> _paletteConfigs;
+        private static Dictionary<string, Building> _buildings;
 
         public static Dictionary<string, Terrain> Terrains 
         { 
@@ -42,6 +43,29 @@ namespace PatriaTerram.Core.Configurations
                 }
 
                 return _paletteConfigs;
+            }
+        }
+
+        public static Dictionary<string, Building> Buildings
+        {
+            get
+            {
+                if (_buildings == null)
+                {
+                    _buildings = new Dictionary<string, Building>();
+                    _buildings.Add(Constants.TownHall, new Building
+                    {
+                        Name = Constants.TownHall,
+                        Color = new Color 
+                        {
+                            R = 0,
+                            G = 0,
+                            B = 0
+                        }
+                    });
+                }
+
+                return _buildings;
             }
         }
     }

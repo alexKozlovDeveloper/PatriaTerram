@@ -126,5 +126,17 @@
       "G": 200,
       "B": 0
     }
+  },
+  "result": {
+    "Name": "result",
+    "IsAffectColor": false,
+    "IntolerableTerrains": [
+
+    ],
+    "Color": {
+      "R": 0,
+      "G": 0,
+      "B": 0
+    }
   }
 }

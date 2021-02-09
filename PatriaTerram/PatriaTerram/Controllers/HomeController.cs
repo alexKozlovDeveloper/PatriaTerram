@@ -5,6 +5,7 @@ using PatriaTerram.Core.Factoryes;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Interfaces;
 using PatriaTerram.Core.Models;
+using PatriaTerram.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,6 +85,29 @@ namespace PatriaTerram.Controllers
 
 
 
+            return View(model);
+        }
+
+        public ActionResult Map()
+        {
+            Configs.PaletteConfigurationJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\PaletteConfigurations.json";
+            Configs.TerrainsJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Terrains.json";
+
+            IPaletteFactory factory = new TerrainPaletteFactory(Configs.PaletteConfigs["web"]);
+
+            var model = factory.GetPalette();
+
+            var processor = new BuildingConditionsProcessor();
+
+            processor.Resolve(model);
+
+            var viewModel = new PaletteView(model);
+
+            return View(viewModel);
+        }
+        
+        public ActionResult MapPoint(PalettePointView model)
+        {          
             return View(model);
         }
 

@@ -1,0 +1,13 @@
+﻿@model PatriaTerram.Web.Models.PalettePointView
+
+<div class="map-cell">
+
+    @foreach (var cell in Model.Cells)
+    {
+        var classes = string.Join(" ", cell.Classes);
+
+        <div class="map-cell-item terrain @classes" style='background-color: rgb(@cell.Color.R, @cell.Color.G, @cell.Color.B);'>
+            <div class="map-cell-item-value">@cell.Value</div>
+        </div>
+    }
+</div>

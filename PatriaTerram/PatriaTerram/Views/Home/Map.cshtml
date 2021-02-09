@@ -1,0 +1,56 @@
+﻿@model PatriaTerram.Web.Models.PaletteView
+
+@{
+    ViewBag.Title = "Map";
+}
+
+<h2>Map</h2>
+
+<div class="map-container">
+    <table>
+        @for (int i = 0; i < Model.Width; i++)
+        {
+            <tr>
+                @for (int j = 0; j < Model.Height; j++)
+                {
+                    <td>
+                        @Html.Partial("MapPoint", Model.Points[i][j])
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <div class="layer-button" onclick="showItems('.map-cell-item-value')">Show Values</div>
+    <div class="layer-button" onclick="hideItems('.map-cell-item-value')">Hide Values</div>
+</div>
+
+<div>
+    Layers:
+
+    @foreach (var layer in Model.Context.Layers)
+    {
+        <div class="layer-button" onclick="selectLayer('@layer.Value')">@layer.Key</div>
+    }
+
+</div>
+
+<script>
+
+    function hideItems(selector) {
+        $(selector).addClass("hidden-cell-item")
+    }
+
+    function showItems(selector) {
+        $(selector).removeClass("hidden-cell-item")
+    }
+
+    function selectLayer(selector) {
+        hideItems('.map-cell-item');
+
+        $(selector).removeClass("hidden-cell-item")
+    }
+
+</script>

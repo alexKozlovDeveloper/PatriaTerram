@@ -29,6 +29,11 @@ namespace PatriaTerram.Core.Helpers
                 }
             }
 
+            if(conditions.Count == 0)
+            {
+                return 0;
+            }
+
             return conditions.Max();
         }
     }

@@ -99,11 +99,16 @@ namespace PatriaTerram.Core.Factoryes
                         Color = model[x, y].GetPointColor()
                     };
 
+                    var value = (int)model[x, y].Terrains.Values
+                        .Where(a => a.Terrain.IsAffectColor == true)
+                        .Select(a => a.Value)
+                        .Average();
+
                     model[x, y].Terrains.Add(resultTerrain.Name,
                         new PalettePointTerrain
                         {
                             Terrain = resultTerrain,
-                            Value = 255
+                            Value = value
                         });
                 }
             }
