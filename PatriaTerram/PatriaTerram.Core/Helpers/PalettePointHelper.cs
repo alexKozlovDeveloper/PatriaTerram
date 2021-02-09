@@ -11,11 +11,23 @@ namespace PatriaTerram.Core.Helpers
     {
         public static void GetPointColor(this PalettePoint point, out int r, out int g, out int b)
         {
-            var coloredComponents = point.Terrains.Where(a => a.Key.IsAffectColor);
+            var coloredComponents = point.Terrains.Values.Where(a => a.Terrain.IsAffectColor);
 
-            r = GetAvarageField(coloredComponents, a => a.Key.ColorR);
-            g = GetAvarageField(coloredComponents, a => a.Key.ColorG);
-            b = GetAvarageField(coloredComponents, a => a.Key.ColorB);
+            r = GetAvarageField(coloredComponents, a => a.Terrain.Color.R);
+            g = GetAvarageField(coloredComponents, a => a.Terrain.Color.G);
+            b = GetAvarageField(coloredComponents, a => a.Terrain.Color.B);
+        }
+
+        public static Color GetPointColor(this PalettePoint point)
+        {
+            point.GetPointColor(out int r, out int g, out int b);
+
+            return new Color
+            {
+                R = r,
+                G = g,
+                B = b
+            };
         }
 
         private static int GetAvarageField<T>(IEnumerable<T> items, Func<T, int> field)
@@ -36,37 +48,30 @@ namespace PatriaTerram.Core.Helpers
 
         public static void AddBuildingConditions(this PalettePoint point, string buildingType, string terrain, int value)
         {
-            var existCondition = point.BuildingConditions.FirstOrDefault(a => a.BuildingType == buildingType);
-
-            if (existCondition == null)
+            if (point.BuildingConditions.Keys.Contains(buildingType) == false)
             {
-                existCondition = new BuildingCondition();
+                var newCondition = new BuildingCondition();
 
-                existCondition.BuildingType = buildingType;
+                newCondition.BuildingType = buildingType;
 
-                point.BuildingConditions.Add(existCondition);
+                point.BuildingConditions.Add(newCondition.BuildingType, newCondition);
             }
 
-            existCondition.AddConditionValue(terrain, value);
+            point.BuildingConditions[buildingType].AddConditionValue(terrain, value);
         }
 
         public static int GetBuildingConditionValue(this PalettePoint point, string buildingType, string terrain)
         {
-            var condition = point.BuildingConditions.FirstOrDefault(a => a.BuildingType == buildingType);
+            if (point.BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
 
-            if (condition == null) { return 0; }
-
-            return condition.TerrainConditionValues[terrain];
+            return point.BuildingConditions[buildingType].TerrainConditionValues[terrain];
         }
 
         public static int GetResultBuildingConditionValue(this PalettePoint point, string buildingType)
         {
-            var condition = point.BuildingConditions.FirstOrDefault(a => a.BuildingType == buildingType);
+            if (point.BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
 
-            if (condition == null) { return 0; }
-
-            //return (int)condition.TerrainConditionValues.Values.Average();
-            return condition.TerrainConditionValues.Values.Sum();
+            return point.BuildingConditions[buildingType].TerrainConditionValues.Values.Sum();
         }
     }
 }

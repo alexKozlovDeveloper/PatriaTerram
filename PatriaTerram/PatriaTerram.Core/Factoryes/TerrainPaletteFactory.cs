@@ -81,7 +81,32 @@ namespace PatriaTerram.Core.Factoryes
             AddRangedTerrain(model, terrains[Constants.FertileSoil], _fertileSoilRange);
             AddRangedTerrain(model, terrains[Constants.Wood], _woodRange);
 
+            AddResultTerrain(model);
+
             return model;
+        }
+
+        private void AddResultTerrain(Palette model)
+        {
+            for (int x = 0; x < model.Width; x++)
+            {
+                for (int y = 0; y < model.Height; y++)
+                {
+                    var resultTerrain = new Terrain
+                    {
+                        IsAffectColor = false,
+                        Name = "result",
+                        Color = model[x, y].GetPointColor()
+                    };
+
+                    model[x, y].Terrains.Add(resultTerrain.Name,
+                        new PalettePointTerrain
+                        {
+                            Terrain = resultTerrain,
+                            Value = 255
+                        });
+                }
+            }
         }
 
         private void AddRangedTerrain(Palette model, Terrain terrain, Range range)
@@ -100,25 +125,27 @@ namespace PatriaTerram.Core.Factoryes
                 {
                     if (terrainMatrix[x][y] == 0) { continue; }
 
-                    if (model[x, y].Terrains.Keys.FirstOrDefault(a => a.Name == terrain.Name) != null) { continue; }
+                    if (model[x, y].Terrains.Keys.Contains(terrain.Name) == true) { continue; }
 
-                    var isIntolerableTerrains = false;
-
-                    for (int i = 0; i < terrain.IntolerableTerrains.Length; i++)
+                    if (IsPointContaintIntolerableTerrains(model[x, y], terrain) == false)
                     {
-                        if (model[x, y].Terrains.Keys.FirstOrDefault(a => a.Name == terrain.IntolerableTerrains[i]) != null)
-                        {
-                            isIntolerableTerrains = true;
-                            break;
-                        }
-                    }
-
-                    if (isIntolerableTerrains == false)
-                    {
-                        model[x, y].Terrains.Add(terrain, terrainMatrix[x][y]);
+                        model[x, y].Terrains.Add(terrain.Name, new PalettePointTerrain { Value = terrainMatrix[x][y], Terrain = terrain });
                     }
                 }
             }
+        }
+
+        private bool IsPointContaintIntolerableTerrains(PalettePoint point, Terrain terrain)
+        {
+            foreach (var intolerableTerrain in terrain.IntolerableTerrains)
+            {
+                if (point.Terrains.Keys.Contains(intolerableTerrain) == true)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private Palette CreateEmptyPalette(int width, int height)

@@ -9,6 +9,7 @@ namespace PatriaTerram.Core.BuildingConditions
 {
     public interface IConditionsResolver
     {
-        void Resolve(Palette palette, Coord pointCoord);
+        void ResolvePoint(Palette palette, Coord pointCoord);
+        void FinalResolve(Palette palette);
     }
 }

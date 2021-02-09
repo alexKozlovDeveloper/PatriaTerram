@@ -2,39 +2,20 @@
 @model PatriaTerram.Core.Models.PalettePoint
 
 <div class="map-cell">
-    @foreach (var terrain in Model.Terrains)
+    @foreach (var terrain in Model.Terrains.Values)
     {
-        int r = (int)(terrain.Key.ColorR + (terrain.Value - 128) / 2.5);
-        int g = (int)(terrain.Key.ColorG + (terrain.Value - 128) / 2.5);
-        int b = (int)(terrain.Key.ColorB + (terrain.Value - 128) / 2.5);
-
-        <div class="map-cell-item terrain @terrain.Key.Name" style='background-color: rgb(@r, @g, @b);'>
+        <div class="map-cell-item terrain @terrain.Terrain.Name" style='background-color: rgb(@terrain.Color.R, @terrain.Color.G, @terrain.Color.B);'>
             <div class="map-cell-item-value">@terrain.Value</div>
         </div>
     }
 
-    @{
-        Model.GetPointColor(out int red, out int green, out int blue);
-        <div class="map-cell-item terrain result" style='background-color: rgb(@red, @green, @blue);'></div>
-    }
-
-    @foreach (var condition in Model.BuildingConditions)
+    @foreach (var condition in Model.BuildingConditions.Values)
     {
-        //var r = (int)((condition.Value / (ViewBag.maxCondition * 1.0)) * 250);
-        var r = (int)((Model.GetResultBuildingConditionValue(condition.BuildingType) / (ViewBag.maxCondition * 1.0)) * 250);
-
         <div class="@condition.BuildingType-building-condition-container">
-            <div class="map-cell-item building-condition @condition.BuildingType result" style='background-color: rgb(@r, 0, 0 );'>
-                <div class="map-cell-item-value">
-                    @Model.GetResultBuildingConditionValue(condition.BuildingType)
-                </div>
-            </div>
             @foreach (var item in condition.TerrainConditionValues)
             {
-
-
                 var color = (int)((item.Value / (ViewBag.maxConditions[item.Key] * 1.0)) * 250);
-                //var color = 154;
+
                 <div class="map-cell-item building-condition @condition.BuildingType @item.Key" style='background-color: rgb(@color, 0, 0 );'>
                     <div class="map-cell-item-value">
                         @item.Value
@@ -42,6 +23,5 @@
                 </div>
             }
         </div>
-
     }
 </div>

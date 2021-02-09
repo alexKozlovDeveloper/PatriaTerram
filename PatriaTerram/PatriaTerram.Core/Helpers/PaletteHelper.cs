@@ -19,13 +19,13 @@ namespace PatriaTerram.Core.Helpers
                 {
                     var point = palette[x, y];
 
-                    var condition = point.BuildingConditions.FirstOrDefault(a => a.BuildingType == buildingType);
+                   // var condition = point.BuildingConditions.FirstOrDefault(a => a.BuildingType == buildingType);
 
-                    if(condition == null) { continue; }
+                    if(point.BuildingConditions.Keys.Contains(buildingType) == false) { continue; }
 
-                    if(condition.TerrainConditionValues.Keys.Contains(terrain) == false) { continue; }
+                    if(point.BuildingConditions[buildingType].TerrainConditionValues.Keys.Contains(terrain) == false) { continue; }
 
-                    conditions.Add(condition.TerrainConditionValues[terrain]);
+                    conditions.Add(point.BuildingConditions[buildingType].TerrainConditionValues[terrain]);
                 }
             }
 

@@ -12,71 +12,89 @@ namespace PatriaTerram.Core.BuildingConditions
     {
         public string ConditionName = Constants.TownHall;
 
-        private Dictionary<string, int> _terrainConditions = new Dictionary<string, int>
+        private List<TerrainCondition> _terrainConditions = new List<TerrainCondition>
         {
+            new TerrainCondition
             {
-                Constants.Stone,
-                15
+                Terrain = Constants.Stone,
+                Radius = 15,
+                Priority = 15
             },
+            new TerrainCondition
             {
-                Constants.Wood,
-                7
+                Terrain = Constants.Wood,
+                Radius = 7,
+                Priority = 10
             },
+            new TerrainCondition
             {
-                Constants.FertileSoil,
-                5
+                Terrain = Constants.FertileSoil,
+                Radius = 5,
+                Priority = 15
             },
+            new TerrainCondition
             {
-                Constants.Lake,
-                8
+                Terrain = Constants.Lake,
+                Radius = 8,
+                Priority = 20
             }
         };
 
-        public void Resolve(Palette palette, Coord baseCoord)
+        public void ResolvePoint(Palette palette, Coord baseCoord)
         {
             var basePoint = palette[baseCoord];
 
             foreach (var terrain in basePoint.Terrains.Keys)
             {
-                if (_terrainConditions.Keys.Contains(terrain.Name))
+                if (_terrainConditions.FirstOrDefault(a => a.Terrain == terrain) != null)
                 {
-                    var radius = _terrainConditions[terrain.Name];
+                    var radius = _terrainConditions.FirstOrDefault(a => a.Terrain == terrain).Radius;
 
                     var coords = baseCoord.GetAdjacentCoordsBeyond(radius, palette.Width, palette.Height);
-                    
+
                     foreach (var adjacentCoord in coords)
                     {
                         int value = GetValue(baseCoord, adjacentCoord, radius, palette.Width, palette.Height);
 
-                        palette[adjacentCoord].AddBuildingConditions(ConditionName, terrain.Name, value);
+                        palette[adjacentCoord].AddBuildingConditions(ConditionName, terrain, value);
                     }
                 }
             }
+        }
 
-            //for (int i = 0; i < point.Terrains.Count; i++)
-            //{
-            //    var terrainName = point.Terrains[i].Terrain.Name;
+        public void FinalResolve(Palette palette)
+        {
+            var maxConditions = new Dictionary<string, int>();
 
-            //    if (_terrainConditions.Keys.Contains(terrainName))
-            //    {
-            //        var radius = _terrainConditions[terrainName];
+            foreach (var terrainCondition in _terrainConditions)
+            {
+                maxConditions.Add(terrainCondition.Terrain, palette.GetMaxBuildingConditionValue(ConditionName, terrainCondition.Terrain));
+            }
 
-            //        var coords = CoordHelper.GetAdjacentCoordsBeyond(new Coord { X = pointCoord.X, Y = pointCoord.Y }, radius, palette.Width, palette.Height);
+            for (int x = 0; x < palette.Width; x++)
+            {
+                for (int y = 0; y < palette.Height; y++)
+                {
+                    var conditions = palette[x, y].BuildingConditions[Constants.TownHall];
 
-            //        foreach (var coord in coords)
-            //        {
-            //            int value = (int)((radius - (int)coord.DistanceBeyond(pointCoord, palette.Width, palette.Height)) * (100.0 / radius));
+                    double sum = 0;
 
-            //            point.AddBuildingConditions(ConditionName, terrainName, value);
+                    foreach (var terrainCondition in _terrainConditions)
+                    {
+                        if(conditions.TerrainConditionValues.Keys.Contains(terrainCondition.Terrain) == false) { continue; }
 
-            //            //palette.Points[coord.X][coord.Y].AddBuildingConditions(new Models.BuildingConditions
-            //            //{
-            //            //    BuildingType = Constants.TownHall,
-            //            //    Value = value
-            //            //});
-            //        }
-            //    }
-            //}
+                        var conditionValue = conditions.TerrainConditionValues[terrainCondition.Terrain];
+
+                        sum += ((conditionValue * 1.0) / maxConditions[terrainCondition.Terrain]) * terrainCondition.Priority;
+                    }
+
+                    sum /= _terrainConditions.Select(a => a.Priority).Sum();
+                    sum *= 1000;
+
+
+                    conditions.AddConditionValue("result", (int)sum);
+                }
+            }
         }
 
         private int GetValue(Coord baseCoord, Coord adjacentCoord, int radius, int width, int height)

@@ -7,15 +7,15 @@ namespace PatriaTerram.Core.Models
 {
     public class PalettePoint
     {
-        public Dictionary<Terrain, int> Terrains { get; }
-        public List<BuildingCondition> BuildingConditions { get; }
-        public List<Building> Buildings { get; }
+        public Dictionary<string, PalettePointTerrain> Terrains { get; }
+        public Dictionary<string, BuildingCondition> BuildingConditions { get; }
+        public Dictionary<string, Building> Buildings { get; }
 
         public PalettePoint()
         {
-            Terrains = new Dictionary<Terrain, int>();
-            BuildingConditions = new List<BuildingCondition>();
-            Buildings = new List<Building>();
+            Terrains = new Dictionary<string, PalettePointTerrain>();
+            BuildingConditions = new Dictionary<string, BuildingCondition>();
+            Buildings = new Dictionary<string, Building>();
         }
     }
 }

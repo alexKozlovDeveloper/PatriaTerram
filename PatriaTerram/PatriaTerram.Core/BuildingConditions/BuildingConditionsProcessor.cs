@@ -22,9 +22,14 @@ namespace PatriaTerram.Core.BuildingConditions
                 {
                     foreach (var resolver in resolvers)
                     {
-                        resolver.Resolve(palette, new Coord(x, y));
+                        resolver.ResolvePoint(palette, new Coord(x, y));
                     }
                 }
+            }
+
+            foreach (var resolver in resolvers)
+            {
+                resolver.FinalResolve(palette);
             }
         }
     }

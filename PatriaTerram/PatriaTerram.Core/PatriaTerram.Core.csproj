@@ -64,9 +64,10 @@
     <Compile Include="Factoryes\SamplePaletteFactory.cs" />
     <Compile Include="Factoryes\TerrainPaletteFactory.cs" />
     <Compile Include="Interfaces\IPaletteFactory.cs" />
-    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\PalettePointTerrain.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\PalettePoint.cs" />
+    <Compile Include="Models\TerrainCondition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

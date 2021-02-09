@@ -44,6 +44,7 @@ namespace PatriaTerram.Controllers
             ViewBag.maxConditions.Add(Constants.FertileSoil, (int)maxFertileSoil);
             ViewBag.maxConditions.Add(Constants.Lake, (int)maxLake);
             ViewBag.maxConditions.Add(Constants.Stone, (int)maxStone);
+            ViewBag.maxConditions.Add("result", 255);
             //ViewBag.maxConditions.Add(Constants., maxStone);
 
             var res = new int[model.Width][];
@@ -61,7 +62,7 @@ namespace PatriaTerram.Controllers
             {
                 for (int y = 0; y < model.Height; y++)
                 {
-                    var conditions = model[x, y].BuildingConditions.FirstOrDefault(a => a.BuildingType == Constants.TownHall);
+                    var conditions = model[x, y].BuildingConditions[Constants.TownHall];
 
                     var wood = GetValue(conditions, Constants.Wood, maxWood);
                     var stone = GetValue(conditions, Constants.Stone, maxStone);
@@ -121,7 +122,7 @@ namespace PatriaTerram.Controllers
             {
                 foreach (var item in points[x].BuildingConditions)
                 {
-                    conditions.Add(item);
+                    conditions.Add(item.Value);
                 }
             }
 
