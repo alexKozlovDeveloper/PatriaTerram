@@ -38,10 +38,13 @@ namespace PatriaTerram.Controllers
             processor.Resolve(model, Configs.Buildings.Values);
 
             var game = new GameController(model);
-            game.NextStep();
-            game.NextStep();
-            //game.NextStep();
-            //game.NextStep();
+
+            for (int i = 0; i < 10; i++)
+            {
+                game.NextStep();
+            }
+
+
             //// test
 
             //var coords = model.GetMaxBuildingConditionCoords(Constants.TownHall, "result");

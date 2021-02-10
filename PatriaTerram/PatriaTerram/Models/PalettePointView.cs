@@ -61,7 +61,7 @@ namespace PatriaTerram.Web.Models
                 {
                     Value = building.Value,
                     Color = building.Color,
-                    Classes = new List<string> { building.Name }
+                    Classes = new List<string> { building.Name, "building" }
                 };
 
                 Cells.Add(cell);

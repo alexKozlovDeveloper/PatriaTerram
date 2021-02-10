@@ -50,6 +50,21 @@ namespace PatriaTerram.Core.Game
                 {
                     Action = "Build",
                     Target = Constants.Stonepit
+                },
+                new Step
+                {
+                    Action = "Build",
+                    Target = Constants.House
+                },
+                new Step
+                {
+                    Action = "Build",
+                    Target = Constants.House
+                },
+                new Step
+                {
+                    Action = "Build",
+                    Target = Constants.House
                 }
             };
         }
@@ -74,7 +89,7 @@ namespace PatriaTerram.Core.Game
         {
             BuildingConditionsProcessor.AddResultConditionLayer(_map, Configs.Buildings[target]);
 
-            var coord = _map.GetMaxBuildingConditionCoord(target, "result");
+            var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(target, "result");
 
             var building = Configs.Buildings[target];
 

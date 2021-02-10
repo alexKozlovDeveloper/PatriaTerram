@@ -3,18 +3,50 @@
 <div>
     <table>
         <tr>
-            @foreach (var item in Model.LayersMenu)
-            {
-                <tr>
-                    <td>@item.Key</td>
+            <td>Technical</td>
+            <td><div class="layer-button" onclick="showItems('.map-cell-item-value')">Show Values</div></td>
+            <td><div class="layer-button" onclick="hideItems('.map-cell-item-value')">Hide Values</div></td>
+            <td><div class="layer-button" onclick="allBuildings()">All Buildings</div></td>
+        </tr>
+        @foreach (var item in Model.LayersMenu)
+        {
+            <tr>
+                <td>@item.Key</td>
 
-                    @foreach (var layer in item.Value)
-                    {
-                        <td>
-                            <div class="layer-button" onclick="selectLayer('@layer.Value')">@layer.Key</div>
-                        </td>
-                    }
-                </tr>
-            }
+                @foreach (var layer in item.Value)
+                {
+                    <td>
+                        <div class="layer-button" onclick="selectLayer('@layer.Value')">@layer.Key</div>
+                    </td>
+                }
+            </tr>
+        }
     </table>
 </div>
+
+<script>
+
+    function hideItems(selector) {
+        $(selector).addClass("hidden-cell-item")
+    }
+
+    function showItems(selector) {
+        $(selector).removeClass("hidden-cell-item")
+    }
+
+    function selectLayer(selector) {
+        hideItems('.map-cell-item');
+
+        $(selector).removeClass("hidden-cell-item")
+    }
+
+    function allBuildings() {
+        hideItems('.map-cell-item');
+
+        $('.building').removeClass("hidden-cell-item")
+    }
+
+</script>
+
+    
+    

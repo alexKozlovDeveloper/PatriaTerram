@@ -24,8 +24,8 @@
 </div>
 
 <div>
-    <div class="layer-button" onclick="showItems('.map-cell-item-value')">Show Values</div>
-    <div class="layer-button" onclick="hideItems('.map-cell-item-value')">Hide Values</div>
+    @*<div class="layer-button" onclick="showItems('.map-cell-item-value')">Show Values</div>
+    <div class="layer-button" onclick="hideItems('.map-cell-item-value')">Hide Values</div>*@
 </div>
 
 <div>
@@ -40,20 +40,3 @@
 
 </div>
 
-<script>
-
-    function hideItems(selector) {
-        $(selector).addClass("hidden-cell-item")
-    }
-
-    function showItems(selector) {
-        $(selector).removeClass("hidden-cell-item")
-    }
-
-    function selectLayer(selector) {
-        hideItems('.map-cell-item');
-
-        $(selector).removeClass("hidden-cell-item")
-    }
-
-</script>

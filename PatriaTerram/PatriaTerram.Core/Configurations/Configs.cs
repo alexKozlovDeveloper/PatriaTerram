@@ -111,7 +111,7 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         Environment = Constants.Wood,
                                         Radius = 5,
-                                        Priority = 25
+                                        Priority = 45
                                     },
                                     new EnvironmentCondition
                                     {

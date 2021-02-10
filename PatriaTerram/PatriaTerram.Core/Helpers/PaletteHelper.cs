@@ -71,5 +71,25 @@ namespace PatriaTerram.Core.Helpers
 
             return coords[maxValue].FirstOrDefault();
         }
+
+        public static Coord GetMaxBuildingConditionCoordWithoutBuildings(this Palette palette, string buildingType, string terrain)
+        {
+            var coords = GetMaxBuildingConditionCoords(palette, buildingType, terrain);
+
+            var sortedKeys = coords.Keys.OrderBy(a => a).Reverse();
+
+            foreach (var key in sortedKeys)
+            {
+                foreach (var item in coords[key])
+                {
+                    if (palette[item].Buildings.Count == 0)
+                    {
+                        return item;
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }
