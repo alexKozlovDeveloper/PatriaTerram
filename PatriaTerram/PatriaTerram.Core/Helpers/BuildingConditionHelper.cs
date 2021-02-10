@@ -11,12 +11,12 @@ namespace PatriaTerram.Core.Helpers
     {
         public static void AddConditionValue(this BuildingCondition condition, string terrain, int value)
         {
-            if (condition.TerrainConditionValues.Keys.Contains(terrain) == false)
+            if (condition.EnvironmentConditionValues.Keys.Contains(terrain) == false)
             {
-                condition.TerrainConditionValues.Add(terrain, 0);
+                condition.EnvironmentConditionValues.Add(terrain, 0);
             }
 
-            condition.TerrainConditionValues[terrain] += value;
+            condition.EnvironmentConditionValues[terrain] += value;
         }
     }
 }

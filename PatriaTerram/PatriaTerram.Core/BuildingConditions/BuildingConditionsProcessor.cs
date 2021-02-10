@@ -9,28 +9,49 @@ namespace PatriaTerram.Core.BuildingConditions
 {
     public class BuildingConditionsProcessor
     {
-        public void Resolve(Palette palette)
+        //public void Resolve(Palette palette)
+        //{
+        //    IEnumerable<IConditionsResolver> resolvers = new List<IConditionsResolver>
+        //    {
+        //        new TownHallConditionResolver()
+        //    };
+
+        //    for (int x = 0; x < palette.Width; x++)
+        //    {
+        //        for (int y = 0; y < palette.Height; y++)
+        //        {
+        //            foreach (var resolver in resolvers)
+        //            {
+        //                resolver.ResolvePoint(palette, new Coord(x, y));
+        //            }
+        //        }
+        //    }
+
+        //    foreach (var resolver in resolvers)
+        //    {
+        //        resolver.FinalResolve(palette);
+        //    }
+        //}
+
+        public void Resolve(Palette palette, IEnumerable<Building> buildings)
         {
-            IEnumerable<IConditionsResolver> resolvers = new List<IConditionsResolver> 
-            { 
-                new TownHallConditionResolver() 
-            };
+            var resolver = new BuildingConditionsResolver();
 
             for (int x = 0; x < palette.Width; x++)
             {
                 for (int y = 0; y < palette.Height; y++)
                 {
-                    foreach (var resolver in resolvers)
+                    foreach (var building in buildings)
                     {
-                        resolver.ResolvePoint(palette, new Coord(x, y));
+                        resolver.ResolvePoint(palette, new Coord(x, y), building);
                     }
                 }
             }
 
-            foreach (var resolver in resolvers)
+            foreach (var building in buildings)
             {
-                resolver.FinalResolve(palette);
-            }
+                resolver.FinalResolve(palette, building);
+            }            
         }
     }
 }

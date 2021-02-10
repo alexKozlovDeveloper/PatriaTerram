@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Models
 {
-    public class TerrainCondition
+    public class EnvironmentCondition
     {
-        public string Terrain { get; set; }
+        public string Environment { get; set; }
         public int Radius { get; set; }
         public int Priority { get; set; }
     }

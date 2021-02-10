@@ -46,10 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildingConditions\BuildingConditionsProcessor.cs" />
+    <Compile Include="BuildingConditions\BuildingConditionsResolver.cs" />
     <Compile Include="BuildingConditions\IConditionsResolver.cs" />
     <Compile Include="BuildingConditions\TownHallConditionResolver.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Configurations\Configs.cs" />
+    <Compile Include="Game\GameController.cs" />
+    <Compile Include="Game\Step.cs" />
     <Compile Include="Helpers\BuildingConditionHelper.cs" />
     <Compile Include="Helpers\CoordHelper.cs" />
     <Compile Include="Helpers\PaletteHelper.cs" />
@@ -67,7 +70,7 @@
     <Compile Include="Models\PalettePointTerrain.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\PalettePoint.cs" />
-    <Compile Include="Models\TerrainCondition.cs" />
+    <Compile Include="Models\EnvironmentCondition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -33,7 +33,6 @@ namespace PatriaTerram.Core.Factoryes
 
         public TerrainPaletteFactory(PaletteConfiguration config)
         {
-
             _width = config.Width;
             _height = config.Height;
             _seed = config.Seed;

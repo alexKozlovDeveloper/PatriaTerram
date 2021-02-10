@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PatriaTerram.Core
+﻿namespace PatriaTerram.Core
 {
     public static class Constants
     {
@@ -19,5 +13,11 @@ namespace PatriaTerram.Core
         public const string Stone = "stone";
 
         public const string TownHall = "TownHall";
+        public const string Sawmill = "Sawmill";
+        public const string Stonepit = "Stonepit";
+        public const string Farm = "Farm";
+        public const string Warehouse = "Warehouse";
+        public const string FishermanHouse = "FishermanHouse";
+        public const string House = "House";
     }
 }

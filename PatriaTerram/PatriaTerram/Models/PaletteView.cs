@@ -14,7 +14,7 @@ namespace PatriaTerram.Web.Models
         public PalettePointView[][] Points { get; set; }
 
         public int Width { get; private set; }
-        public int Height { get; private set; }   
+        public int Height { get; private set; }
         public PaletteContext Context { get; set; }
 
         public PaletteView(Palette palette)
@@ -41,7 +41,18 @@ namespace PatriaTerram.Web.Models
 
             foreach (var terrain in Configs.Terrains.Values)
             {
-                context.MaxConditions.Add(terrain.Name, palette.GetMaxBuildingConditionValue(Constants.TownHall, terrain.Name));
+                foreach (var building in Configs.Buildings.Values)
+                {
+                    context.MaxConditions.Add($"{building.Name}-{terrain.Name}", palette.GetMaxBuildingConditionValue(building.Name, terrain.Name));
+                }
+            }
+
+            foreach (var item1 in Configs.Buildings.Values)
+            {
+                foreach (var item2 in Configs.Buildings.Values)
+                {
+                    context.MaxConditions.Add($"{item1.Name}-{item2.Name}", palette.GetMaxBuildingConditionValue(item1.Name, item2.Name));
+                }
             }
 
             context.MaxTerrainValue = GetMaxTerrainValue(palette);
@@ -61,7 +72,7 @@ namespace PatriaTerram.Web.Models
 
                     foreach (var terrain in point.Terrains.Values)
                     {
-                        if(terrain.Value > max)
+                        if (terrain.Value > max)
                         {
                             max = terrain.Value;
                         }

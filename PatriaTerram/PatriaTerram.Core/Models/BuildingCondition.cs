@@ -7,11 +7,11 @@ namespace PatriaTerram.Core.Models
     {       
         public string BuildingType { get; set; }
 
-        public Dictionary<string, int> TerrainConditionValues { get; }
+        public Dictionary<string, int> EnvironmentConditionValues { get; }
 
         public BuildingCondition()
         {
-            TerrainConditionValues = new Dictionary<string, int>();
+            EnvironmentConditionValues = new Dictionary<string, int>();
         }
     }
 }

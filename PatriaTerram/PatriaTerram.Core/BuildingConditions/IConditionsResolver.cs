@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.BuildingConditions
 {
-    public interface IConditionsResolver
-    {
-        void ResolvePoint(Palette palette, Coord pointCoord);
-        void FinalResolve(Palette palette);
-    }
+    //public interface IConditionsResolver
+    //{
+    //    void ResolvePoint(Palette palette, Coord pointCoord);
+    //    void FinalResolve(Palette palette);
+    //}
 }

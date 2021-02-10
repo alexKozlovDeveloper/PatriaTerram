@@ -35,17 +35,6 @@ namespace PatriaTerram.Core.Models
             _points = points;
         }
 
-        //public int TerrainsDepth
-        //{
-        //    get
-        //    {
-        //        var max = Points.Select(a => a.Max(b => b.Terrains.Count))
-        //                        .Max();
-
-        //        return max;
-        //    }
-        //}
-
         public PalettePoint this[int i, int j]
         {
             get { return _points[i][j]; }

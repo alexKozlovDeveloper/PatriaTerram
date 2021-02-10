@@ -19,22 +19,57 @@ namespace PatriaTerram.Core.Helpers
                 {
                     var point = palette[x, y];
 
-                   // var condition = point.BuildingConditions.FirstOrDefault(a => a.BuildingType == buildingType);
+                    if (point.BuildingConditions.Keys.Contains(buildingType) == false) { continue; }
 
-                    if(point.BuildingConditions.Keys.Contains(buildingType) == false) { continue; }
+                    if (point.BuildingConditions[buildingType].EnvironmentConditionValues.Keys.Contains(terrain) == false) { continue; }
 
-                    if(point.BuildingConditions[buildingType].TerrainConditionValues.Keys.Contains(terrain) == false) { continue; }
-
-                    conditions.Add(point.BuildingConditions[buildingType].TerrainConditionValues[terrain]);
+                    conditions.Add(point.BuildingConditions[buildingType].EnvironmentConditionValues[terrain]);
                 }
             }
 
-            if(conditions.Count == 0)
+            if (conditions.Count == 0)
             {
                 return 0;
             }
 
             return conditions.Max();
+        }
+
+        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoords(this Palette palette, string buildingType, string terrain)
+        {
+            var conditions = new Dictionary<int, List<Coord>>();
+
+            for (int x = 0; x < palette.Width; x++)
+            {
+                for (int y = 0; y < palette.Height; y++)
+                {
+                    var point = palette[x, y];
+
+                    if (point.BuildingConditions.Keys.Contains(buildingType) == false) { continue; }
+
+                    if (point.BuildingConditions[buildingType].EnvironmentConditionValues.Keys.Contains(terrain) == false) { continue; }
+
+                    var value = point.BuildingConditions[buildingType].EnvironmentConditionValues[terrain];
+
+                    if (conditions.Keys.Contains(value) == false)
+                    {
+                        conditions.Add(value, new List<Coord>());
+                    }
+
+                    conditions[value].Add(new Coord(x, y));
+                }
+            }
+
+            return conditions;
+        }
+
+        public static Coord GetMaxBuildingConditionCoord(this Palette palette, string buildingType, string terrain)
+        {
+            var coords = GetMaxBuildingConditionCoords(palette, buildingType, terrain);
+
+            var maxValue = coords.Keys.Max();
+
+            return coords[maxValue].FirstOrDefault();
         }
     }
 }

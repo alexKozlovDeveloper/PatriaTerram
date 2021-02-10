@@ -64,14 +64,14 @@ namespace PatriaTerram.Core.Helpers
         {
             if (point.BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
 
-            return point.BuildingConditions[buildingType].TerrainConditionValues[terrain];
+            return point.BuildingConditions[buildingType].EnvironmentConditionValues[terrain];
         }
 
         public static int GetResultBuildingConditionValue(this PalettePoint point, string buildingType)
         {
             if (point.BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
 
-            return point.BuildingConditions[buildingType].TerrainConditionValues.Values.Sum();
+            return point.BuildingConditions[buildingType].EnvironmentConditionValues.Values.Sum();
         }
     }
 }

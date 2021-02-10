@@ -35,14 +35,14 @@ namespace PatriaTerram.Web.Models
 
             foreach (var buildingCondition in point.BuildingConditions.Values)
             {
-                foreach (var item in buildingCondition.TerrainConditionValues)
+                foreach (var item in buildingCondition.EnvironmentConditionValues)
                 {
                     var cell = new MapCellItem()
                     {
                         Value = item.Value,
                         Color = new Color
                         {
-                            R = (int)((item.Value / (double)context.MaxConditions[item.Key]) * 255),
+                            R = (int)((item.Value / (double)context.MaxConditions[$"{buildingCondition.BuildingType}-{item.Key}"]) * 255),
                             G = 0,
                             B = 0
                         },
@@ -59,7 +59,7 @@ namespace PatriaTerram.Web.Models
             {                
                 var cell = new MapCellItem()
                 {
-                    Value = 1000,
+                    Value = building.Value,
                     Color = building.Color,
                     Classes = new List<string> { building.Name }
                 };
