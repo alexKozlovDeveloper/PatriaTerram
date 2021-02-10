@@ -53,5 +53,12 @@ namespace PatriaTerram.Core.BuildingConditions
                 resolver.FinalResolve(palette, building);
             }            
         }
+
+        public static void AddResultConditionLayer(Palette palette, Building building)
+        {
+            var resolver = new BuildingConditionsResolver();
+
+            resolver.FinalResolve(palette, building);
+        }
     }
 }

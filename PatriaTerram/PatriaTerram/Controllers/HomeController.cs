@@ -39,7 +39,7 @@ namespace PatriaTerram.Controllers
 
             var game = new GameController(model);
             game.NextStep();
-            //game.NextStep();
+            game.NextStep();
             //game.NextStep();
             //game.NextStep();
             //// test
@@ -81,6 +81,13 @@ namespace PatriaTerram.Controllers
             return View(viewModel);
         }
         
+        public ActionResult LayersMenu(PaletteContext context)
+        {
+            var menu = new LayerMenuView(context);
+
+            return View(menu);
+        }
+
         public ActionResult MapPoint(PalettePointView model)
         {          
             return View(model);

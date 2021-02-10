@@ -1,4 +1,5 @@
-﻿@model PatriaTerram.Web.Models.PaletteView
+﻿@using PatriaTerram.Web.Models
+@model PatriaTerram.Web.Models.PaletteView
 
 @{
     ViewBag.Title = "Map";
@@ -30,10 +31,12 @@
 <div>
     Layers:
 
-    @foreach (var layer in Model.Context.Layers)
-    {
-        <div class="layer-button" onclick="selectLayer('@layer.Value')">@layer.Key</div>
-    }
+    @Html.Partial("LayersMenu", new LayerMenuView(Model.Context))
+
+    @*@foreach (var layer in Model.Context.Layers)
+        {
+            <div class="layer-button" onclick="selectLayer('@layer.Value')">@layer.Key</div>
+        }*@
 
 </div>
 

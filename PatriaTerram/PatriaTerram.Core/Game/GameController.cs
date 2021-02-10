@@ -72,6 +72,8 @@ namespace PatriaTerram.Core.Game
 
         private void Build(string target)
         {
+            BuildingConditionsProcessor.AddResultConditionLayer(_map, Configs.Buildings[target]);
+
             var coord = _map.GetMaxBuildingConditionCoord(target, "result");
 
             var building = Configs.Buildings[target];

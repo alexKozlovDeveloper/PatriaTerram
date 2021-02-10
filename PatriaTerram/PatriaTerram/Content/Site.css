@@ -40,7 +40,8 @@ textarea {
 }
 
 .layer-button {
-    background-color: aqua;
+    background-color: #eeeeee;
+    margin: 3px;
 }
 
 .map-cell-item {

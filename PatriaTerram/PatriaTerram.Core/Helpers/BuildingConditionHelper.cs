@@ -18,5 +18,15 @@ namespace PatriaTerram.Core.Helpers
 
             condition.EnvironmentConditionValues[terrain] += value;
         }
+
+        public static void UpdateConditionValue(this BuildingCondition condition, string terrain, int value)
+        {
+            if (condition.EnvironmentConditionValues.Keys.Contains(terrain) == false)
+            {
+                condition.EnvironmentConditionValues.Add(terrain, 0);
+            }
+
+            condition.EnvironmentConditionValues[terrain] = value;
+        }
     }
 }

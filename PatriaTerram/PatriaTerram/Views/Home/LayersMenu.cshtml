@@ -1,0 +1,20 @@
+﻿@model PatriaTerram.Web.Models.LayerMenuView
+
+<div>
+    <table>
+        <tr>
+            @foreach (var item in Model.LayersMenu)
+            {
+                <tr>
+                    <td>@item.Key</td>
+
+                    @foreach (var layer in item.Value)
+                    {
+                        <td>
+                            <div class="layer-button" onclick="selectLayer('@layer.Value')">@layer.Key</div>
+                        </td>
+                    }
+                </tr>
+            }
+    </table>
+</div>

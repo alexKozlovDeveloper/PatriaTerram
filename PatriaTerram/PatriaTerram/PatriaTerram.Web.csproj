@@ -124,6 +124,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LayerMenuView.cs" />
     <Compile Include="Models\MapCellItem.cs" />
     <Compile Include="Models\PaletteContext.cs" />
     <Compile Include="Models\PalettePointView.cs" />
@@ -165,6 +166,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Map.cshtml" />
     <Content Include="Views\Home\MapPoint.cshtml" />
+    <Content Include="Views\Home\LayersMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

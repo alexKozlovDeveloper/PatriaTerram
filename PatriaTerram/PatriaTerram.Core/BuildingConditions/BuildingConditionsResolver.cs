@@ -46,7 +46,12 @@ namespace PatriaTerram.Core.BuildingConditions
             {
                 for (int y = 0; y < palette.Height; y++)
                 {
-                    var conditions = palette[x, y].BuildingConditions[Constants.TownHall];
+                    if(palette[x, y].BuildingConditions.Keys.Contains(building.Name) == false)
+                    {
+                        continue;
+                    }
+
+                    var conditions = palette[x, y].BuildingConditions[building.Name];
 
                     double sum = 0;
 
@@ -63,7 +68,7 @@ namespace PatriaTerram.Core.BuildingConditions
                     sum *= 1000;
 
 
-                    conditions.AddConditionValue("result", (int)sum);
+                    conditions.UpdateConditionValue("result", (int)sum);
                 }
             }
         }
