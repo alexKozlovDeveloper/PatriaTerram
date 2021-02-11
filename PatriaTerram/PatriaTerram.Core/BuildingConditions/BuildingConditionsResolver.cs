@@ -17,15 +17,31 @@ namespace PatriaTerram.Core.BuildingConditions
 
             foreach (var terrain in basePoint.Terrains.Keys)
             {
-                if (building.EnvironmentConditions.FirstOrDefault(a => a.Environment == terrain) != null)
+                var environmentCondition = building.EnvironmentConditions.FirstOrDefault(a => a.Environment == terrain);
+
+                if (environmentCondition != null)
                 {
-                    var radius = building.EnvironmentConditions.FirstOrDefault(a => a.Environment == terrain).Radius;
+                    var radius = environmentCondition.Radius;
 
                     var coords = baseCoord.GetAdjacentCoordsBeyond(radius, palette.Width, palette.Height);
 
                     foreach (var adjacentCoord in coords)
                     {
-                        int value = GetValue(baseCoord, adjacentCoord, radius, palette.Width, palette.Height);
+                        int value = 0;
+
+                        if (environmentCondition.Type == EnvironmentConditionType.LinearDecrease)
+                        {
+                            value = GetValueLinearDecrease(baseCoord, adjacentCoord, radius, palette.Width, palette.Height);
+                        }
+                        else
+                        {
+                            value = GetValueOneLevel(baseCoord, adjacentCoord, radius, palette.Width, palette.Height);
+                        }
+
+                        if (environmentCondition.IsPositive == false)
+                        {
+                            value *= -1;
+                        }
 
                         palette[adjacentCoord].AddBuildingConditions($"{building.Name}", terrain, value);
                     }
@@ -39,7 +55,7 @@ namespace PatriaTerram.Core.BuildingConditions
 
             foreach (var terrainCondition in building.EnvironmentConditions)
             {
-                maxConditions.Add(terrainCondition.Environment, palette.GetMaxBuildingConditionValue(building.Name, terrainCondition.Environment));
+                maxConditions.Add(terrainCondition.Environment, Math.Abs(palette.GetMaxBuildingConditionValue(building.Name, terrainCondition.Environment)));
             }
 
             for (int x = 0; x < palette.Width; x++)
@@ -60,6 +76,11 @@ namespace PatriaTerram.Core.BuildingConditions
                         if (conditions.EnvironmentConditionValues.Keys.Contains(terrainCondition.Environment) == false) { continue; }
 
                         var conditionValue = conditions.EnvironmentConditionValues[terrainCondition.Environment];
+
+                        if (conditionValue < 0)
+                        {
+
+                        }
 
                         sum += ((conditionValue * 1.0) / maxConditions[terrainCondition.Environment]) * terrainCondition.Priority;
                     }
@@ -89,7 +110,21 @@ namespace PatriaTerram.Core.BuildingConditions
 
                         foreach (var adjacentCoord in coords)
                         {
-                            int value = GetValue(baseCoord, adjacentCoord, effectedBuildoing.Radius, palette.Width, palette.Height);
+                            int value = 0;
+
+                            if (effectedBuildoing.Type == EnvironmentConditionType.LinearDecrease)
+                            {
+                                value = GetValueLinearDecrease(baseCoord, adjacentCoord, effectedBuildoing.Radius, palette.Width, palette.Height);
+                            }
+                            else
+                            {
+                                value = GetValueOneLevel(baseCoord, adjacentCoord, effectedBuildoing.Radius, palette.Width, palette.Height);
+                            }
+
+                            if(effectedBuildoing.IsPositive == false)
+                            {
+                                value *= -1;
+                            }
 
                             palette[adjacentCoord].AddBuildingConditions($"{building.Name}", pointBuilding.Name, value);
                         }
@@ -98,9 +133,14 @@ namespace PatriaTerram.Core.BuildingConditions
             }
         }
 
-        public static int GetValue(Coord baseCoord, Coord adjacentCoord, int radius, int width, int height)
+        public static int GetValueLinearDecrease(Coord baseCoord, Coord adjacentCoord, int radius, int width, int height)
         {
             return (int)((radius - (int)baseCoord.DistanceBeyond(adjacentCoord, width, height)) * (100.0 / radius));
+        }
+
+        public static int GetValueOneLevel(Coord baseCoord, Coord adjacentCoord, int radius, int width, int height)
+        {
+            return 100;
         }
     }
 }

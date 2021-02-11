@@ -63,6 +63,7 @@
     <Compile Include="Configurations\PaletteConfiguration.cs" />
     <Compile Include="Configurations\Range.cs" />
     <Compile Include="Models\Color.cs" />
+    <Compile Include="Models\EnvironmentConditionType.cs" />
     <Compile Include="Models\Terrain.cs" />
     <Compile Include="Factoryes\SamplePaletteFactory.cs" />
     <Compile Include="Factoryes\TerrainPaletteFactory.cs" />

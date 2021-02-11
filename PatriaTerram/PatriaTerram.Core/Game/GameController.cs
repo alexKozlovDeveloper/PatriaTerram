@@ -19,54 +19,72 @@ namespace PatriaTerram.Core.Game
         public GameController(Palette map)
         {
             _map = map;
-            _steps = new List<Step>
+
+            var townHall = new Step
             {
-                new Step
-                {
-                    Action = "Build",
-                    Target = Constants.TownHall
-                },
-                new Step
-                {
-                    Action = "Build",
-                    Target = Constants.Sawmill
-                },
-                new Step
-                {
-                    Action = "Build",
-                    Target = Constants.Sawmill
-                },
-                new Step
-                {
-                    Action = "Build",
-                    Target = Constants.Farm
-                },
-                new Step
-                {
-                    Action = "Build",
-                    Target = Constants.Farm
-                },
-                new Step
-                {
-                    Action = "Build",
-                    Target = Constants.Stonepit
-                },
-                new Step
-                {
-                    Action = "Build",
-                    Target = Constants.House
-                },
-                new Step
-                {
-                    Action = "Build",
-                    Target = Constants.House
-                },
-                new Step
-                {
-                    Action = "Build",
-                    Target = Constants.House
-                }
+                Action = "Build",
+                Target = Constants.TownHall
             };
+            var sawmill = new Step
+            {
+                Action = "Build",
+                Target = Constants.Sawmill
+            };
+            var farm = new Step
+            {
+                Action = "Build",
+                Target = Constants.Farm
+            };
+            var house = new Step
+            {
+                Action = "Build",
+                Target = Constants.House
+            };
+            var stonepit = new Step
+            {
+                Action = "Build",
+                Target = Constants.Stonepit
+            };
+
+            var startedPack = new List<Step>() 
+            {
+                sawmill,
+                sawmill,
+                sawmill,
+                stonepit,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                house,
+                house,
+                house,
+                house,
+                house,
+                house,
+                house,
+            };
+
+            _steps = new List<Step> 
+            {
+                townHall
+            };
+
+            _steps.AddRange(startedPack);
+            _steps.AddRange(startedPack);
+            _steps.AddRange(startedPack);
+            _steps.AddRange(startedPack);
         }
 
         public void NextStep()

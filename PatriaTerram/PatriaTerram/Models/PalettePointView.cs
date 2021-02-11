@@ -10,9 +10,12 @@ namespace PatriaTerram.Web.Models
     {
         public List<MapCellItem> Cells { get; set; }
 
+        public List<string> Classes { get; set; }
+
         public PalettePointView(PalettePoint point, PaletteContext context)
         {
             Cells = new List<MapCellItem>();
+            Classes = new List<string>();
 
             foreach (var item in point.Terrains.Values)
             {
@@ -67,6 +70,16 @@ namespace PatriaTerram.Web.Models
                 Cells.Add(cell);
 
                 context.AddLayer($"{building.Name}", $".{building.Name}");
+            }
+
+            if(point.Buildings.Count > 0)
+            {
+                Classes.Add("point-with-building");
+            }
+            else
+            {
+                Classes.Add("point-without-building");
+
             }
         }
     }

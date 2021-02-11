@@ -71,25 +71,33 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         Environment = Constants.Stone,
                                         Radius = 15,
-                                        Priority = 15
+                                        Priority = 15,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     },
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.Wood,
                                         Radius = 7,
-                                        Priority = 10
+                                        Priority = 10,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     },
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.FertileSoil,
                                         Radius = 5,
-                                        Priority = 15
+                                        Priority = 15,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     },
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.Lake,
                                         Radius = 8,
-                                        Priority = 20
+                                        Priority = 20,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     }
                                 }
                             }
@@ -111,13 +119,25 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         Environment = Constants.Wood,
                                         Radius = 5,
-                                        Priority = 45
+                                        Priority = 45,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     },
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.TownHall,
-                                        Radius = 10,
-                                        Priority = 15
+                                        Radius = 15,
+                                        Priority = 25,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.OneLevel
+                                    },
+                                    new EnvironmentCondition
+                                    {
+                                        Environment = Constants.Sawmill,
+                                        Radius = 3,
+                                        Priority = 45,
+                                        IsPositive = false,
+                                        Type = EnvironmentConditionType.OneLevel
                                     }
                                 }
                             }
@@ -139,13 +159,25 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         Environment = Constants.Stone,
                                         Radius = 5,
-                                        Priority = 50
+                                        Priority = 50,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     },
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.TownHall,
                                         Radius = 15,
-                                        Priority = 15
+                                        Priority = 15,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.OneLevel
+                                    },
+                                    new EnvironmentCondition
+                                    {
+                                        Environment = Constants.Stonepit,
+                                        Radius = 2,
+                                        Priority = 50,
+                                        IsPositive = false,
+                                        Type = EnvironmentConditionType.OneLevel
                                     }
                                 }
                             }
@@ -167,13 +199,33 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         Environment = Constants.FertileSoil,
                                         Radius = 5,
-                                        Priority = 50
+                                        Priority = 50,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     },
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.TownHall,
-                                        Radius = 7,
-                                        Priority = 25
+                                        Radius = 15,
+                                        Priority = 15,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.OneLevel
+                                    },
+                                    new EnvironmentCondition
+                                    {
+                                        Environment = Constants.Sawmill,
+                                        Radius = 3,
+                                        Priority = 50,
+                                        IsPositive = false,
+                                        Type = EnvironmentConditionType.OneLevel
+                                    },
+                                    new EnvironmentCondition
+                                    {
+                                        Environment = Constants.Farm,
+                                        Radius = 5,
+                                        Priority = 20,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.OneLevel
                                     }
                                 }
                             }
@@ -194,26 +246,42 @@ namespace PatriaTerram.Core.Configurations
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.Sawmill,
-                                        Radius = 10,
-                                        Priority = 10
+                                        Radius = 15,
+                                        Priority = 15,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.OneLevel
                                     },
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.Stonepit,
-                                        Radius = 10,
-                                        Priority = 10
+                                        Radius = 15,
+                                        Priority = 15,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.OneLevel
                                     },
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.Farm,
-                                        Radius = 10,
-                                        Priority = 10
+                                        Radius = 5,
+                                        Priority = 20,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.OneLevel
                                     },
                                     new EnvironmentCondition
                                     {
                                         Environment = Constants.TownHall,
-                                        Radius = 10,
-                                        Priority = 10
+                                        Radius = 15,
+                                        Priority = 20,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
+                                    },
+                                    new EnvironmentCondition
+                                    {
+                                        Environment = Constants.House,
+                                        Radius = 5,
+                                        Priority = 15,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     }
                                 }
                             }

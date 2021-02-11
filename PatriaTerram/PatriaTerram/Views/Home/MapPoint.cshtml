@@ -1,6 +1,10 @@
 ﻿@model PatriaTerram.Web.Models.PalettePointView
 
-<div class="map-cell">
+@{ 
+    var classesStr = string.Join(" ", Model.Classes);
+}
+
+<div class="map-cell @classesStr">
 
     @foreach (var cell in Model.Cells)
     {
