@@ -53,21 +53,13 @@ namespace PatriaTerram.Core.BuildingConditions
 
         public void FinalResolve(Palette palette, Building building)
         {
-            var maxConditions = new Dictionary<string, int>();
-
-            foreach (var terrainCondition in building.EnvironmentConditions)
-            {
-                maxConditions.Add(terrainCondition.Environment, Math.Abs(palette.GetMaxBuildingConditionValue(building.Name, terrainCondition.Environment)));
-            }
+            var maxConditions = GetMAxConditions(palette, building);
 
             for (int x = 0; x < palette.Width; x++)
             {
                 for (int y = 0; y < palette.Height; y++)
                 {
-                    if (palette[x, y].BuildingConditions.Keys.Contains(building.Name) == false)
-                    {
-                        continue;
-                    }
+                    if (palette[x, y].BuildingConditions.Keys.Contains(building.Name) == false) { continue; }
 
                     var conditions = palette[x, y].BuildingConditions[building.Name];
 
@@ -79,21 +71,29 @@ namespace PatriaTerram.Core.BuildingConditions
 
                         var conditionValue = conditions.EnvironmentConditionValues[terrainCondition.Environment];
 
-                        if (conditionValue < 0)
-                        {
-
-                        }
-
                         sum += ((conditionValue * 1.0) / maxConditions[terrainCondition.Environment]) * terrainCondition.Priority;
                     }
 
                     sum /= building.EnvironmentConditions.Select(a => a.Priority).Sum();
                     sum *= 1000;
 
-
                     conditions.UpdateConditionValue(Constants.Result, (int)sum);
                 }
             }
+        }
+
+        private Dictionary<string, int> GetMAxConditions(Palette palette, Building building)
+        {
+            var maxConditions = new Dictionary<string, int>();
+
+            foreach (var terrainCondition in building.EnvironmentConditions)
+            {
+                var value = Math.Abs(palette.GetMaxBuildingConditionValue(building.Name, terrainCondition.Environment));
+
+                maxConditions.Add(terrainCondition.Environment, value);
+            }
+
+            return maxConditions;
         }
 
         public static void UpdateBuildingEffects(Palette palette, Coord baseCoord)
