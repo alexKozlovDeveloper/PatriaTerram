@@ -47,23 +47,16 @@
   <ItemGroup>
     <Compile Include="BuildingConditions\BuildingConditionsProcessor.cs" />
     <Compile Include="BuildingConditions\BuildingConditionsResolver.cs" />
-    <Compile Include="BuildingConditions\IConditionsResolver.cs" />
-    <Compile Include="BuildingConditions\TownHallConditionResolver.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Configurations\Configs.cs" />
-    <Compile Include="Game\GameController.cs" />
-    <Compile Include="Game\Step.cs" />
-    <Compile Include="Helpers\BuildingConditionHelper.cs" />
-    <Compile Include="Helpers\CoordHelper.cs" />
     <Compile Include="Helpers\PaletteHelper.cs" />
     <Compile Include="Helpers\PalettePointHelper.cs" />
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\BuildingCondition.cs" />
-    <Compile Include="Models\Coord.cs" />
     <Compile Include="Configurations\PaletteConfiguration.cs" />
     <Compile Include="Configurations\Range.cs" />
     <Compile Include="Models\Color.cs" />
-    <Compile Include="Models\EnvironmentConditionType.cs" />
+    <Compile Include="Enums\EnvironmentConditionType.cs" />
     <Compile Include="Models\Terrain.cs" />
     <Compile Include="Factoryes\SamplePaletteFactory.cs" />
     <Compile Include="Factoryes\TerrainPaletteFactory.cs" />
@@ -75,6 +68,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AStarAlgorithm\AStarAlgorithm.csproj">
+      <Project>{8a6bd105-45fd-4768-bc58-225020b39e7f}</Project>
+      <Name>AStarAlgorithm</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PerlinNoise\PerlinNoise.csproj">
       <Project>{2be58c75-a2c8-4c92-8fcf-e0207d5eaeeb}</Project>
       <Name>PerlinNoise</Name>

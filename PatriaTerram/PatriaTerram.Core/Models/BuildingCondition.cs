@@ -13,5 +13,25 @@ namespace PatriaTerram.Core.Models
         {
             EnvironmentConditionValues = new Dictionary<string, int>();
         }
+
+        public void AddConditionValue(string terrain, int value)
+        {
+            if (EnvironmentConditionValues.Keys.Contains(terrain) == false)
+            {
+                EnvironmentConditionValues.Add(terrain, 0);
+            }
+
+            EnvironmentConditionValues[terrain] += value;
+        }
+
+        public void UpdateConditionValue(string terrain, int value)
+        {
+            if (EnvironmentConditionValues.Keys.Contains(terrain) == false)
+            {
+                EnvironmentConditionValues.Add(terrain, 0);
+            }
+
+            EnvironmentConditionValues[terrain] = value;
+        }
     }
 }

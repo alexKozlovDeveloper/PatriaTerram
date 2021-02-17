@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Models;
 using System;
 using System.Collections.Generic;

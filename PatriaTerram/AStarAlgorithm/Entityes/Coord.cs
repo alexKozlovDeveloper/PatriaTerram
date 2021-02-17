@@ -6,10 +6,18 @@ using System.Threading.Tasks;
 
 namespace AStarAlgorithm.Entityes
 {
-    public class Coord
+    public class Coord : IComparable
     {
         public int X { get; set; }
         public int Y { get; set; }
+
+        public bool IsPositive
+        {
+            get
+            {
+                return X >= 0 && Y >= 0;
+            }
+        }
 
         public Coord(int x, int y)
         {

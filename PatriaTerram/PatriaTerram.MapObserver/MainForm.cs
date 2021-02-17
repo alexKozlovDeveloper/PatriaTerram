@@ -18,11 +18,11 @@ using AStarAlgorithm;
 
 namespace PatriaTerram.MapObserver
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private int[][] _matrix;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -259,127 +259,10 @@ namespace PatriaTerram.MapObserver
 
         private int[][] GetMatrix()
         {
-            var width = 10;
-            var height = 10;
+            var filePath = @"TestMatrixes\matrix10x10.json";
+            var json = System.IO.File.ReadAllText(filePath);
 
-            int[][] matrix = new int[width][];
-
-            for (int i = 0; i < height; i++)
-            {
-                matrix[i] = new int[height];
-            }
-
-            matrix[0][0] = 1;
-            matrix[0][1] = 1;
-            matrix[0][2] = 1;
-            matrix[0][3] = 1;
-            matrix[0][4] = 1;
-            matrix[0][5] = 1;
-            matrix[0][6] = 1;
-            matrix[0][7] = 1;
-            matrix[0][8] = 1;
-            matrix[0][9] = 1;
-
-            matrix[1][0] = 1;
-            matrix[1][1] = 999;
-            matrix[1][2] = 999;
-            matrix[1][3] = 999;
-            matrix[1][4] = 999;
-            matrix[1][5] = 999;
-            matrix[1][6] = 999;
-            matrix[1][7] = 999;
-            matrix[1][8] = 999;
-            matrix[1][9] = 1;
-
-            matrix[2][0] = 1;
-            matrix[2][1] = 999;
-            matrix[2][2] = 1;
-            matrix[2][3] = 1;
-            matrix[2][4] = 1;
-            matrix[2][5] = 1;
-            matrix[2][6] = 1;
-            matrix[2][7] = 1;
-            matrix[2][8] = 1;
-            matrix[2][9] = 1;
-
-            matrix[3][0] = 1;
-            matrix[3][1] = 999;
-            matrix[3][2] = 1;
-            matrix[3][3] = 999;
-            matrix[3][4] = 999;
-            matrix[3][5] = 999;
-            matrix[3][6] = 1;
-            matrix[3][7] = 999;
-            matrix[3][8] = 999;
-            matrix[3][9] = 1;
-
-            matrix[4][0] = 1;
-            matrix[4][1] = 999;
-            matrix[4][2] = 1;
-            matrix[4][3] = 999;
-            matrix[4][4] = 1;
-            matrix[4][5] = 999;
-            matrix[4][6] = 1;
-            matrix[4][7] = 1;
-            matrix[4][8] = 999;
-            matrix[4][9] = 1;
-
-            matrix[5][0] = 1;
-            matrix[5][1] = 999;
-            matrix[5][2] = 999;
-            matrix[5][3] = 999;
-            matrix[5][4] = 1;
-            matrix[5][5] = 999;
-            matrix[5][6] = 999;
-            matrix[5][7] = 1;
-            matrix[5][8] = 999;
-            matrix[5][9] = 1;
-
-            matrix[6][0] = 1;
-            matrix[6][1] = 999;
-            matrix[6][2] = 1;
-            matrix[6][3] = 999;
-            matrix[6][4] = 1;
-            matrix[6][5] = 1;
-            matrix[6][6] = 1;
-            matrix[6][7] = 1;
-            matrix[6][8] = 999;
-            matrix[6][9] = 1;
-
-            matrix[7][0] = 1;
-            matrix[7][1] = 999;
-            matrix[7][2] = 1;
-            matrix[7][3] = 1;
-            matrix[7][4] = 1;
-            matrix[7][5] = 999;
-            matrix[7][6] = 999;
-            matrix[7][7] = 1;
-            matrix[7][8] = 999;
-            matrix[7][9] = 1;
-
-            matrix[8][0] = 1;
-            matrix[8][1] = 999;
-            matrix[8][2] = 999;
-            matrix[8][3] = 999;
-            matrix[8][4] = 999;
-            matrix[8][5] = 999;
-            matrix[8][6] = 999;
-            matrix[8][7] = 999;
-            matrix[8][8] = 999;
-            matrix[8][9] = 1;
-
-            matrix[9][0] = 1;
-            matrix[9][1] = 1;
-            matrix[9][2] = 1;
-            matrix[9][3] = 1;
-            matrix[9][4] = 1;
-            matrix[9][5] = 1;
-            matrix[9][6] = 1;
-            matrix[9][7] = 1;
-            matrix[9][8] = 1;
-            matrix[9][9] = 1;
-
-            return matrix;
+            return JsonConvert.DeserializeObject<int[][]>(json);
         }
     }
 }

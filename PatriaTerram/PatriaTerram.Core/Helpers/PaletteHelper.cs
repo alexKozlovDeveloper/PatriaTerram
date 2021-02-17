@@ -1,4 +1,5 @@
-﻿using PatriaTerram.Core.Models;
+﻿using AStarAlgorithm.Entityes;
+using PatriaTerram.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +91,66 @@ namespace PatriaTerram.Core.Helpers
             }
 
             return null;
+        }
+    
+        public static void MovePointsXAxis(this Palette palette, int distance)
+        {
+            for (int y = 0; y < palette.Height; y++)
+            {
+                var row = new PalettePoint[palette.Width];
+
+                for (int x = 0; x < palette.Width; x++)
+                {                  
+                    var newX = x + distance;
+
+                    if (newX >= palette.Width)
+                    {
+                        newX -= palette.Width;
+                    }
+
+                    if (newX < 0)
+                    {
+                        newX += palette.Width;
+                    }
+
+                    row[newX] = palette[x,y];
+                }
+
+                for (int x = 0; x < palette.Width; x++)
+                {
+                    palette[x, y] = row[x];
+                }
+            }
+        }
+
+        public static void MovePointsYAxis(this Palette palette, int distance)
+        {
+            for (int x = 0; x < palette.Width; x++)
+            {
+                var column = new PalettePoint[palette.Height];
+
+                for (int y = 0; y < palette.Height; y++)
+                {
+                    var newY = y + distance;
+
+                    if (newY >= palette.Height)
+                    {
+                        newY -= palette.Height;
+                    }
+
+                    if (newY < 0)
+                    {
+                        newY += palette.Height;
+                    }
+
+                    column[newY] = palette[x, y];
+                }
+
+                for (int y = 0; y < palette.Height; y++)
+                {
+                    palette[x, y] = column[y];
+                }
+            }
         }
     }
 }

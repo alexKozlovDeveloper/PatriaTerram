@@ -189,6 +189,10 @@
       <Project>{7ef2a029-f45c-4394-be5a-c20a5d011d28}</Project>
       <Name>PatriaTerram.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PatriaTerram.Game\PatriaTerram.Game.csproj">
+      <Project>{fecbcaf8-d670-491f-9cfa-b3703267032c}</Project>
+      <Name>PatriaTerram.Game</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

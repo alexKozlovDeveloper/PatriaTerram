@@ -94,7 +94,7 @@ namespace PatriaTerram.Core.Factoryes
                     var resultTerrain = new Terrain
                     {
                         IsAffectColor = false,
-                        Name = "result",
+                        Name = Constants.Result,
                         Color = model[x, y].GetPointColor()
                     };
 

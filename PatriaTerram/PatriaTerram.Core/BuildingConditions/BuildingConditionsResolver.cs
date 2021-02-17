@@ -1,4 +1,6 @@
-﻿using PatriaTerram.Core.Configurations;
+﻿using AStarAlgorithm.Entityes;
+using PatriaTerram.Core.Configurations;
+using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
 using System;
@@ -19,33 +21,33 @@ namespace PatriaTerram.Core.BuildingConditions
             {
                 var environmentCondition = building.EnvironmentConditions.FirstOrDefault(a => a.Environment == terrain);
 
-                if (environmentCondition != null)
+                if (environmentCondition == null) { continue; }
+
+                var radius = environmentCondition.Radius;
+
+                var adjacentCoords = baseCoord.GetAdjacentCoordsBeyond(radius, palette.Width, palette.Height);
+
+                foreach (var adjacentCoord in adjacentCoords)
                 {
-                    var radius = environmentCondition.Radius;
+                    int value = 0;
 
-                    var coords = baseCoord.GetAdjacentCoordsBeyond(radius, palette.Width, palette.Height);
-
-                    foreach (var adjacentCoord in coords)
+                    if (environmentCondition.Type == EnvironmentConditionType.LinearDecrease)
                     {
-                        int value = 0;
-
-                        if (environmentCondition.Type == EnvironmentConditionType.LinearDecrease)
-                        {
-                            value = GetValueLinearDecrease(baseCoord, adjacentCoord, radius, palette.Width, palette.Height);
-                        }
-                        else
-                        {
-                            value = GetValueOneLevel(baseCoord, adjacentCoord, radius, palette.Width, palette.Height);
-                        }
-
-                        if (environmentCondition.IsPositive == false)
-                        {
-                            value *= -1;
-                        }
-
-                        palette[adjacentCoord].AddBuildingConditions($"{building.Name}", terrain, value);
+                        value = GetValueLinearDecrease(baseCoord, adjacentCoord, radius, palette.Width, palette.Height);
                     }
+                    else
+                    {
+                        value = GetValueOneLevel(baseCoord, adjacentCoord, radius, palette.Width, palette.Height);
+                    }
+
+                    if (environmentCondition.IsPositive == false)
+                    {
+                        value *= -1;
+                    }
+
+                    palette[adjacentCoord].AddBuildingConditions(building.Name, terrain, value);
                 }
+
             }
         }
 
@@ -62,7 +64,7 @@ namespace PatriaTerram.Core.BuildingConditions
             {
                 for (int y = 0; y < palette.Height; y++)
                 {
-                    if(palette[x, y].BuildingConditions.Keys.Contains(building.Name) == false)
+                    if (palette[x, y].BuildingConditions.Keys.Contains(building.Name) == false)
                     {
                         continue;
                     }
@@ -89,7 +91,7 @@ namespace PatriaTerram.Core.BuildingConditions
                     sum *= 1000;
 
 
-                    conditions.UpdateConditionValue("result", (int)sum);
+                    conditions.UpdateConditionValue(Constants.Result, (int)sum);
                 }
             }
         }
@@ -121,7 +123,7 @@ namespace PatriaTerram.Core.BuildingConditions
                                 value = GetValueOneLevel(baseCoord, adjacentCoord, effectedBuildoing.Radius, palette.Width, palette.Height);
                             }
 
-                            if(effectedBuildoing.IsPositive == false)
+                            if (effectedBuildoing.IsPositive == false)
                             {
                                 value *= -1;
                             }

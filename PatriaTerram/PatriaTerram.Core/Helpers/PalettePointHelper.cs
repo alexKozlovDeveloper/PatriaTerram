@@ -46,32 +46,15 @@ namespace PatriaTerram.Core.Helpers
             return sum / count;
         }
 
-        public static void AddBuildingConditions(this PalettePoint point, string buildingType, string terrain, int value)
-        {
-            if (point.BuildingConditions.Keys.Contains(buildingType) == false)
-            {
-                var newCondition = new BuildingCondition();
 
-                newCondition.BuildingType = buildingType;
 
-                point.BuildingConditions.Add(newCondition.BuildingType, newCondition);
-            }
 
-            point.BuildingConditions[buildingType].AddConditionValue(terrain, value);
-        }
 
-        public static int GetBuildingConditionValue(this PalettePoint point, string buildingType, string terrain)
-        {
-            if (point.BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
+        //public static int GetResultBuildingConditionValue(this PalettePoint point, string buildingType)
+        //{
+        //    if (point.BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
 
-            return point.BuildingConditions[buildingType].EnvironmentConditionValues[terrain];
-        }
-
-        public static int GetResultBuildingConditionValue(this PalettePoint point, string buildingType)
-        {
-            if (point.BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
-
-            return point.BuildingConditions[buildingType].EnvironmentConditionValues.Values.Sum();
-        }
+        //    return point.BuildingConditions[buildingType].EnvironmentConditionValues.Values.Sum();
+        //}
     }
 }

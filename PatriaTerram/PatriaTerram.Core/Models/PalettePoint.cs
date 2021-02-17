@@ -17,5 +17,26 @@ namespace PatriaTerram.Core.Models
             BuildingConditions = new Dictionary<string, BuildingCondition>();
             Buildings = new Dictionary<string, Building>();
         }
+
+        public void AddBuildingConditions(string buildingType, string terrain, int value)
+        {
+            if (BuildingConditions.Keys.Contains(buildingType) == false)
+            {
+                var newCondition = new BuildingCondition();
+
+                newCondition.BuildingType = buildingType;
+
+                BuildingConditions.Add(newCondition.BuildingType, newCondition);
+            }
+
+            BuildingConditions[buildingType].AddConditionValue(terrain, value);
+        }
+
+        public int GetBuildingConditionValue(string buildingType, string terrain)
+        {
+            if (BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
+
+            return BuildingConditions[buildingType].EnvironmentConditionValues[terrain];
+        }
     }
 }

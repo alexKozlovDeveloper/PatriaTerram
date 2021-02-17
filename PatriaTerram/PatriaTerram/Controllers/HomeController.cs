@@ -2,17 +2,13 @@
 using PatriaTerram.Core.BuildingConditions;
 using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Factoryes;
-using PatriaTerram.Core.Game;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Interfaces;
-using PatriaTerram.Core.Models;
+using PatriaTerram.Game;
+using PatriaTerram.Game.Entityes;
 using PatriaTerram.Web.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 
 namespace PatriaTerram.Controllers
 {
@@ -34,50 +30,16 @@ namespace PatriaTerram.Controllers
 
             var processor = new BuildingConditionsProcessor();
 
-
             processor.Resolve(model, Configs.Buildings.Values);
 
-            var game = new GameController(model);
+            var steps = GetSteps();
+
+            var game = new GameController(model, steps);
 
             for (int i = 0; i < 1000; i++)
             {
                 game.NextStep();
             }
-
-
-            //// test
-
-            //var coords = model.GetMaxBuildingConditionCoords(Constants.TownHall, "result");
-
-            //var sortedKeys = coords.Keys.ToList();
-            //sortedKeys.Sort();
-            //sortedKeys.Reverse();
-
-            ////var mostCoors = new List<Coord>();
-
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    //mostCoors.AddRange(coords[sortedKeys[i]]);
-
-            //    foreach (var coord in coords[sortedKeys[i]])
-            //    {
-            //        model[coord].Buildings.Add(Constants.TownHall, new Building()
-            //        {
-            //            Color = new Color()
-            //            {
-            //                R = 255,
-            //                G = 20,
-            //                B = 147
-            //            },
-            //            Name = Constants.TownHall,
-            //            Value = sortedKeys[i]
-            //        });
-            //    }
-            //}
-
-
-
-            //// end test
 
             var viewModel = new PaletteView(model);
 
@@ -94,6 +56,78 @@ namespace PatriaTerram.Controllers
         public ActionResult MapPoint(PalettePointView model)
         {          
             return View(model);
+        }
+
+
+        private List<Step> GetSteps()
+        {
+            var townHall = new Step
+            {
+                Action = "Build",
+                Target = Constants.TownHall
+            };
+            var sawmill = new Step
+            {
+                Action = "Build",
+                Target = Constants.Sawmill
+            };
+            var farm = new Step
+            {
+                Action = "Build",
+                Target = Constants.Farm
+            };
+            var house = new Step
+            {
+                Action = "Build",
+                Target = Constants.House
+            };
+            var stonepit = new Step
+            {
+                Action = "Build",
+                Target = Constants.Stonepit
+            };
+
+            var startedPack = new List<Step>()
+            {
+                sawmill,
+                sawmill,
+                sawmill,
+                stonepit,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                farm,
+                house,
+                house,
+                house,
+                house,
+                house,
+                house,
+                house,
+            };
+
+            var steps = new List<Step>
+            {
+                townHall
+            };
+
+            steps.AddRange(startedPack);
+            steps.AddRange(startedPack);
+            steps.AddRange(startedPack);
+            steps.AddRange(startedPack);
+
+            return steps;
         }
     }
 }
