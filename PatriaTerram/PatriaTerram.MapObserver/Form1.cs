@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AStarAlgorithm;
 
 namespace PatriaTerram.MapObserver
 {
@@ -189,6 +190,196 @@ namespace PatriaTerram.MapObserver
             beachSizeTextBox.Text = config.BeachSize.ToString();
 
             SmoothingSizeTextBox.Text = config.SmoothingSize.ToString();
+        }
+
+        private void astartTestbutton_Click(object sender, EventArgs e)
+        {
+            var matrix = GetMatrix();
+
+            var start = new AStarAlgorithm.Entityes.Coord(0, 0);
+            var finish = new AStarAlgorithm.Entityes.Coord(6, 2);
+
+            var resolver = new AStarResolver(matrix);
+
+            var path = resolver.GetPath(start, finish);
+
+            foreach (var item in path)
+            {
+                matrix[item.X][item.Y] = 666;
+            }
+
+            var bitmap = GetBitmap(matrix, 10);
+
+            mapPictureBox.Image = bitmap;
+        }
+
+        private Bitmap GetBitmap(int[][] matrix, int multiplayer)
+        {
+            var width = matrix.Length;
+            var height = matrix[0].Length;
+
+            var image = new Bitmap(width * multiplayer, height * multiplayer);
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    //var point = palette[x, y];
+                    //point.GetPointColor(out int r, out int g, out int b);
+
+                    var color = System.Drawing.Color.FromArgb(0, 0, 0);
+
+                    if(matrix[x][y] == 1)
+                    {
+                        color = System.Drawing.Color.White;
+                    }
+
+                    if (matrix[x][y] == 999)
+                    {
+                        color = System.Drawing.Color.Black;
+                    }
+
+                    if (matrix[x][y] == 666)
+                    {
+                        color = System.Drawing.Color.Yellow;
+                    }
+
+                    for (int i = 0; i < multiplayer; i++)
+                    {
+                        for (int j = 0; j < multiplayer; j++)
+                        {
+                            image.SetPixel(x * multiplayer + i, y * multiplayer + j, color);
+                        }
+                    }
+                }
+            }
+
+            return image;
+        }
+
+        private int[][] GetMatrix()
+        {
+            var width = 10;
+            var height = 10;
+
+            int[][] matrix = new int[width][];
+
+            for (int i = 0; i < height; i++)
+            {
+                matrix[i] = new int[height];
+            }
+
+            matrix[0][0] = 1;
+            matrix[0][1] = 1;
+            matrix[0][2] = 1;
+            matrix[0][3] = 1;
+            matrix[0][4] = 1;
+            matrix[0][5] = 1;
+            matrix[0][6] = 1;
+            matrix[0][7] = 1;
+            matrix[0][8] = 1;
+            matrix[0][9] = 1;
+
+            matrix[1][0] = 1;
+            matrix[1][1] = 999;
+            matrix[1][2] = 999;
+            matrix[1][3] = 999;
+            matrix[1][4] = 999;
+            matrix[1][5] = 999;
+            matrix[1][6] = 999;
+            matrix[1][7] = 999;
+            matrix[1][8] = 999;
+            matrix[1][9] = 1;
+
+            matrix[2][0] = 1;
+            matrix[2][1] = 999;
+            matrix[2][2] = 1;
+            matrix[2][3] = 1;
+            matrix[2][4] = 1;
+            matrix[2][5] = 1;
+            matrix[2][6] = 1;
+            matrix[2][7] = 1;
+            matrix[2][8] = 1;
+            matrix[2][9] = 1;
+
+            matrix[3][0] = 1;
+            matrix[3][1] = 999;
+            matrix[3][2] = 1;
+            matrix[3][3] = 999;
+            matrix[3][4] = 999;
+            matrix[3][5] = 999;
+            matrix[3][6] = 1;
+            matrix[3][7] = 999;
+            matrix[3][8] = 999;
+            matrix[3][9] = 1;
+
+            matrix[4][0] = 1;
+            matrix[4][1] = 999;
+            matrix[4][2] = 1;
+            matrix[4][3] = 999;
+            matrix[4][4] = 1;
+            matrix[4][5] = 999;
+            matrix[4][6] = 1;
+            matrix[4][7] = 1;
+            matrix[4][8] = 999;
+            matrix[4][9] = 1;
+
+            matrix[5][0] = 1;
+            matrix[5][1] = 999;
+            matrix[5][2] = 999;
+            matrix[5][3] = 999;
+            matrix[5][4] = 1;
+            matrix[5][5] = 999;
+            matrix[5][6] = 999;
+            matrix[5][7] = 1;
+            matrix[5][8] = 999;
+            matrix[5][9] = 1;
+
+            matrix[6][0] = 1;
+            matrix[6][1] = 999;
+            matrix[6][2] = 1;
+            matrix[6][3] = 999;
+            matrix[6][4] = 1;
+            matrix[6][5] = 1;
+            matrix[6][6] = 1;
+            matrix[6][7] = 1;
+            matrix[6][8] = 999;
+            matrix[6][9] = 1;
+
+            matrix[7][0] = 1;
+            matrix[7][1] = 999;
+            matrix[7][2] = 1;
+            matrix[7][3] = 1;
+            matrix[7][4] = 1;
+            matrix[7][5] = 999;
+            matrix[7][6] = 999;
+            matrix[7][7] = 1;
+            matrix[7][8] = 999;
+            matrix[7][9] = 1;
+
+            matrix[8][0] = 1;
+            matrix[8][1] = 999;
+            matrix[8][2] = 999;
+            matrix[8][3] = 999;
+            matrix[8][4] = 999;
+            matrix[8][5] = 999;
+            matrix[8][6] = 999;
+            matrix[8][7] = 999;
+            matrix[8][8] = 999;
+            matrix[8][9] = 1;
+
+            matrix[9][0] = 1;
+            matrix[9][1] = 1;
+            matrix[9][2] = 1;
+            matrix[9][3] = 1;
+            matrix[9][4] = 1;
+            matrix[9][5] = 1;
+            matrix[9][6] = 1;
+            matrix[9][7] = 1;
+            matrix[9][8] = 1;
+            matrix[9][9] = 1;
+
+            return matrix;
         }
     }
 }

@@ -66,6 +66,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.configsNamesComboBox = new System.Windows.Forms.ComboBox();
             this.loadConfigbutton = new System.Windows.Forms.Button();
+            this.astartTestbutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mapPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -420,11 +421,22 @@
             this.loadConfigbutton.UseVisualStyleBackColor = true;
             this.loadConfigbutton.Click += new System.EventHandler(this.loadConfigbutton_Click);
             // 
+            // astartTestbutton
+            // 
+            this.astartTestbutton.Location = new System.Drawing.Point(8, 581);
+            this.astartTestbutton.Name = "astartTestbutton";
+            this.astartTestbutton.Size = new System.Drawing.Size(181, 52);
+            this.astartTestbutton.TabIndex = 38;
+            this.astartTestbutton.Text = "A* Test";
+            this.astartTestbutton.UseVisualStyleBackColor = true;
+            this.astartTestbutton.Click += new System.EventHandler(this.astartTestbutton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1243, 752);
+            this.Controls.Add(this.astartTestbutton);
             this.Controls.Add(this.loadConfigbutton);
             this.Controls.Add(this.configsNamesComboBox);
             this.Controls.Add(this.label13);
@@ -511,6 +523,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox configsNamesComboBox;
         private System.Windows.Forms.Button loadConfigbutton;
+        private System.Windows.Forms.Button astartTestbutton;
     }
 }
 

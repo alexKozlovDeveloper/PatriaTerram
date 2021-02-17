@@ -84,6 +84,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AStarAlgorithm\AStarAlgorithm.csproj">
+      <Project>{8a6bd105-45fd-4768-bc58-225020b39e7f}</Project>
+      <Name>AStarAlgorithm</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PatriaTerram.Core\PatriaTerram.Core.csproj">
       <Project>{7ef2a029-f45c-4394-be5a-c20a5d011d28}</Project>
       <Name>PatriaTerram.Core</Name>
