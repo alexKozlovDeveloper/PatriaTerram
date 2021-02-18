@@ -43,7 +43,7 @@ namespace PatriaTerram.Web.Models
             {
                 foreach (var building in Configs.Buildings.Values)
                 {
-                    context.MaxConditions.Add($"{building.Name}-{terrain.Name}", palette.GetMaxBuildingConditionValue(building.Name, terrain.Name));
+                    context.MaxConditions.Add($"{building.Name}-{terrain.Type.ToString()}", palette.GetMaxBuildingConditionValue(building.Name, terrain.Type.ToString()));
                 }
             }
 
@@ -70,13 +70,20 @@ namespace PatriaTerram.Web.Models
                 {
                     var point = palette[x, y];
 
-                    foreach (var terrain in point.Terrains.Values)
+                    var maxPointTerrainValue = point.Terrains.GetMaxTerrainValue();
+
+                    if (maxPointTerrainValue > max)
                     {
-                        if (terrain.Value > max)
-                        {
-                            max = terrain.Value;
-                        }
+                        max = maxPointTerrainValue;
                     }
+
+                    //foreach (var terrain in point.Terrains.Values)
+                    //{
+                    //    if (terrain.Value > max)
+                    //    {
+                    //        max = terrain.Value;
+                    //    }
+                    //}
                 }
             }
 

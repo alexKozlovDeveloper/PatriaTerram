@@ -2,16 +2,16 @@
 {
     public static class Constants
     {
-        public const string Altitude = "altitude";
-        public const string Ground = "ground";
-        public const string Ocean = "ocean";
-        public const string Lake = "lake";
-        public const string Wood = "wood";
-        public const string Mountains = "mountains";
-        public const string FertileSoil = "fertileSoil";
-        public const string Beach = "beach";
-        public const string Stone = "stone";
-        public const string Result = "result";
+        public const string Altitude = "Altitude";
+        public const string Ground = "Ground";
+        public const string Ocean = "Ocean";
+        public const string Lake = "Lake";
+        public const string Wood = "Wood";
+        public const string Mountains = "Mountains";
+        public const string FertileSoil = "FertileSoil";
+        public const string Beach = "Beach";
+        public const string Stone = "Stone";
+        public const string Result = "Result";
 
         public const string TownHall = "TownHall";
         public const string Sawmill = "Sawmill";

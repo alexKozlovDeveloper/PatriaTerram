@@ -9,6 +9,7 @@ using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.BuildingConditions;
 using PatriaTerram.Game.Entityes;
 using PatriaTerram.Core;
+using PatriaTerram.Core.Enums;
 
 namespace PatriaTerram.Game
 {
@@ -44,7 +45,7 @@ namespace PatriaTerram.Game
         {
             BuildingConditionsProcessor.AddResultConditionLayer(_map, Configs.Buildings[target]);
 
-            var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(target, Constants.Result);
+            var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(target, TerrainType.Result.ToString());
 
             var building = Configs.Buildings[target];
 

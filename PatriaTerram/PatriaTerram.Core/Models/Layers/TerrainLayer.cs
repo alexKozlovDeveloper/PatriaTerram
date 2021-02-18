@@ -41,5 +41,22 @@ namespace PatriaTerram.Core.Models.Layers
                 return Items.Select(a => a.TerrainType).ToList();
             }
         }
+
+        public int GetTerrainValue(TerrainType terrainType)
+        {
+            var item = GetTerrain(terrainType);
+
+            if(item == null)
+            {
+                return 0;
+            }
+
+            return item.Value;
+        }
+
+        public int GetMaxTerrainValue()
+        {
+            return Items.Select(a => a.Value).Max();
+        }
     }
 }

@@ -18,9 +18,9 @@ namespace PatriaTerram.Web.Models
 
             foreach (var terrain in Configs.Terrains.Values)
             {
-                if (context.Layers.Keys.Contains(terrain.Name) == true)
+                if (context.Layers.Keys.Contains(terrain.Type.ToString()) == true)
                 {
-                    terrains.Add(terrain.Name, context.Layers[terrain.Name]);
+                    terrains.Add(terrain.Type.ToString(), context.Layers[terrain.Type.ToString()]);
                 }
             }
 

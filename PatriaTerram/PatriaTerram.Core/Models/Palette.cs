@@ -44,7 +44,15 @@ namespace PatriaTerram.Core.Models
 
         public PalettePoint this[Coord coord]
         {
-            get { return _points[coord.X][coord.Y]; }
+            get
+            { 
+                if(coord == null)
+                {
+                    return null;
+                }
+
+                return _points[coord.X][coord.Y]; 
+            }
             set { _points[coord.X][coord.Y] = value; }
         }
     }

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatriaTerram.Game", "Patria
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MathSupport", "MathSupport", "{9A0D8217-98C0-4296-ADE4-6D1E766564D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatriaTerram.Console", "PatriaTerram.Console\PatriaTerram.Console.csproj", "{F9268F6F-DBC2-41EE-8E00-B49C2B181DC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{FECBCAF8-D670-491F-9CFA-B3703267032C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FECBCAF8-D670-491F-9CFA-B3703267032C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FECBCAF8-D670-491F-9CFA-B3703267032C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9268F6F-DBC2-41EE-8E00-B49C2B181DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9268F6F-DBC2-41EE-8E00-B49C2B181DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9268F6F-DBC2-41EE-8E00-B49C2B181DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9268F6F-DBC2-41EE-8E00-B49C2B181DC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

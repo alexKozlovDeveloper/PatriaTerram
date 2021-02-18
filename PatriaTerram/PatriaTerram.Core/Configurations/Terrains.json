@@ -1,6 +1,6 @@
 {
-  "altitude": {
-    "Name": "altitude",
+  "Altitude": {
+    "Type": "Altitude",
     "IsAffectColor": false,
     "IntolerableTerrains": [
 
@@ -11,15 +11,15 @@
       "B": 50
     }
   },
-  "fertileSoil": {
-    "Name": "fertileSoil",
+  "FertileSoil": {
+    "Type": "FertileSoil",
     "IsAffectColor": true,
     "IntolerableTerrains": [
-      "ocean",
-      "stone",
-      "mountains",
-      "beach",
-      "lake"
+      "Ocean",
+      "Stone",
+      "Mountains",
+      "Beach",
+      "Lake"
     ],
     "Color": {
       "R": 0,
@@ -27,14 +27,14 @@
       "B": 0
     }
   },
-  "ground": {
-    "Name": "ground",
+  "Ground": {
+    "Type": "Ground",
     "IsAffectColor": true,
     "IntolerableTerrains": [
-      "ocean",
-      "mountains",
-      "beach",
-      "lake"
+      "Ocean",
+      "Mountains",
+      "Beach",
+      "Lake"
     ],
     "Color": {
       "R": 0,
@@ -42,14 +42,14 @@
       "B": 0
     }
   },
-  "lake": {
-    "Name": "lake",
+  "Lake": {
+    "Type": "Lake",
     "IsAffectColor": true,
     "IntolerableTerrains": [
-      "ocean",
-      "mountains",
-      "stone",
-      "beach"
+      "Ocean",
+      "Mountains",
+      "Stone",
+      "Beach"
     ],
     "Color": {
       "R": 0,
@@ -57,8 +57,8 @@
       "B": 200
     }
   },
-  "ocean": {
-    "Name": "ocean",
+  "Ocean": {
+    "Type": "Ocean",
     "IsAffectColor": true,
     "IntolerableTerrains": [
 
@@ -69,13 +69,13 @@
       "B": 100
     }
   },
-  "stone": {
-    "Name": "stone",
+  "Stone": {
+    "Type": "Stone",
     "IsAffectColor": true,
     "IntolerableTerrains": [
-      "ocean",
-      "mountains",
-      "lake"
+      "Ocean",
+      "Mountains",
+      "Lake"
     ],
     "Color": {
       "R": 0,
@@ -83,15 +83,15 @@
       "B": 50
     }
   },
-  "wood": {
-    "Name": "wood",
+  "Wood": {
+    "Type": "Wood",
     "IsAffectColor": true,
     "IntolerableTerrains": [
-      "ocean",
-      "mountains",
-      "beach",
-      "lake",
-      "stone"
+      "Ocean",
+      "Mountains",
+      "Beach",
+      "Lake",
+      "Stone"
     ],
     "Color": {
       "R": 128,
@@ -99,15 +99,15 @@
       "B": 0
     }
   },
-  "mountains": {
-    "Name": "mountains",
+  "Mountains": {
+    "Type": "Mountains",
     "IsAffectColor": true,
     "IntolerableTerrains": [
-      "ground",
-      "fertileSoil",
-      "lake",
-      "stone",
-      "wood"
+      "Ground",
+      "FertileSoil",
+      "Lake",
+      "Stone",
+      "Wood"
     ],
     "Color": {
       "R": 100,
@@ -115,8 +115,8 @@
       "B": 100
     }
   },
-  "beach": {
-    "Name": "beach",
+  "Beach": {
+    "Type": "Beach",
     "IsAffectColor": true,
     "IntolerableTerrains": [
 
@@ -127,8 +127,8 @@
       "B": 0
     }
   },
-  "result": {
-    "Name": "result",
+  "Result": {
+    "Type": "Result",
     "IsAffectColor": false,
     "IntolerableTerrains": [
 

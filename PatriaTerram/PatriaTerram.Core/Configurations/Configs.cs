@@ -15,18 +15,18 @@ namespace PatriaTerram.Core.Configurations
         public static string TerrainsJsonFilePath = @"Configurations\Terrains.json";
         public static string PaletteConfigurationJsonFilePath = @"Configurations\PaletteConfigurations.json";
 
-        private static Dictionary<string, Terrain> _terrains;
+        private static Dictionary<TerrainType, Terrain> _terrains;
         private static Dictionary<string, PaletteConfiguration> _paletteConfigs;
         private static Dictionary<string, Building> _buildings;
 
-        public static Dictionary<string, Terrain> Terrains
+        public static Dictionary<TerrainType, Terrain> Terrains
         {
             get
             {
                 if (_terrains == null)
                 {
                     var json = File.ReadAllText(TerrainsJsonFilePath);
-                    _terrains = JsonConvert.DeserializeObject<Dictionary<string, Terrain>>(json);
+                    _terrains = JsonConvert.DeserializeObject<Dictionary<TerrainType, Terrain>>(json);
                 }
 
                 return _terrains;

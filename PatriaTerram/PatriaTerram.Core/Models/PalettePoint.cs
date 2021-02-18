@@ -1,4 +1,5 @@
 ﻿using PatriaTerram.Core.Interfaces;
+using PatriaTerram.Core.Models.Layers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,26 +11,31 @@ namespace PatriaTerram.Core.Models
     {
         private List<ILayer> _layers;
 
-        public Dictionary<string, PalettePointTerrain> Terrains { get; }
+        //public Dictionary<string, PalettePointTerrain> Terrains { get; }
         public Dictionary<string, BuildingCondition> BuildingConditions { get; }
         public Dictionary<string, Building> Buildings { get; }
 
         public PalettePoint()
         {
-            Terrains = new Dictionary<string, PalettePointTerrain>();
+            //Terrains = new Dictionary<string, PalettePointTerrain>();
             BuildingConditions = new Dictionary<string, BuildingCondition>();
             Buildings = new Dictionary<string, Building>();
 
             _layers = new List<ILayer>();
+
+            _layers.Add(new TerrainLayer());
+            _layers.Add(new BuildingConditionLayer());
+            _layers.Add(new BuildingLayer());
         }
 
         public void AddBuildingConditions(string buildingType, string terrain, int value)
         {
             if (BuildingConditions.Keys.Contains(buildingType) == false)
             {
-                var newCondition = new BuildingCondition();
-
-                newCondition.BuildingType = buildingType;
+                var newCondition = new BuildingCondition
+                {
+                    BuildingType = buildingType
+                };
 
                 BuildingConditions.Add(newCondition.BuildingType, newCondition);
             }
@@ -56,12 +62,18 @@ namespace PatriaTerram.Core.Models
         {
             var layer = _layers.FirstOrDefault(a => a.Name == layerName);
 
-            if(layer == null)
+            if (layer == null)
             {
                 return default;
             }
 
             return (T)layer;
         }
+
+        public TerrainLayer Terrains => GetLayer<TerrainLayer>("Terrain");
+        public BuildingConditionLayer BuildingCondition => GetLayer<BuildingConditionLayer>("BuildingCondition");
+        public BuildingLayer Building => GetLayer<BuildingLayer>("Building");
+
+
     }
 }

@@ -17,9 +17,9 @@ namespace PatriaTerram.Core.BuildingConditions
         {
             var basePoint = palette[baseCoord];
 
-            foreach (var terrain in basePoint.Terrains.Keys)
+            foreach (var terrainType in basePoint.Terrains.TerrainTypes)
             {
-                var environmentCondition = building.EnvironmentConditions.FirstOrDefault(a => a.Environment == terrain);
+                var environmentCondition = building.EnvironmentConditions.FirstOrDefault(a => a.Environment == terrainType.ToString());
 
                 if (environmentCondition == null) { continue; }
 
@@ -45,7 +45,7 @@ namespace PatriaTerram.Core.BuildingConditions
                         value *= -1;
                     }
 
-                    palette[adjacentCoord].AddBuildingConditions(building.Name, terrain, value);
+                    palette[adjacentCoord].AddBuildingConditions(building.Name, terrainType.ToString(), value);
                 }
 
             }

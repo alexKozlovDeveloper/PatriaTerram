@@ -1,4 +1,5 @@
 ﻿using PatriaTerram.Core.Configurations;
+using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Interfaces;
 using PatriaTerram.Core.Models;
@@ -63,22 +64,22 @@ namespace PatriaTerram.Core.Factoryes
 
             var beachMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge).ClearTopValue(_oceanEdge + _beachSize);
 
-            AddTerrain(model, altitudeMatrix, terrains[Constants.Altitude]);
-            AddTerrain(model, oceanMatrix, terrains[Constants.Ocean]);
-            AddTerrain(model, mountainsMatrix, terrains[Constants.Mountains]);
-            AddTerrain(model, beachMatrix, terrains[Constants.Beach]);
+            AddTerrain(model, altitudeMatrix, terrains[TerrainType.Altitude]);
+            AddTerrain(model, oceanMatrix, terrains[TerrainType.Ocean]);
+            AddTerrain(model, mountainsMatrix, terrains[TerrainType.Mountains]);
+            AddTerrain(model, beachMatrix, terrains[TerrainType.Beach]);
 
-            AddRangedTerrain(model, terrains[Constants.Lake], _lakeRange);
-            AddRangedTerrain(model, terrains[Constants.Lake], _lakeRange);
-            AddRangedTerrain(model, terrains[Constants.Lake], _lakeRange);
+            AddRangedTerrain(model, terrains[TerrainType.Lake], _lakeRange);
+            AddRangedTerrain(model, terrains[TerrainType.Lake], _lakeRange);
+            AddRangedTerrain(model, terrains[TerrainType.Lake], _lakeRange);
 
-            AddRangedTerrain(model, terrains[Constants.Stone], _stoneRange);
-            AddRangedTerrain(model, terrains[Constants.Stone], _stoneRange);
+            AddRangedTerrain(model, terrains[TerrainType.Stone], _stoneRange);
+            AddRangedTerrain(model, terrains[TerrainType.Stone], _stoneRange);
 
-            AddTerrain(model, groundMatrix, terrains[Constants.Ground]);
+            AddTerrain(model, groundMatrix, terrains[TerrainType.Ground]);
 
-            AddRangedTerrain(model, terrains[Constants.FertileSoil], _fertileSoilRange);
-            AddRangedTerrain(model, terrains[Constants.Wood], _woodRange);
+            AddRangedTerrain(model, terrains[TerrainType.FertileSoil], _fertileSoilRange);
+            AddRangedTerrain(model, terrains[TerrainType.Wood], _woodRange);
 
             AddResultTerrain(model);
 
@@ -94,21 +95,38 @@ namespace PatriaTerram.Core.Factoryes
                     var resultTerrain = new Terrain
                     {
                         IsAffectColor = false,
-                        Name = Constants.Result,
+                        //Name = Constants.Result,
                         Color = model[x, y].GetPointColor()
                     };
 
-                    var value = (int)model[x, y].Terrains.Values
-                        .Where(a => a.Terrain.IsAffectColor == true)
-                        .Select(a => a.Value)
-                        .Average();
+                    //var value = (int)model[x, y].Terrains.Values
+                    //    .Where(a => a.Terrain.IsAffectColor == true)
+                    //    .Select(a => a.Value)
+                    //    .Average();
 
-                    model[x, y].Terrains.Add(resultTerrain.Name,
-                        new PalettePointTerrain
+                    var values = new List<int>();
+
+                    foreach (var terrainType in model[x, y].Terrains.TerrainTypes)
+                    {
+                        var terrain = Configs.Terrains[terrainType];
+
+                        if (terrain.IsAffectColor)
                         {
-                            Terrain = resultTerrain,
-                            Value = value
-                        });
+                            values.Add(model[x, y].Terrains.GetTerrainValue(terrainType));
+                        }
+                    }
+
+
+                    int value = values.Count > 0 ? (int)values.Average() : 0;
+
+                    //model[x, y].Terrains.Add(resultTerrain.Name,
+                    //    new PalettePointTerrain
+                    //    {
+                    //        Terrain = resultTerrain,
+                    //        Value = value
+                    //    });
+
+                    model[x, y].Terrains.AddTerrain(TerrainType.Result, value);
                 }
             }
         }
@@ -129,11 +147,11 @@ namespace PatriaTerram.Core.Factoryes
                 {
                     if (terrainMatrix[x][y] == 0) { continue; }
 
-                    if (model[x, y].Terrains.Keys.Contains(terrain.Name) == true) { continue; }
+                    if (model[x, y].Terrains.IsHasTerrain(terrain.Type) == true) { continue; }
 
                     if (IsPointContaintIntolerableTerrains(model[x, y], terrain) == false)
                     {
-                        model[x, y].Terrains.Add(terrain.Name, new PalettePointTerrain { Value = terrainMatrix[x][y], Terrain = terrain });
+                        model[x, y].Terrains.AddTerrain(terrain.Type, terrainMatrix[x][y]);
                     }
                 }
             }
@@ -143,7 +161,7 @@ namespace PatriaTerram.Core.Factoryes
         {
             foreach (var intolerableTerrain in terrain.IntolerableTerrains)
             {
-                if (point.Terrains.Keys.Contains(intolerableTerrain) == true)
+                if (point.Terrains.IsHasTerrain(intolerableTerrain) == true)
                 {
                     return true;
                 }

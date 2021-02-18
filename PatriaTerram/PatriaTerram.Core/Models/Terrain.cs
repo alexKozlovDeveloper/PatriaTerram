@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PatriaTerram.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,15 @@ namespace PatriaTerram.Core.Models
 {
     public class Terrain
     {
-        public string Name { get; set; }
+        //public string Name { get; set; }
+        public TerrainType Type { get; set; }
         public bool IsAffectColor { get; set; }
-        public string[] IntolerableTerrains { get; set; }
+        public TerrainType[] IntolerableTerrains { get; set; }
         public Color Color { get; set; }
 
-        public override string ToString()
-        {
-            return Name;
-        }
+        //public override string ToString()
+        //{
+        //    return Name;
+        //}
     }
 }
