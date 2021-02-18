@@ -12,14 +12,14 @@ namespace PatriaTerram.Core.Models
         private List<ILayer> _layers;
 
         //public Dictionary<string, PalettePointTerrain> Terrains { get; }
-        public Dictionary<string, BuildingCondition> BuildingConditions { get; }
-        public Dictionary<string, Building> Buildings { get; }
+        //public Dictionary<string, BuildingCondition> BuildingConditions { get; }
+        //public Dictionary<string, Building> Buildings { get; }
 
         public PalettePoint()
         {
             //Terrains = new Dictionary<string, PalettePointTerrain>();
-            BuildingConditions = new Dictionary<string, BuildingCondition>();
-            Buildings = new Dictionary<string, Building>();
+            //BuildingConditions = new Dictionary<string, BuildingCondition>();
+            //Buildings = new Dictionary<string, Building>();
 
             _layers = new List<ILayer>();
 
@@ -28,27 +28,27 @@ namespace PatriaTerram.Core.Models
             _layers.Add(new BuildingLayer());
         }
 
-        public void AddBuildingConditions(string buildingType, string terrain, int value)
-        {
-            if (BuildingConditions.Keys.Contains(buildingType) == false)
-            {
-                var newCondition = new BuildingCondition
-                {
-                    BuildingType = buildingType
-                };
+        //public void AddBuildingConditions(string buildingType, string terrain, int value)
+        //{
+        //    if (BuildingConditions.Keys.Contains(buildingType) == false)
+        //    {
+        //        var newCondition = new BuildingCondition
+        //        {
+        //            BuildingType = buildingType
+        //        };
 
-                BuildingConditions.Add(newCondition.BuildingType, newCondition);
-            }
+        //        BuildingConditions.Add(newCondition.BuildingType, newCondition);
+        //    }
 
-            BuildingConditions[buildingType].AddConditionValue(terrain, value);
-        }
+        //    BuildingConditions[buildingType].AddConditionValue(terrain, value);
+        //}
 
-        public int GetBuildingConditionValue(string buildingType, string terrain)
-        {
-            if (BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
+        //public int GetBuildingConditionValue(string buildingType, string terrain)
+        //{
+        //    if (BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
 
-            return BuildingConditions[buildingType].EnvironmentConditionValues[terrain];
-        }
+        //    return BuildingConditions[buildingType].EnvironmentConditionValues[terrain];
+        //}
 
         //public ILayer this[string layerName]
         //{
@@ -71,9 +71,7 @@ namespace PatriaTerram.Core.Models
         }
 
         public TerrainLayer Terrains => GetLayer<TerrainLayer>("Terrain");
-        public BuildingConditionLayer BuildingCondition => GetLayer<BuildingConditionLayer>("BuildingCondition");
-        public BuildingLayer Building => GetLayer<BuildingLayer>("Building");
-
-
+        public BuildingConditionLayer BuildingConditions => GetLayer<BuildingConditionLayer>("BuildingCondition");
+        public BuildingLayer Buildings => GetLayer<BuildingLayer>("Building");
     }
 }

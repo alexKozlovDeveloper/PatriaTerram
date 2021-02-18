@@ -43,7 +43,7 @@ namespace PatriaTerram.Web.Models
             {
                 foreach (var building in Configs.Buildings.Values)
                 {
-                    context.MaxConditions.Add($"{building.Name}-{terrain.Type.ToString()}", palette.GetMaxBuildingConditionValue(building.Name, terrain.Type.ToString()));
+                    context.MaxConditions.Add($"{building.Name}-{terrain.Type.ToString()}", palette.GetMaxBuildingConditionValue(building.Type, terrain.Type.ToString()));
                 }
             }
 
@@ -51,7 +51,7 @@ namespace PatriaTerram.Web.Models
             {
                 foreach (var item2 in Configs.Buildings.Values)
                 {
-                    context.MaxConditions.Add($"{item1.Name}-{item2.Name}", palette.GetMaxBuildingConditionValue(item1.Name, item2.Name));
+                    context.MaxConditions.Add($"{item1.Name}-{item2.Name}", palette.GetMaxBuildingConditionValue(item1.Type, item2.Name));
                 }
             }
 

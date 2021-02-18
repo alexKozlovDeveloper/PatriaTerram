@@ -55,30 +55,59 @@ namespace PatriaTerram.Web.Models
                 context.AddLayer(terrain.Type.ToString(), $".{terrain.Type.ToString()}");
             }
 
-            foreach (var buildingCondition in point.BuildingConditions.Values)
+            foreach (var buildingCondition in point.BuildingConditions.GetAllCondiotions())
             {
-                foreach (var item in buildingCondition.EnvironmentConditionValues)
+                //foreach (var item in buildingCondition.EnvironmentConditionValues)
+                //{
+
+                var env = buildingCondition.Environment;
+                var type = buildingCondition.BuildingType;
+                var value = buildingCondition.Value;
+
+                var cell = new MapCellItem()
                 {
-                    var cell = new MapCellItem()
+                    Value = value,
+                    Color = new Color
                     {
-                        Value = item.Value,
-                        Color = new Color
-                        {
-                            R = (int)((item.Value / (double)context.MaxConditions[$"{buildingCondition.BuildingType}-{item.Key}"]) * 255),
-                            G = 0,
-                            B = 0
-                        },
-                        Classes = new List<string> { $"{buildingCondition.BuildingType}-{item.Key}" }
-                    };
+                        R = (int)((value / (double)context.MaxConditions[$"{type}-{env}"]) * 255),
+                        G = 0,
+                        B = 0
+                    },
+                    Classes = new List<string> { $"{type}-{env}" }
+                };
 
-                    Cells.Add(cell);
+                Cells.Add(cell);
 
-                    context.AddLayer($"{buildingCondition.BuildingType}-{item.Key}", $".{buildingCondition.BuildingType}-{item.Key}");
-                }
+                context.AddLayer($"{type}-{env}", $".{type}-{env}");
+                //}
             }
 
-            foreach (var building in point.Buildings.Values)
-            {                
+            //foreach (var buildingCondition in point.BuildingConditions.Values)
+            //{
+            //    foreach (var item in buildingCondition.EnvironmentConditionValues)
+            //    {
+            //        var cell = new MapCellItem()
+            //        {
+            //            Value = item.Value,
+            //            Color = new Color
+            //            {
+            //                R = (int)((item.Value / (double)context.MaxConditions[$"{buildingCondition.BuildingType}-{item.Key}"]) * 255),
+            //                G = 0,
+            //                B = 0
+            //            },
+            //            Classes = new List<string> { $"{buildingCondition.BuildingType}-{item.Key}" }
+            //        };
+
+            //        Cells.Add(cell);
+
+            //        context.AddLayer($"{buildingCondition.BuildingType}-{item.Key}", $".{buildingCondition.BuildingType}-{item.Key}");
+            //    }
+            //}
+
+            foreach (var buildingType in point.Buildings.GetBuildings())
+            {
+                var building = Configs.Buildings[buildingType];
+
                 var cell = new MapCellItem()
                 {
                     Value = building.Value,
@@ -91,7 +120,7 @@ namespace PatriaTerram.Web.Models
                 context.AddLayer($"{building.Name}", $".{building.Name}");
             }
 
-            if(point.Buildings.Count > 0)
+            if(point.Buildings.IsHasAnyBuildings() == true)
             {
                 Classes.Add("point-with-building");
             }

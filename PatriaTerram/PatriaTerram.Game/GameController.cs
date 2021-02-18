@@ -34,14 +34,14 @@ namespace PatriaTerram.Game
             switch (step.Action)
             {
                 case "Build":
-                    Build(step.Target);
+                    Build(step.BuildingType);
                     break;
                 default:
                     break;
             }
         }
 
-        private void Build(string target)
+        private void Build(BuildingType target)
         {
             BuildingConditionsProcessor.AddResultConditionLayer(_map, Configs.Buildings[target]);
 
@@ -49,7 +49,7 @@ namespace PatriaTerram.Game
 
             var building = Configs.Buildings[target];
 
-            _map[coord].Buildings.Add(building.Name, building);
+            _map[coord].Buildings.AddBuilding(building.Type);
 
             BuildingConditionsResolver.UpdateBuildingEffects(_map, coord);
         }

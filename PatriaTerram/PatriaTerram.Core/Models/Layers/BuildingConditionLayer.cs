@@ -23,9 +23,14 @@ namespace PatriaTerram.Core.Models.Layers
             return Items.Any(a => a.BuildingType == buildingType && a.Environment == environment);
         }
 
-        public BuildingConditionLayerItem GetCondiotion(BuildingType buildingType)
+        public List<BuildingConditionLayerItem> GetCondiotions(BuildingType buildingType)
         {
-            return Items.FirstOrDefault(a => a.BuildingType == buildingType);
+            return Items.Where(a => a.BuildingType == buildingType).ToList();
+        }
+
+        public List<BuildingConditionLayerItem> GetAllCondiotions()
+        {
+            return Items;
         }
 
         public int GetValue(BuildingType buildingType, string environment)
@@ -40,16 +45,65 @@ namespace PatriaTerram.Core.Models.Layers
             return item.Value;
         }
 
+        public void UpdateValue(BuildingType buildingType, string environment, int value)
+        {
+            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.Environment == environment);
+
+            if (item == null)
+            {
+                item = new BuildingConditionLayerItem
+                {
+                    BuildingType = buildingType,
+                    Environment = environment
+                };
+
+                Items.Add(item);
+            }
+
+            item.Value = value;
+        }
+
         public void AddConditionValue(BuildingType buildingType, string environment, int value)
         {
-            var item = new BuildingConditionLayerItem
-            {
-                BuildingType = buildingType,
-                Environment = environment,
-                Value = value
-            };
+            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.Environment == environment);
 
-            Items.Add(item);
+            if(item == null)
+            {
+                item = new BuildingConditionLayerItem
+                {
+                    BuildingType = buildingType,
+                    Environment = environment,
+                    Value = value
+                };
+
+                Items.Add(item);
+            }
+            else
+            {
+                item.Value += value;
+            }
         }
+
+        //public void AddBuildingConditions(string buildingType, string terrain, int value)
+        //{
+        //    if (BuildingConditions.Keys.Contains(buildingType) == false)
+        //    {
+        //        var newCondition = new BuildingCondition
+        //        {
+        //            BuildingType = buildingType
+        //        };
+
+        //        BuildingConditions.Add(newCondition.BuildingType, newCondition);
+        //    }
+
+        //    BuildingConditions[buildingType].AddConditionValue(terrain, value);
+        //}
+
+        //public int GetBuildingConditionValue(string buildingType, string terrain)
+        //{
+        //    if (BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
+
+        //    return BuildingConditions[buildingType].EnvironmentConditionValues[terrain];
+        //}
     }
 }

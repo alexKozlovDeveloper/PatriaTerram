@@ -1,6 +1,7 @@
 ﻿using PatriaTerram.Core;
 using PatriaTerram.Core.BuildingConditions;
 using PatriaTerram.Core.Configurations;
+using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Factoryes;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Interfaces;
@@ -64,27 +65,27 @@ namespace PatriaTerram.Controllers
             var townHall = new Step
             {
                 Action = "Build",
-                Target = Constants.TownHall
+                BuildingType = BuildingType.TownHall
             };
             var sawmill = new Step
             {
                 Action = "Build",
-                Target = Constants.Sawmill
+                BuildingType = BuildingType.Sawmill
             };
             var farm = new Step
             {
                 Action = "Build",
-                Target = Constants.Farm
+                BuildingType = BuildingType.Farm
             };
             var house = new Step
             {
                 Action = "Build",
-                Target = Constants.House
+                BuildingType = BuildingType.House
             };
             var stonepit = new Step
             {
                 Action = "Build",
-                Target = Constants.Stonepit
+                BuildingType = BuildingType.Stonepit
             };
 
             var startedPack = new List<Step>()

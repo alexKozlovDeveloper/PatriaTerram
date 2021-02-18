@@ -17,7 +17,7 @@ namespace PatriaTerram.Core.Configurations
 
         private static Dictionary<TerrainType, Terrain> _terrains;
         private static Dictionary<string, PaletteConfiguration> _paletteConfigs;
-        private static Dictionary<string, Building> _buildings;
+        private static Dictionary<BuildingType, Building> _buildings;
 
         public static Dictionary<TerrainType, Terrain> Terrains
         {
@@ -47,19 +47,20 @@ namespace PatriaTerram.Core.Configurations
             }
         }
 
-        public static Dictionary<string, Building> Buildings
+        public static Dictionary<BuildingType, Building> Buildings
         {
             get
             {
                 if (_buildings == null)
                 {
-                    _buildings = new Dictionary<string, Building>
+                    _buildings = new Dictionary<BuildingType, Building>
                     {
                         {
-                            Constants.TownHall,
+                            BuildingType.TownHall,
                             new Building
                             {
                                 Name = Constants.TownHall,
+                                Type = BuildingType.TownHall,
                                 Color = new Color
                                 {
                                     R = 255,
@@ -104,10 +105,11 @@ namespace PatriaTerram.Core.Configurations
                             }
                         },
                         {
-                            Constants.Sawmill,
+                            BuildingType.Sawmill,
                             new Building
                             {
                                 Name = Constants.Sawmill,
+                                Type = BuildingType.Sawmill,
                                 Color = new Color
                                 {
                                     R = 153,
@@ -144,10 +146,11 @@ namespace PatriaTerram.Core.Configurations
                             }
                         },
                         {
-                            Constants.Stonepit,
+                            BuildingType.Stonepit,
                             new Building
                             {
                                 Name = Constants.Stonepit,
+                                Type = BuildingType.Stonepit,
                                 Color = new Color
                                 {
                                     R = 0,
@@ -184,10 +187,11 @@ namespace PatriaTerram.Core.Configurations
                             }
                         },
                         {
-                            Constants.Farm,
+                            BuildingType.Farm,
                             new Building
                             {
                                 Name = Constants.Farm,
+                                Type = BuildingType.Farm,
                                 Color = new Color
                                 {
                                     R = 178,
@@ -232,10 +236,11 @@ namespace PatriaTerram.Core.Configurations
                             }
                         },
                         {
-                            Constants.House,
+                            BuildingType.House,
                             new Building
                             {
                                 Name = Constants.House,
+                                Type = BuildingType.House,
                                 Color = new Color
                                 {
                                     R = 102,

@@ -1,4 +1,5 @@
 ﻿using AStarAlgorithm.Entityes;
+using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace PatriaTerram.Core.Helpers
 {
     public static class PaletteHelper
     {
-        public static int GetMaxBuildingConditionValue(this Palette palette, string buildingType, string terrain)
+        public static int GetMaxBuildingConditionValue(this Palette palette, BuildingType buildingType, string terrain)
         {
             var conditions = new List<int>();
 
@@ -20,11 +21,11 @@ namespace PatriaTerram.Core.Helpers
                 {
                     var point = palette[x, y];
 
-                    if (point.BuildingConditions.Keys.Contains(buildingType) == false) { continue; }
+                    if (point.BuildingConditions.IsHasBuildingCondition(buildingType) == false) { continue; }
 
-                    if (point.BuildingConditions[buildingType].EnvironmentConditionValues.Keys.Contains(terrain) == false) { continue; }
+                    if (point.BuildingConditions.IsHasEnvironment(buildingType, terrain) == false) { continue; }
 
-                    conditions.Add(point.BuildingConditions[buildingType].EnvironmentConditionValues[terrain]);
+                    conditions.Add(point.BuildingConditions.GetValue(buildingType, terrain));                    
                 }
             }
 
@@ -36,7 +37,7 @@ namespace PatriaTerram.Core.Helpers
             return conditions.Max();
         }
 
-        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoords(this Palette palette, string buildingType, string terrain)
+        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoords(this Palette palette, BuildingType buildingType, string terrain)
         {
             var conditions = new Dictionary<int, List<Coord>>();
 
@@ -46,11 +47,11 @@ namespace PatriaTerram.Core.Helpers
                 {
                     var point = palette[x, y];
 
-                    if (point.BuildingConditions.Keys.Contains(buildingType) == false) { continue; }
+                    if (point.BuildingConditions.IsHasBuildingCondition(buildingType) == false) { continue; }
 
-                    if (point.BuildingConditions[buildingType].EnvironmentConditionValues.Keys.Contains(terrain) == false) { continue; }
+                    if (point.BuildingConditions.IsHasEnvironment(buildingType, terrain) == false) { continue; }
 
-                    var value = point.BuildingConditions[buildingType].EnvironmentConditionValues[terrain];
+                    var value = point.BuildingConditions.GetValue(buildingType, terrain); //[buildingType].EnvironmentConditionValues[terrain];
 
                     if (conditions.Keys.Contains(value) == false)
                     {
@@ -64,7 +65,7 @@ namespace PatriaTerram.Core.Helpers
             return conditions;
         }
 
-        public static Coord GetMaxBuildingConditionCoord(this Palette palette, string buildingType, string terrain)
+        public static Coord GetMaxBuildingConditionCoord(this Palette palette, BuildingType buildingType, string terrain)
         {
             var coords = GetMaxBuildingConditionCoords(palette, buildingType, terrain);
 
@@ -73,7 +74,7 @@ namespace PatriaTerram.Core.Helpers
             return coords[maxValue].FirstOrDefault();
         }
 
-        public static Coord GetMaxBuildingConditionCoordWithoutBuildings(this Palette palette, string buildingType, string terrain)
+        public static Coord GetMaxBuildingConditionCoordWithoutBuildings(this Palette palette, BuildingType buildingType, string terrain)
         {
             var coords = GetMaxBuildingConditionCoords(palette, buildingType, terrain);
 
@@ -83,7 +84,7 @@ namespace PatriaTerram.Core.Helpers
             {
                 foreach (var item in coords[key])
                 {
-                    if (palette[item].Buildings.Count == 0)
+                    if (palette[item].Buildings.IsHasAnyBuildings() == false)
                     {
                         return item;
                     }

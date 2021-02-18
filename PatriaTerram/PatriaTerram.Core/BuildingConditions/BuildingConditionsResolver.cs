@@ -45,7 +45,7 @@ namespace PatriaTerram.Core.BuildingConditions
                         value *= -1;
                     }
 
-                    palette[adjacentCoord].AddBuildingConditions(building.Name, terrainType.ToString(), value);
+                    palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, terrainType.ToString(), value);
                 }
 
             }
@@ -59,17 +59,19 @@ namespace PatriaTerram.Core.BuildingConditions
             {
                 for (int y = 0; y < palette.Height; y++)
                 {
-                    if (palette[x, y].BuildingConditions.Keys.Contains(building.Name) == false) { continue; }
+                    if (palette[x, y].BuildingConditions.IsHasBuildingCondition(building.Type) == false) { continue; }
 
-                    var conditions = palette[x, y].BuildingConditions[building.Name];
+                    //var conditions = palette[x, y].BuildingConditions[building.Name];
 
                     double sum = 0;
 
                     foreach (var terrainCondition in building.EnvironmentConditions)
                     {
-                        if (conditions.EnvironmentConditionValues.Keys.Contains(terrainCondition.Environment) == false) { continue; }
+                        //if (conditions.EnvironmentConditionValues.Keys.Contains(terrainCondition.Environment) == false) { continue; }
+                        if (palette[x, y].BuildingConditions.IsHasEnvironment(building.Type, terrainCondition.Environment) == false) { continue; }
 
-                        var conditionValue = conditions.EnvironmentConditionValues[terrainCondition.Environment];
+                        //var conditionValue = conditions.EnvironmentConditionValues[terrainCondition.Environment];
+                        var conditionValue = palette[x, y].BuildingConditions.GetValue(building.Type, terrainCondition.Environment);
 
                         //if (conditionValue == 0 && terrainCondition.IsRequired == true)
                         //{
@@ -83,7 +85,8 @@ namespace PatriaTerram.Core.BuildingConditions
                     sum /= building.EnvironmentConditions.Select(a => a.Priority).Sum();
                     sum *= 1000;
 
-                    conditions.UpdateConditionValue(Constants.Result, (int)sum);
+                    palette[x, y].BuildingConditions.UpdateValue(building.Type, Constants.Result, (int)sum);
+                    //conditions.UpdateConditionValue(Constants.Result, (int)sum);
                 }
             }
         }
@@ -94,7 +97,7 @@ namespace PatriaTerram.Core.BuildingConditions
 
             foreach (var terrainCondition in building.EnvironmentConditions)
             {
-                var value = Math.Abs(palette.GetMaxBuildingConditionValue(building.Name, terrainCondition.Environment));
+                var value = Math.Abs(palette.GetMaxBuildingConditionValue(building.Type, terrainCondition.Environment));
 
                 maxConditions.Add(terrainCondition.Environment, value);
             }
@@ -106,10 +109,12 @@ namespace PatriaTerram.Core.BuildingConditions
         {
             var basePoint = palette[baseCoord];
 
-            foreach (var pointBuilding in basePoint.Buildings.Values)
+            foreach (var pointBuildingType in basePoint.Buildings.GetBuildings())
             {
                 foreach (var building in Configs.Buildings.Values)
                 {
+                    var pointBuilding = Configs.Buildings[pointBuildingType];
+
                     var effectedBuildoings = building.EnvironmentConditions.Where(a => a.Environment == pointBuilding.Name);
 
                     foreach (var effectedBuildoing in effectedBuildoings)
@@ -134,7 +139,7 @@ namespace PatriaTerram.Core.BuildingConditions
                                 value *= -1;
                             }
 
-                            palette[adjacentCoord].AddBuildingConditions(building.Name, pointBuilding.Name, value);
+                            palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, pointBuilding.Name, value);
                         }
                     }
                 }
