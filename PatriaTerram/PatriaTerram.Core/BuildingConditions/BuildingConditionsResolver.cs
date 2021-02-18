@@ -53,7 +53,7 @@ namespace PatriaTerram.Core.BuildingConditions
 
         public void FinalResolve(Palette palette, Building building)
         {
-            var maxConditions = GetMAxConditions(palette, building);
+            var maxConditions = GetMaxConditions(palette, building);
 
             for (int x = 0; x < palette.Width; x++)
             {
@@ -71,6 +71,12 @@ namespace PatriaTerram.Core.BuildingConditions
 
                         var conditionValue = conditions.EnvironmentConditionValues[terrainCondition.Environment];
 
+                        //if (conditionValue == 0 && terrainCondition.IsRequired == true)
+                        //{
+                        //    sum = 0;
+                        //    break;
+                        //}
+
                         sum += ((conditionValue * 1.0) / maxConditions[terrainCondition.Environment]) * terrainCondition.Priority;
                     }
 
@@ -82,7 +88,7 @@ namespace PatriaTerram.Core.BuildingConditions
             }
         }
 
-        private Dictionary<string, int> GetMAxConditions(Palette palette, Building building)
+        private Dictionary<string, int> GetMaxConditions(Palette palette, Building building)
         {
             var maxConditions = new Dictionary<string, int>();
 
@@ -128,7 +134,7 @@ namespace PatriaTerram.Core.BuildingConditions
                                 value *= -1;
                             }
 
-                            palette[adjacentCoord].AddBuildingConditions($"{building.Name}", pointBuilding.Name, value);
+                            palette[adjacentCoord].AddBuildingConditions(building.Name, pointBuilding.Name, value);
                         }
                     }
                 }

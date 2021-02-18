@@ -274,6 +274,7 @@ namespace PatriaTerram.Core.Configurations
                                         Radius = 15,
                                         Priority = 20,
                                         IsPositive = true,
+                                        IsRequired = true,
                                         Type = EnvironmentConditionType.LinearDecrease
                                     },
                                     new EnvironmentCondition

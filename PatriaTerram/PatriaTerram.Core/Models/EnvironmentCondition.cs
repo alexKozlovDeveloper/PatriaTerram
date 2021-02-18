@@ -14,6 +14,7 @@ namespace PatriaTerram.Core.Models
         public int Priority { get; set; }
         public EnvironmentConditionType Type { get; set; }
         public bool IsPositive { get; set; }
+        public bool IsRequired { get; set; }
 
         public override string ToString()
         {

@@ -1,4 +1,4 @@
-﻿namespace PatriaTerram.Core
+﻿namespace PatriaTerram.Core.Configurations
 {
     public static class Constants
     {
@@ -19,6 +19,7 @@
         public const string Farm = "Farm";
         public const string Warehouse = "Warehouse";
         public const string FishermanHouse = "FishermanHouse";
-        public const string House = "House";
+        public const string House = "House"; 
+        public const string Market = "market"; 
     }
 }
