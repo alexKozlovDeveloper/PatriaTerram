@@ -14,18 +14,13 @@ namespace PatriaTerram.Web.Models
         {
             LayersMenu = new Dictionary<string, Dictionary<string, string>>();
 
-            var terrains = new Dictionary<string, string>();
+            AddTownLayer(LayersMenu, context);
+            AddTerrainLayer(LayersMenu, context);
+            AddConditionLayer(LayersMenu, context);
+        }
 
-            foreach (var terrain in Configs.Terrains.Values)
-            {
-                if (context.Layers.Keys.Contains(terrain.Type.ToString()) == true)
-                {
-                    terrains.Add(terrain.Type.ToString(), context.Layers[terrain.Type.ToString()]);
-                }
-            }
-
-            LayersMenu.Add("Terrains", terrains);
-
+        private void AddConditionLayer(Dictionary<string, Dictionary<string, string>> LayersMenu, PaletteContext context)
+        {
             foreach (var building in Configs.Buildings.Values)
             {
                 var buildingLayers = new Dictionary<string, string>();
@@ -39,6 +34,33 @@ namespace PatriaTerram.Web.Models
 
                 LayersMenu.Add(building.Type.ToString(), buildingLayers);
             }
+        }
+
+        private void AddTownLayer(Dictionary<string, Dictionary<string, string>> LayersMenu, PaletteContext context)
+        {
+            var towns = new Dictionary<string, string>();
+
+            foreach (var townName in context.TownNames)
+            {
+                towns.Add(townName, $".{townName}");
+            }
+
+            LayersMenu.Add("Towns", towns);
+        }
+
+        private void AddTerrainLayer(Dictionary<string, Dictionary<string, string>> LayersMenu, PaletteContext context)
+        {
+            var terrains = new Dictionary<string, string>();
+
+            foreach (var terrain in Configs.Terrains.Values)
+            {
+                if (context.Layers.Keys.Contains(terrain.Type.ToString()) == true)
+                {
+                    terrains.Add(terrain.Type.ToString(), context.Layers[terrain.Type.ToString()]);
+                }
+            }
+
+            LayersMenu.Add("Terrains", terrains);
         }
     }
 }

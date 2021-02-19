@@ -80,20 +80,20 @@ namespace PatriaTerram.Web.Models
                 context.AddLayer($"{type}-{env}", $".{type}-{env}");
             }
 
-            foreach (var buildingType in point.Buildings.GetBuildingTypes())
+            foreach (var buildingLayerItem in point.Buildings.GetBuildings())
             {
-                var building = Configs.Buildings[buildingType];
+                var building = Configs.Buildings[buildingLayerItem.BuildingType];
 
                 var cell = new MapCellItem()
                 {
                     Value = building.Value,
                     Color = building.Color,
-                    Classes = new List<string> { building.Type.ToString(), "building" }
+                    Classes = new List<string> { building.Type.ToString(), "building", buildingLayerItem.TownName }
                 };
 
                 Cells.Add(cell);
 
-                context.AddLayer($"{building.Type.ToString()}", $".{building.Type.ToString()}");
+                context.AddLayer($"{building.Type}", $".{building.Type}");
             }
 
             if(point.Buildings.IsHasAnyBuildings() == true)

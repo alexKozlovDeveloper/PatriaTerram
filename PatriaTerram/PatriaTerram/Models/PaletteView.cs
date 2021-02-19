@@ -57,6 +57,17 @@ namespace PatriaTerram.Web.Models
 
             context.MaxTerrainValue = GetMaxTerrainValue(palette);
 
+            foreach (var point in palette.AllPoints)
+            {
+                foreach (var building in point.Buildings.GetBuildings())
+                {
+                    if(context.TownNames.Contains(building.TownName) == false)
+                    {
+                        context.TownNames.Add(building.TownName);
+                    }
+                }
+            }
+
             return context;
         }
 

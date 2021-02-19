@@ -10,11 +10,13 @@ namespace PatriaTerram.Web.Models
         public int MaxTerrainValue { get; set; }
         public Dictionary<string, int> MaxConditions { get; set; }
         public Dictionary<string, string> Layers { get; set; }
+        public List<string> TownNames { get; set; }
 
         public PaletteContext()
         {
             MaxConditions = new Dictionary<string, int>();
             Layers = new Dictionary<string, string>();
+            TownNames = new List<string>();
         }
 
         public void AddLayer(string layer, string classes)
