@@ -65,30 +65,37 @@ namespace PatriaTerram.Controllers
 
         private List<Step> GetSteps()
         {
+            var townName = "FarmVillage";
+
             var townHall = new Step
             {
-                Action = "Build",
-                BuildingType = BuildingType.TownHall
+                Action = StepAction.Build,
+                BuildingType = BuildingType.TownHall,
+                TownName = townName
             };
             var sawmill = new Step
             {
-                Action = "Build",
-                BuildingType = BuildingType.Sawmill
+                Action = StepAction.Build,
+                BuildingType = BuildingType.Sawmill,
+                TownName = townName
             };
             var farm = new Step
             {
-                Action = "Build",
-                BuildingType = BuildingType.Farm
+                Action = StepAction.Build,
+                BuildingType = BuildingType.Farm,
+                TownName = townName
             };
             var house = new Step
             {
-                Action = "Build",
-                BuildingType = BuildingType.House
+                Action = StepAction.Build,
+                BuildingType = BuildingType.House,
+                TownName = townName
             };
             var stonepit = new Step
             {
-                Action = "Build",
-                BuildingType = BuildingType.Stonepit
+                Action = StepAction.Build,
+                BuildingType = BuildingType.Stonepit,
+                TownName = townName
             };
 
             var startedPack = new List<Step>()

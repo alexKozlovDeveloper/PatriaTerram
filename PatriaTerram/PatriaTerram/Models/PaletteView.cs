@@ -76,14 +76,6 @@ namespace PatriaTerram.Web.Models
                     {
                         max = maxPointTerrainValue;
                     }
-
-                    //foreach (var terrain in point.Terrains.Values)
-                    //{
-                    //    if (terrain.Value > max)
-                    //    {
-                    //        max = terrain.Value;
-                    //    }
-                    //}
                 }
             }
 

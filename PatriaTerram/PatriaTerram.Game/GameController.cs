@@ -38,21 +38,21 @@ namespace PatriaTerram.Game
 
             switch (step.Action)
             {
-                case "Build":
-                    Build(step.BuildingType);
+                case StepAction.Build:
+                    Build(step.BuildingType, step.TownName);
                     break;
                 default:
                     break;
             }
         }
 
-        private void Build(BuildingType target)
+        private void Build(BuildingType target, string townName)
         {
             BuildingConditionsProcessor.AddResultConditionLayer(_map, Configs.Buildings[target]);
 
             var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(target, TerrainType.Result.ToString());
 
-            _builder.Build(target, coord);
+            _builder.Build(target, townName, coord);
         }
     }
 }

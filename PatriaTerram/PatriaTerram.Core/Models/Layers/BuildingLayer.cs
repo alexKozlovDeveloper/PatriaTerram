@@ -13,11 +13,12 @@ namespace PatriaTerram.Core.Models.Layers
     {
         public override string Name { get { return "Building"; } }
 
-        public void AddBuilding(BuildingType buildingType)
+        public void AddBuilding(BuildingType buildingType, string townName = null)
         {
             var item = new BuildingLayerItem
             {
-                BuildingType = buildingType
+                BuildingType = buildingType,
+                TownName = townName
             };
 
             Items.Add(item);
@@ -28,9 +29,14 @@ namespace PatriaTerram.Core.Models.Layers
             return Items.Count != 0;
         }
 
-        public List<BuildingType> GetBuildings() 
+        public List<BuildingType> GetBuildingTypes() 
         {
             return Items.Select(a => a.BuildingType).ToList();
+        }
+
+        public List<BuildingLayerItem> GetBuildings()
+        {
+            return Items;
         }
     }
 }

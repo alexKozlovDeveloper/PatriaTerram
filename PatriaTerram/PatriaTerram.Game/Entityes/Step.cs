@@ -9,7 +9,8 @@ namespace PatriaTerram.Game.Entityes
 {
     public class Step
     {
-        public string Action { get; set; }
+        public StepAction Action { get; set; }
+        public string TownName { get; set; }
         public BuildingType BuildingType { get; set; }
     }
 }

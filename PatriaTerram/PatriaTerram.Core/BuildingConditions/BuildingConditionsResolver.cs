@@ -75,9 +75,21 @@ namespace PatriaTerram.Core.BuildingConditions
 
                 foreach (var terrainCondition in building.EnvironmentConditions)
                 {
-                    if (point.BuildingConditions.IsHasEnvironment(building.Type, terrainCondition.Environment) == false) { continue; }
+                    //var conditionValue = 0;
 
+                    //if (point.BuildingConditions.IsHasEnvironment(building.Type, terrainCondition.Environment) == true) 
+                    //{
+                        //continue; 
                     var conditionValue = point.BuildingConditions.GetValue(building.Type, terrainCondition.Environment);
+                    //}                    
+
+                    //conditionValue = point.BuildingConditions.GetValue(building.Type, terrainCondition.Environment);
+
+                    if (terrainCondition.IsRequired == true && conditionValue <= 0) 
+                    {
+                        sum = 0;
+                        break;
+                    }
 
                     sum += ((conditionValue * 1.0) / maxConditions[terrainCondition.Environment]) * terrainCondition.Priority;
                 }
@@ -105,11 +117,11 @@ namespace PatriaTerram.Core.BuildingConditions
 
         public void UpdateBuildingEffects(Coord baseCoord)
         {
-            foreach (var pointBuildingType in _palette[baseCoord].Buildings.GetBuildings())
+            foreach (var buildingLayerItem in _palette[baseCoord].Buildings.GetBuildings())
             {
                 foreach (var building in Configs.Buildings.Values)
                 {
-                    var pointBuilding = Configs.Buildings[pointBuildingType];
+                    var pointBuilding = Configs.Buildings[buildingLayerItem.BuildingType];
 
                     var effectedBuildoings = building.EnvironmentConditions.Where(a => a.Environment == pointBuilding.Type.ToString());
 
@@ -121,7 +133,7 @@ namespace PatriaTerram.Core.BuildingConditions
                         {
                             var value = GetConditionValue(effectedBuildoing, baseCoord, adjacentCoord);
 
-                            _palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, pointBuilding.Type.ToString(), value);
+                            _palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, pointBuilding.Type.ToString(), value, buildingLayerItem.TownName);
                         }
                     }
                 }

@@ -57,12 +57,11 @@ namespace PatriaTerram.Web.Models
 
             foreach (var buildingCondition in point.BuildingConditions.GetAllCondiotions())
             {
-                //foreach (var item in buildingCondition.EnvironmentConditionValues)
-                //{
-
                 var env = buildingCondition.Environment;
                 var type = buildingCondition.BuildingType;
                 var value = buildingCondition.Value;
+
+                if(value == 0) { continue; }
 
                 var cell = new MapCellItem()
                 {
@@ -79,32 +78,9 @@ namespace PatriaTerram.Web.Models
                 Cells.Add(cell);
 
                 context.AddLayer($"{type}-{env}", $".{type}-{env}");
-                //}
             }
 
-            //foreach (var buildingCondition in point.BuildingConditions.Values)
-            //{
-            //    foreach (var item in buildingCondition.EnvironmentConditionValues)
-            //    {
-            //        var cell = new MapCellItem()
-            //        {
-            //            Value = item.Value,
-            //            Color = new Color
-            //            {
-            //                R = (int)((item.Value / (double)context.MaxConditions[$"{buildingCondition.BuildingType}-{item.Key}"]) * 255),
-            //                G = 0,
-            //                B = 0
-            //            },
-            //            Classes = new List<string> { $"{buildingCondition.BuildingType}-{item.Key}" }
-            //        };
-
-            //        Cells.Add(cell);
-
-            //        context.AddLayer($"{buildingCondition.BuildingType}-{item.Key}", $".{buildingCondition.BuildingType}-{item.Key}");
-            //    }
-            //}
-
-            foreach (var buildingType in point.Buildings.GetBuildings())
+            foreach (var buildingType in point.Buildings.GetBuildingTypes())
             {
                 var building = Configs.Buildings[buildingType];
 

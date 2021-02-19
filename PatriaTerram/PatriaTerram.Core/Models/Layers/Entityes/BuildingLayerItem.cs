@@ -10,6 +10,7 @@ namespace PatriaTerram.Core.Models.Layers.Entityes
 {
     public class BuildingLayerItem : ILayerItem
     {
+        public string TownName { get; set; }
         public BuildingType BuildingType { get; set; }
     }
 }

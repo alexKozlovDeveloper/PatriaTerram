@@ -19,7 +19,8 @@ namespace PatriaTerram.Core.Models
         public override string ToString()
         {
             var posValue = IsPositive == true ? "positive" : "negative";
-            return $"{Environment}-[R:{Radius},P:{Priority},T:{Type}] {posValue}";
+            var req = IsRequired == true ? "<!>" : "";
+            return $"{req} {Environment}-[R:{Radius},P:{Priority},T:{Type}] {posValue}";
         }
     }
 }

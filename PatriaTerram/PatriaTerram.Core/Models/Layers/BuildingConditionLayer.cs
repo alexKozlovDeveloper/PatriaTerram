@@ -63,7 +63,7 @@ namespace PatriaTerram.Core.Models.Layers
             item.Value = value;
         }
 
-        public void AddConditionValue(BuildingType buildingType, string environment, int value)
+        public void AddConditionValue(BuildingType buildingType, string environment, int value, string townName = null)
         {
             var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.Environment == environment);
 
@@ -73,7 +73,8 @@ namespace PatriaTerram.Core.Models.Layers
                 {
                     BuildingType = buildingType,
                     Environment = environment,
-                    Value = value
+                    Value = value,
+                    TownName = townName
                 };
 
                 Items.Add(item);

@@ -130,6 +130,7 @@ namespace PatriaTerram.Core.Configurations
                                         Radius = 15,
                                         Priority = 25,
                                         IsPositive = true,
+                                        IsRequired = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
                                     new EnvironmentCondition
@@ -170,6 +171,7 @@ namespace PatriaTerram.Core.Configurations
                                         Radius = 15,
                                         Priority = 15,
                                         IsPositive = true,
+                                        IsRequired = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
                                     new EnvironmentCondition
@@ -190,9 +192,9 @@ namespace PatriaTerram.Core.Configurations
                                 Type = BuildingType.Farm,
                                 Color = new Color
                                 {
-                                    R = 178,
-                                    G = 255,
-                                    B = 102
+                                    R = 240,
+                                    G = 230,
+                                    B = 140
                                 },
                                 EnvironmentConditions = new List<EnvironmentCondition>
                                 {
@@ -210,6 +212,7 @@ namespace PatriaTerram.Core.Configurations
                                         Radius = 15,
                                         Priority = 15,
                                         IsPositive = true,
+                                        IsRequired = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
                                     new EnvironmentCondition

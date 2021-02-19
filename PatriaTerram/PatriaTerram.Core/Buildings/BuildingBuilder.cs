@@ -22,9 +22,9 @@ namespace PatriaTerram.Core.Buildings
             _resolver = new BuildingConditionsResolver(_palette);
         }
 
-        public void Build(BuildingType target, Coord coord)
+        public void Build(BuildingType target, string townName, Coord coord)
         {
-            _palette[coord].Buildings.AddBuilding(target);
+            _palette[coord].Buildings.AddBuilding(target, townName);
 
             _resolver.UpdateBuildingEffects(coord);
         }

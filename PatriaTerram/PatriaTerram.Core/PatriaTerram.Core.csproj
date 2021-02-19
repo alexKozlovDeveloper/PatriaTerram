@@ -51,6 +51,7 @@
     <Compile Include="Configurations\Constants.cs" />
     <Compile Include="Configurations\Configs.cs" />
     <Compile Include="Enums\BuildingType.cs" />
+    <Compile Include="Enums\StepAction.cs" />
     <Compile Include="Enums\TerrainType.cs" />
     <Compile Include="Helpers\PaletteHelper.cs" />
     <Compile Include="Helpers\PalettePointColorHelper.cs" />
