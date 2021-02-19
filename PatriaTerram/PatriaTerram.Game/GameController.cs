@@ -10,6 +10,7 @@ using PatriaTerram.Core.BuildingConditions;
 using PatriaTerram.Game.Entityes;
 using PatriaTerram.Core;
 using PatriaTerram.Core.Enums;
+using PatriaTerram.Core.Buildings;
 
 namespace PatriaTerram.Game
 {
@@ -19,10 +20,14 @@ namespace PatriaTerram.Game
         private List<Step> _steps;
         private int stepNumber = 0;
 
+        private BuildingBuilder _builder;
+
         public GameController(Palette map, List<Step> steps)
         {
             _map = map;
-            _steps = steps; 
+            _steps = steps;
+
+            _builder = new BuildingBuilder(_map);
         }
 
         public void NextStep()
@@ -47,11 +52,7 @@ namespace PatriaTerram.Game
 
             var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(target, TerrainType.Result.ToString());
 
-            var building = Configs.Buildings[target];
-
-            _map[coord].Buildings.AddBuilding(building.Type);
-
-            BuildingConditionsResolver.UpdateBuildingEffects(_map, coord);
+            _builder.Build(target, coord);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace PatriaTerram.Core.BuildingConditions
     {
         public void Resolve(Palette palette, IEnumerable<Building> buildings)
         {
-            var resolver = new BuildingConditionsResolver();
+            var resolver = new BuildingConditionsResolver(palette);
 
             for (int x = 0; x < palette.Width; x++)
             {
@@ -20,22 +20,22 @@ namespace PatriaTerram.Core.BuildingConditions
                 {
                     foreach (var building in buildings)
                     {
-                        resolver.ResolvePoint(palette, new Coord(x, y), building);
+                        resolver.ResolvePoint(new Coord(x, y), building);
                     }
                 }
             }
 
             foreach (var building in buildings)
             {
-                resolver.FinalResolve(palette, building);
+                resolver.FinalResolve(building);
             }            
         }
 
         public static void AddResultConditionLayer(Palette palette, Building building)
         {
-            var resolver = new BuildingConditionsResolver();
+            var resolver = new BuildingConditionsResolver(palette);
 
-            resolver.FinalResolve(palette, building);
+            resolver.FinalResolve(building);
         }
     }
 }

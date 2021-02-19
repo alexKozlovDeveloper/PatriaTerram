@@ -13,9 +13,16 @@ namespace PatriaTerram.Core.BuildingConditions
 {
     public class BuildingConditionsResolver
     {
-        public void ResolvePoint(Palette palette, Coord baseCoord, Building building)
+        private Palette _palette;
+
+        public BuildingConditionsResolver(Palette palette)
         {
-            var basePoint = palette[baseCoord];
+            _palette = palette;
+        }
+
+        public void ResolvePoint(Coord baseCoord, Building building)
+        {
+            var basePoint = _palette[baseCoord];
 
             foreach (var terrainType in basePoint.Terrains.TerrainTypes)
             {
@@ -24,24 +31,24 @@ namespace PatriaTerram.Core.BuildingConditions
                 if (environmentCondition == null) { continue; }
 
                 var radius = environmentCondition.Radius;
-                var adjacentCoords = baseCoord.GetAdjacentCoordsBeyond(radius, palette.Width, palette.Height);
+                var adjacentCoords = baseCoord.GetAdjacentCoordsBeyond(radius, _palette.Width, _palette.Height);
 
                 foreach (var adjacentCoord in adjacentCoords)
                 {
-                    var value = GetConditionValue(environmentCondition, palette, baseCoord, adjacentCoord);
+                    var value = GetConditionValue(environmentCondition, baseCoord, adjacentCoord);
 
-                    palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, terrainType.ToString(), value);
+                    _palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, terrainType.ToString(), value);
                 }
             }
         }
 
-        public static int GetConditionValue(EnvironmentCondition environmentCondition, Palette palette, Coord baseCoord, Coord adjacentCoord)
+        public int GetConditionValue(EnvironmentCondition environmentCondition, Coord baseCoord, Coord adjacentCoord)
         {
-            int value = 0;
+            var value = 0;
 
             if (environmentCondition.Type == EnvironmentConditionType.LinearDecrease)
             {
-                value = GetValueLinearDecrease(baseCoord, adjacentCoord, environmentCondition.Radius, palette.Width, palette.Height);
+                value = GetValueLinearDecrease(baseCoord, adjacentCoord, environmentCondition.Radius);
             }
             else
             {
@@ -56,11 +63,11 @@ namespace PatriaTerram.Core.BuildingConditions
             return value;
         }
 
-        public void FinalResolve(Palette palette, Building building)
+        public void FinalResolve(Building building)
         {
-            var maxConditions = GetMaxConditions(palette, building);
+            var maxConditions = GetMaxConditions(building);
 
-            foreach (var point in palette.AllPoints)
+            foreach (var point in _palette.AllPoints)
             {
                 if (point.BuildingConditions.IsHasBuildingCondition(building.Type) == false) { continue; }
 
@@ -82,13 +89,13 @@ namespace PatriaTerram.Core.BuildingConditions
             }
         }
 
-        private Dictionary<string, int> GetMaxConditions(Palette palette, Building building)
+        private Dictionary<string, int> GetMaxConditions(Building building)
         {
             var maxConditions = new Dictionary<string, int>();
 
             foreach (var terrainCondition in building.EnvironmentConditions)
             {
-                var value = Math.Abs(palette.GetMaxBuildingConditionValue(building.Type, terrainCondition.Environment));
+                var value = Math.Abs(_palette.GetMaxBuildingConditionValue(building.Type, terrainCondition.Environment));
 
                 maxConditions.Add(terrainCondition.Environment, value);
             }
@@ -96,9 +103,9 @@ namespace PatriaTerram.Core.BuildingConditions
             return maxConditions;
         }
 
-        public static void UpdateBuildingEffects(Palette palette, Coord baseCoord)
+        public void UpdateBuildingEffects(Coord baseCoord)
         {
-            foreach (var pointBuildingType in palette[baseCoord].Buildings.GetBuildings())
+            foreach (var pointBuildingType in _palette[baseCoord].Buildings.GetBuildings())
             {
                 foreach (var building in Configs.Buildings.Values)
                 {
@@ -108,25 +115,25 @@ namespace PatriaTerram.Core.BuildingConditions
 
                     foreach (var effectedBuildoing in effectedBuildoings)
                     {
-                        var coords = baseCoord.GetAdjacentCoordsBeyond(effectedBuildoing.Radius, palette.Width, palette.Height);
+                        var coords = baseCoord.GetAdjacentCoordsBeyond(effectedBuildoing.Radius, _palette.Width, _palette.Height);
 
                         foreach (var adjacentCoord in coords)
                         {
-                            var value = GetConditionValue(effectedBuildoing, palette, baseCoord, adjacentCoord);
+                            var value = GetConditionValue(effectedBuildoing, baseCoord, adjacentCoord);
 
-                            palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, pointBuilding.Type.ToString(), value);
+                            _palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, pointBuilding.Type.ToString(), value);
                         }
                     }
                 }
             }
         }
 
-        public static int GetValueLinearDecrease(Coord baseCoord, Coord adjacentCoord, int radius, int width, int height)
+        public int GetValueLinearDecrease(Coord baseCoord, Coord adjacentCoord, int radius)
         {
-            return (int)((radius - (int)baseCoord.DistanceBeyond(adjacentCoord, width, height)) * (100.0 / radius));
+            return (int)((radius - (int)baseCoord.DistanceBeyond(adjacentCoord, _palette.Width, _palette.Height)) * (100.0 / radius));
         }
 
-        public static int GetValueOneLevel()
+        public int GetValueOneLevel()
         {
             return 100;
         }

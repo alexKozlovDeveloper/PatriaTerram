@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BuildingConditions\BuildingConditionsProcessor.cs" />
     <Compile Include="BuildingConditions\BuildingConditionsResolver.cs" />
+    <Compile Include="Buildings\BuildingBuilder.cs" />
     <Compile Include="Configurations\Constants.cs" />
     <Compile Include="Configurations\Configs.cs" />
     <Compile Include="Enums\BuildingType.cs" />
