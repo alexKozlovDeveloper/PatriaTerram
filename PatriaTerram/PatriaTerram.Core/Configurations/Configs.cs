@@ -59,7 +59,6 @@ namespace PatriaTerram.Core.Configurations
                             BuildingType.TownHall,
                             new Building
                             {
-                                Name = Constants.TownHall,
                                 Type = BuildingType.TownHall,
                                 Color = new Color
                                 {
@@ -108,7 +107,6 @@ namespace PatriaTerram.Core.Configurations
                             BuildingType.Sawmill,
                             new Building
                             {
-                                Name = Constants.Sawmill,
                                 Type = BuildingType.Sawmill,
                                 Color = new Color
                                 {
@@ -149,7 +147,6 @@ namespace PatriaTerram.Core.Configurations
                             BuildingType.Stonepit,
                             new Building
                             {
-                                Name = Constants.Stonepit,
                                 Type = BuildingType.Stonepit,
                                 Color = new Color
                                 {
@@ -190,7 +187,6 @@ namespace PatriaTerram.Core.Configurations
                             BuildingType.Farm,
                             new Building
                             {
-                                Name = Constants.Farm,
                                 Type = BuildingType.Farm,
                                 Color = new Color
                                 {
@@ -239,7 +235,6 @@ namespace PatriaTerram.Core.Configurations
                             BuildingType.House,
                             new Building
                             {
-                                Name = Constants.House,
                                 Type = BuildingType.House,
                                 Color = new Color
                                 {

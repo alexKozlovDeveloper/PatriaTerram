@@ -30,14 +30,14 @@ namespace PatriaTerram.Web.Models
             {
                 var buildingLayers = new Dictionary<string, string>();
 
-                var keys = context.Layers.Keys.Where(a => a.StartsWith(building.Name)).OrderBy(a => a);
+                var keys = context.Layers.Keys.Where(a => a.StartsWith(building.Type.ToString())).OrderBy(a => a);
 
                 foreach (var key in keys)
                 {
                     buildingLayers.Add(key, context.Layers[key]);
                 }
 
-                LayersMenu.Add(building.Name, buildingLayers);
+                LayersMenu.Add(building.Type.ToString(), buildingLayers);
             }
         }
     }

@@ -42,6 +42,9 @@ namespace PatriaTerram.Controllers
                 game.NextStep();
             }
 
+            model.MovePointsXAxis(20);
+            model.MovePointsYAxis(20);
+
             var viewModel = new PaletteView(model);
 
             return View(viewModel);

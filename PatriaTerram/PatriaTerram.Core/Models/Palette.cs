@@ -55,5 +55,23 @@ namespace PatriaTerram.Core.Models
             }
             set { _points[coord.X][coord.Y] = value; }
         }
+
+        public IEnumerable<PalettePoint> AllPoints
+        {
+            get
+            {
+                var items = new List<PalettePoint>();
+
+                for (int x = 0; x < Width; x++)
+                {
+                    for (int y = 0; y < Height; y++)
+                    {
+                        items.Add(this[x, y]);
+                    }
+                }
+
+                return items;
+            }
+        }
     }
 }

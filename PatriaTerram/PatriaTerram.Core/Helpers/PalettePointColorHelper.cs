@@ -8,12 +8,10 @@ using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Helpers
 {
-    public static class PalettePointHelper
+    public static class PalettePointColorHelper
     {
         public static void GetPointColor(this PalettePoint point, out int r, out int g, out int b)
         {
-            //var coloredComponents = point.Terrains.Values.Where(a => a.Terrain.IsAffectColor);
-
             var coloredTerrains = new List<Terrain>();
 
             foreach (var terrainType in point.Terrains.TerrainTypes)
@@ -58,16 +56,5 @@ namespace PatriaTerram.Core.Helpers
 
             return sum / count;
         }
-
-
-
-
-
-        //public static int GetResultBuildingConditionValue(this PalettePoint point, string buildingType)
-        //{
-        //    if (point.BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
-
-        //    return point.BuildingConditions[buildingType].EnvironmentConditionValues.Values.Sum();
-        //}
     }
 }

@@ -9,8 +9,6 @@ namespace PatriaTerram.Core.Models
 {
     public class Building
     {
-        public string Name { get; set; }
-
         public BuildingType Type { get; set; }
 
         public Color Color { get; set; }

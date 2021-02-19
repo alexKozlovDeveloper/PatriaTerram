@@ -88,46 +88,23 @@ namespace PatriaTerram.Core.Factoryes
 
         private void AddResultTerrain(Palette model)
         {
-            for (int x = 0; x < model.Width; x++)
+            foreach (var point in model.AllPoints)
             {
-                for (int y = 0; y < model.Height; y++)
+                var values = new List<int>();
+
+                foreach (var terrainType in point.Terrains.TerrainTypes)
                 {
-                    var resultTerrain = new Terrain
+                    var terrain = Configs.Terrains[terrainType];
+
+                    if (terrain.IsAffectColor)
                     {
-                        IsAffectColor = false,
-                        //Name = Constants.Result,
-                        Color = model[x, y].GetPointColor()
-                    };
-
-                    //var value = (int)model[x, y].Terrains.Values
-                    //    .Where(a => a.Terrain.IsAffectColor == true)
-                    //    .Select(a => a.Value)
-                    //    .Average();
-
-                    var values = new List<int>();
-
-                    foreach (var terrainType in model[x, y].Terrains.TerrainTypes)
-                    {
-                        var terrain = Configs.Terrains[terrainType];
-
-                        if (terrain.IsAffectColor)
-                        {
-                            values.Add(model[x, y].Terrains.GetTerrainValue(terrainType));
-                        }
+                        values.Add(point.Terrains.GetTerrainValue(terrainType));
                     }
-
-
-                    int value = values.Count > 0 ? (int)values.Average() : 0;
-
-                    //model[x, y].Terrains.Add(resultTerrain.Name,
-                    //    new PalettePointTerrain
-                    //    {
-                    //        Terrain = resultTerrain,
-                    //        Value = value
-                    //    });
-
-                    model[x, y].Terrains.AddTerrain(TerrainType.Result, value);
                 }
+
+                int value = values.Count > 0 ? (int)values.Average() : 0;
+
+                point.Terrains.AddTerrain(TerrainType.Result, value);
             }
         }
 

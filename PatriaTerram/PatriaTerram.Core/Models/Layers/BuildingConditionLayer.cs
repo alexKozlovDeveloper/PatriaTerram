@@ -83,27 +83,5 @@ namespace PatriaTerram.Core.Models.Layers
                 item.Value += value;
             }
         }
-
-        //public void AddBuildingConditions(string buildingType, string terrain, int value)
-        //{
-        //    if (BuildingConditions.Keys.Contains(buildingType) == false)
-        //    {
-        //        var newCondition = new BuildingCondition
-        //        {
-        //            BuildingType = buildingType
-        //        };
-
-        //        BuildingConditions.Add(newCondition.BuildingType, newCondition);
-        //    }
-
-        //    BuildingConditions[buildingType].AddConditionValue(terrain, value);
-        //}
-
-        //public int GetBuildingConditionValue(string buildingType, string terrain)
-        //{
-        //    if (BuildingConditions.Keys.Contains(buildingType) == false) { return 0; }
-
-        //    return BuildingConditions[buildingType].EnvironmentConditionValues[terrain];
-        //}
     }
 }

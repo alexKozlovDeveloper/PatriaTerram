@@ -1,11 +1,8 @@
 ﻿using AStarAlgorithm.Entityes;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Helpers
 {
@@ -15,18 +12,14 @@ namespace PatriaTerram.Core.Helpers
         {
             var conditions = new List<int>();
 
-            for (int x = 0; x < palette.Width; x++)
+            foreach (var point in palette.AllPoints)
             {
-                for (int y = 0; y < palette.Height; y++)
-                {
-                    var point = palette[x, y];
-
-                    if (point.BuildingConditions.IsHasBuildingCondition(buildingType) == false) { continue; }
-
-                    if (point.BuildingConditions.IsHasEnvironment(buildingType, terrain) == false) { continue; }
-
-                    conditions.Add(point.BuildingConditions.GetValue(buildingType, terrain));                    
+                if (point.BuildingConditions.IsHasEnvironment(buildingType, terrain) == false) 
+                { 
+                    continue; 
                 }
+
+                conditions.Add(point.BuildingConditions.GetValue(buildingType, terrain));
             }
 
             if (conditions.Count == 0)
@@ -46,8 +39,6 @@ namespace PatriaTerram.Core.Helpers
                 for (int y = 0; y < palette.Height; y++)
                 {
                     var point = palette[x, y];
-
-                    if (point.BuildingConditions.IsHasBuildingCondition(buildingType) == false) { continue; }
 
                     if (point.BuildingConditions.IsHasEnvironment(buildingType, terrain) == false) { continue; }
 

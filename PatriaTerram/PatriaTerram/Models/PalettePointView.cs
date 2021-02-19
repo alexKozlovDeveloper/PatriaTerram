@@ -112,12 +112,12 @@ namespace PatriaTerram.Web.Models
                 {
                     Value = building.Value,
                     Color = building.Color,
-                    Classes = new List<string> { building.Name, "building" }
+                    Classes = new List<string> { building.Type.ToString(), "building" }
                 };
 
                 Cells.Add(cell);
 
-                context.AddLayer($"{building.Name}", $".{building.Name}");
+                context.AddLayer($"{building.Type.ToString()}", $".{building.Type.ToString()}");
             }
 
             if(point.Buildings.IsHasAnyBuildings() == true)
