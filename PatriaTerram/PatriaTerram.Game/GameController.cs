@@ -59,19 +59,9 @@ namespace PatriaTerram.Game
         {
             var building = _buildings.FirstOrDefault(a => a.Type == buildingType);
 
-            //ConditionsProcessor.AddResultConditionLayer(_map, Configs.Buildings[target]);
-
-            //var processor = new ConditionsProcessor();
-
-            //processor.ResolveBuildingConditions(_map, Configs.Buildings.Values);
             _conditionsProcessor.ResolveResultCondition(building);
 
             var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(buildingType, TerrainType.Result.ToString());
-
-            if(coord == null)
-            {
-
-            }
 
             _builder.Build(buildingType, townName, coord);
         }

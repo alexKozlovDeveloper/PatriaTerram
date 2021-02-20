@@ -73,7 +73,7 @@ namespace PatriaTerram.Web.Models
 
             foreach (var point in palette.AllPoints)
             {
-                foreach (var building in point.Buildings.GetBuildings())
+                foreach (var building in point.Buildings.GetAll())
                 {
                     if(context.TownNames.Contains(building.TownName) == false)
                     {

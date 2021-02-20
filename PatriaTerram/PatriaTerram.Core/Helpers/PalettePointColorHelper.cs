@@ -14,7 +14,7 @@ namespace PatriaTerram.Core.Helpers
         {
             var coloredTerrains = new List<Terrain>();
 
-            foreach (var terrainType in point.Terrains.TerrainTypes)
+            foreach (var terrainType in point.Terrains.GetTerrainTypes())
             {
                 var terrain = Configs.Terrains[terrainType];
 

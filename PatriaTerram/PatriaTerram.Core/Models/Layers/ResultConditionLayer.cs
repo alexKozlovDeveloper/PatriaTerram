@@ -12,11 +12,6 @@ namespace PatriaTerram.Core.Models.Layers
     {
         public override string Name { get { return "ResultCondition"; } }
 
-        public List<ResultConditionLayerItem> GetResultConditions()
-        {
-            return Items;
-        }
-
         public void UpdateValue(BuildingType buildingType, int value)
         {
             var item = Items.FirstOrDefault(a => a.BuildingType == buildingType);
@@ -45,11 +40,6 @@ namespace PatriaTerram.Core.Models.Layers
             }
 
             return item.Value;
-        }
-
-        public List<ResultConditionLayerItem> GetAllCondiotions()
-        {
-            return Items;
         }
 
         public bool IsHasCondition(BuildingType buildingType)

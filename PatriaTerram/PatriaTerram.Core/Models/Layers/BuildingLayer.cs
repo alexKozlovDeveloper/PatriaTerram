@@ -33,10 +33,5 @@ namespace PatriaTerram.Core.Models.Layers
         {
             return Items.Select(a => a.BuildingType).ToList();
         }
-
-        public List<BuildingLayerItem> GetBuildings()
-        {
-            return Items;
-        }
     }
 }

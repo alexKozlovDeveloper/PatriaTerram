@@ -12,11 +12,6 @@ namespace PatriaTerram.Core.Models.Layers
     {
         public override string Name { get { return "TerrainCondition"; } }
 
-        public List<TerrainConditionLayerItem> GetTerrainConditions()
-        {
-            return Items;
-        }
-
         public void AddConditionValue(BuildingType buildingType, TerrainType environmentTerrain, int value, string townName = null)
         {
             var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == environmentTerrain);
@@ -39,7 +34,7 @@ namespace PatriaTerram.Core.Models.Layers
             }
         }
 
-        public bool IsHasEnvironment(BuildingType buildingType, TerrainType environment)
+        public bool IsHasCondition(BuildingType buildingType, TerrainType environment)
         {
             return Items.Any(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == environment);
         }
@@ -54,11 +49,6 @@ namespace PatriaTerram.Core.Models.Layers
             }
 
             return item.Value;
-        }
-
-        public List<TerrainConditionLayerItem> GetAllCondiotions()
-        {
-            return Items;
         }
     }
 }

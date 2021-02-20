@@ -12,7 +12,6 @@ namespace PatriaTerram.Core.Models.Layers.Entityes
     {
         public string TownName { get; set; }
         public BuildingType BuildingType { get; set; }
-        //public string Environment { get; set; }
         public BuildingType EnvironmentBuildingType { get; set; }
         public int Value { get; set; } 
     }

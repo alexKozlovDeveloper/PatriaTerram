@@ -19,7 +19,7 @@ namespace PatriaTerram.Web.Models
             Cells = new List<MapCellItem>();
             Classes = new List<string>();
 
-            foreach (var terrainType in point.Terrains.TerrainTypes)
+            foreach (var terrainType in point.Terrains.GetTerrainTypes())
             {
                 var itemValue = point.Terrains.GetTerrainValue(terrainType);
                 var terrain = Configs.Terrains[terrainType];
@@ -55,7 +55,7 @@ namespace PatriaTerram.Web.Models
                 context.AddLayer(terrain.Type.ToString(), $".{terrain.Type.ToString()}");
             }
 
-            foreach (var terrainCondition in point.TerrainConditions.GetAllCondiotions())
+            foreach (var terrainCondition in point.TerrainConditions.GetAll())
             {
                 var env = terrainCondition.EnvironmentTerrainType;
                 var type = terrainCondition.BuildingType;
@@ -80,7 +80,7 @@ namespace PatriaTerram.Web.Models
                 context.AddLayer($"{type}-{env}", $".{type}-{env}");
             }
 
-            foreach (var buildingCondition in point.BuildingConditions.GetAllCondiotions())
+            foreach (var buildingCondition in point.BuildingConditions.GetAll())
             {
                 var env = buildingCondition.EnvironmentBuildingType;
                 var type = buildingCondition.BuildingType;
@@ -105,7 +105,7 @@ namespace PatriaTerram.Web.Models
                 context.AddLayer($"{type}-{env}", $".{type}-{env}");
             }
 
-            foreach (var buildingCondition in point.ResultConditions.GetAllCondiotions())
+            foreach (var buildingCondition in point.ResultConditions.GetAll())
             {
                 var env = "Result";
                 var type = buildingCondition.BuildingType;
@@ -130,7 +130,7 @@ namespace PatriaTerram.Web.Models
                 context.AddLayer($"{type}-{env}", $".{type}-{env}");
             }
 
-            foreach (var buildingLayerItem in point.Buildings.GetBuildings())
+            foreach (var buildingLayerItem in point.Buildings.GetAll())
             {
                 var building = Configs.Buildings[buildingLayerItem.BuildingType];
 

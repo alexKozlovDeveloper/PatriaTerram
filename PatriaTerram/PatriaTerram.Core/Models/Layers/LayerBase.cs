@@ -16,5 +16,10 @@ namespace PatriaTerram.Core.Models.Layers
         {
             Items = new List<T>();
         }
+
+        public List<T> GetAll()
+        {
+            return Items;
+        }
     }
 }

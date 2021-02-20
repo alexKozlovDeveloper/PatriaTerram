@@ -21,33 +21,11 @@ namespace PatriaTerram.Core.Conditions
             _palette = palette;
         }
 
-        //public void ResolvePoint(Coord baseCoord, Building building)
-        //{
-        //    var basePoint = _palette[baseCoord];
-
-        //    foreach (var terrainType in basePoint.Terrains.TerrainTypes)
-        //    {
-        //        var environmentCondition = building.BuildingConditions.FirstOrDefault(a => a.Environment == terrainType.ToString());
-
-        //        if (environmentCondition == null) { continue; }
-
-        //        var radius = environmentCondition.Radius;
-        //        var adjacentCoords = baseCoord.GetAdjacentCoordsBeyond(radius, _palette.Width, _palette.Height);
-
-        //        foreach (var adjacentCoord in adjacentCoords)
-        //        {
-        //            var value = GetConditionValue(environmentCondition, baseCoord, adjacentCoord);
-
-        //            _palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, terrainType.ToString(), value);
-        //        }
-        //    }
-        //}
-
         public void ResolveTerrainCondition(Coord baseCoord, Building building)
         {
             var basePoint = _palette[baseCoord];
 
-            foreach (var terrainType in basePoint.Terrains.TerrainTypes)
+            foreach (var terrainType in basePoint.Terrains.GetTerrainTypes())
             {
                 var environmentCondition = building.TerrainConditions.FirstOrDefault(a => a.EnvironmentTerrain == terrainType);
 
@@ -70,7 +48,7 @@ namespace PatriaTerram.Core.Conditions
         {
             var basePoint = _palette[baseCoord];
 
-            foreach (var buildingLayerItem in basePoint.Buildings.GetBuildings())
+            foreach (var buildingLayerItem in basePoint.Buildings.GetAll())
             {
                 var environmentCondition = building.BuildingConditions.FirstOrDefault(a => a.EnvironmentBuilding == buildingLayerItem.BuildingType);
 
@@ -147,36 +125,6 @@ namespace PatriaTerram.Core.Conditions
             return value;
         }
 
-        //public void FinalResolve(Building building)
-        //{
-        //    var maxConditions = GetMaxConditions(building);
-
-        //    foreach (var point in _palette.AllPoints)
-        //    {
-        //        if (point.BuildingConditions.IsHasBuildingCondition(building.Type) == false) { continue; }
-
-        //        double sum = 0;
-
-        //        foreach (var terrainCondition in building.BuildingConditions)
-        //        {
-        //            var conditionValue = point.BuildingConditions.GetValue(building.Type, terrainCondition.EnvironmentBuilding);
-
-        //            if (terrainCondition.IsRequired == true && conditionValue <= 0) 
-        //            {
-        //                sum = 0;
-        //                break;
-        //            }
-
-        //            sum += ((conditionValue * 1.0) / maxConditions[terrainCondition.Environment]) * terrainCondition.Priority;
-        //        }
-
-        //        sum /= building.BuildingConditions.Select(a => a.Priority).Sum();
-        //        sum *= 1000;
-
-        //        point.BuildingConditions.UpdateValue(building.Type, Constants.Result, (int)sum);
-        //    }
-        //}
-
         public Dictionary<string, int> GetMaxConditions(Building building)
         {
             var maxConditions = new Dictionary<string, int>();
@@ -200,7 +148,7 @@ namespace PatriaTerram.Core.Conditions
 
         public void UpdateBuildingEffects(Coord baseCoord)
         {
-            foreach (var buildingLayerItem in _palette[baseCoord].Buildings.GetBuildings())
+            foreach (var buildingLayerItem in _palette[baseCoord].Buildings.GetAll())
             {
                 foreach (var building in Configs.Buildings.Values)
                 {

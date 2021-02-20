@@ -18,27 +18,6 @@ namespace PatriaTerram.Core.Conditions
             _palette = palette;
         }
 
-        //public void Resolve(Palette palette, IEnumerable<Building> buildings)
-        //{
-        //    var resolver = new ConditionsResolver(palette);
-
-        //    for (int x = 0; x < palette.Width; x++)
-        //    {
-        //        for (int y = 0; y < palette.Height; y++)
-        //        {
-        //            foreach (var building in buildings)
-        //            {
-        //                resolver.ResolveTerrainCondition(new Coord(x, y), building);
-        //            }
-        //        }
-        //    }
-
-        //    foreach (var building in buildings)
-        //    {
-        //        resolver.FinalResolve(building);
-        //    }            
-        //}
-
         public void ResolveTerrainConditions(IEnumerable<Building> buildings)
         {
             var resolver = new ConditionsResolver(_palette);
@@ -73,16 +52,9 @@ namespace PatriaTerram.Core.Conditions
 
         public void ResolveResultCondition(IEnumerable<Building> buildings)
         {
-            var resolver = new ConditionsResolver(_palette);
-
             foreach (var building in buildings)
             {
-                var maxConditions = resolver.GetMaxConditions(building);
-
-                foreach (var point in _palette.AllPoints)
-                {
-                    resolver.ResolveResultCondition(point, building, maxConditions);
-                }
+                ResolveResultCondition(building);
             }
         }
 
@@ -96,18 +68,6 @@ namespace PatriaTerram.Core.Conditions
             {
                 resolver.ResolveResultCondition(point, building, maxConditions);
             }
-        }
-
-        public static void AddResultConditionLayer(Palette palette, Building building)
-        {
-            //var resolver = new ConditionsResolver(palette);
-
-            //resolver.FinalResolve(building);
-
-            var res = new ConditionsProcessor(palette);
-
-            res.ResolveResultCondition(building);
-            //resolver.ResolveResultCondition(building);
         }
     }
 }

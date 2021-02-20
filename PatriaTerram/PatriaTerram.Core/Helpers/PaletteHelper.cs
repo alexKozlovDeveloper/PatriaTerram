@@ -14,7 +14,7 @@ namespace PatriaTerram.Core.Helpers
 
             foreach (var point in palette.AllPoints)
             {
-                if (point.BuildingConditions.IsHasEnvironment(buildingType, terrainBuildingType) == false) 
+                if (point.BuildingConditions.IsHasCondition(buildingType, terrainBuildingType) == false) 
                 { 
                     continue; 
                 }
@@ -36,7 +36,7 @@ namespace PatriaTerram.Core.Helpers
 
             foreach (var point in palette.AllPoints)
             {
-                if (point.TerrainConditions.IsHasEnvironment(buildingType, terrainType) == false)
+                if (point.TerrainConditions.IsHasCondition(buildingType, terrainType) == false)
                 {
                     continue;
                 }
@@ -84,7 +84,7 @@ namespace PatriaTerram.Core.Helpers
                 {
                     var point = palette[x, y];
 
-                    if (point.BuildingConditions.IsHasEnvironment(buildingType, terrain) == false) { continue; }
+                    if (point.BuildingConditions.IsHasCondition(buildingType, terrain) == false) { continue; }
 
                     var value = point.BuildingConditions.GetValue(buildingType, terrain); //[buildingType].EnvironmentConditionValues[terrain];
 

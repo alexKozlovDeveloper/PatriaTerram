@@ -92,7 +92,7 @@ namespace PatriaTerram.Core.Factoryes
             {
                 var values = new List<int>();
 
-                foreach (var terrainType in point.Terrains.TerrainTypes)
+                foreach (var terrainType in point.Terrains.GetTerrainTypes())
                 {
                     var terrain = Configs.Terrains[terrainType];
 
