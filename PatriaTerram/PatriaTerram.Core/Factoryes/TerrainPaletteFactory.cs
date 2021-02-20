@@ -1,4 +1,5 @@
 ﻿using PatriaTerram.Core.Configurations;
+using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Interfaces;

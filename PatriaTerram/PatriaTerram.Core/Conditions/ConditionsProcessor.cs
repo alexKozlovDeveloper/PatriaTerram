@@ -1,11 +1,7 @@
 ﻿using AStarAlgorithm.Entityes;
-using PatriaTerram.Core.Configurations;
+using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Conditions
 {

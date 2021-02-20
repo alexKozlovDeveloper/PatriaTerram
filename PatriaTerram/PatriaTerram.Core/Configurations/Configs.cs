@@ -1,20 +1,15 @@
 ﻿using Newtonsoft.Json;
-using PatriaTerram.Core.Conditions.Entityes;
+using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Enums;
-using PatriaTerram.Core.Models;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Configurations
 {
     public static class Configs
     {
-        public static string TerrainsJsonFilePath = @"Configurations\Terrains.json";
-        public static string PaletteConfigurationJsonFilePath = @"Configurations\PaletteConfigurations.json";
+        public static string TerrainsJsonFilePath = @"Configurations\Files\Terrains.json";
+        public static string PaletteConfigurationJsonFilePath = @"Configurations\Files\PaletteConfigurations.json";
 
         private static Dictionary<TerrainType, Terrain> _terrains;
         private static Dictionary<string, PaletteConfiguration> _paletteConfigs;

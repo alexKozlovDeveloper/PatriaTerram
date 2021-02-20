@@ -1,16 +1,12 @@
 ﻿using PatriaTerram.Core.Models;
 using PatriaTerram.Core.Helpers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PatriaTerram.Core.Configurations;
 using PatriaTerram.Game.Entityes;
-using PatriaTerram.Core;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Buildings;
 using PatriaTerram.Core.Conditions;
+using PatriaTerram.Core.Configurations.Entityes;
 
 namespace PatriaTerram.Game
 {

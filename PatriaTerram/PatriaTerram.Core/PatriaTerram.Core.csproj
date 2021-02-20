@@ -57,11 +57,11 @@
     <Compile Include="Helpers\PalettePointColorHelper.cs" />
     <Compile Include="Interfaces\ILayer.cs" />
     <Compile Include="Interfaces\ILayerItem.cs" />
-    <Compile Include="Models\Building.cs" />
+    <Compile Include="Configurations\Entityes\Building.cs" />
     <Compile Include="Configurations\PaletteConfiguration.cs" />
     <Compile Include="Configurations\Range.cs" />
-    <Compile Include="Conditions\Entityes\BuildingCondition.cs" />
-    <Compile Include="Models\Color.cs" />
+    <Compile Include="Configurations\Entityes\BuildingCondition.cs" />
+    <Compile Include="Configurations\Entityes\Color.cs" />
     <Compile Include="Enums\EnvironmentConditionType.cs" />
     <Compile Include="Models\Layers\BuildingConditionLayer.cs" />
     <Compile Include="Models\Layers\BuildingLayer.cs" />
@@ -74,14 +74,14 @@
     <Compile Include="Models\Layers\LayerBase.cs" />
     <Compile Include="Models\Layers\TerrainConditionLayer.cs" />
     <Compile Include="Models\Layers\TerrainLayer.cs" />
-    <Compile Include="Models\Terrain.cs" />
+    <Compile Include="Configurations\Entityes\Terrain.cs" />
     <Compile Include="Factoryes\SamplePaletteFactory.cs" />
     <Compile Include="Factoryes\TerrainPaletteFactory.cs" />
     <Compile Include="Interfaces\IPaletteFactory.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\PalettePoint.cs" />
-    <Compile Include="Conditions\Entityes\EnvironmentConditionBase.cs" />
-    <Compile Include="Conditions\Entityes\TerrainCondition.cs" />
+    <Compile Include="Configurations\Entityes\EnvironmentConditionBase.cs" />
+    <Compile Include="Configurations\Entityes\TerrainCondition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,10 +95,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configurations\PaletteConfigurations.json">
+    <None Include="Configurations\Files\PaletteConfigurations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Configurations\Terrains.json">
+    <None Include="Configurations\Files\Terrains.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

@@ -1,14 +1,10 @@
 ﻿using Newtonsoft.Json;
 using PatriaTerram.Core.Configurations;
+using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Factoryes;
-using PatriaTerram.Core.Models;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatriaTerram.Console
 {
@@ -16,11 +12,6 @@ namespace PatriaTerram.Console
     {
         static void Main(string[] args)
         {
-            //var terrains = Configs.Terrains[TerrainType.Result];
-
-            var factory = new TerrainPaletteFactory(Configs.PaletteConfigs["web"]);
-
-            var palette = factory.GetPalette();
 
         }
 

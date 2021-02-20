@@ -217,9 +217,6 @@ namespace PatriaTerram.MapObserver
             {
                 for (int y = 0; y < height; y++)
                 {
-                    //var point = palette[x, y];
-                    //point.GetPointColor(out int r, out int g, out int b);
-
                     var color = System.Drawing.Color.FromArgb(0, 0, 0);
 
                     if(matrix[x][y] == 1)

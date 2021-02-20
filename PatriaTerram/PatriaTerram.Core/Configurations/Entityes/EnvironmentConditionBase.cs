@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PatriaTerram.Core.Conditions.Entityes
+namespace PatriaTerram.Core.Configurations.Entityes
 {
     public class EnvironmentConditionBase
     {
