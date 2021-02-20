@@ -29,15 +29,15 @@ namespace PatriaTerram.Controllers
 
             var model = factory.GetPalette();
 
-            var processor = new ConditionsProcessor();
+            //var processor = new ConditionsProcessor();
 
             //processor.Resolve(model, Configs.Buildings.Values);
-            processor.ResolveTerrainConditions(model, Configs.Buildings.Values);
-            processor.ResolveResultCondition(model, Configs.Buildings.Values);
+            //processor.ResolveTerrainConditions(model, Configs.Buildings.Values);
+            //processor.ResolveResultCondition(model, Configs.Buildings.Values);
 
             var steps = GetSteps();
 
-            var game = new GameController(model, steps);
+            var game = new GameController(model, steps, Configs.Buildings.Values);
 
             for (int i = 0; i < 1000; i++)
             {
@@ -63,7 +63,6 @@ namespace PatriaTerram.Controllers
         {          
             return View(model);
         }
-
 
         private List<Step> GetSteps()
         {

@@ -21,13 +21,22 @@ namespace PatriaTerram.Game
         private int stepNumber = 0;
 
         private BuildingBuilder _builder;
+        private ConditionsProcessor _conditionsProcessor;
+        private IEnumerable<Building> _buildings;
 
-        public GameController(Palette map, List<Step> steps)
+        public GameController(Palette map, List<Step> steps, IEnumerable<Building> buildings)
         {
             _map = map;
             _steps = steps;
 
             _builder = new BuildingBuilder(_map);
+
+            _buildings = buildings;
+
+            _conditionsProcessor = new ConditionsProcessor(_map);
+
+            _conditionsProcessor.ResolveTerrainConditions(_buildings);
+            _conditionsProcessor.ResolveResultCondition(_buildings);
         }
 
         public void NextStep()
@@ -46,23 +55,25 @@ namespace PatriaTerram.Game
             }
         }
 
-        private void Build(BuildingType target, string townName)
+        private void Build(BuildingType buildingType, string townName)
         {
+            var building = _buildings.FirstOrDefault(a => a.Type == buildingType);
+
             //ConditionsProcessor.AddResultConditionLayer(_map, Configs.Buildings[target]);
 
-            var processor = new ConditionsProcessor();
+            //var processor = new ConditionsProcessor();
 
             //processor.ResolveBuildingConditions(_map, Configs.Buildings.Values);
-            processor.ResolveResultCondition(_map, Configs.Buildings[target]);
+            _conditionsProcessor.ResolveResultCondition(building);
 
-            var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(target, TerrainType.Result.ToString());
+            var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(buildingType, TerrainType.Result.ToString());
 
             if(coord == null)
             {
 
             }
 
-            _builder.Build(target, townName, coord);
+            _builder.Build(buildingType, townName, coord);
         }
     }
 }

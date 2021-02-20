@@ -11,6 +11,13 @@ namespace PatriaTerram.Core.Conditions
 {
     public class ConditionsProcessor
     {
+        private Palette _palette;
+
+        public ConditionsProcessor(Palette palette)
+        {
+            _palette = palette;
+        }
+
         //public void Resolve(Palette palette, IEnumerable<Building> buildings)
         //{
         //    var resolver = new ConditionsResolver(palette);
@@ -32,13 +39,13 @@ namespace PatriaTerram.Core.Conditions
         //    }            
         //}
 
-        public void ResolveTerrainConditions(Palette palette, IEnumerable<Building> buildings)
+        public void ResolveTerrainConditions(IEnumerable<Building> buildings)
         {
-            var resolver = new ConditionsResolver(palette);
+            var resolver = new ConditionsResolver(_palette);
 
-            for (int x = 0; x < palette.Width; x++)
+            for (int x = 0; x < _palette.Width; x++)
             {
-                for (int y = 0; y < palette.Height; y++)
+                for (int y = 0; y < _palette.Height; y++)
                 {
                     foreach (var building in buildings)
                     {
@@ -48,13 +55,13 @@ namespace PatriaTerram.Core.Conditions
             }
         }
 
-        public void ResolveBuildingConditions(Palette palette, IEnumerable<Building> buildings)
+        public void ResolveBuildingConditions(IEnumerable<Building> buildings)
         {
-            var resolver = new ConditionsResolver(palette);
+            var resolver = new ConditionsResolver(_palette);
 
-            for (int x = 0; x < palette.Width; x++)
+            for (int x = 0; x < _palette.Width; x++)
             {
-                for (int y = 0; y < palette.Height; y++)
+                for (int y = 0; y < _palette.Height; y++)
                 {
                     foreach (var building in buildings)
                     {
@@ -64,28 +71,28 @@ namespace PatriaTerram.Core.Conditions
             }
         }
 
-        public void ResolveResultCondition(Palette palette, IEnumerable<Building> buildings)
+        public void ResolveResultCondition(IEnumerable<Building> buildings)
         {
-            var resolver = new ConditionsResolver(palette);
+            var resolver = new ConditionsResolver(_palette);
 
             foreach (var building in buildings)
             {
                 var maxConditions = resolver.GetMaxConditions(building);
 
-                foreach (var point in palette.AllPoints)
+                foreach (var point in _palette.AllPoints)
                 {
                     resolver.ResolveResultCondition(point, building, maxConditions);
                 }
             }
         }
 
-        public void ResolveResultCondition(Palette palette, Building building)
+        public void ResolveResultCondition(Building building)
         {
-            var resolver = new ConditionsResolver(palette);
+            var resolver = new ConditionsResolver(_palette);
 
             var maxConditions = resolver.GetMaxConditions(building);
 
-            foreach (var point in palette.AllPoints)
+            foreach (var point in _palette.AllPoints)
             {
                 resolver.ResolveResultCondition(point, building, maxConditions);
             }
@@ -97,9 +104,9 @@ namespace PatriaTerram.Core.Conditions
 
             //resolver.FinalResolve(building);
 
-            var res = new ConditionsProcessor();
+            var res = new ConditionsProcessor(palette);
 
-            res.ResolveResultCondition(palette, building);
+            res.ResolveResultCondition(building);
             //resolver.ResolveResultCondition(building);
         }
     }
