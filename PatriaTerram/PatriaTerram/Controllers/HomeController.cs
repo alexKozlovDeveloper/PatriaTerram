@@ -1,5 +1,5 @@
 ﻿using PatriaTerram.Core;
-using PatriaTerram.Core.BuildingConditions;
+using PatriaTerram.Core.Conditions;
 using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Factoryes;
@@ -29,9 +29,11 @@ namespace PatriaTerram.Controllers
 
             var model = factory.GetPalette();
 
-            var processor = new BuildingConditionsProcessor();
+            var processor = new ConditionsProcessor();
 
-            processor.Resolve(model, Configs.Buildings.Values);
+            //processor.Resolve(model, Configs.Buildings.Values);
+            processor.ResolveTerrainConditions(model, Configs.Buildings.Values);
+            processor.ResolveResultCondition(model, Configs.Buildings.Values);
 
             var steps = GetSteps();
 

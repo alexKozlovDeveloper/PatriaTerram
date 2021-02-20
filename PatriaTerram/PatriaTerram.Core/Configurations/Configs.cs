@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PatriaTerram.Core.Conditions.Entityes;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Models;
 using System;
@@ -66,35 +67,74 @@ namespace PatriaTerram.Core.Configurations
                                     G = 20,
                                     B = 147
                                 },
-                                EnvironmentConditions = new List<EnvironmentCondition>
+                                BuildingConditions = new List<BuildingCondition>
                                 {
-                                    new EnvironmentCondition
+                                    //new BuildingCondition
+                                    //{
+                                    //    Environment = Constants.Stone,
+                                    //    Radius = 15,
+                                    //    Priority = 15,
+                                    //    IsPositive = true,
+                                    //    Type = EnvironmentConditionType.LinearDecrease
+                                    //},
+                                    //new BuildingCondition
+                                    //{
+                                    //    Environment = Constants.Wood,
+                                    //    Radius = 7,
+                                    //    Priority = 10,
+                                    //    IsPositive = true,
+                                    //    Type = EnvironmentConditionType.LinearDecrease
+                                    //},
+                                    //new BuildingCondition
+                                    //{
+                                    //    Environment = Constants.FertileSoil,
+                                    //    Radius = 5,
+                                    //    Priority = 15,
+                                    //    IsPositive = true,
+                                    //    Type = EnvironmentConditionType.LinearDecrease
+                                    //},
+                                    //new BuildingCondition
+                                    //{
+                                    //    Environment = Constants.Lake,
+                                    //    Radius = 8,
+                                    //    Priority = 20,
+                                    //    IsPositive = true,
+                                    //    Type = EnvironmentConditionType.LinearDecrease
+                                    //}
+                                },
+                                TerrainConditions = new List<TerrainCondition> 
+                                {
+                                    new TerrainCondition
                                     {
-                                        Environment = Constants.Stone,
+                                        //Environment = Constants.Stone,
+                                        EnvironmentTerrain = TerrainType.Stone,
                                         Radius = 15,
                                         Priority = 15,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.LinearDecrease
                                     },
-                                    new EnvironmentCondition
+                                    new TerrainCondition
                                     {
-                                        Environment = Constants.Wood,
+                                        //Environment = Constants.Wood,
+                                        EnvironmentTerrain = TerrainType.Wood,
                                         Radius = 7,
                                         Priority = 10,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.LinearDecrease
                                     },
-                                    new EnvironmentCondition
+                                    new TerrainCondition
                                     {
-                                        Environment = Constants.FertileSoil,
+                                        //Environment = Constants.FertileSoil,
+                                        EnvironmentTerrain = TerrainType.FertileSoil,
                                         Radius = 5,
                                         Priority = 15,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.LinearDecrease
                                     },
-                                    new EnvironmentCondition
+                                    new TerrainCondition
                                     {
-                                        Environment = Constants.Lake,
+                                        //Environment = Constants.Lake,
+                                        EnvironmentTerrain = TerrainType.Lake,
                                         Radius = 8,
                                         Priority = 20,
                                         IsPositive = true,
@@ -114,32 +154,46 @@ namespace PatriaTerram.Core.Configurations
                                     G = 51,
                                     B = 255
                                 },
-                                EnvironmentConditions = new List<EnvironmentCondition>
+                                BuildingConditions = new List<BuildingCondition>
                                 {
-                                    new EnvironmentCondition
+                                    //new BuildingCondition
+                                    //{
+                                    //    Environment = Constants.Wood,
+                                    //    Radius = 5,
+                                    //    Priority = 45,
+                                    //    IsPositive = true,
+                                    //    Type = EnvironmentConditionType.LinearDecrease
+                                    //},
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.Wood,
-                                        Radius = 5,
-                                        Priority = 45,
-                                        IsPositive = true,
-                                        Type = EnvironmentConditionType.LinearDecrease
-                                    },
-                                    new EnvironmentCondition
-                                    {
-                                        Environment = Constants.TownHall,
+                                        //Environment = Constants.TownHall,
+                                        EnvironmentBuilding = BuildingType.TownHall,
                                         Radius = 15,
                                         Priority = 25,
                                         IsPositive = true,
                                         IsRequired = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
-                                    new EnvironmentCondition
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.Sawmill,
+                                        //Environment = Constants.Sawmill,
+                                        EnvironmentBuilding = BuildingType.Sawmill,
                                         Radius = 3,
                                         Priority = 45,
                                         IsPositive = false,
                                         Type = EnvironmentConditionType.OneLevel
+                                    }
+                                },
+                                TerrainConditions = new List<TerrainCondition>
+                                {
+                                    new TerrainCondition
+                                    {
+                                        //Environment = Constants.Wood,
+                                        EnvironmentTerrain = TerrainType.Wood,
+                                        Radius = 5,
+                                        Priority = 45,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     }
                                 }
                             }
@@ -155,32 +209,46 @@ namespace PatriaTerram.Core.Configurations
                                     G = 0,
                                     B = 0
                                 },
-                                EnvironmentConditions = new List<EnvironmentCondition>
+                                BuildingConditions = new List<BuildingCondition>
                                 {
-                                    new EnvironmentCondition
+                                    //new BuildingCondition
+                                    //{
+                                    //    Environment = Constants.Stone,
+                                    //    Radius = 5,
+                                    //    Priority = 50,
+                                    //    IsPositive = true,
+                                    //    Type = EnvironmentConditionType.LinearDecrease
+                                    //},
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.Stone,
-                                        Radius = 5,
-                                        Priority = 50,
-                                        IsPositive = true,
-                                        Type = EnvironmentConditionType.LinearDecrease
-                                    },
-                                    new EnvironmentCondition
-                                    {
-                                        Environment = Constants.TownHall,
+                                        //Environment = Constants.TownHall,
+                                        EnvironmentBuilding = BuildingType.TownHall,
                                         Radius = 15,
                                         Priority = 15,
                                         IsPositive = true,
                                         IsRequired = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
-                                    new EnvironmentCondition
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.Stonepit,
+                                        //Environment = Constants.Stonepit,
+                                        EnvironmentBuilding = BuildingType.Stonepit,
                                         Radius = 2,
                                         Priority = 50,
                                         IsPositive = false,
                                         Type = EnvironmentConditionType.OneLevel
+                                    }
+                                },
+                                TerrainConditions = new List<TerrainCondition>
+                                {
+                                    new TerrainCondition
+                                    {
+                                        //Environment = Constants.Stone,
+                                        EnvironmentTerrain = TerrainType.Stone,
+                                        Radius = 5,
+                                        Priority = 50,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     }
                                 }
                             }
@@ -196,40 +264,55 @@ namespace PatriaTerram.Core.Configurations
                                     G = 230,
                                     B = 140
                                 },
-                                EnvironmentConditions = new List<EnvironmentCondition>
+                                BuildingConditions = new List<BuildingCondition>
                                 {
-                                    new EnvironmentCondition
+                                    //new BuildingCondition
+                                    //{
+                                    //    Environment = Constants.FertileSoil,
+                                    //    Radius = 5,
+                                    //    Priority = 50,
+                                    //    IsPositive = true,
+                                    //    Type = EnvironmentConditionType.LinearDecrease
+                                    //},
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.FertileSoil,
-                                        Radius = 5,
-                                        Priority = 50,
-                                        IsPositive = true,
-                                        Type = EnvironmentConditionType.LinearDecrease
-                                    },
-                                    new EnvironmentCondition
-                                    {
-                                        Environment = Constants.TownHall,
+                                        //Environment = Constants.TownHall,
+                                        EnvironmentBuilding = BuildingType.TownHall,
                                         Radius = 15,
                                         Priority = 15,
                                         IsPositive = true,
                                         IsRequired = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
-                                    new EnvironmentCondition
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.Sawmill,
+                                        //Environment = Constants.Sawmill,
+                                        EnvironmentBuilding = BuildingType.Sawmill,
                                         Radius = 3,
                                         Priority = 50,
                                         IsPositive = false,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
-                                    new EnvironmentCondition
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.Farm,
+                                        //Environment = Constants.Farm,
+                                        EnvironmentBuilding = BuildingType.Farm,
                                         Radius = 5,
                                         Priority = 20,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.OneLevel
+                                    }
+                                },
+                                TerrainConditions = new List<TerrainCondition>
+                                {
+                                    new TerrainCondition
+                                    {
+                                        //Environment = Constants.FertileSoil,
+                                        EnvironmentTerrain = TerrainType.FertileSoil,
+                                        Radius = 5,
+                                        Priority = 50,
+                                        IsPositive = true,
+                                        Type = EnvironmentConditionType.LinearDecrease
                                     }
                                 }
                             }
@@ -245,44 +328,49 @@ namespace PatriaTerram.Core.Configurations
                                     G = 51,
                                     B = 0
                                 },
-                                EnvironmentConditions = new List<EnvironmentCondition>
+                                BuildingConditions = new List<BuildingCondition>
                                 {
-                                    new EnvironmentCondition
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.Sawmill,
+                                       // Environment = Constants.Sawmill,
+                                        EnvironmentBuilding = BuildingType.Sawmill,
                                         Radius = 15,
                                         Priority = 15,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
-                                    new EnvironmentCondition
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.Stonepit,
+                                        //Environment = Constants.Stonepit,
+                                        EnvironmentBuilding = BuildingType.Stonepit,
                                         Radius = 15,
                                         Priority = 15,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
-                                    new EnvironmentCondition
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.Farm,
+                                        //Environment = Constants.Farm,
+                                        EnvironmentBuilding = BuildingType.Farm,
                                         Radius = 5,
                                         Priority = 20,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     },
-                                    new EnvironmentCondition
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.TownHall,
+                                        //Environment = Constants.TownHall,
+                                        EnvironmentBuilding = BuildingType.TownHall,
                                         Radius = 15,
                                         Priority = 20,
                                         IsPositive = true,
                                         IsRequired = true,
                                         Type = EnvironmentConditionType.LinearDecrease
                                     },
-                                    new EnvironmentCondition
+                                    new BuildingCondition
                                     {
-                                        Environment = Constants.House,
+                                        //Environment = Constants.House,
+                                        EnvironmentBuilding = BuildingType.House,
                                         Radius = 5,
                                         Priority = 15,
                                         IsPositive = true,

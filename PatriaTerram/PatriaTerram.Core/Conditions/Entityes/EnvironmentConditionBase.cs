@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PatriaTerram.Core.Models
+namespace PatriaTerram.Core.Conditions.Entityes
 {
-    public class EnvironmentCondition
+    public class EnvironmentConditionBase
     {
-        public string Environment { get; set; }
+        //public string Environment { get; set; }
         public int Radius { get; set; }
         public int Priority { get; set; }
         public EnvironmentConditionType Type { get; set; }
@@ -20,7 +20,7 @@ namespace PatriaTerram.Core.Models
         {
             var posValue = IsPositive == true ? "positive" : "negative";
             var req = IsRequired == true ? "<!>" : "";
-            return $"{req} {Environment}-[R:{Radius},P:{Priority},T:{Type}] {posValue}";
+            return $"{req} [R:{Radius},P:{Priority},T:{Type}] {posValue}";
         }
     }
 }

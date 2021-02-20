@@ -55,13 +55,63 @@ namespace PatriaTerram.Web.Models
                 context.AddLayer(terrain.Type.ToString(), $".{terrain.Type.ToString()}");
             }
 
+            foreach (var terrainCondition in point.TerrainConditions.GetAllCondiotions())
+            {
+                var env = terrainCondition.EnvironmentTerrainType;
+                var type = terrainCondition.BuildingType;
+                var value = terrainCondition.Value;
+
+                if (value == 0) { continue; }
+
+                var cell = new MapCellItem()
+                {
+                    Value = value,
+                    Color = new Color
+                    {
+                        R = (int)((value / (double)context.MaxConditions[$"{type}-{env}"]) * 255),
+                        G = 0,
+                        B = 0
+                    },
+                    Classes = new List<string> { $"{type}-{env}" }
+                };
+
+                Cells.Add(cell);
+
+                context.AddLayer($"{type}-{env}", $".{type}-{env}");
+            }
+
             foreach (var buildingCondition in point.BuildingConditions.GetAllCondiotions())
             {
-                var env = buildingCondition.Environment;
+                var env = buildingCondition.EnvironmentBuildingType;
                 var type = buildingCondition.BuildingType;
                 var value = buildingCondition.Value;
 
                 if(value == 0) { continue; }
+
+                var cell = new MapCellItem()
+                {
+                    Value = value,
+                    Color = new Color
+                    {
+                        R = (int)((value / (double)context.MaxConditions[$"{type}-{env}"]) * 255),
+                        G = 0,
+                        B = 0
+                    },
+                    Classes = new List<string> { $"{type}-{env}" }
+                };
+
+                Cells.Add(cell);
+
+                context.AddLayer($"{type}-{env}", $".{type}-{env}");
+            }
+
+            foreach (var buildingCondition in point.ResultConditions.GetAllCondiotions())
+            {
+                var env = "Result";
+                var type = buildingCondition.BuildingType;
+                var value = buildingCondition.Value;
+
+                if (value == 0) { continue; }
 
                 var cell = new MapCellItem()
                 {

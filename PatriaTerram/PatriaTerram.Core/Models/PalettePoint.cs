@@ -9,15 +9,18 @@ namespace PatriaTerram.Core.Models
 {
     public class PalettePoint
     {
-        private List<ILayer> _layers;
+        private readonly List<ILayer> _layers;
 
         public PalettePoint()
         {
-            _layers = new List<ILayer>();
-
-            _layers.Add(new TerrainLayer());
-            _layers.Add(new BuildingConditionLayer());
-            _layers.Add(new BuildingLayer());
+            _layers = new List<ILayer>
+            {
+                new TerrainLayer(),
+                new TerrainConditionLayer(),
+                new BuildingConditionLayer(),                
+                new ResultConditionLayer(),
+                new BuildingLayer()
+            };
         }
 
         public T GetLayer<T>(string layerName) where T : ILayer
@@ -33,7 +36,9 @@ namespace PatriaTerram.Core.Models
         }
 
         public TerrainLayer Terrains => GetLayer<TerrainLayer>("Terrain");
-        public BuildingConditionLayer BuildingConditions => GetLayer<BuildingConditionLayer>("BuildingCondition");
+        public TerrainConditionLayer TerrainConditions => GetLayer<TerrainConditionLayer>("TerrainCondition");
+        public BuildingConditionLayer BuildingConditions => GetLayer<BuildingConditionLayer>("BuildingCondition");        
+        public ResultConditionLayer ResultConditions => GetLayer<ResultConditionLayer>("ResultCondition");
         public BuildingLayer Buildings => GetLayer<BuildingLayer>("Building");
     }
 }

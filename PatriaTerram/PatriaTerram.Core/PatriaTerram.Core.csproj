@@ -45,8 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildingConditions\BuildingConditionsProcessor.cs" />
-    <Compile Include="BuildingConditions\BuildingConditionsResolver.cs" />
+    <Compile Include="Conditions\ConditionsProcessor.cs" />
+    <Compile Include="Conditions\ConditionsResolver.cs" />
     <Compile Include="Buildings\BuildingBuilder.cs" />
     <Compile Include="Configurations\Constants.cs" />
     <Compile Include="Configurations\Configs.cs" />
@@ -60,14 +60,19 @@
     <Compile Include="Models\Building.cs" />
     <Compile Include="Configurations\PaletteConfiguration.cs" />
     <Compile Include="Configurations\Range.cs" />
+    <Compile Include="Conditions\Entityes\BuildingCondition.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="Enums\EnvironmentConditionType.cs" />
     <Compile Include="Models\Layers\BuildingConditionLayer.cs" />
     <Compile Include="Models\Layers\BuildingLayer.cs" />
+    <Compile Include="Models\Layers\Entityes\ResultConditionLayerItem.cs" />
+    <Compile Include="Models\Layers\Entityes\TerrainConditionLayerItem.cs" />
+    <Compile Include="Models\Layers\ResultConditionLayer.cs" />
     <Compile Include="Models\Layers\Entityes\BuildingConditionLayerItem.cs" />
     <Compile Include="Models\Layers\Entityes\BuildingLayerItem.cs" />
     <Compile Include="Models\Layers\Entityes\TerrainLayerItem.cs" />
     <Compile Include="Models\Layers\LayerBase.cs" />
+    <Compile Include="Models\Layers\TerrainConditionLayer.cs" />
     <Compile Include="Models\Layers\TerrainLayer.cs" />
     <Compile Include="Models\Terrain.cs" />
     <Compile Include="Factoryes\SamplePaletteFactory.cs" />
@@ -75,7 +80,8 @@
     <Compile Include="Interfaces\IPaletteFactory.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\PalettePoint.cs" />
-    <Compile Include="Models\EnvironmentCondition.cs" />
+    <Compile Include="Conditions\Entityes\EnvironmentConditionBase.cs" />
+    <Compile Include="Conditions\Entityes\TerrainCondition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

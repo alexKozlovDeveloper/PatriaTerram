@@ -1,18 +1,11 @@
 ﻿using Newtonsoft.Json;
-using PatriaTerram.Core.BuildingConditions;
 using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Factoryes;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
 using PerlinNoise;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AStarAlgorithm;
 

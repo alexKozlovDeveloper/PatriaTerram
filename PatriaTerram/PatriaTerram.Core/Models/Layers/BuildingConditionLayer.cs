@@ -18,9 +18,9 @@ namespace PatriaTerram.Core.Models.Layers
             return Items.Any(a => a.BuildingType == buildingType);
         }
 
-        public bool IsHasEnvironment(BuildingType buildingType, string environment)
+        public bool IsHasEnvironment(BuildingType buildingType, BuildingType environmentBuildingType)
         {
-            return Items.Any(a => a.BuildingType == buildingType && a.Environment == environment);
+            return Items.Any(a => a.BuildingType == buildingType && a.EnvironmentBuildingType == environmentBuildingType);
         }
 
         public List<BuildingConditionLayerItem> GetCondiotions(BuildingType buildingType)
@@ -33,9 +33,9 @@ namespace PatriaTerram.Core.Models.Layers
             return Items;
         }
 
-        public int GetValue(BuildingType buildingType, string environment)
+        public int GetValue(BuildingType buildingType, BuildingType environmentBuildingType)
         {
-            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.Environment == environment);
+            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentBuildingType == environmentBuildingType);
 
             if (item == null)
             {
@@ -45,16 +45,16 @@ namespace PatriaTerram.Core.Models.Layers
             return item.Value;
         }
 
-        public void UpdateValue(BuildingType buildingType, string environment, int value)
+        public void UpdateValue(BuildingType buildingType, BuildingType environmentBuildingType, int value)
         {
-            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.Environment == environment);
+            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentBuildingType == environmentBuildingType);
 
             if (item == null)
             {
                 item = new BuildingConditionLayerItem
                 {
                     BuildingType = buildingType,
-                    Environment = environment
+                    EnvironmentBuildingType = environmentBuildingType
                 };
 
                 Items.Add(item);
@@ -63,16 +63,16 @@ namespace PatriaTerram.Core.Models.Layers
             item.Value = value;
         }
 
-        public void AddConditionValue(BuildingType buildingType, string environment, int value, string townName = null)
+        public void AddConditionValue(BuildingType buildingType, BuildingType environmentBuildingType, int value, string townName = null)
         {
-            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.Environment == environment);
+            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentBuildingType == environmentBuildingType);
 
             if(item == null)
             {
                 item = new BuildingConditionLayerItem
                 {
                     BuildingType = buildingType,
-                    Environment = environment,
+                    EnvironmentBuildingType = environmentBuildingType,
                     Value = value,
                     TownName = townName
                 };

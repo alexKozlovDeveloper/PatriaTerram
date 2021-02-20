@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Models.Layers.Entityes
 {
-    public class BuildingConditionLayerItem : ILayerItem
+    public class ResultConditionLayerItem : ILayerItem
     {
         public string TownName { get; set; }
         public BuildingType BuildingType { get; set; }
-        //public string Environment { get; set; }
-        public BuildingType EnvironmentBuildingType { get; set; }
-        public int Value { get; set; } 
+        //public string EnvironmentBuilding { get; set; }
+        public int Value { get; set; }
     }
 }

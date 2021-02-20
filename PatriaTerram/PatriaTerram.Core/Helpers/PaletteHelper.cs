@@ -8,18 +8,18 @@ namespace PatriaTerram.Core.Helpers
 {
     public static class PaletteHelper
     {
-        public static int GetMaxBuildingConditionValue(this Palette palette, BuildingType buildingType, string terrain)
+        public static int GetMaxBuildingConditionValue(this Palette palette, BuildingType buildingType, BuildingType terrainBuildingType)
         {
             var conditions = new List<int>();
 
             foreach (var point in palette.AllPoints)
             {
-                if (point.BuildingConditions.IsHasEnvironment(buildingType, terrain) == false) 
+                if (point.BuildingConditions.IsHasEnvironment(buildingType, terrainBuildingType) == false) 
                 { 
                     continue; 
                 }
 
-                conditions.Add(point.BuildingConditions.GetValue(buildingType, terrain));
+                conditions.Add(point.BuildingConditions.GetValue(buildingType, terrainBuildingType));
             }
 
             if (conditions.Count == 0)
@@ -30,7 +30,51 @@ namespace PatriaTerram.Core.Helpers
             return conditions.Max();
         }
 
-        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoords(this Palette palette, BuildingType buildingType, string terrain)
+        public static int GetMaxTerrainConditionValue(this Palette palette, BuildingType buildingType, TerrainType terrainType)
+        {
+            var conditions = new List<int>();
+
+            foreach (var point in palette.AllPoints)
+            {
+                if (point.TerrainConditions.IsHasEnvironment(buildingType, terrainType) == false)
+                {
+                    continue;
+                }
+
+                conditions.Add(point.TerrainConditions.GetValue(buildingType, terrainType));
+            }
+
+            if (conditions.Count == 0)
+            {
+                return 0;
+            }
+
+            return conditions.Max();
+        }
+
+        public static int GetMaxResultConditionValue(this Palette palette, BuildingType buildingType)
+        {
+            var conditions = new List<int>();
+
+            foreach (var point in palette.AllPoints)
+            {
+                if (point.ResultConditions.IsHasCondition(buildingType) == false)
+                {
+                    continue;
+                }
+
+                conditions.Add(point.ResultConditions.GetValue(buildingType));
+            }
+
+            if (conditions.Count == 0)
+            {
+                return 0;
+            }
+
+            return conditions.Max();
+        }
+
+        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoords(this Palette palette, BuildingType buildingType, BuildingType terrain)
         {
             var conditions = new Dictionary<int, List<Coord>>();
 
@@ -56,7 +100,33 @@ namespace PatriaTerram.Core.Helpers
             return conditions;
         }
 
-        public static Coord GetMaxBuildingConditionCoord(this Palette palette, BuildingType buildingType, string terrain)
+        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoordsNew(this Palette palette, BuildingType buildingType, string terrain)
+        {
+            var conditions = new Dictionary<int, List<Coord>>();
+
+            for (int x = 0; x < palette.Width; x++)
+            {
+                for (int y = 0; y < palette.Height; y++)
+                {
+                    var point = palette[x, y];
+
+                   // if (point.ResultConditions.IsHasEnvironment(buildingType, terrain) == false) { continue; }
+
+                    var value = point.ResultConditions.GetValue(buildingType); //[buildingType].EnvironmentConditionValues[terrain];
+
+                    if (conditions.Keys.Contains(value) == false)
+                    {
+                        conditions.Add(value, new List<Coord>());
+                    }
+
+                    conditions[value].Add(new Coord(x, y));
+                }
+            }
+
+            return conditions;
+        }
+
+        public static Coord GetMaxBuildingConditionCoord(this Palette palette, BuildingType buildingType, BuildingType terrain)
         {
             var coords = GetMaxBuildingConditionCoords(palette, buildingType, terrain);
 
@@ -67,7 +137,7 @@ namespace PatriaTerram.Core.Helpers
 
         public static Coord GetMaxBuildingConditionCoordWithoutBuildings(this Palette palette, BuildingType buildingType, string terrain)
         {
-            var coords = GetMaxBuildingConditionCoords(palette, buildingType, terrain);
+            var coords = GetMaxBuildingConditionCoordsNew(palette, buildingType, terrain);
 
             var sortedKeys = coords.Keys.OrderBy(a => a).Reverse();
 

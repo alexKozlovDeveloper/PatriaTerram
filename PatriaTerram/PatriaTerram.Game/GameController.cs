@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PatriaTerram.Core.Configurations;
-using PatriaTerram.Core.BuildingConditions;
 using PatriaTerram.Game.Entityes;
 using PatriaTerram.Core;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Buildings;
+using PatriaTerram.Core.Conditions;
 
 namespace PatriaTerram.Game
 {
@@ -48,9 +48,19 @@ namespace PatriaTerram.Game
 
         private void Build(BuildingType target, string townName)
         {
-            BuildingConditionsProcessor.AddResultConditionLayer(_map, Configs.Buildings[target]);
+            //ConditionsProcessor.AddResultConditionLayer(_map, Configs.Buildings[target]);
+
+            var processor = new ConditionsProcessor();
+
+            //processor.ResolveBuildingConditions(_map, Configs.Buildings.Values);
+            processor.ResolveResultCondition(_map, Configs.Buildings[target]);
 
             var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(target, TerrainType.Result.ToString());
+
+            if(coord == null)
+            {
+
+            }
 
             _builder.Build(target, townName, coord);
         }

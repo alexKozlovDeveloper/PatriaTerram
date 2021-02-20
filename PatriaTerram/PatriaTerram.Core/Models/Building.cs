@@ -1,4 +1,5 @@
-﻿using PatriaTerram.Core.Enums;
+﻿using PatriaTerram.Core.Conditions.Entityes;
+using PatriaTerram.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,13 @@ namespace PatriaTerram.Core.Models
 
         public int Value { get; set; }
 
-        public List<EnvironmentCondition> EnvironmentConditions { get; set; }
+        public List<BuildingCondition> BuildingConditions { get; set; }
+        public List<TerrainCondition> TerrainConditions { get; set; }
+
+        public Building() 
+        {
+            BuildingConditions = new List<BuildingCondition>();
+            TerrainConditions = new List<TerrainCondition>();
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using AStarAlgorithm.Entityes;
-using PatriaTerram.Core.BuildingConditions;
+using PatriaTerram.Core.Conditions;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Models;
 using System;
@@ -13,13 +13,13 @@ namespace PatriaTerram.Core.Buildings
     public class BuildingBuilder
     {
         private Palette _palette;
-        private BuildingConditionsResolver _resolver;
+        private ConditionsResolver _resolver;
 
         public BuildingBuilder(Palette palette)
         {
             _palette = palette;
 
-            _resolver = new BuildingConditionsResolver(_palette);
+            _resolver = new ConditionsResolver(_palette);
         }
 
         public void Build(BuildingType target, string townName, Coord coord)
