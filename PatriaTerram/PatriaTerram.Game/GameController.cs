@@ -32,7 +32,7 @@ namespace PatriaTerram.Game
             _conditionsProcessor = new ConditionsProcessor(_map);
 
             _conditionsProcessor.ResolveTerrainConditions(_buildings);
-            _conditionsProcessor.ResolveResultCondition(_buildings);
+            _conditionsProcessor.ResolveResultCondition(_steps[0].TownName, _buildings);
         }
 
         public void NextStep()
@@ -44,20 +44,20 @@ namespace PatriaTerram.Game
             switch (step.Action)
             {
                 case StepAction.Build:
-                    Build(step.BuildingType, step.TownName);
+                    Build(step.TownName, step.BuildingType);
                     break;
                 default:
                     break;
             }
         }
 
-        private void Build(BuildingType buildingType, string townName)
+        private void Build(string townName, BuildingType buildingType)
         {
             var building = _buildings.FirstOrDefault(a => a.Type == buildingType);
 
-            _conditionsProcessor.ResolveResultCondition(building);
+            _conditionsProcessor.ResolveResultCondition(townName, building);
 
-            var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(buildingType, TerrainType.Result.ToString());
+            var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(townName, buildingType, TerrainType.Result.ToString());
 
             _builder.Build(buildingType, townName, coord);
         }

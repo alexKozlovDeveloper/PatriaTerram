@@ -8,18 +8,18 @@ namespace PatriaTerram.Core.Helpers
 {
     public static class PaletteHelper
     {
-        public static int GetMaxBuildingConditionValue(this Palette palette, BuildingType buildingType, BuildingType terrainBuildingType)
+        public static int GetMaxBuildingConditionValue(this Palette palette, string townName, BuildingType buildingType, BuildingType terrainBuildingType)
         {
             var conditions = new List<int>();
 
             foreach (var point in palette.AllPoints)
             {
-                if (point.BuildingConditions.IsHasCondition(buildingType, terrainBuildingType) == false) 
+                if (point.BuildingConditions.IsHasCondition(townName, buildingType, terrainBuildingType) == false) 
                 { 
                     continue; 
                 }
 
-                conditions.Add(point.BuildingConditions.GetValue(buildingType, terrainBuildingType));
+                conditions.Add(point.BuildingConditions.GetValue(townName, buildingType, terrainBuildingType));
             }
 
             if (conditions.Count == 0)
@@ -52,18 +52,18 @@ namespace PatriaTerram.Core.Helpers
             return conditions.Max();
         }
 
-        public static int GetMaxResultConditionValue(this Palette palette, BuildingType buildingType)
+        public static int GetMaxResultConditionValue(this Palette palette, string townName, BuildingType buildingType)
         {
             var conditions = new List<int>();
 
             foreach (var point in palette.AllPoints)
             {
-                if (point.ResultConditions.IsHasCondition(buildingType) == false)
+                if (point.ResultConditions.IsHasCondition(townName, buildingType) == false)
                 {
                     continue;
                 }
 
-                conditions.Add(point.ResultConditions.GetValue(buildingType));
+                conditions.Add(point.ResultConditions.GetValue(townName, buildingType));
             }
 
             if (conditions.Count == 0)
@@ -74,7 +74,7 @@ namespace PatriaTerram.Core.Helpers
             return conditions.Max();
         }
 
-        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoords(this Palette palette, BuildingType buildingType, BuildingType terrain)
+        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoords(this Palette palette, string townName, BuildingType buildingType, BuildingType terrain)
         {
             var conditions = new Dictionary<int, List<Coord>>();
 
@@ -84,9 +84,9 @@ namespace PatriaTerram.Core.Helpers
                 {
                     var point = palette[x, y];
 
-                    if (point.BuildingConditions.IsHasCondition(buildingType, terrain) == false) { continue; }
+                    if (point.BuildingConditions.IsHasCondition(townName, buildingType, terrain) == false) { continue; }
 
-                    var value = point.BuildingConditions.GetValue(buildingType, terrain); //[buildingType].EnvironmentConditionValues[terrain];
+                    var value = point.BuildingConditions.GetValue(townName, buildingType, terrain); //[buildingType].EnvironmentConditionValues[terrain];
 
                     if (conditions.Keys.Contains(value) == false)
                     {
@@ -100,7 +100,7 @@ namespace PatriaTerram.Core.Helpers
             return conditions;
         }
 
-        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoordsNew(this Palette palette, BuildingType buildingType, string terrain)
+        public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoordsNew(this Palette palette,string townName, BuildingType buildingType, string terrain)
         {
             var conditions = new Dictionary<int, List<Coord>>();
 
@@ -112,7 +112,7 @@ namespace PatriaTerram.Core.Helpers
 
                    // if (point.ResultConditions.IsHasEnvironment(buildingType, terrain) == false) { continue; }
 
-                    var value = point.ResultConditions.GetValue(buildingType); //[buildingType].EnvironmentConditionValues[terrain];
+                    var value = point.ResultConditions.GetValue(townName, buildingType); //[buildingType].EnvironmentConditionValues[terrain];
 
                     if (conditions.Keys.Contains(value) == false)
                     {
@@ -126,18 +126,18 @@ namespace PatriaTerram.Core.Helpers
             return conditions;
         }
 
-        public static Coord GetMaxBuildingConditionCoord(this Palette palette, BuildingType buildingType, BuildingType terrain)
+        public static Coord GetMaxBuildingConditionCoord(this Palette palette, string townName, BuildingType buildingType, BuildingType terrain)
         {
-            var coords = GetMaxBuildingConditionCoords(palette, buildingType, terrain);
+            var coords = GetMaxBuildingConditionCoords(palette, townName, buildingType, terrain);
 
             var maxValue = coords.Keys.Max();
 
             return coords[maxValue].FirstOrDefault();
         }
 
-        public static Coord GetMaxBuildingConditionCoordWithoutBuildings(this Palette palette, BuildingType buildingType, string terrain)
+        public static Coord GetMaxBuildingConditionCoordWithoutBuildings(this Palette palette, string townName, BuildingType buildingType, string terrain)
         {
-            var coords = GetMaxBuildingConditionCoordsNew(palette, buildingType, terrain);
+            var coords = GetMaxBuildingConditionCoordsNew(palette, townName, buildingType, terrain);
 
             var sortedKeys = coords.Keys.OrderBy(a => a).Reverse();
 
@@ -213,6 +213,24 @@ namespace PatriaTerram.Core.Helpers
                     palette[x, y] = column[y];
                 }
             }
+        }
+
+        public static List<string> GetAllTownNames(this Palette palette)
+        {
+            var townNames = new List<string>();
+
+            foreach (var point in palette.AllPoints)
+            {
+                foreach (var building in point.Buildings.GetAll())
+                {
+                    if(townNames.Contains(building.TownName) == false)
+                    {
+                        townNames.Add(building.TownName);
+                    }
+                }
+            }
+
+            return townNames;
         }
     }
 }

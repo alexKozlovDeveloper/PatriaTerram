@@ -38,6 +38,7 @@ namespace PatriaTerram.Web.Models
         private PaletteContext GetPaletteContext(Palette palette)
         {
             var context = new PaletteContext();
+            var townNames = palette.GetAllTownNames();
 
             foreach (var terrain in Configs.Terrains.Values)
             {
@@ -51,7 +52,7 @@ namespace PatriaTerram.Web.Models
             {
                 foreach (var item2 in Configs.Buildings.Values)
                 {
-                    context.MaxConditions.Add($"{item1.Type}-{item2.Type}", palette.GetMaxBuildingConditionValue(item1.Type, item2.Type));
+                    context.MaxConditions.Add($"{item1.Type}-{item2.Type}", palette.GetMaxBuildingConditionValue(townNames.FirstOrDefault(), item1.Type, item2.Type));
                 }
             }
 
@@ -61,11 +62,11 @@ namespace PatriaTerram.Web.Models
 
                 if (context.MaxConditions.ContainsKey(key) == true)
                 {
-                    context.MaxConditions[key] = palette.GetMaxResultConditionValue(building.Type);
+                    context.MaxConditions[key] = palette.GetMaxResultConditionValue(townNames.FirstOrDefault(), building.Type);
                 }
                 else
                 {
-                    context.MaxConditions.Add(key, palette.GetMaxResultConditionValue(building.Type));
+                    context.MaxConditions.Add(key, palette.GetMaxResultConditionValue(townNames.FirstOrDefault(), building.Type));
                 }
             }
 

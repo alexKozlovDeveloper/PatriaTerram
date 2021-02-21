@@ -30,7 +30,7 @@ namespace PatriaTerram.Core.Conditions
             }
         }
 
-        public void ResolveBuildingConditions(IEnumerable<Building> buildings)
+        public void ResolveBuildingConditions(string townName, IEnumerable<Building> buildings)
         {
             var resolver = new ConditionsResolver(_palette);
 
@@ -40,29 +40,29 @@ namespace PatriaTerram.Core.Conditions
                 {
                     foreach (var building in buildings)
                     {
-                        resolver.ResolveBuildingCondition(new Coord(x, y), building);
+                        resolver.ResolveBuildingCondition(new Coord(x, y), townName, building);
                     }
                 }
             }
         }
 
-        public void ResolveResultCondition(IEnumerable<Building> buildings)
+        public void ResolveResultCondition(string townName, IEnumerable<Building> buildings)
         {
             foreach (var building in buildings)
             {
-                ResolveResultCondition(building);
+                ResolveResultCondition(townName, building);
             }
         }
 
-        public void ResolveResultCondition(Building building)
+        public void ResolveResultCondition(string townName, Building building)
         {
             var resolver = new ConditionsResolver(_palette);
 
-            var maxConditions = resolver.GetMaxConditions(building);
+            var maxConditions = resolver.GetMaxConditions(townName, building);
 
             foreach (var point in _palette.AllPoints)
             {
-                resolver.ResolveResultCondition(point, building, maxConditions);
+                resolver.ResolveResultCondition(point, townName, building, maxConditions);
             }
         }
     }

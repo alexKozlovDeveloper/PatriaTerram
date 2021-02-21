@@ -12,7 +12,7 @@ namespace PatriaTerram.Core.Models.Layers
     {
         public override string Name { get { return "ResultCondition"; } }
 
-        public void UpdateValue(BuildingType buildingType, int value)
+        public void UpdateValue(string townName, BuildingType buildingType, int value)
         {
             var item = Items.FirstOrDefault(a => a.BuildingType == buildingType);
 
@@ -30,7 +30,7 @@ namespace PatriaTerram.Core.Models.Layers
             item.Value = value;
         }
 
-        public int GetValue(BuildingType buildingType)
+        public int GetValue(string townName, BuildingType buildingType)
         {
             var item = Items.FirstOrDefault(a => a.BuildingType == buildingType);
 
@@ -42,7 +42,7 @@ namespace PatriaTerram.Core.Models.Layers
             return item.Value;
         }
 
-        public bool IsHasCondition(BuildingType buildingType)
+        public bool IsHasCondition(string townName, BuildingType buildingType)
         {
             return Items.Any(a => a.BuildingType == buildingType);
         }

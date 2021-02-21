@@ -21,5 +21,7 @@
         public const string FishermanHouse = "FishermanHouse";
         public const string House = "House"; 
         public const string Market = "market"; 
+
+        public const string AnyBuilding = "AnyBuilding";
     }
 }

@@ -12,7 +12,7 @@ namespace PatriaTerram.Core.Models.Layers
     {
         public override string Name { get { return "TerrainCondition"; } }
 
-        public void AddConditionValue(BuildingType buildingType, TerrainType environmentTerrain, int value, string townName = null)
+        public void AddConditionValue(BuildingType buildingType, TerrainType environmentTerrain, int value)
         {
             var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == environmentTerrain);
 
@@ -22,8 +22,7 @@ namespace PatriaTerram.Core.Models.Layers
                 {
                     BuildingType = buildingType,
                     EnvironmentTerrainType = environmentTerrain,
-                    Value = value,
-                    TownName = townName
+                    Value = value
                 };
 
                 Items.Add(item);

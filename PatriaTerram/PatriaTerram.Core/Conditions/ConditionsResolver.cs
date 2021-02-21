@@ -42,7 +42,7 @@ namespace PatriaTerram.Core.Conditions
 
         }
 
-        public void ResolveBuildingCondition(Coord baseCoord, Building building)
+        public void ResolveBuildingCondition(Coord baseCoord, string townName, Building building)
         {
             var basePoint = _palette[baseCoord];
 
@@ -59,12 +59,12 @@ namespace PatriaTerram.Core.Conditions
                 {
                     var value = GetConditionValue(environmentCondition, baseCoord, adjacentCoord);
 
-                    _palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, environmentCondition.EnvironmentBuilding, value);
+                    _palette[adjacentCoord].BuildingConditions.AddConditionValue(townName, building.Type, environmentCondition.EnvironmentBuilding, value);
                 }
             }
         }
 
-        public void ResolveResultCondition(PalettePoint point, Building building, Dictionary<string, int> maxConditions)
+        public void ResolveResultCondition(PalettePoint point, string townName, Building building, Dictionary<string, int> maxConditions)
         {
             double sum = 0;
 
@@ -74,7 +74,7 @@ namespace PatriaTerram.Core.Conditions
 
                 if (terrainCondition.IsRequired == true && conditionValue <= 0)
                 {
-                    point.ResultConditions.UpdateValue(building.Type, 0);
+                    point.ResultConditions.UpdateValue(townName, building.Type, 0);
                     return;
                 }
 
@@ -83,11 +83,11 @@ namespace PatriaTerram.Core.Conditions
 
             foreach (var buildingCondition in building.BuildingConditions)
             {
-                var conditionValue = point.BuildingConditions.GetValue(building.Type, buildingCondition.EnvironmentBuilding);
+                var conditionValue = point.BuildingConditions.GetValue(townName, building.Type, buildingCondition.EnvironmentBuilding);
 
                 if (buildingCondition.IsRequired == true && conditionValue <= 0)
                 {
-                    point.ResultConditions.UpdateValue(building.Type, 0);
+                    point.ResultConditions.UpdateValue(townName, building.Type, 0);
                     return;
                 }
 
@@ -99,7 +99,7 @@ namespace PatriaTerram.Core.Conditions
             sum /= prioritySum;
             sum *= 1000;
 
-            point.ResultConditions.UpdateValue(building.Type, (int)sum);
+            point.ResultConditions.UpdateValue(townName, building.Type, (int)sum);
         }
 
         public int GetConditionValue(EnvironmentConditionBase environmentCondition, Coord baseCoord, Coord adjacentCoord)
@@ -123,13 +123,13 @@ namespace PatriaTerram.Core.Conditions
             return value;
         }
 
-        public Dictionary<string, int> GetMaxConditions(Building building)
+        public Dictionary<string, int> GetMaxConditions(string townName, Building building)
         {
             var maxConditions = new Dictionary<string, int>();
 
             foreach (var buildingCondition in building.BuildingConditions)
             {
-                var value = Math.Abs(_palette.GetMaxBuildingConditionValue(building.Type, buildingCondition.EnvironmentBuilding));
+                var value = Math.Abs(_palette.GetMaxBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding));
 
                 maxConditions.Add(buildingCondition.EnvironmentBuilding.ToString(), value);
             }
@@ -162,7 +162,7 @@ namespace PatriaTerram.Core.Conditions
                         {
                             var value = GetConditionValue(effectedBuildoing, baseCoord, adjacentCoord);
 
-                            _palette[adjacentCoord].BuildingConditions.AddConditionValue(building.Type, pointBuilding.Type, value, buildingLayerItem.TownName);
+                            _palette[adjacentCoord].BuildingConditions.AddConditionValue(buildingLayerItem.TownName, building.Type, pointBuilding.Type, value);
                         }
                     }
                 }
