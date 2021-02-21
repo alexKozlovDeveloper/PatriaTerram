@@ -14,14 +14,15 @@ namespace PatriaTerram.Core.Models.Layers
 
         public void UpdateValue(string townName, BuildingType buildingType, int value)
         {
-            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType);
+            var item = GetItem(townName, buildingType);
 
             if (item == null)
             {
                 item = new ResultConditionLayerItem
                 {
                     BuildingType = buildingType,
-                    Value = value
+                    Value = value,
+                    TownName = townName
                 };
 
                 Items.Add(item);
@@ -32,9 +33,9 @@ namespace PatriaTerram.Core.Models.Layers
 
         public int GetValue(string townName, BuildingType buildingType)
         {
-            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType);
+            var item = GetItem(townName, buildingType);
 
-            if(item == null)
+            if (item == null)
             {
                 return 0;
             }
@@ -44,7 +45,12 @@ namespace PatriaTerram.Core.Models.Layers
 
         public bool IsHasCondition(string townName, BuildingType buildingType)
         {
-            return Items.Any(a => a.BuildingType == buildingType);
+            return Items.Any(a => a.TownName == townName && a.BuildingType == buildingType);
+        }
+
+        public ResultConditionLayerItem GetItem(string townName, BuildingType buildingType)
+        {
+            return Items.FirstOrDefault(a => a.TownName == townName && a.BuildingType == buildingType);
         }
     }
 }

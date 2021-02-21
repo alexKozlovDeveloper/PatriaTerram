@@ -83,6 +83,7 @@ namespace PatriaTerram.Web.Models
                 var env = buildingCondition.EnvironmentBuildingType;
                 var type = buildingCondition.BuildingType;
                 var value = buildingCondition.Value;
+                var town = buildingCondition.TownName;
 
                 if(value == 0) { continue; }
 
@@ -100,14 +101,15 @@ namespace PatriaTerram.Web.Models
 
                 Cells.Add(cell);
 
-                context.AddLayer($"{type}-{env}", $".{type}-{env}");
+                context.AddLayer($"{type}-{env} [{town}]", $".{type}-{env}");
             }
 
-            foreach (var buildingCondition in point.ResultConditions.GetAll())
+            foreach (var resultCondition in point.ResultConditions.GetAll())
             {
                 var env = "Result";
-                var type = buildingCondition.BuildingType;
-                var value = buildingCondition.Value;
+                var type = resultCondition.BuildingType;
+                var value = resultCondition.Value;
+                var town = resultCondition.TownName;
 
                 if (value == 0) { continue; }
 
@@ -125,12 +127,13 @@ namespace PatriaTerram.Web.Models
 
                 Cells.Add(cell);
 
-                context.AddLayer($"{type}-{env}", $".{type}-{env}");
+                context.AddLayer($"{type}-{env} [{town}]", $".{type}-{env}");
             }
 
             foreach (var buildingLayerItem in point.Buildings.GetAll())
             {
                 var building = Configs.Buildings[buildingLayerItem.BuildingType];
+                var town = buildingLayerItem.TownName;
 
                 var cell = new MapCellItem()
                 {
@@ -141,7 +144,7 @@ namespace PatriaTerram.Web.Models
 
                 Cells.Add(cell);
 
-                context.AddLayer($"{building.Type}", $".{building.Type}");
+                context.AddLayer($"{building.Type} [{town}]", $".{building.Type}");
             }
 
             if(point.Buildings.IsHasAnyBuildings() == true)
