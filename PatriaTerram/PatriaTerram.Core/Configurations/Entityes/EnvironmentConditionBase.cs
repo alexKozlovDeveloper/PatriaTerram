@@ -10,6 +10,7 @@ namespace PatriaTerram.Core.Configurations.Entityes
     public class EnvironmentConditionBase
     {
         public int Radius { get; set; }
+        public int InnerRadius { get; set; }
         public int Priority { get; set; }
         public EnvironmentConditionType Type { get; set; }
         public bool IsPositive { get; set; }

@@ -1,5 +1,6 @@
 ﻿using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Configurations.Entityes;
+using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
 using System.Collections.Generic;
@@ -21,23 +22,24 @@ namespace PatriaTerram.Web.Models
             {
                 var itemValue = point.Terrains.GetTerrainValue(terrainType);
                 var terrain = Configs.Terrains[terrainType];
+                var terrainColorValue = (itemValue / (double)context.MaxTerrainValue);
 
                 var color = new Color
                 {
-                    R = (int)(terrain.Color.R * (itemValue / (double)context.MaxTerrainValue)),
-                    G = (int)(terrain.Color.G * (itemValue / (double)context.MaxTerrainValue)),
-                    B = (int)(terrain.Color.B * (itemValue / (double)context.MaxTerrainValue))
+                    R = (int)(terrain.Color.R * terrainColorValue),
+                    G = (int)(terrain.Color.G * terrainColorValue),
+                    B = (int)(terrain.Color.B * terrainColorValue)
                 };
 
-                if(terrainType == Core.Enums.TerrainType.Result)
+                if(terrainType == TerrainType.Result)
                 {
                     var resultColor = point.GetPointColor();
 
                     color = new Color
                     {
-                        R = (int)(resultColor.R * (itemValue / (double)context.MaxTerrainValue)),
-                        G = (int)(resultColor.G * (itemValue / (double)context.MaxTerrainValue)),
-                        B = (int)(resultColor.B * (itemValue / (double)context.MaxTerrainValue))
+                        R = (int)(resultColor.R * terrainColorValue),
+                        G = (int)(resultColor.G * terrainColorValue),
+                        B = (int)(resultColor.B * terrainColorValue)
                     };
                 }
 
@@ -58,6 +60,7 @@ namespace PatriaTerram.Web.Models
                 var env = terrainCondition.EnvironmentTerrainType;
                 var type = terrainCondition.BuildingType;
                 var value = terrainCondition.Value;
+                var terrainConditionColorValue = value / (double)context.MaxConditions[$"{type}-{env}"] * 255;
 
                 if (value == 0) { continue; }
 
@@ -66,7 +69,7 @@ namespace PatriaTerram.Web.Models
                     Value = value,
                     Color = new Color
                     {
-                        R = (int)((value / (double)context.MaxConditions[$"{type}-{env}"]) * 255),
+                        R = (int)terrainConditionColorValue,
                         G = 0,
                         B = 0
                     },
@@ -84,15 +87,16 @@ namespace PatriaTerram.Web.Models
                 var type = buildingCondition.BuildingType;
                 var value = buildingCondition.Value;
                 var town = buildingCondition.TownName;
+                var buildingConditionColorValue = (value / (double)context.MaxConditions[$"{type}-{env}"]) * 255;
 
-                if(value == 0) { continue; }
+                if (value == 0) { continue; }
 
                 var cell = new MapCellItem()
                 {
                     Value = value,
                     Color = new Color
                     {
-                        R = (int)((value / (double)context.MaxConditions[$"{type}-{env}"]) * 255),
+                        R = (int)buildingConditionColorValue,
                         G = 0,
                         B = 0
                     },
@@ -110,6 +114,7 @@ namespace PatriaTerram.Web.Models
                 var type = resultCondition.BuildingType;
                 var value = resultCondition.Value;
                 var town = resultCondition.TownName;
+                var resultConditionColorResult = (value / (double)context.MaxConditions[$"{type}-{env}"]) * 255;
 
                 if (value == 0) { continue; }
 
@@ -118,7 +123,7 @@ namespace PatriaTerram.Web.Models
                     Value = value,
                     Color = new Color
                     {
-                        R = (int)((value / (double)context.MaxConditions[$"{type}-{env}"]) * 255),
+                        R = (int)resultConditionColorResult,
                         G = 0,
                         B = 0
                     },

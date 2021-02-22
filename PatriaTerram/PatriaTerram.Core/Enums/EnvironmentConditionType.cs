@@ -9,6 +9,8 @@ namespace PatriaTerram.Core.Enums
     public enum EnvironmentConditionType
     {
         LinearDecrease,
-        OneLevel
+        OneLevel,
+        RingOneLevel,
+        RingLinearDecrease
     }
 }

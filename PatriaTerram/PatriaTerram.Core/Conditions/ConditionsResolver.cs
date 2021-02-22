@@ -72,14 +72,15 @@ namespace PatriaTerram.Core.Conditions
             {
                 var conditionValue = point.TerrainConditions.GetValue(building.Type, terrainCondition.EnvironmentTerrain);
 
-                if (terrainCondition.IsRequired == true && conditionValue <= 0)
+                var resultValue = GetResultValue(conditionValue, maxConditions[terrainCondition.EnvironmentTerrain.ToString()], terrainCondition.Priority);
+
+                if (terrainCondition.IsRequired == true && resultValue <= 0)
                 {
                     point.ResultConditions.UpdateValue(townName, building.Type, 0);
                     return;
                 }
 
-                //sum += ((conditionValue * 1.0) / maxConditions[terrainCondition.EnvironmentTerrain.ToString()]) * terrainCondition.Priority;
-                sum += GetValue(conditionValue, maxConditions[terrainCondition.EnvironmentTerrain.ToString()], terrainCondition.Priority);
+                sum += resultValue;
             }
 
             foreach (var buildingCondition in building.BuildingConditions)
@@ -91,56 +92,57 @@ namespace PatriaTerram.Core.Conditions
                     conditionValue = point.BuildingConditions.GetValue(building.Type, buildingCondition.EnvironmentBuilding);
                 }
 
-                if (buildingCondition.IsRequired == true && conditionValue <= 0)
+                var resultValue = GetResultValue(conditionValue, maxConditions[buildingCondition.EnvironmentBuilding.ToString()], buildingCondition.Priority);
+
+                if (buildingCondition.IsRequired == true && resultValue <= 0)
                 {
                     point.ResultConditions.UpdateValue(townName, building.Type, 0);
                     return;
                 }
 
-                //sum += ((conditionValue * 1.0) / maxConditions[buildingCondition.EnvironmentBuilding.ToString()]) * buildingCondition.Priority;
-                sum += GetValue(conditionValue, maxConditions[buildingCondition.EnvironmentBuilding.ToString()], buildingCondition.Priority);
+                sum += resultValue;
             }
 
             var prioritySum = building.BuildingConditions.Select(a => a.Priority).Sum()
                             + building.TerrainConditions.Select(a => a.Priority).Sum();
 
             sum /= prioritySum;
-            sum *= 1000;
+            sum *= 100;
 
             point.ResultConditions.UpdateValue(townName, building.Type, (int)sum);
         }
 
-        private int GetValue(int conditionValue, Range range, int priority)
+        private int GetResultValue(int conditionValue, Range range, int priority)
         {
             double value = range.ToRangeValuePercent(conditionValue);
 
             double res = value * priority * 100;
-
-            if(res > 50000 || res < -50000)
-            {
-
-            }
-
-            if(res != 0)
-            {
-
-            }
 
             return (int)res;
         }
 
         public int GetConditionValue(EnvironmentConditionBase environmentCondition, Coord baseCoord, Coord adjacentCoord)
         {
-            int value;
+            int value = 0;
 
-            if (environmentCondition.Type == EnvironmentConditionType.LinearDecrease)
+            switch (environmentCondition.Type)
             {
-                value = GetValueLinearDecrease(baseCoord, adjacentCoord, environmentCondition.Radius);
+                case EnvironmentConditionType.LinearDecrease:
+                    value = ConditionsResolverHelper.GetValueLinearDecrease(baseCoord, adjacentCoord, environmentCondition.Radius, _palette.Width, _palette.Height);
+                    break;
+                case EnvironmentConditionType.OneLevel:
+                    value = ConditionsResolverHelper.GetValueOneLevel();
+                    break;
+                case EnvironmentConditionType.RingOneLevel:
+                    value = ConditionsResolverHelper.GetValueRingOneLevel(baseCoord, adjacentCoord, environmentCondition.Radius, environmentCondition.InnerRadius, _palette.Width, _palette.Height);
+                    break;
+                case EnvironmentConditionType.RingLinearDecrease:
+                    value = ConditionsResolverHelper.GetValueRingLinearDecrease(baseCoord, adjacentCoord, environmentCondition.Radius, environmentCondition.InnerRadius, _palette.Width, _palette.Height);
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                value = GetValueOneLevel();
-            }
+
 
             if (environmentCondition.IsPositive == false)
             {
@@ -148,102 +150,6 @@ namespace PatriaTerram.Core.Conditions
             }
 
             return value;
-        }
-
-        public Dictionary<string, int> GetMaxConditions(string townName, Building building)
-        {
-            var maxConditions = new Dictionary<string, int>();
-
-            foreach (var buildingCondition in building.BuildingConditions)
-            {
-                //var value = Math.Abs(_palette.GetMaxBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding));
-                var value = _palette.GetMaxBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding);
-
-                maxConditions.Add(buildingCondition.EnvironmentBuilding.ToString(), value);
-            }
-
-            foreach (var terrainCondition in building.TerrainConditions)
-            {
-                //var value = Math.Abs(_palette.GetMaxTerrainConditionValue(building.Type, terrainCondition.EnvironmentTerrain));
-                var value = _palette.GetMaxTerrainConditionValue(building.Type, terrainCondition.EnvironmentTerrain);
-
-                maxConditions.Add(terrainCondition.EnvironmentTerrain.ToString(), value);
-            }
-
-            return maxConditions;
-        }
-
-        public Dictionary<string, int> GetMaxConditions(List<string> allTownNames, Building building)
-        {
-            var maxConditions = new Dictionary<string, int>();
-
-            foreach (var buildingCondition in building.BuildingConditions)
-            {
-                var max = -100_000;
-
-                foreach (var townName in allTownNames)
-                {
-                    //var value = Math.Abs(_palette.GetMaxBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding));
-                    var value = _palette.GetMaxBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding);
-
-                    if(max < value)
-                    {
-                        max = value;
-                    }
-                }
-
-                maxConditions.Add(buildingCondition.EnvironmentBuilding.ToString(), max);
-            }
-
-            foreach (var terrainCondition in building.TerrainConditions)
-            {
-                //var value = Math.Abs(_palette.GetMaxTerrainConditionValue(building.Type, terrainCondition.EnvironmentTerrain));
-                var value = _palette.GetMaxTerrainConditionValue(building.Type, terrainCondition.EnvironmentTerrain);
-
-                maxConditions.Add(terrainCondition.EnvironmentTerrain.ToString(), value);
-            }
-
-            return maxConditions;
-        }
-
-        public Dictionary<string, Range> GetConditionRanges(List<string> allTownNames, Building building)
-        {
-            var conditionRanges = new Dictionary<string, Range>();
-
-            foreach (var buildingCondition in building.BuildingConditions)
-            {
-                //var mins = new List<int>
-
-                //foreach (var townName in allTownNames)
-                //{
-                //    //var value = Math.Abs(_palette.GetMaxBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding));
-                //    var value = _palette.GetMaxBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding);
-
-                //    if (max < value)
-                //    {
-                //        max = value;
-                //    }
-                //}
-
-                var max = allTownNames.Select(townName => _palette.GetMaxBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding))
-                                      .Max();
-
-                var min = allTownNames.Select(townName => _palette.GetMinBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding))
-                                      .Min();
-
-                conditionRanges.Add(buildingCondition.EnvironmentBuilding.ToString(), new Range { Top = max, Bottom = min });
-            }
-
-            foreach (var terrainCondition in building.TerrainConditions)
-            {
-                //var value = Math.Abs(_palette.GetMaxTerrainConditionValue(building.Type, terrainCondition.EnvironmentTerrain));
-                var max = _palette.GetMaxTerrainConditionValue(building.Type, terrainCondition.EnvironmentTerrain);
-                var min = _palette.GetMinTerrainConditionValue(building.Type, terrainCondition.EnvironmentTerrain);
-
-                conditionRanges.Add(terrainCondition.EnvironmentTerrain.ToString(), new Range { Top = max, Bottom = min });
-            }
-
-            return conditionRanges;
         }
 
         public void UpdateBuildingEffects(Coord baseCoord)
@@ -269,16 +175,6 @@ namespace PatriaTerram.Core.Conditions
                     }
                 }
             }
-        }
-
-        public int GetValueLinearDecrease(Coord baseCoord, Coord adjacentCoord, int radius)
-        {
-            return (int)((radius - (int)baseCoord.DistanceBeyond(adjacentCoord, _palette.Width, _palette.Height)) * (100.0 / radius));
-        }
-
-        public int GetValueOneLevel()
-        {
-            return 100;
         }
     }
 }

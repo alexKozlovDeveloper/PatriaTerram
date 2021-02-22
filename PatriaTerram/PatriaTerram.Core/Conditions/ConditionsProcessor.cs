@@ -1,5 +1,6 @@
 ﻿using AStarAlgorithm.Entityes;
 using PatriaTerram.Core.Configurations.Entityes;
+using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
 using System.Collections.Generic;
 
@@ -58,8 +59,7 @@ namespace PatriaTerram.Core.Conditions
         {
             var resolver = new ConditionsResolver(_palette);
 
-            var maxConditions = resolver.GetMaxConditions(allTownNames, building);
-            var items = resolver.GetConditionRanges(allTownNames, building);
+            var items = _palette.GetConditionRanges(allTownNames, building);
 
             foreach (var point in _palette.AllPoints)
             {

@@ -39,6 +39,7 @@ namespace PatriaTerram.Web.Models
         {
             var context = new PaletteContext();
             context.TownNames = palette.GetAllTownNames();
+            //context.ConditionRanges = palette.GetConditionRanges(context.TownNames, );
 
             foreach (var terrain in Configs.Terrains.Values)
             {

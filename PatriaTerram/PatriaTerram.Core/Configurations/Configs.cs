@@ -69,8 +69,9 @@ namespace PatriaTerram.Core.Configurations
                                         EnvironmentBuilding = BuildingType.TownHall,
                                         Radius = 15,
                                         TownCondition = TownCondition.AnyTown,
-                                        Priority = 100,
+                                        Priority = 30,
                                         IsPositive = false,
+                                        IsRequired = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     }
                                 },
@@ -80,7 +81,7 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         EnvironmentTerrain = TerrainType.Stone,
                                         Radius = 15,
-                                        Priority = 6,
+                                        Priority = 10,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.LinearDecrease
                                     },
@@ -88,7 +89,7 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         EnvironmentTerrain = TerrainType.Wood,
                                         Radius = 7,
-                                        Priority = 3,
+                                        Priority = 5,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.LinearDecrease
                                     },
@@ -96,7 +97,7 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         EnvironmentTerrain = TerrainType.FertileSoil,
                                         Radius = 5,
-                                        Priority = 3,
+                                        Priority = 5,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.LinearDecrease
                                     },
@@ -104,7 +105,7 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         EnvironmentTerrain = TerrainType.Lake,
                                         Radius = 8,
-                                        Priority = 6,
+                                        Priority = 10,
                                         IsPositive = true,
                                         Type = EnvironmentConditionType.LinearDecrease
                                     }
@@ -128,10 +129,11 @@ namespace PatriaTerram.Core.Configurations
                                     {
                                         EnvironmentBuilding = BuildingType.TownHall,
                                         Radius = 15,
+                                        InnerRadius = 5,
                                         Priority = 25,
                                         IsPositive = true,
                                         IsRequired = true,
-                                        Type = EnvironmentConditionType.OneLevel
+                                        Type = EnvironmentConditionType.RingOneLevel
                                     },
                                     new BuildingCondition
                                     {

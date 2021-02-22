@@ -9,6 +9,7 @@ namespace PatriaTerram.Web.Models
     {
         public int MaxTerrainValue { get; set; }
         public Dictionary<string, int> MaxConditions { get; set; }
+        public Dictionary<string, int> ConditionRanges { get; set; }
         public Dictionary<string, string> Layers { get; set; }
         public List<string> TownNames { get; set; }
 

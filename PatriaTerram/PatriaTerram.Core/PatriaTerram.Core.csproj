@@ -53,8 +53,12 @@
     <Compile Include="Enums\BuildingType.cs" />
     <Compile Include="Enums\TerrainType.cs" />
     <Compile Include="Enums\TownCondition.cs" />
+    <Compile Include="Helpers\ConditionsResolverHelper.cs" />
+    <Compile Include="Helpers\PaletteBuildingConditionHelper.cs" />
     <Compile Include="Helpers\PaletteHelper.cs" />
     <Compile Include="Helpers\PalettePointColorHelper.cs" />
+    <Compile Include="Helpers\PaletteResultConditionHelper.cs" />
+    <Compile Include="Helpers\PaletteTerrainConditionHelper.cs" />
     <Compile Include="Helpers\RangeHelper.cs" />
     <Compile Include="Interfaces\ILayer.cs" />
     <Compile Include="Interfaces\ILayerItem.cs" />
