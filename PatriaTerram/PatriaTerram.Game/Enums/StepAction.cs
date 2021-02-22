@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PatriaTerram.Core.Enums
+namespace PatriaTerram.Game.Enums
 {
     public enum StepAction
     {

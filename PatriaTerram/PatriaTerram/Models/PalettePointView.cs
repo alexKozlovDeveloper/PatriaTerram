@@ -96,12 +96,12 @@ namespace PatriaTerram.Web.Models
                         G = 0,
                         B = 0
                     },
-                    Classes = new List<string> { $"{type}-{env}" }
+                    Classes = new List<string> { $"{type}-{env}", town }
                 };
 
                 Cells.Add(cell);
 
-                context.AddLayer($"{type}-{env} [{town}]", $".{type}-{env}");
+                context.AddLayer($"{type}-{env} [{town}]", $".{type}-{env}.{town}");
             }
 
             foreach (var resultCondition in point.ResultConditions.GetAll())
@@ -122,12 +122,12 @@ namespace PatriaTerram.Web.Models
                         G = 0,
                         B = 0
                     },
-                    Classes = new List<string> { $"{type}-{env}" }
+                    Classes = new List<string> { $"{type}-{env}", town }
                 };
 
                 Cells.Add(cell);
 
-                context.AddLayer($"{type}-{env} [{town}]", $".{type}-{env}");
+                context.AddLayer($"{type}-{env} [{town}]", $".{type}-{env}.{town}");
             }
 
             foreach (var buildingLayerItem in point.Buildings.GetAll())
@@ -144,7 +144,7 @@ namespace PatriaTerram.Web.Models
 
                 Cells.Add(cell);
 
-                context.AddLayer($"{building.Type} [{town}]", $".{building.Type}");
+                context.AddLayer($"{building.Type} [{town}]", $".{building.Type}.{town}");
             }
 
             if(point.Buildings.IsHasAnyBuildings() == true)

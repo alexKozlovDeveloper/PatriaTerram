@@ -38,6 +38,26 @@ namespace PatriaTerram.Core.Models.Layers
             return Items.Any(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == environment);
         }
 
+        public int GetMaxValue()
+        {
+            if (Items.Count == 0)
+            {
+                return 0;
+            }
+
+            return Items.Select(a => a.Value).Max();
+        }
+
+        public int GetMinValue()
+        {
+            if (Items.Count == 0)
+            {
+                return 0;
+            }
+
+            return Items.Select(a => a.Value).Min();
+        }
+
         public int GetValue(BuildingType buildingType, TerrainType terrainType)
         {
             var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == terrainType);

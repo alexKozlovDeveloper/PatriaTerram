@@ -1,4 +1,5 @@
 ﻿using AStarAlgorithm.Entityes;
+using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Models;
 using System.Collections.Generic;
@@ -8,71 +9,172 @@ namespace PatriaTerram.Core.Helpers
 {
     public static class PaletteHelper
     {
-        public static int GetMaxBuildingConditionValue(this Palette palette, string townName, BuildingType buildingType, BuildingType terrainBuildingType)
+        private static IEnumerable<int> GetAllBuildingConditionValues(this Palette palette, string townName, BuildingType buildingType, BuildingType terrainBuildingType)
         {
-            var conditions = new List<int>();
+            //var conditions = new List<int>();
 
-            foreach (var point in palette.AllPoints)
-            {
-                if (point.BuildingConditions.IsHasCondition(townName, buildingType, terrainBuildingType) == false) 
-                { 
-                    continue; 
-                }
+            return palette.AllPoints.Select(a => a.BuildingConditions.GetValue(townName, buildingType, terrainBuildingType));
 
-                conditions.Add(point.BuildingConditions.GetValue(townName, buildingType, terrainBuildingType));
-            }
+            //foreach (var point in palette.AllPoints)
+            //{
+            //    conditions.Add(point.BuildingConditions.GetValue(townName, buildingType, terrainBuildingType));
+            //}
 
-            if (conditions.Count == 0)
-            {
-                return 0;
-            }
+            //return conditions;
+        }
 
-            return conditions.Max();
+        private static IEnumerable<int> GetAllTerrainConditionValues(this Palette palette, BuildingType buildingType, TerrainType terrainType)
+        {
+            return palette.AllPoints.Select(a => a.TerrainConditions.GetValue(buildingType, terrainType));
+
+            //var conditions = new List<int>();
+
+            //foreach (var point in palette.AllPoints)
+            //{
+            //    conditions.Add(point.TerrainConditions.GetValue(buildingType, terrainType));
+            //}
+
+            //return conditions;
+        }
+
+        private static IEnumerable<int> GetAllResultConditionValues(this Palette palette, string townName, BuildingType buildingType)
+        {
+            return palette.AllPoints.Select(a => a.ResultConditions.GetValue(townName, buildingType));
+
+            //var conditions = new List<int>();
+
+            //foreach (var point in palette.AllPoints)
+            //{
+            //    conditions.Add(point.ResultConditions.GetValue(townName, buildingType));
+            //}
+
+            //return conditions;
         }
 
         public static int GetMaxTerrainConditionValue(this Palette palette, BuildingType buildingType, TerrainType terrainType)
         {
-            var conditions = new List<int>();
+            var conditions = palette.GetAllTerrainConditionValues(buildingType, terrainType);
 
-            foreach (var point in palette.AllPoints)
-            {
-                if (point.TerrainConditions.IsHasCondition(buildingType, terrainType) == false)
-                {
-                    continue;
-                }
-
-                conditions.Add(point.TerrainConditions.GetValue(buildingType, terrainType));
-            }
-
-            if (conditions.Count == 0)
-            {
-                return 0;
-            }
+            if (conditions.Count() == 0) { return 0; }
 
             return conditions.Max();
+        }
+
+        public static int GetMinTerrainConditionValue(this Palette palette, BuildingType buildingType, TerrainType terrainType)
+        {
+            var conditions = palette.GetAllTerrainConditionValues(buildingType, terrainType);
+
+            if (conditions.Count() == 0) { return 0; }
+
+            return conditions.Min();
+        }
+
+        public static Range GetMinMaxTerrainConditionValue(this Palette palette, BuildingType buildingType, TerrainType terrainType)
+        {
+            return new Range 
+            { 
+                Bottom = palette.GetMinTerrainConditionValue(buildingType, terrainType),
+                Top = palette.GetMaxTerrainConditionValue(buildingType, terrainType)
+            };
+        }
+
+        public static int GetMaxBuildingConditionValue(this Palette palette, string townName, BuildingType buildingType, BuildingType terrainBuildingType)
+        {
+            var conditions = palette.GetAllBuildingConditionValues(townName, buildingType, terrainBuildingType);
+
+            if (conditions.Count() == 0) { return 0; }
+
+            return conditions.Max();
+        }
+
+        public static int GetMinBuildingConditionValue(this Palette palette, string townName, BuildingType buildingType, BuildingType terrainBuildingType)
+        {
+            var conditions = palette.GetAllBuildingConditionValues(townName, buildingType, terrainBuildingType);
+
+            if (conditions.Count() == 0) { return 0; }
+
+            return conditions.Min();
+        }
+
+        public static Range GetMinMaxBuildingConditionValue(this Palette palette, string townName, BuildingType buildingType, BuildingType terrainBuildingType)
+        {
+            return new Range
+            {
+                Bottom = palette.GetMinBuildingConditionValue(townName, buildingType, terrainBuildingType),
+                Top = palette.GetMaxBuildingConditionValue(townName, buildingType, terrainBuildingType)
+            };
         }
 
         public static int GetMaxResultConditionValue(this Palette palette, string townName, BuildingType buildingType)
         {
-            var conditions = new List<int>();
+            var conditions = palette.GetAllResultConditionValues(townName, buildingType);
 
-            foreach (var point in palette.AllPoints)
-            {
-                if (point.ResultConditions.IsHasCondition(townName, buildingType) == false)
-                {
-                    continue;
-                }
-
-                conditions.Add(point.ResultConditions.GetValue(townName, buildingType));
-            }
-
-            if (conditions.Count == 0)
-            {
-                return 0;
-            }
+            if (conditions.Count() == 0) { return 0; }
 
             return conditions.Max();
         }
+
+        public static int GetMinResultConditionValue(this Palette palette, string townName, BuildingType buildingType)
+        {
+            var conditions = palette.GetAllResultConditionValues(townName, buildingType);
+
+            if (conditions.Count() == 0) { return 0; }
+
+            return conditions.Min();
+        }
+
+        public static Range GetMinMaxResultConditionValue(this Palette palette, string townName, BuildingType buildingType)
+        {
+            return new Range
+            {
+                Bottom = palette.GetMinResultConditionValue(townName, buildingType),
+                Top = palette.GetMaxResultConditionValue(townName, buildingType)
+            };
+        }
+
+        //public static int GetMaxBuildingConditionValue(this Palette palette, string townName, BuildingType buildingType, BuildingType terrainBuildingType)
+        //{
+        //    var conditions = new List<int>();
+
+        //    foreach (var point in palette.AllPoints)
+        //    {
+        //        //if (point.BuildingConditions.IsHasCondition(townName, buildingType, terrainBuildingType) == false) 
+        //        //{ 
+        //        //    continue; 
+        //        //}
+
+        //        conditions.Add(point.BuildingConditions.GetValue(townName, buildingType, terrainBuildingType));
+        //    }
+
+        //    if (conditions.Count == 0)
+        //    {
+        //        return 0;
+        //    }
+
+        //    return conditions.Max();
+        //}
+
+        //public static int GetMaxResultConditionValue(this Palette palette, string townName, BuildingType buildingType)
+        //{
+        //    var conditions = new List<int>();
+
+        //    foreach (var point in palette.AllPoints)
+        //    {
+        //        //if (point.ResultConditions.IsHasCondition(townName, buildingType) == false)
+        //        //{
+        //        //    continue;
+        //        //}
+
+        //        conditions.Add(point.ResultConditions.GetValue(townName, buildingType));
+        //    }
+
+        //    if (conditions.Count == 0)
+        //    {
+        //        return 0;
+        //    }
+
+        //    return conditions.Max();
+        //}
 
         public static Dictionary<int, List<Coord>> GetMaxBuildingConditionCoords(this Palette palette, string townName, BuildingType buildingType, BuildingType terrain)
         {

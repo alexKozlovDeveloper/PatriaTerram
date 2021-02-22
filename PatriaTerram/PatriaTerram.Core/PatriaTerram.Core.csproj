@@ -51,10 +51,11 @@
     <Compile Include="Configurations\Constants.cs" />
     <Compile Include="Configurations\Configs.cs" />
     <Compile Include="Enums\BuildingType.cs" />
-    <Compile Include="Enums\StepAction.cs" />
     <Compile Include="Enums\TerrainType.cs" />
+    <Compile Include="Enums\TownCondition.cs" />
     <Compile Include="Helpers\PaletteHelper.cs" />
     <Compile Include="Helpers\PalettePointColorHelper.cs" />
+    <Compile Include="Helpers\RangeHelper.cs" />
     <Compile Include="Interfaces\ILayer.cs" />
     <Compile Include="Interfaces\ILayerItem.cs" />
     <Compile Include="Configurations\Entityes\Building.cs" />

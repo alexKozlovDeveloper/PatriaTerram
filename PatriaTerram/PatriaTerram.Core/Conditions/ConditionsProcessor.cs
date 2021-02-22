@@ -46,23 +46,24 @@ namespace PatriaTerram.Core.Conditions
             }
         }
 
-        public void ResolveResultCondition(string townName, IEnumerable<Building> buildings)
+        public void ResolveResultCondition(string townName, List<string> allTownNames, IEnumerable<Building> buildings)
         {
             foreach (var building in buildings)
             {
-                ResolveResultCondition(townName, building);
+                ResolveResultCondition(townName, allTownNames, building);
             }
         }
 
-        public void ResolveResultCondition(string townName, Building building)
+        public void ResolveResultCondition(string townName, List<string> allTownNames, Building building)
         {
             var resolver = new ConditionsResolver(_palette);
 
-            var maxConditions = resolver.GetMaxConditions(townName, building);
+            var maxConditions = resolver.GetMaxConditions(allTownNames, building);
+            var items = resolver.GetConditionRanges(allTownNames, building);
 
             foreach (var point in _palette.AllPoints)
             {
-                resolver.ResolveResultCondition(point, townName, building, maxConditions);
+                resolver.ResolveResultCondition(point, townName, building, items);
             }
         }
     }

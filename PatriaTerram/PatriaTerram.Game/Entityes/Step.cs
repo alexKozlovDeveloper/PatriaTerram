@@ -1,4 +1,5 @@
 ﻿using PatriaTerram.Core.Enums;
+using PatriaTerram.Game.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

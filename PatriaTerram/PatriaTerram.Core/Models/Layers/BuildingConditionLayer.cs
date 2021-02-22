@@ -22,6 +22,26 @@ namespace PatriaTerram.Core.Models.Layers
                                  && a.BuildingType == buildingType).ToList();
         }
 
+        public int GetMaxValue()
+        {
+            if(Items.Count == 0)
+            {
+                return 0;
+            }
+
+            return Items.Select(a => a.Value).Max();
+        }
+
+        public int GetMinValue()
+        {
+            if (Items.Count == 0)
+            {
+                return 0;
+            }
+
+            return Items.Select(a => a.Value).Min();
+        }
+
         public int GetValue(string townName, BuildingType buildingType, BuildingType environmentBuildingType)
         {
             var item = GetItem(townName, buildingType, environmentBuildingType);
@@ -32,6 +52,18 @@ namespace PatriaTerram.Core.Models.Layers
             }
 
             return item.Value;
+        }
+
+        public int GetValue(BuildingType buildingType, BuildingType environmentBuildingType)
+        {
+            var items = Items.Where(a => a.BuildingType == buildingType && a.EnvironmentBuildingType == environmentBuildingType);
+
+            if (items.Any() == false)
+            {
+                return 0;
+            }
+
+            return (int)items.Select(a => a.Value).Average();
         }
 
         public void UpdateValue(string townName, BuildingType buildingType, BuildingType environmentBuildingType, int value)

@@ -42,7 +42,7 @@ namespace PatriaTerram.Web.Models
 
             foreach (var townName in context.TownNames)
             {
-                towns.Add(townName, $".{townName}");
+                towns.Add(townName, $".{townName}.building");
             }
 
             LayersMenu.Add("Towns", towns);

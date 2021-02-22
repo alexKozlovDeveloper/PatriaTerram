@@ -52,5 +52,25 @@ namespace PatriaTerram.Core.Models.Layers
         {
             return Items.FirstOrDefault(a => a.TownName == townName && a.BuildingType == buildingType);
         }
+
+        public int GetMaxValue()
+        {
+            if (Items.Count == 0)
+            {
+                return 0;
+            }
+
+            return Items.Select(a => a.Value).Max();
+        }
+
+        public int GetMinValue()
+        {
+            if (Items.Count == 0)
+            {
+                return 0;
+            }
+
+            return Items.Select(a => a.Value).Min();
+        }
     }
 }

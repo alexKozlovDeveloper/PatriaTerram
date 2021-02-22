@@ -7,6 +7,7 @@ using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Buildings;
 using PatriaTerram.Core.Conditions;
 using PatriaTerram.Core.Configurations.Entityes;
+using PatriaTerram.Game.Enums;
 
 namespace PatriaTerram.Game
 {
@@ -32,7 +33,7 @@ namespace PatriaTerram.Game
             _conditionsProcessor = new ConditionsProcessor(_map);
 
             _conditionsProcessor.ResolveTerrainConditions(_buildings);
-            _conditionsProcessor.ResolveResultCondition(_steps[0].TownName, _buildings);
+            _conditionsProcessor.ResolveResultCondition(_steps[0].TownName, new List<string> { "Farm_1", "Farm_2" }, _buildings);
         }
 
         public void NextStep()
@@ -55,7 +56,7 @@ namespace PatriaTerram.Game
         {
             var building = _buildings.FirstOrDefault(a => a.Type == buildingType);
 
-            _conditionsProcessor.ResolveResultCondition(townName, building);
+            _conditionsProcessor.ResolveResultCondition(townName, new List<string> { "Farm_1", "Farm_2" }, building);
 
             var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(townName, buildingType, TerrainType.Result.ToString());
 

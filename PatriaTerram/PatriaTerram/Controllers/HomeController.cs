@@ -7,6 +7,7 @@ using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Interfaces;
 using PatriaTerram.Game;
 using PatriaTerram.Game.Entityes;
+using PatriaTerram.Game.Enums;
 using PatriaTerram.Web.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -29,12 +30,26 @@ namespace PatriaTerram.Controllers
 
             var model = factory.GetPalette();
 
-            var steps = GetSteps();
+            var stepFactory = new StepFactory();
+
+            //var steps = GetSteps();
+            var steps = new List<Step>();
+
+            steps.AddRange(stepFactory.GetStartedPack("Farm_1"));
+            steps.AddRange(stepFactory.GetStartedPack("Farm_2"));
+            //steps.AddRange(stepFactory.GetStartedPack("Farm_3"));
+            //steps.AddRange(stepFactory.GetStartedPack("Farm_4"));
+            //steps.AddRange(stepFactory.GetStartedPack("Farm_5"));
 
             var game = new GameController(model, steps, Configs.Buildings.Values);
 
             for (int i = 0; i < 1000; i++)
             {
+                if(i == 27)
+                {
+
+                }
+
                 game.NextStep();
             }
 

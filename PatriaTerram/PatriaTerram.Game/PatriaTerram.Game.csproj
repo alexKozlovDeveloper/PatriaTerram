@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\StepAction.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entityes\Step.cs" />
+    <Compile Include="StepFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AStarAlgorithm\AStarAlgorithm.csproj">
