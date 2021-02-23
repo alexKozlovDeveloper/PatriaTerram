@@ -58,9 +58,17 @@
       <Project>{8a6bd105-45fd-4768-bc58-225020b39e7f}</Project>
       <Name>AStarAlgorithm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PatriaTerram.Core.Condition\PatriaTerram.Core.Condition.csproj">
+      <Project>{168b3f4f-b7d6-43aa-9e2f-95f81cb074c6}</Project>
+      <Name>PatriaTerram.Core.Condition</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PatriaTerram.Core\PatriaTerram.Core.csproj">
       <Project>{7ef2a029-f45c-4394-be5a-c20a5d011d28}</Project>
       <Name>PatriaTerram.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PatriaTerram.Game\PatriaTerram.Game.csproj">
+      <Project>{fecbcaf8-d670-491f-9cfa-b3703267032c}</Project>
+      <Name>PatriaTerram.Game</Name>
     </ProjectReference>
     <ProjectReference Include="..\PerlinNoise\PerlinNoise.csproj">
       <Project>{2be58c75-a2c8-4c92-8fcf-e0207d5eaeeb}</Project>

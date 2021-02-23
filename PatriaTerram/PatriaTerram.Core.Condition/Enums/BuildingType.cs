@@ -9,6 +9,7 @@
         Warehouse,
         FishermanHouse,
         House,
-        Market
+        Market,
+        Road
     }
 }

@@ -1,8 +1,10 @@
-﻿using PatriaTerram.Core;
+﻿using AStarAlgorithm.Entityes;
+using PatriaTerram.Core;
 using PatriaTerram.Core.Condition.Configurations;
 using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Condition.Helpers;
 using PatriaTerram.Core.Condition.Models;
+using PatriaTerram.Core.Condition.Roads;
 using PatriaTerram.Core.Conditions;
 using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Enums;
@@ -29,33 +31,53 @@ namespace PatriaTerram.Controllers
         {
             Configs.PaletteConfigurationJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\PaletteConfigurations.json";
             Configs.TerrainsJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\Terrains.json";
+            ConditionConfigs.TerrainsJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\Buildings.json";
 
             var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"]);
-
             var model = factory.GetPalette();
 
             var stepFactory = new StepFactory();
 
-            //var steps = GetSteps();
             var steps = new List<Step>();
 
             steps.AddRange(stepFactory.GetStartedPack("Farm_1"));
             steps.AddRange(stepFactory.GetStartedPack("Farm_2"));
-            //steps.AddRange(stepFactory.GetStartedPack("Farm_3"));
-            //steps.AddRange(stepFactory.GetStartedPack("Farm_4"));
-            //steps.AddRange(stepFactory.GetStartedPack("Farm_5"));
+            steps.AddRange(stepFactory.GetStartedPack("Farm_3"));
+            steps.AddRange(stepFactory.GetStartedPack("Farm_4"));
+            steps.AddRange(stepFactory.GetStartedPack("Farm_5"));
 
             var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
 
             for (int i = 0; i < 1000; i++)
             {
-                if(i == 27)
-                {
-
-                }
-
                 game.NextStep();
             }
+
+            // ---
+
+            var roadBuilder = new RoadBuilder(model);
+
+            //var townHallCoords = model.GetAllBuildingCoords(BuildingType.TownHall);
+            //var townHallCoords = model.GetAllBuildingCoords();
+
+            var buildingCoords = new List<Coord>();
+
+            buildingCoords.AddRange(model.GetAllBuildingCoords(BuildingType.TownHall));
+            buildingCoords.AddRange(model.GetAllBuildingCoords(BuildingType.Sawmill));
+            buildingCoords.AddRange(model.GetAllBuildingCoords(BuildingType.Stonepit));
+
+            for (int i = 0; i < buildingCoords.Count - 1; i++)
+            {
+                for (int j = i + 1; j < buildingCoords.Count; j++)
+                {
+                    var start = buildingCoords[i];
+                    var finish = buildingCoords[j];
+
+                    roadBuilder.Build(start, finish, "World_Roads");
+                }
+            }            
+
+            // ---
 
             model.MovePointsXAxis(20);
             model.MovePointsYAxis(20);
@@ -75,84 +97,6 @@ namespace PatriaTerram.Controllers
         public ActionResult MapPoint(PalettePointView model)
         {          
             return View(model);
-        }
-
-        private List<Step> GetSteps()
-        {
-            var townName = "FarmVillage";
-
-            var townHall = new Step
-            {
-                Action = StepAction.Build,
-                BuildingType = BuildingType.TownHall,
-                TownName = townName
-            };
-            var sawmill = new Step
-            {
-                Action = StepAction.Build,
-                BuildingType = BuildingType.Sawmill,
-                TownName = townName
-            };
-            var farm = new Step
-            {
-                Action = StepAction.Build,
-                BuildingType = BuildingType.Farm,
-                TownName = townName
-            };
-            var house = new Step
-            {
-                Action = StepAction.Build,
-                BuildingType = BuildingType.House,
-                TownName = townName
-            };
-            var stonepit = new Step
-            {
-                Action = StepAction.Build,
-                BuildingType = BuildingType.Stonepit,
-                TownName = townName
-            };
-
-            var startedPack = new List<Step>()
-            {
-                sawmill,
-                sawmill,
-                sawmill,
-                stonepit,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                farm,
-                house,
-                house,
-                house,
-                house,
-                house,
-                house,
-                house,
-            };
-
-            var steps = new List<Step>
-            {
-                townHall
-            };
-
-            steps.AddRange(startedPack);
-            steps.AddRange(startedPack);
-            steps.AddRange(startedPack);
-            steps.AddRange(startedPack);
-
-            return steps;
-        }
+        }        
     }
 }

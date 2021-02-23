@@ -21,9 +21,24 @@ namespace PatriaTerram.Core.Condition.Layers
             Items.Add(item);
         }
 
+        public void AddIfNotExist(BuildingType buildingType, string townName)
+        {
+            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.TownName == townName);
+
+            if(item == null)
+            {
+                AddBuilding(buildingType, townName);
+            }
+        }
+
         public bool IsHasAnyBuildings()
         {
             return Items.Count != 0;
+        }
+
+        public int Count()
+        {
+            return Items.Count;
         }
 
         public List<BuildingType> GetBuildingTypes() 

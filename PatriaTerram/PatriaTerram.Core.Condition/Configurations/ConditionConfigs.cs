@@ -1,14 +1,18 @@
-﻿using PatriaTerram.Core.Condition.Configurations.Entityes;
+﻿using Newtonsoft.Json;
+using PatriaTerram.Core.Condition.Configurations.Entityes;
 using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Enums;
 using System.Collections.Generic;
+using System.IO;
 
 namespace PatriaTerram.Core.Condition.Configurations
 {
     public static class ConditionConfigs
     {
-        private static Dictionary<BuildingType, Building> _buildings;
+        public static string TerrainsJsonFilePath = @"Configurations\Files\Buildings.json";
+
+        private static Dictionary<string, Dictionary<BuildingType, Building>> _buildings;
 
         public static Dictionary<BuildingType, Building> Buildings
         {
@@ -16,7 +20,21 @@ namespace PatriaTerram.Core.Condition.Configurations
             {
                 if (_buildings == null)
                 {
-                    _buildings = new Dictionary<BuildingType, Building>
+                    var json = File.ReadAllText(TerrainsJsonFilePath);
+                    _buildings = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<BuildingType, Building>>>(json);
+                }
+
+                return _buildings["test"];
+            }
+        }
+
+
+        /// <summary>
+        /// Legacy
+        /// </summary>
+        private static void GetBuildings()
+        {
+            var buildings = new Dictionary<BuildingType, Building>
                     {
                         {
                             BuildingType.TownHall,
@@ -279,10 +297,6 @@ namespace PatriaTerram.Core.Condition.Configurations
                             }
                         }
                     };
-                }
-
-                return _buildings;
-            }
         }
     }
 }

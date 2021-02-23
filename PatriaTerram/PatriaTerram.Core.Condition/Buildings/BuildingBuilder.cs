@@ -21,7 +21,7 @@ namespace PatriaTerram.Core.Condition.Buildings
 
         public void Build(BuildingType target, string townName, Coord coord)
         {
-            _palette[coord].Buildings.AddBuilding(target, townName);
+            _palette[coord].Buildings.AddIfNotExist(target, townName);
 
             _resolver.UpdateBuildingEffects(coord, ConditionConfigs.Buildings);
         }

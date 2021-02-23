@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
-using PatriaTerram.Core.Configurations;
+using PatriaTerram.Core.Condition.Configurations;
+using PatriaTerram.Core.Condition.Configurations.Entityes;
+using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Enums;
-using PatriaTerram.Core.Factoryes;
 using System.Collections.Generic;
 using System.IO;
 
@@ -12,7 +13,16 @@ namespace PatriaTerram.Console
     {
         static void Main(string[] args)
         {
+            var buildings = ConditionConfigs.Buildings;
 
+            var items = new Dictionary<string, Dictionary<BuildingType, Building>>();
+
+            items.Add("test", buildings);
+            items.Add("main", buildings);
+
+            var json = JsonConvert.SerializeObject(items);
+
+            File.WriteAllText("buildings.json", json);
         }
 
         public static void WriteTerrainsConfigToJsonFile() 

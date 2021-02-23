@@ -23,10 +23,16 @@ namespace PatriaTerram.Game
         private ConditionsProcessor _conditionsProcessor;
         private IEnumerable<Building> _buildings;
 
+        private List<string> _townNames;
+
         public GameController(Palette<ConditionPalettePoint> map, List<Step> steps, IEnumerable<Building> buildings)
         {
             _map = map;
             _steps = steps;
+
+            _townNames = _steps.Select(a => a.TownName)
+                               .Distinct()
+                               .ToList();
 
             _builder = new BuildingBuilder(_map);
 
@@ -35,7 +41,7 @@ namespace PatriaTerram.Game
             _conditionsProcessor = new ConditionsProcessor(_map);
 
             _conditionsProcessor.ResolveTerrainConditions(_buildings);
-            _conditionsProcessor.ResolveResultCondition(_steps[0].TownName, new List<string> { "Farm_1", "Farm_2" }, _buildings);
+            _conditionsProcessor.ResolveResultCondition(_steps[0].TownName, _townNames, _buildings);
         }
 
         public void NextStep()

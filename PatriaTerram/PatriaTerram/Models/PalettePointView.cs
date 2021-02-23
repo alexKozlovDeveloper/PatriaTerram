@@ -1,4 +1,5 @@
 ﻿using PatriaTerram.Core.Condition.Configurations;
+using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Condition.Models;
 using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Configurations.Entityes;
@@ -139,6 +140,11 @@ namespace PatriaTerram.Web.Models
 
             foreach (var buildingLayerItem in point.Buildings.GetAll())
             {
+                if(buildingLayerItem.BuildingType == BuildingType.Road && point.Buildings.Count() > 1)
+                {
+                    continue;
+                }
+
                 var building = ConditionConfigs.Buildings[buildingLayerItem.BuildingType];
                 var town = buildingLayerItem.TownName;
 

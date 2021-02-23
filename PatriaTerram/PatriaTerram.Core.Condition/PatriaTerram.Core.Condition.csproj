@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buildings\BuildingBuilder.cs" />
+    <Compile Include="Helpers\TownHelper.cs" />
+    <Compile Include="Roads\PassabilityMatrixConverter.cs" />
+    <Compile Include="Roads\RoadBuilder.cs" />
     <Compile Include="ConditionsProcessor.cs" />
     <Compile Include="Configurations\ConditionConfigs.cs" />
     <Compile Include="Configurations\Entityes\Building.cs" />
@@ -71,7 +77,12 @@
     <Compile Include="Resolvers\PointResultConditionResolver.cs" />
     <Compile Include="Resolvers\PointTerrainConditionResolver.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Configurations\Files\Buildings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AStarAlgorithm\AStarAlgorithm.csproj">
       <Project>{8a6bd105-45fd-4768-bc58-225020b39e7f}</Project>
