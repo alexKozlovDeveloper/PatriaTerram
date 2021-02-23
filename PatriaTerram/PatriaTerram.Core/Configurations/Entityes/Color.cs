@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PatriaTerram.Core.Configurations.Entityes
+﻿namespace PatriaTerram.Core.Configurations.Entityes
 {
     public class Color
     {

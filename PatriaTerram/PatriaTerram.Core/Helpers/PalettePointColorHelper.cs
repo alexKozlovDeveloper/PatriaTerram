@@ -8,7 +8,7 @@ namespace PatriaTerram.Core.Helpers
 {
     public static class PalettePointColorHelper
     {
-        public static void GetPointColor(this PalettePoint point, out int r, out int g, out int b)
+        public static void GetPointColor(this TerrainPalettePoint point, out int r, out int g, out int b)
         {
             var coloredTerrains = new List<Terrain>();
 
@@ -27,7 +27,7 @@ namespace PatriaTerram.Core.Helpers
             b = GetAvarageField(coloredTerrains, a => a.Color.B);
         }
 
-        public static Color GetPointColor(this PalettePoint point)
+        public static Color GetPointColor(this TerrainPalettePoint point)
         {
             point.GetPointColor(out int r, out int g, out int b);
 

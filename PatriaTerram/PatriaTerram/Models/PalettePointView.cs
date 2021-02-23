@@ -1,4 +1,6 @@
-﻿using PatriaTerram.Core.Configurations;
+﻿using PatriaTerram.Core.Condition.Configurations;
+using PatriaTerram.Core.Condition.Models;
+using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Helpers;
@@ -13,7 +15,7 @@ namespace PatriaTerram.Web.Models
 
         public List<string> Classes { get; set; }
 
-        public PalettePointView(PalettePoint point, PaletteContext context)
+        public PalettePointView(ConditionPalettePoint point, PaletteContext context)
         {
             Cells = new List<MapCellItem>();
             Classes = new List<string>();
@@ -137,7 +139,7 @@ namespace PatriaTerram.Web.Models
 
             foreach (var buildingLayerItem in point.Buildings.GetAll())
             {
-                var building = Configs.Buildings[buildingLayerItem.BuildingType];
+                var building = ConditionConfigs.Buildings[buildingLayerItem.BuildingType];
                 var town = buildingLayerItem.TownName;
 
                 var cell = new MapCellItem()

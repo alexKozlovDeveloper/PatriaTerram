@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{168B3F4F-B7D6-43AA-9E2F-95F81CB074C6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PatriaTerram.Core.Condition</RootNamespace>
+    <AssemblyName>PatriaTerram.Core.Condition</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Buildings\BuildingBuilder.cs" />
+    <Compile Include="ConditionsProcessor.cs" />
+    <Compile Include="Configurations\ConditionConfigs.cs" />
+    <Compile Include="Configurations\Entityes\Building.cs" />
+    <Compile Include="Configurations\Entityes\BuildingCondition.cs" />
+    <Compile Include="Configurations\Entityes\EnvironmentConditionBase.cs" />
+    <Compile Include="Configurations\Entityes\TerrainCondition.cs" />
+    <Compile Include="Enums\BuildingType.cs" />
+    <Compile Include="Enums\EnvironmentConditionType.cs" />
+    <Compile Include="Enums\TownCondition.cs" />
+    <Compile Include="Helpers\PaletteBuildingConditionHelper.cs" />
+    <Compile Include="Helpers\PaletteHelper.cs" />
+    <Compile Include="Helpers\PaletteResultConditionHelper.cs" />
+    <Compile Include="Helpers\PaletteTerrainConditionHelper.cs" />
+    <Compile Include="Helpers\ResultConditionValueHelper.cs" />
+    <Compile Include="Models\ConditionPalettePoint.cs" />
+    <Compile Include="Layers\BuildingConditionLayer.cs" />
+    <Compile Include="Layers\BuildingLayer.cs" />
+    <Compile Include="Layers\Entityes\BuildingConditionLayerItem.cs" />
+    <Compile Include="Layers\Entityes\BuildingLayerItem.cs" />
+    <Compile Include="Layers\Entityes\ResultConditionLayerItem.cs" />
+    <Compile Include="Layers\Entityes\TerrainConditionLayerItem.cs" />
+    <Compile Include="Layers\ResultConditionLayer.cs" />
+    <Compile Include="Layers\TerrainConditionLayer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolvers\BasePointResolver.cs" />
+    <Compile Include="Resolvers\PointBuildingConditionResolver.cs" />
+    <Compile Include="Resolvers\PointResultConditionResolver.cs" />
+    <Compile Include="Resolvers\PointTerrainConditionResolver.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AStarAlgorithm\AStarAlgorithm.csproj">
+      <Project>{8a6bd105-45fd-4768-bc58-225020b39e7f}</Project>
+      <Name>AStarAlgorithm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PatriaTerram.Core\PatriaTerram.Core.csproj">
+      <Project>{7ef2a029-f45c-4394-be5a-c20a5d011d28}</Project>
+      <Name>PatriaTerram.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

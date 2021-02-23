@@ -1,4 +1,5 @@
-﻿using PatriaTerram.Core.Configurations;
+﻿using PatriaTerram.Core.Condition.Configurations;
+using PatriaTerram.Core.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace PatriaTerram.Web.Models
 
         private void AddConditionLayer(Dictionary<string, Dictionary<string, string>> LayersMenu, PaletteContext context)
         {
-            foreach (var building in Configs.Buildings.Values)
+            foreach (var building in ConditionConfigs.Buildings.Values)
             {
                 var buildingLayers = new Dictionary<string, string>();
 

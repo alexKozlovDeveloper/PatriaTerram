@@ -1,11 +1,7 @@
-﻿using PatriaTerram.Core.Enums;
-using PatriaTerram.Game.Entityes;
-using System;
+﻿using PatriaTerram.Game.Entityes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PatriaTerram.Game.Enums;
+using PatriaTerram.Core.Condition.Enums;
 
 namespace PatriaTerram.Game
 {

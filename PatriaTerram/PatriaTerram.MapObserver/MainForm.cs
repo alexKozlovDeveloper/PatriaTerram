@@ -8,6 +8,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using AStarAlgorithm;
+using PatriaTerram.Core.Configurations.Entityes;
 
 namespace PatriaTerram.MapObserver
 {
@@ -125,14 +126,14 @@ namespace PatriaTerram.MapObserver
                 SmoothingSize = int.Parse(SmoothingSizeTextBox.Text as string)
             };
 
-            var factory = new TerrainPaletteFactory(config);
+            var factory = new TerrainPaletteFactory<TerrainPalettePoint>(config);
 
             var palette = factory.GetPalette();
 
             mapPictureBox.Image = GetBitmap(palette, pixelSize);
         }
 
-        private Bitmap GetBitmap(Palette palette, int multiplayer)
+        private Bitmap GetBitmap(Palette<TerrainPalettePoint> palette, int multiplayer)
         {
             var image = new Bitmap(palette.Width * multiplayer, palette.Height * multiplayer);
 

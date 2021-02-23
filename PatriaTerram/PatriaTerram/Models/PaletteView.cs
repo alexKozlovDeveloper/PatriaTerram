@@ -1,4 +1,7 @@
 ﻿using PatriaTerram.Core;
+using PatriaTerram.Core.Condition.Configurations;
+using PatriaTerram.Core.Condition.Helpers;
+using PatriaTerram.Core.Condition.Models;
 using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
@@ -17,7 +20,7 @@ namespace PatriaTerram.Web.Models
         public int Height { get; private set; }
         public PaletteContext Context { get; set; }
 
-        public PaletteView(Palette palette)
+        public PaletteView(Palette<ConditionPalettePoint> palette)
         {
             Width = palette.Width;
             Height = palette.Height;
@@ -35,34 +38,34 @@ namespace PatriaTerram.Web.Models
             }
         }
 
-        private PaletteContext GetPaletteContext(Palette palette)
+        private PaletteContext GetPaletteContext(Palette<ConditionPalettePoint> palette)
         {
             var context = new PaletteContext();
 
             context.TownNames = palette.GetAllTownNames();
 
-            foreach (var building in Configs.Buildings.Values)
+            foreach (var building in ConditionConfigs.Buildings.Values)
             {
                 context.TownConditionRanges.Add(building.Type.ToString(), palette.GetConditionRanges(context.TownNames, building));
             }
 
             foreach (var terrain in Configs.Terrains.Values)
             {
-                foreach (var building in Configs.Buildings.Values)
+                foreach (var building in ConditionConfigs.Buildings.Values)
                 {
                     context.MaxConditions.Add($"{building.Type}-{terrain.Type}", palette.GetMaxTerrainConditionValue(building.Type, terrain.Type));
                 }
             }
 
-            foreach (var item1 in Configs.Buildings.Values)
+            foreach (var item1 in ConditionConfigs.Buildings.Values)
             {
-                foreach (var item2 in Configs.Buildings.Values)
+                foreach (var item2 in ConditionConfigs.Buildings.Values)
                 {
                     context.MaxConditions.Add($"{item1.Type}-{item2.Type}", palette.GetMaxBuildingConditionValue(context.TownNames.FirstOrDefault(), item1.Type, item2.Type));
                 }
             }
 
-            foreach (var building in Configs.Buildings.Values)
+            foreach (var building in ConditionConfigs.Buildings.Values)
             {
                 var key = $"{building.Type}-Result";
 
@@ -81,7 +84,7 @@ namespace PatriaTerram.Web.Models
             return context;
         }
 
-        private int GetMaxTerrainValue(Palette palette)
+        private int GetMaxTerrainValue(Palette<ConditionPalettePoint> palette)
         {
             var max = 0;
 

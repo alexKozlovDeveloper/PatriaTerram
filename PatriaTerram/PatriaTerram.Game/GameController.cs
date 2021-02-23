@@ -1,19 +1,21 @@
 ﻿using PatriaTerram.Core.Models;
-using PatriaTerram.Core.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using PatriaTerram.Game.Entityes;
 using PatriaTerram.Core.Enums;
-using PatriaTerram.Core.Buildings;
 using PatriaTerram.Core.Conditions;
-using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Game.Enums;
+using PatriaTerram.Core.Condition.Buildings;
+using PatriaTerram.Core.Condition.Configurations.Entityes;
+using PatriaTerram.Core.Condition.Models;
+using PatriaTerram.Core.Condition.Enums;
+using PatriaTerram.Core.Condition.Helpers;
 
 namespace PatriaTerram.Game
 {
     public class GameController
     {
-        private Palette _map;
+        private Palette<ConditionPalettePoint> _map;
         private List<Step> _steps;
         private int stepNumber = 0;
 
@@ -21,7 +23,7 @@ namespace PatriaTerram.Game
         private ConditionsProcessor _conditionsProcessor;
         private IEnumerable<Building> _buildings;
 
-        public GameController(Palette map, List<Step> steps, IEnumerable<Building> buildings)
+        public GameController(Palette<ConditionPalettePoint> map, List<Step> steps, IEnumerable<Building> buildings)
         {
             _map = map;
             _steps = steps;

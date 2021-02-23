@@ -1,9 +1,5 @@
-﻿using PatriaTerram.Core.Configurations;
+﻿using PatriaTerram.Core.Configurations.Entityes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Helpers
 {

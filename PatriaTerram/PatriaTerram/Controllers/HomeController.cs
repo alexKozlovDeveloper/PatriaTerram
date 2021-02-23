@@ -1,4 +1,8 @@
 ﻿using PatriaTerram.Core;
+using PatriaTerram.Core.Condition.Configurations;
+using PatriaTerram.Core.Condition.Enums;
+using PatriaTerram.Core.Condition.Helpers;
+using PatriaTerram.Core.Condition.Models;
 using PatriaTerram.Core.Conditions;
 using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Enums;
@@ -26,7 +30,7 @@ namespace PatriaTerram.Controllers
             Configs.PaletteConfigurationJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\PaletteConfigurations.json";
             Configs.TerrainsJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\Terrains.json";
 
-            IPaletteFactory factory = new TerrainPaletteFactory(Configs.PaletteConfigs["web"]);
+            var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"]);
 
             var model = factory.GetPalette();
 
@@ -41,7 +45,7 @@ namespace PatriaTerram.Controllers
             //steps.AddRange(stepFactory.GetStartedPack("Farm_4"));
             //steps.AddRange(stepFactory.GetStartedPack("Farm_5"));
 
-            var game = new GameController(model, steps, Configs.Buildings.Values);
+            var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
 
             for (int i = 0; i < 1000; i++)
             {

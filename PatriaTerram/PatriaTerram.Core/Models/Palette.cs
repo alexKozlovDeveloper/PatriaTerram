@@ -1,14 +1,11 @@
 ﻿using AStarAlgorithm.Entityes;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace PatriaTerram.Core.Models
 {
-    public class Palette
+    public class Palette<Point>
     {
-        private  PalettePoint[][] _points;
+        private Point[][] _points;
 
         public int Width
         {
@@ -31,24 +28,24 @@ namespace PatriaTerram.Core.Models
             }
         }
 
-        public Palette(PalettePoint[][] points)
+        public Palette(Point[][] points)
         {
             _points = points;
         }
 
-        public PalettePoint this[int i, int j]
+        public Point this[int i, int j]
         {
             get { return _points[i][j]; }
             set { _points[i][j] = value; }
         }
 
-        public PalettePoint this[Coord coord]
+        public Point this[Coord coord]
         {
             get
             { 
                 if(coord == null)
                 {
-                    return null;
+                    return default;
                 }
 
                 return _points[coord.X][coord.Y]; 
@@ -56,11 +53,11 @@ namespace PatriaTerram.Core.Models
             set { _points[coord.X][coord.Y] = value; }
         }
 
-        public IEnumerable<PalettePoint> AllPoints
+        public IEnumerable<Point> AllPoints
         {
             get
             {
-                var items = new List<PalettePoint>();
+                var items = new List<Point>();
 
                 for (int x = 0; x < Width; x++)
                 {

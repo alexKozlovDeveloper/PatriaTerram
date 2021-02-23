@@ -1,20 +1,15 @@
 ﻿using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Enums;
-using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Interfaces;
 using PatriaTerram.Core.Models;
 using PerlinNoise;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Factoryes
 {
-    public class TerrainPaletteFactory : IPaletteFactory
+    public class TerrainPaletteFactory<Point> : IPaletteFactory<Point> where Point : TerrainPalettePoint, new()
     {
         private int _width;
         private int _height;
@@ -53,9 +48,9 @@ namespace PatriaTerram.Core.Factoryes
             _generator = new PerlinNoiseGenerator(_seed, _maxAltitudeValue);
         }
 
-        public Palette GetPalette()
+        public Palette<Point> GetPalette()
         {
-            Palette model = CreateEmptyPalette(_width, _height);
+            Palette<Point> model = CreateEmptyPalette(_width, _height);
             var terrains = Configs.Terrains;
 
             var altitudeMatrix = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize);
@@ -87,7 +82,7 @@ namespace PatriaTerram.Core.Factoryes
             return model;
         }
 
-        private void AddResultTerrain(Palette model)
+        private void AddResultTerrain(Palette<Point> model)
         {
             foreach (var point in model.AllPoints)
             {
@@ -109,7 +104,7 @@ namespace PatriaTerram.Core.Factoryes
             }
         }
 
-        private void AddRangedTerrain(Palette model, Terrain terrain, Range range)
+        private void AddRangedTerrain(Palette<Point> model, Terrain terrain, Range range)
         {
             var terrainMatrix = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize)
                 .ClearBottomValue(range.Bottom)
@@ -117,7 +112,7 @@ namespace PatriaTerram.Core.Factoryes
             AddTerrain(model, terrainMatrix, terrain);
         }
 
-        private void AddTerrain(Palette model, int[][] terrainMatrix, Terrain terrain)
+        private void AddTerrain(Palette<Point> model, int[][] terrainMatrix, Terrain terrain)
         {
             for (int x = 0; x < _width; x++)
             {
@@ -135,7 +130,7 @@ namespace PatriaTerram.Core.Factoryes
             }
         }
 
-        private bool IsPointContaintIntolerableTerrains(PalettePoint point, Terrain terrain)
+        private bool IsPointContaintIntolerableTerrains(Point point, Terrain terrain)
         {
             foreach (var intolerableTerrain in terrain.IntolerableTerrains)
             {
@@ -148,21 +143,21 @@ namespace PatriaTerram.Core.Factoryes
             return false;
         }
 
-        private Palette CreateEmptyPalette(int width, int height)
+        private Palette<Point> CreateEmptyPalette(int width, int height)
         {
-            var points = new PalettePoint[width][];
+            var points = new Point[width][];
 
             for (int i = 0; i < width; i++)
             {
-                points[i] = new PalettePoint[height];
+                points[i] = new Point[height];
 
                 for (int j = 0; j < height; j++)
                 {
-                    points[i][j] = new PalettePoint();
+                    points[i][j] = new Point();
                 }
             }
 
-            return new Palette(points);
+            return new Palette<Point>(points);
         }
     }
 }
