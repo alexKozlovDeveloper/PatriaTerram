@@ -13,6 +13,8 @@ namespace PatriaTerram.Core.Condition.Configurations
         public static string TerrainsJsonFilePath = @"Configurations\Files\Buildings.json";
 
         private static Dictionary<string, Dictionary<BuildingType, Building>> _buildings;
+        private static Dictionary<TerrainType, int> _terrainPassability;
+        private static Dictionary<BuildingType, int> _buildingPassability;
 
         public static Dictionary<BuildingType, Building> Buildings
         {
@@ -28,6 +30,103 @@ namespace PatriaTerram.Core.Condition.Configurations
             }
         }
 
+        public static Dictionary<TerrainType, int> TerrainPassability
+        {
+            get
+            {
+                if (_terrainPassability == null)
+                {
+                    _terrainPassability = new Dictionary<TerrainType, int>
+                    {
+                        {
+                            TerrainType.Beach,
+                            15
+                        },
+                        {
+                            TerrainType.FertileSoil,
+                            8
+                        },
+                        {
+                            TerrainType.Ground,
+                            7
+                        },
+                        {
+                            TerrainType.Lake,
+                            1000
+                        },
+                        {
+                            TerrainType.Mountains,
+                            1000
+                        },
+                        {
+                            TerrainType.Ocean,
+                            1000
+                        },
+                        {
+                            TerrainType.Stone,
+                            25
+                        },
+                        {
+                            TerrainType.Wood,
+                            10
+                        }
+                    };
+                }
+
+                return _terrainPassability;
+            }
+        }
+
+        public static Dictionary<BuildingType, int> BuildingPassability
+        {
+            get
+            {
+                if (_buildingPassability == null)
+                {
+                    _buildingPassability = new Dictionary<BuildingType, int>
+                    {
+                        {
+                            BuildingType.Farm,
+                            5
+                        },
+                        {
+                            BuildingType.FishermanHouse,
+                            5
+                        },
+                        {
+                            BuildingType.House,
+                            5
+                        },
+                        {
+                            BuildingType.Market,
+                            5
+                        },
+                        {
+                            BuildingType.Sawmill,
+                            5
+                        },
+                        {
+                            BuildingType.Stonepit,
+                            5
+                        },
+                        {
+                            BuildingType.TownHall,
+                            5
+                        },
+                        {
+                            BuildingType.Warehouse,
+                            5
+                        },
+                        {
+                            BuildingType.Road,
+                            5
+                        }
+                    };
+                }
+
+                return _buildingPassability;
+            }
+        }
 
         /// <summary>
         /// Legacy

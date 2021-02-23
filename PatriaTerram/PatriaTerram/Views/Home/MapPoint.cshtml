@@ -10,8 +10,17 @@
     {
         var classes = string.Join(" ", cell.Classes);
 
-        <div class="map-cell-item terrain @classes" style='background-color: rgb(@cell.Color.R, @cell.Color.G, @cell.Color.B);'>
-            <div class="map-cell-item-value">@cell.Value</div>
-        </div>
+        if (string.IsNullOrEmpty(cell.Image) == true)
+        {
+            <div class="map-cell-item terrain @classes" style='background-color: rgb(@cell.Color.R, @cell.Color.G, @cell.Color.B);'>
+                <div class="map-cell-item-value">@cell.Value</div>
+            </div>
+        }
+        else
+        {
+            <div class="map-cell-item terrain @classes" style="background-image: url('@Url.Content(cell.Image)');">
+                <div class="map-cell-item-value">@cell.Value</div>
+            </div>
+        }
     }
 </div>

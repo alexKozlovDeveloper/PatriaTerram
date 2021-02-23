@@ -16,6 +16,11 @@ namespace PatriaTerram.Web.Models
 
         public List<string> Classes { get; set; }
 
+        public PalettePointView()
+        {
+
+        }
+
         public PalettePointView(ConditionPalettePoint point, PaletteContext context)
         {
             Cells = new List<MapCellItem>();
@@ -50,7 +55,8 @@ namespace PatriaTerram.Web.Models
                 {
                     Value = itemValue,
                     Color = color,
-                    Classes = new List<string> { terrain.Type.ToString() }
+                    Classes = new List<string> { terrain.Type.ToString() },
+                    Image = GetTerrainImage(context, terrainType)
                 };
 
                 Cells.Add(cell);
@@ -152,7 +158,8 @@ namespace PatriaTerram.Web.Models
                 {
                     Value = building.Value,
                     Color = building.Color,
-                    Classes = new List<string> { building.Type.ToString(), "building", buildingLayerItem.TownName }
+                    Classes = new List<string> { building.Type.ToString(), "building", buildingLayerItem.TownName },
+                    Image = GetBuildingImage(context, building.Type)
                 };
 
                 Cells.Add(cell);
@@ -169,6 +176,26 @@ namespace PatriaTerram.Web.Models
                 Classes.Add("point-without-building");
 
             }
+        }
+
+        private string GetBuildingImage(PaletteContext context, BuildingType buildingType)
+        {
+            if (context.BuildingTextureMaping.ContainsKey(buildingType) == true)
+            {
+                return context.BuildingTextureMaping[buildingType];
+            }
+
+            return string.Empty;
+        }
+
+        private string GetTerrainImage(PaletteContext context, TerrainType terrainType)
+        {
+            if (context.TerrainTextureMaping.ContainsKey(terrainType) == true)
+            {
+                return context.TerrainTextureMaping[terrainType];
+            }
+
+            return string.Empty;
         }
     }
 }

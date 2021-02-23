@@ -15,82 +15,10 @@ namespace PatriaTerram.Core.Condition.Roads
         private Dictionary<TerrainType, int> _terrainPassability;
         private Dictionary<BuildingType, int> _buildingPassability;
 
-        public PassabilityMatrixConverter()
+        public PassabilityMatrixConverter(Dictionary<TerrainType, int> terrainPassability, Dictionary<BuildingType, int> buildingPassability)
         {
-            _terrainPassability = new Dictionary<TerrainType, int>
-            {
-                {
-                    TerrainType.Beach,
-                    15
-                },
-                {
-                    TerrainType.FertileSoil,
-                    8
-                },
-                {
-                    TerrainType.Ground,
-                    7
-                },
-                {
-                    TerrainType.Lake,
-                    1000
-                },
-                {
-                    TerrainType.Mountains,
-                    1000
-                },
-                {
-                    TerrainType.Ocean,
-                    1000
-                },
-                {
-                    TerrainType.Stone,
-                    25
-                },
-                {
-                    TerrainType.Wood,
-                    10
-                }
-            };
-            _buildingPassability = new Dictionary<BuildingType, int>
-            {
-                {
-                    BuildingType.Farm,
-                    5
-                },
-                {
-                    BuildingType.FishermanHouse,
-                    5
-                },
-                {
-                    BuildingType.House,
-                    5
-                },
-                {
-                    BuildingType.Market,
-                    5
-                },
-                {
-                    BuildingType.Sawmill,
-                    5
-                },
-                {
-                    BuildingType.Stonepit,
-                    5
-                },
-                {
-                    BuildingType.TownHall,
-                    5
-                },
-                {
-                    BuildingType.Warehouse,
-                    5
-                },
-                {
-                    BuildingType.Road,
-                    5
-                }
-            };
+            _terrainPassability = terrainPassability;
+            _buildingPassability = buildingPassability;
         }
 
         public int[][] Convert(Palette<ConditionPalettePoint> palette)

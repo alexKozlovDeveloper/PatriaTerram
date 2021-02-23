@@ -41,7 +41,7 @@ namespace PatriaTerram.Game
             _conditionsProcessor = new ConditionsProcessor(_map);
 
             _conditionsProcessor.ResolveTerrainConditions(_buildings);
-            _conditionsProcessor.ResolveResultCondition(_steps[0].TownName, _townNames, _buildings);
+            //_conditionsProcessor.ResolveResultCondition(_steps[0].TownName, _buildings);
         }
 
         public void NextStep()
@@ -64,7 +64,7 @@ namespace PatriaTerram.Game
         {
             var building = _buildings.FirstOrDefault(a => a.Type == buildingType);
 
-            _conditionsProcessor.ResolveResultCondition(townName, new List<string> { "Farm_1", "Farm_2" }, building);
+            _conditionsProcessor.ResolveResultCondition(townName, _townNames, building);
 
             var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(townName, buildingType, TerrainType.Result.ToString());
 

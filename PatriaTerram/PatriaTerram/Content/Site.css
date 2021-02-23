@@ -50,4 +50,7 @@ textarea {
     padding: 1px;
     min-width: 5px;
     min-height: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

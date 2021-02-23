@@ -7,6 +7,7 @@ namespace PatriaTerram.Web.Models
     {
         public Color Color { get; set; }
         public int Value { get; set; }
+        public string Image { get; set; }
         public List<string> Classes { get; set; }
 
         public MapCellItem()

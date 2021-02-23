@@ -1,5 +1,7 @@
-﻿using PatriaTerram.Core.Configurations;
+﻿using PatriaTerram.Core.Condition.Enums;
+using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Configurations.Entityes;
+using PatriaTerram.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,8 @@ namespace PatriaTerram.Web.Models
         public Dictionary<string, Dictionary<string, Range>> TownConditionRanges { get; set; }
         public Dictionary<string, string> Layers { get; set; }
         public List<string> TownNames { get; set; }
+        public Dictionary<TerrainType, string> TerrainTextureMaping { get; set; }
+        public Dictionary<BuildingType, string> BuildingTextureMaping { get; set; }
 
         public PaletteContext()
         {

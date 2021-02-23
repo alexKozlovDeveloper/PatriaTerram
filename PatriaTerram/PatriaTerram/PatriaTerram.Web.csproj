@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Configurations\ImageConfigs.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -136,6 +137,20 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Terrains\Beach.png" />
+    <Content Include="Content\Building\Farm.png" />
+    <Content Include="Content\Terrains\FertileSoil.png" />
+    <Content Include="Content\Terrains\Ground.png" />
+    <Content Include="Content\Building\House.png" />
+    <Content Include="Content\Terrains\Lake.png" />
+    <Content Include="Content\Terrains\Mountains.png" />
+    <Content Include="Content\Terrains\Ocean.png" />
+    <Content Include="Content\Building\Road.png" />
+    <Content Include="Content\Building\Sawmill.png" />
+    <Content Include="Content\Terrains\Stone.png" />
+    <Content Include="Content\Building\Stonepit.png" />
+    <Content Include="Content\Building\TownHall.png" />
+    <Content Include="Content\Terrains\Wood.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

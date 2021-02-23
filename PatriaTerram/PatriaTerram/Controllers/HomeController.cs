@@ -36,15 +36,18 @@ namespace PatriaTerram.Controllers
             var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"]);
             var model = factory.GetPalette();
 
+            //var viewModel = new PaletteView(model);
+            //return View(viewModel);
+
             var stepFactory = new StepFactory();
 
             var steps = new List<Step>();
 
             steps.AddRange(stepFactory.GetStartedPack("Farm_1"));
             steps.AddRange(stepFactory.GetStartedPack("Farm_2"));
-            steps.AddRange(stepFactory.GetStartedPack("Farm_3"));
-            steps.AddRange(stepFactory.GetStartedPack("Farm_4"));
-            steps.AddRange(stepFactory.GetStartedPack("Farm_5"));
+            //steps.AddRange(stepFactory.GetStartedPack("Farm_3"));
+            //steps.AddRange(stepFactory.GetStartedPack("Farm_4"));
+            //steps.AddRange(stepFactory.GetStartedPack("Farm_5"));
 
             var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
 
@@ -56,9 +59,6 @@ namespace PatriaTerram.Controllers
             // ---
 
             var roadBuilder = new RoadBuilder(model);
-
-            //var townHallCoords = model.GetAllBuildingCoords(BuildingType.TownHall);
-            //var townHallCoords = model.GetAllBuildingCoords();
 
             var buildingCoords = new List<Coord>();
 
@@ -97,6 +97,6 @@ namespace PatriaTerram.Controllers
         public ActionResult MapPoint(PalettePointView model)
         {          
             return View(model);
-        }        
+        }      
     }
 }

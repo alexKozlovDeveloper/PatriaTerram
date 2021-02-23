@@ -139,6 +139,12 @@ namespace PatriaTerram.Core.Condition.Helpers
 
             foreach (var buildingCondition in building.BuildingConditions)
             {
+                if(allTownNames.Count == 0)
+                {
+                    conditionRanges.Add(buildingCondition.EnvironmentBuilding.ToString(), new Range { Top = 0, Bottom = 0 });
+                    continue;
+                }
+
                 var max = allTownNames.Select(townName => palette.GetMaxBuildingConditionValue(townName, building.Type, buildingCondition.EnvironmentBuilding))
                                       .Max();
 

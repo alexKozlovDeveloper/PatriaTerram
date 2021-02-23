@@ -5,6 +5,7 @@ using PatriaTerram.Core.Condition.Models;
 using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
+using PatriaTerram.Web.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,9 +41,12 @@ namespace PatriaTerram.Web.Models
 
         private PaletteContext GetPaletteContext(Palette<ConditionPalettePoint> palette)
         {
-            var context = new PaletteContext();
-
-            context.TownNames = palette.GetAllTownNames();
+            var context = new PaletteContext
+            {
+                TownNames = palette.GetAllTownNames(),
+                TerrainTextureMaping = ImageConfigs.TerrainTextureMaping,
+                BuildingTextureMaping = ImageConfigs.BuildingTextureMaping
+            };
 
             foreach (var building in ConditionConfigs.Buildings.Values)
             {

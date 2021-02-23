@@ -49,8 +49,10 @@ namespace PatriaTerram.Core.Conditions
             }
         }
 
-        public void ResolveResultCondition(string townName, List<string> allTownNames, IEnumerable<Building> buildings)
+        public void ResolveResultCondition(string townName, IEnumerable<Building> buildings)
         {
+            var allTownNames = _palette.GetAllTownNames();
+
             foreach (var building in buildings)
             {
                 ResolveResultCondition(townName, allTownNames, building);

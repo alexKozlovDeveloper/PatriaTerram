@@ -1,6 +1,7 @@
 ﻿using AStarAlgorithm;
 using AStarAlgorithm.Entityes;
 using PatriaTerram.Core.Condition.Buildings;
+using PatriaTerram.Core.Condition.Configurations;
 using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Condition.Models;
 using PatriaTerram.Core.Models;
@@ -23,7 +24,7 @@ namespace PatriaTerram.Core.Condition.Roads
 
         public void Build(Coord start, Coord finish, string townName)
         {
-            var converter = new PassabilityMatrixConverter();
+            var converter = new PassabilityMatrixConverter(ConditionConfigs.TerrainPassability, ConditionConfigs.BuildingPassability);
 
             var matrix = converter.Convert(_palette);
 
