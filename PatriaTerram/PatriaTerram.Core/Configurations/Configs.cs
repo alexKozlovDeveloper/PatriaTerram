@@ -141,7 +141,7 @@ namespace PatriaTerram.Core.Configurations
                                         Radius = 3,
                                         Priority = 45,
                                         IsPositive = false,
-                                        //IsRequired = true,
+                                        IsRequired = true,
                                         Type = EnvironmentConditionType.OneLevel
                                     }
                                 },

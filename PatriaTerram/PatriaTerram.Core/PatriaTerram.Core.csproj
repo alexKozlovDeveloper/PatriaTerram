@@ -46,8 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conditions\ConditionsProcessor.cs" />
-    <Compile Include="Conditions\ConditionsResolver.cs" />
     <Compile Include="Buildings\BuildingBuilder.cs" />
+    <Compile Include="Conditions\Resolvers\BasePointResolver.cs" />
+    <Compile Include="Conditions\Resolvers\PointBuildingConditionResolver.cs" />
+    <Compile Include="Conditions\Resolvers\PointResultConditionResolver.cs" />
+    <Compile Include="Conditions\Resolvers\PointTerrainConditionResolver.cs" />
     <Compile Include="Configurations\Constants.cs" />
     <Compile Include="Configurations\Configs.cs" />
     <Compile Include="Enums\BuildingType.cs" />
@@ -68,6 +71,7 @@
     <Compile Include="Configurations\Entityes\BuildingCondition.cs" />
     <Compile Include="Configurations\Entityes\Color.cs" />
     <Compile Include="Enums\EnvironmentConditionType.cs" />
+    <Compile Include="Interfaces\IPointResolver.cs" />
     <Compile Include="Models\Layers\BuildingConditionLayer.cs" />
     <Compile Include="Models\Layers\BuildingLayer.cs" />
     <Compile Include="Models\Layers\Entityes\ResultConditionLayerItem.cs" />

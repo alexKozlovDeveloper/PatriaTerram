@@ -1,4 +1,5 @@
-﻿using PatriaTerram.Core.Enums;
+﻿using PatriaTerram.Core.Configurations.Entityes;
+using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Models.Layers.Entityes;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace PatriaTerram.Core.Models.Layers
     {
         public override string Name { get { return "TerrainCondition"; } }
 
-        public void AddConditionValue(BuildingType buildingType, TerrainType environmentTerrain, int value)
+        public void AddConditionValue(BuildingType buildingType, TerrainType environmentTerrain, int value, TerrainCondition condition)
         {
             var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == environmentTerrain);
 
@@ -22,7 +23,8 @@ namespace PatriaTerram.Core.Models.Layers
                 {
                     BuildingType = buildingType,
                     EnvironmentTerrainType = environmentTerrain,
-                    Value = value
+                    Value = value,
+                    Condition = condition
                 };
 
                 Items.Add(item);

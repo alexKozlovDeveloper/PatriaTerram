@@ -1,4 +1,5 @@
 ﻿using AStarAlgorithm.Entityes;
+using PatriaTerram.Core.Conditions.Resolvers;
 using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
@@ -15,9 +16,14 @@ namespace PatriaTerram.Core.Conditions
             _palette = palette;
         }
 
+        public void Resolve()
+        {
+
+        }
+
         public void ResolveTerrainConditions(IEnumerable<Building> buildings)
         {
-            var resolver = new ConditionsResolver(_palette);
+            var resolver = new PointTerrainConditionResolver(_palette);
 
             for (int x = 0; x < _palette.Width; x++)
             {
@@ -25,7 +31,7 @@ namespace PatriaTerram.Core.Conditions
                 {
                     foreach (var building in buildings)
                     {
-                        resolver.ResolveTerrainCondition(new Coord(x, y), building);
+                        resolver.Resolve(new Coord(x, y), building);
                     }
                 }
             }
@@ -33,7 +39,7 @@ namespace PatriaTerram.Core.Conditions
 
         public void ResolveBuildingConditions(string townName, IEnumerable<Building> buildings)
         {
-            var resolver = new ConditionsResolver(_palette);
+            var resolver = new PointBuildingConditionResolver(_palette);
 
             for (int x = 0; x < _palette.Width; x++)
             {
@@ -41,7 +47,7 @@ namespace PatriaTerram.Core.Conditions
                 {
                     foreach (var building in buildings)
                     {
-                        resolver.ResolveBuildingCondition(new Coord(x, y), townName, building);
+                        resolver.Resolve(new Coord(x, y), townName, building);
                     }
                 }
             }
@@ -57,13 +63,13 @@ namespace PatriaTerram.Core.Conditions
 
         public void ResolveResultCondition(string townName, List<string> allTownNames, Building building)
         {
-            var resolver = new ConditionsResolver(_palette);
+            var resolver = new PointResultConditionResolver(_palette);
 
             var items = _palette.GetConditionRanges(allTownNames, building);
 
             foreach (var point in _palette.AllPoints)
             {
-                resolver.ResolveResultCondition(point, townName, building, items);
+                resolver.Resolve(point, townName, building, items);
             }
         }
     }

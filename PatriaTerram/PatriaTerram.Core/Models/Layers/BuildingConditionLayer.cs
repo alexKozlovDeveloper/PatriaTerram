@@ -1,4 +1,5 @@
-﻿using PatriaTerram.Core.Enums;
+﻿using PatriaTerram.Core.Configurations.Entityes;
+using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Models.Layers.Entityes;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace PatriaTerram.Core.Models.Layers
             return (int)items.Select(a => a.Value).Average();
         }
 
-        public void UpdateValue(string townName, BuildingType buildingType, BuildingType environmentBuildingType, int value)
+        public void UpdateValue(string townName, BuildingType buildingType, BuildingType environmentBuildingType, int value, BuildingCondition condition)
         {
             var item = GetItem(townName, buildingType, environmentBuildingType);
 
@@ -75,7 +76,8 @@ namespace PatriaTerram.Core.Models.Layers
                 item = new BuildingConditionLayerItem
                 {
                     BuildingType = buildingType,
-                    EnvironmentBuildingType = environmentBuildingType
+                    EnvironmentBuildingType = environmentBuildingType,
+                    Condition = condition
                 };
 
                 Items.Add(item);
@@ -84,7 +86,7 @@ namespace PatriaTerram.Core.Models.Layers
             item.Value = value;
         }
 
-        public void AddConditionValue(string townName, BuildingType buildingType, BuildingType environmentBuildingType, int value)
+        public void AddConditionValue(string townName, BuildingType buildingType, BuildingType environmentBuildingType, int value, BuildingCondition condition)
         {
             var item = GetItem(townName, buildingType, environmentBuildingType);
 
@@ -95,7 +97,8 @@ namespace PatriaTerram.Core.Models.Layers
                     BuildingType = buildingType,
                     EnvironmentBuildingType = environmentBuildingType,
                     Value = value,
-                    TownName = townName
+                    TownName = townName,
+                    Condition = condition
                 };
 
                 Items.Add(item);

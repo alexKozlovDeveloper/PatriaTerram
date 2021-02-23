@@ -1,0 +1,68 @@
+﻿using PatriaTerram.Core.Configurations;
+using PatriaTerram.Core.Configurations.Entityes;
+using PatriaTerram.Core.Enums;
+using PatriaTerram.Core.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PatriaTerram.Core.Conditions.Resolvers
+{
+    public class PointResultConditionResolver : BasePointResolver
+    {
+        public PointResultConditionResolver(Palette palette) : base(palette)
+        {
+
+        }
+
+        public void Resolve(PalettePoint point, string townName, Building building, Dictionary<string, Range> maxConditions)
+        {
+            double sum = 0;
+
+            foreach (var terrainCondition in building.TerrainConditions)
+            {
+                var conditionValue = point.TerrainConditions.GetValue(building.Type, terrainCondition.EnvironmentTerrain);
+
+                var resultValue = GetResultValue(conditionValue, maxConditions[terrainCondition.EnvironmentTerrain.ToString()], terrainCondition.Priority);
+
+                if (terrainCondition.IsRequired == true && resultValue <= 0)
+                {
+                    point.ResultConditions.UpdateValue(townName, building.Type, 0);
+                    return;
+                }
+
+                sum += resultValue;
+            }
+
+            foreach (var buildingCondition in building.BuildingConditions)
+            {
+                var conditionValue = point.BuildingConditions.GetValue(townName, building.Type, buildingCondition.EnvironmentBuilding);
+
+                if (buildingCondition.TownCondition == TownCondition.AnyTown)
+                {
+                    conditionValue = point.BuildingConditions.GetValue(building.Type, buildingCondition.EnvironmentBuilding);
+                }
+
+                var resultValue = GetResultValue(conditionValue, maxConditions[buildingCondition.EnvironmentBuilding.ToString()], buildingCondition.Priority);
+
+                if (buildingCondition.IsRequired == true && resultValue <= 0)
+                {
+                    point.ResultConditions.UpdateValue(townName, building.Type, 0);
+                    return;
+                }
+
+                sum += resultValue;
+            }
+
+            var prioritySum = building.BuildingConditions.Select(a => a.Priority).Sum()
+                            + building.TerrainConditions.Select(a => a.Priority).Sum();
+
+            sum /= prioritySum;
+            sum *= 100;
+
+            point.ResultConditions.UpdateValue(townName, building.Type, (int)sum);
+        }
+    }
+}
