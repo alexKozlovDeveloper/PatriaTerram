@@ -163,7 +163,7 @@ namespace PatriaTerram.MapObserver
 
             var config = Configs.PaletteConfigs[configName];
 
-            sizeComboBox.SelectedItem = config.Width;
+            sizeComboBox.Text = config.Width.ToString();
             seedTextBox.Text = config.Seed.ToString();
 
             oceanEdgeTextBox.Text = config.OceanEdge.ToString();
