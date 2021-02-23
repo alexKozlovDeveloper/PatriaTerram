@@ -38,8 +38,13 @@ namespace PatriaTerram.Web.Models
         private PaletteContext GetPaletteContext(Palette palette)
         {
             var context = new PaletteContext();
+
             context.TownNames = palette.GetAllTownNames();
-            //context.ConditionRanges = palette.GetConditionRanges(context.TownNames, );
+
+            foreach (var building in Configs.Buildings.Values)
+            {
+                context.TownConditionRanges.Add(building.Type.ToString(), palette.GetConditionRanges(context.TownNames, building));
+            }
 
             foreach (var terrain in Configs.Terrains.Values)
             {

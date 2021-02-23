@@ -27,10 +27,21 @@ namespace PatriaTerram.Core.Conditions.Resolvers
 
                 var resultValue = GetResultValue(conditionValue, maxConditions[terrainCondition.EnvironmentTerrain.ToString()], terrainCondition.Priority);
 
-                if (terrainCondition.IsRequired == true && resultValue <= 0)
+                if (terrainCondition.IsRequired == true && terrainCondition.IsPositive == true && resultValue <= 0)
                 {
                     point.ResultConditions.UpdateValue(townName, building.Type, 0);
                     return;
+                }
+
+                if (terrainCondition.IsRequired == true && terrainCondition.IsPositive == false && resultValue > 0)
+                {
+                    point.ResultConditions.UpdateValue(townName, building.Type, 0);
+                    return;
+                }
+
+                if (terrainCondition.IsPositive == false)
+                {
+                    resultValue *= -1;
                 }
 
                 sum += resultValue;
@@ -47,10 +58,21 @@ namespace PatriaTerram.Core.Conditions.Resolvers
 
                 var resultValue = GetResultValue(conditionValue, maxConditions[buildingCondition.EnvironmentBuilding.ToString()], buildingCondition.Priority);
 
-                if (buildingCondition.IsRequired == true && resultValue <= 0)
+                if (buildingCondition.IsRequired == true && buildingCondition.IsPositive == true && resultValue <= 0)
                 {
                     point.ResultConditions.UpdateValue(townName, building.Type, 0);
                     return;
+                }
+
+                if (buildingCondition.IsRequired == true && buildingCondition.IsPositive == false && resultValue > 0)
+                {
+                    point.ResultConditions.UpdateValue(townName, building.Type, 0);
+                    return;
+                }
+
+                if(buildingCondition.IsPositive == false)
+                {
+                    resultValue *= -1;
                 }
 
                 sum += resultValue;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Helpers
 {
-    public static class ConditionsResolverHelper
+    public static class ResultConditionValueHelper
     {
         public static int GetValueLinearDecrease(Coord baseCoord, Coord adjacentCoord, int radius, int width, int height)
         {

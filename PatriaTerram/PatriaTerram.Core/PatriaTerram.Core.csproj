@@ -56,7 +56,7 @@
     <Compile Include="Enums\BuildingType.cs" />
     <Compile Include="Enums\TerrainType.cs" />
     <Compile Include="Enums\TownCondition.cs" />
-    <Compile Include="Helpers\ConditionsResolverHelper.cs" />
+    <Compile Include="Helpers\ResultConditionValueHelper.cs" />
     <Compile Include="Helpers\PaletteBuildingConditionHelper.cs" />
     <Compile Include="Helpers\PaletteHelper.cs" />
     <Compile Include="Helpers\PalettePointColorHelper.cs" />
@@ -71,7 +71,6 @@
     <Compile Include="Configurations\Entityes\BuildingCondition.cs" />
     <Compile Include="Configurations\Entityes\Color.cs" />
     <Compile Include="Enums\EnvironmentConditionType.cs" />
-    <Compile Include="Interfaces\IPointResolver.cs" />
     <Compile Include="Models\Layers\BuildingConditionLayer.cs" />
     <Compile Include="Models\Layers\BuildingLayer.cs" />
     <Compile Include="Models\Layers\Entityes\ResultConditionLayerItem.cs" />

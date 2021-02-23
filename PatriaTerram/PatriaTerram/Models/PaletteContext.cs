@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PatriaTerram.Core.Configurations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,7 @@ namespace PatriaTerram.Web.Models
     {
         public int MaxTerrainValue { get; set; }
         public Dictionary<string, int> MaxConditions { get; set; }
-        public Dictionary<string, int> ConditionRanges { get; set; }
+        public Dictionary<string, Dictionary<string, Range>> TownConditionRanges { get; set; }
         public Dictionary<string, string> Layers { get; set; }
         public List<string> TownNames { get; set; }
 
@@ -18,6 +19,7 @@ namespace PatriaTerram.Web.Models
             MaxConditions = new Dictionary<string, int>();
             Layers = new Dictionary<string, string>();
             TownNames = new List<string>();
+            TownConditionRanges = new Dictionary<string, Dictionary<string, Range>>();
         }
 
         public void AddLayer(string layer, string classes)

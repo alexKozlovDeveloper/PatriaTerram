@@ -28,25 +28,19 @@ namespace PatriaTerram.Core.Conditions.Resolvers
             switch (environmentCondition.Type)
             {
                 case EnvironmentConditionType.LinearDecrease:
-                    value = ConditionsResolverHelper.GetValueLinearDecrease(baseCoord, adjacentCoord, environmentCondition.Radius, _palette.Width, _palette.Height);
+                    value = ResultConditionValueHelper.GetValueLinearDecrease(baseCoord, adjacentCoord, environmentCondition.Radius, _palette.Width, _palette.Height);
                     break;
                 case EnvironmentConditionType.OneLevel:
-                    value = ConditionsResolverHelper.GetValueOneLevel();
+                    value = ResultConditionValueHelper.GetValueOneLevel();
                     break;
                 case EnvironmentConditionType.RingOneLevel:
-                    value = ConditionsResolverHelper.GetValueRingOneLevel(baseCoord, adjacentCoord, environmentCondition.Radius, environmentCondition.InnerRadius, _palette.Width, _palette.Height);
+                    value = ResultConditionValueHelper.GetValueRingOneLevel(baseCoord, adjacentCoord, environmentCondition.Radius, environmentCondition.InnerRadius, _palette.Width, _palette.Height);
                     break;
                 case EnvironmentConditionType.RingLinearDecrease:
-                    value = ConditionsResolverHelper.GetValueRingLinearDecrease(baseCoord, adjacentCoord, environmentCondition.Radius, environmentCondition.InnerRadius, _palette.Width, _palette.Height);
+                    value = ResultConditionValueHelper.GetValueRingLinearDecrease(baseCoord, adjacentCoord, environmentCondition.Radius, environmentCondition.InnerRadius, _palette.Width, _palette.Height);
                     break;
                 default:
                     break;
-            }
-
-
-            if (environmentCondition.IsPositive == false)
-            {
-                value *= -1;
             }
 
             return value;
