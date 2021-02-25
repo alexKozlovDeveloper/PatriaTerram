@@ -119,10 +119,9 @@ namespace PatriaTerram.ConsoleApp
                         {
                             var building = point.Buildings.GetAll().FirstOrDefault(a => a.BuildingType != BuildingType.Road);
 
-                            color = System.Drawing.Color.FromArgb(
-                                          (ConditionConfigs.Buildings[building.BuildingType].Color.R),
-                                          (ConditionConfigs.Buildings[building.BuildingType].Color.G),
-                                          (ConditionConfigs.Buildings[building.BuildingType].Color.B));                            
+                            var buildingColor = ConditionConfigs.Buildings[building.BuildingType].Color.GetReduceredColor(1.25);
+
+                            color = System.Drawing.Color.FromArgb(buildingColor.R, buildingColor.G, buildingColor.B);                            
                         }
                         else
                         {

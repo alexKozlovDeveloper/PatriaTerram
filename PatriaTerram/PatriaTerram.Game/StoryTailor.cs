@@ -33,7 +33,7 @@ namespace PatriaTerram.Game
 
             _log.Log($"Getting Steps...");
             var stepFactory = new StepFactory();
-            //var steps = stepFactory.GetTwoKingdoms();
+
             var steps = stepFactory.GetBigCounty();
 
             var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);

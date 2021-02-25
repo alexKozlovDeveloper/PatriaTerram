@@ -38,21 +38,6 @@ namespace PatriaTerram.Controllers
 
             var model = tailor.Tell();
 
-            //var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"]);
-            //var model = factory.GetPalette();
-
-            //var stepFactory = new StepFactory();
-            //var steps = stepFactory.GetTwoKingdoms();
-
-            //var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
-
-            //while (game.IsHasSteps)
-            //{
-            //    game.NextStep();
-            //}
-
-            //game.ResolveRoads(new List<BuildingType> { BuildingType.TownHall, BuildingType.Sawmill, BuildingType.Stonepit });
-
             model.MovePointsXAxis(20);
             model.MovePointsYAxis(20);
 
