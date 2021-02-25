@@ -73,5 +73,15 @@ namespace PatriaTerram.Game
 
             return startedPack;
         }
+
+        public List<Step> GetTwoKingdoms()
+        {
+            var steps = new List<Step>();
+
+            steps.AddRange(GetStartedPack("Farm_1"));
+            steps.AddRange(GetStartedPack("Farm_2"));
+
+            return steps;
+        }
     }
 }

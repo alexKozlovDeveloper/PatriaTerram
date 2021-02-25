@@ -41,52 +41,55 @@ namespace PatriaTerram.Controllers
 
             var stepFactory = new StepFactory();
 
-            var steps = new List<Step>();
+            var steps = stepFactory.GetTwoKingdoms();
 
-            steps.AddRange(stepFactory.GetStartedPack("Farm_1"));
-            steps.AddRange(stepFactory.GetStartedPack("Farm_2"));
+            //steps.AddRange(stepFactory.GetStartedPack("Farm_1"));
+            //steps.AddRange(stepFactory.GetStartedPack("Farm_2"));
             //steps.AddRange(stepFactory.GetStartedPack("Farm_3"));
             //steps.AddRange(stepFactory.GetStartedPack("Farm_4"));
             //steps.AddRange(stepFactory.GetStartedPack("Farm_5"));
 
             var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
 
-            for (int i = 0; i < 1000; i++)
+            while (game.IsHasSteps)
             {
                 game.NextStep();
             }
 
-            // ---
-
-            var roadBuilder = new RoadBuilder(model);
-
-            var buildingCoords = new List<Coord>();
-
-            buildingCoords.AddRange(model.GetAllBuildingCoords(BuildingType.TownHall));
-            buildingCoords.AddRange(model.GetAllBuildingCoords(BuildingType.Sawmill));
-            buildingCoords.AddRange(model.GetAllBuildingCoords(BuildingType.Stonepit));
-
-            for (int i = 0; i < buildingCoords.Count - 1; i++)
-            {
-                for (int j = i + 1; j < buildingCoords.Count; j++)
-                {
-                    var start = buildingCoords[i];
-                    var finish = buildingCoords[j];
-
-                    roadBuilder.Build(start, finish, "World_Roads");
-                }
-            }            
 
             // ---
 
-            model.MovePointsXAxis(20);
-            model.MovePointsYAxis(20);
+            game.ResolveRoads(new List<BuildingType> { BuildingType.TownHall, BuildingType.Sawmill, BuildingType.Stonepit });
+
+            //var roadBuilder = new RoadBuilder(model);
+
+            //var buildingCoords = new List<Coord>();
+
+            //buildingCoords.AddRange(model.GetAllBuildingCoords(BuildingType.TownHall));
+            //buildingCoords.AddRange(model.GetAllBuildingCoords(BuildingType.Sawmill));
+            //buildingCoords.AddRange(model.GetAllBuildingCoords(BuildingType.Stonepit));
+
+            //for (int i = 0; i < buildingCoords.Count - 1; i++)
+            //{
+            //    for (int j = i + 1; j < buildingCoords.Count; j++)
+            //    {
+            //        var start = buildingCoords[i];
+            //        var finish = buildingCoords[j];
+
+            //        roadBuilder.Build(start, finish, "World_Roads");
+            //    }
+            //}            
+
+            // ---
+
+            //model.MovePointsXAxis(20);
+            //model.MovePointsYAxis(20);
 
             var viewModel = new PaletteView(model);
 
             return View(viewModel);
         }
-        
+
         public ActionResult LayersMenu(PaletteContext context)
         {
             var menu = new LayerMenuView(context);
@@ -95,8 +98,8 @@ namespace PatriaTerram.Controllers
         }
 
         public ActionResult MapPoint(PalettePointView model)
-        {          
+        {
             return View(model);
-        }      
+        }
     }
 }

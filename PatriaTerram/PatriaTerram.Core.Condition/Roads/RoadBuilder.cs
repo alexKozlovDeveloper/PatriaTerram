@@ -5,11 +5,6 @@ using PatriaTerram.Core.Condition.Configurations;
 using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Condition.Models;
 using PatriaTerram.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatriaTerram.Core.Condition.Roads
 {

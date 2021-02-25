@@ -42,18 +42,29 @@ namespace PatriaTerram.Web.Models
                 if(terrainType == TerrainType.Result)
                 {
                     /// Old result
-                    //var resultColor = point.GetPointColor();
+                    var resultColor = point.GetPointColor();
 
-                    //color = new Color
-                    //{
-                    //    R = (int)(resultColor.R * terrainColorValue),
-                    //    G = (int)(resultColor.G * terrainColorValue),
-                    //    B = (int)(resultColor.B * terrainColorValue)
-                    //};
+                    color = new Color
+                    {
+                        R = (int)(resultColor.R * terrainColorValue),
+                        G = (int)(resultColor.G * terrainColorValue),
+                        B = (int)(resultColor.B * terrainColorValue)
+                    };
+
+                    var cell = new MapCellItem()
+                    {
+                        Value = itemValue,
+                        Color = color,
+                        Classes = new List<string> { terrain.Type.ToString() },
+                        Image = GetTerrainImage(context, terrainType)
+                    };
+
+                    Cells.Add(cell);
+
                     /// Old result end
 
-                    var texturedCell = GetResultTexturedCell(context, point);
-                    Cells.Add(texturedCell);
+                    //var texturedCell = GetResultTexturedCell(context, point);
+                    //Cells.Add(texturedCell);
                 }
                 else
                 {

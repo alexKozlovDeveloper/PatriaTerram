@@ -10,6 +10,8 @@ using PatriaTerram.Core.Condition.Configurations.Entityes;
 using PatriaTerram.Core.Condition.Models;
 using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Condition.Helpers;
+using PatriaTerram.Core.Condition.Roads;
+using AStarAlgorithm.Entityes;
 
 namespace PatriaTerram.Game
 {
@@ -41,7 +43,14 @@ namespace PatriaTerram.Game
             _conditionsProcessor = new ConditionsProcessor(_map);
 
             _conditionsProcessor.ResolveTerrainConditions(_buildings);
-            //_conditionsProcessor.ResolveResultCondition(_steps[0].TownName, _buildings);
+        }
+
+        public bool IsHasSteps
+        {
+            get
+            {
+                return stepNumber < _steps.Count;
+            }
         }
 
         public void NextStep()
@@ -69,6 +78,29 @@ namespace PatriaTerram.Game
             var coord = _map.GetMaxBuildingConditionCoordWithoutBuildings(townName, buildingType, TerrainType.Result.ToString());
 
             _builder.Build(buildingType, townName, coord);
+        }
+
+        public void ResolveRoads(IEnumerable<BuildingType> buildingTypes)
+        {
+            var roadBuilder = new RoadBuilder(_map);
+
+            var buildingCoords = new List<Coord>();
+
+            foreach (var buildingType in buildingTypes)
+            {
+                buildingCoords.AddRange(_map.GetAllBuildingCoords(buildingType));
+            }
+
+            for (int i = 0; i < buildingCoords.Count - 1; i++)
+            {
+                for (int j = i + 1; j < buildingCoords.Count; j++)
+                {
+                    var start = buildingCoords[i];
+                    var finish = buildingCoords[j];
+
+                    roadBuilder.Build(start, finish, "World_Roads");
+                }
+            }
         }
     }
 }

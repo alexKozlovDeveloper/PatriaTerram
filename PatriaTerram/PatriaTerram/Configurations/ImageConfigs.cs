@@ -57,7 +57,8 @@ namespace PatriaTerram.Web.Configurations
                     };
                 }
 
-                return _terrainTextureMaping;
+                //return _terrainTextureMaping;
+                return new Dictionary<TerrainType, string>();
             }
         }
 
@@ -98,7 +99,8 @@ namespace PatriaTerram.Web.Configurations
                     };
                 }
 
-                return _buildingTextureMaping;
+                //return _buildingTextureMaping;
+                return new Dictionary<BuildingType, string>();
             }           
         }
     }
