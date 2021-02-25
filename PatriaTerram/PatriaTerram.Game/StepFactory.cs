@@ -186,5 +186,24 @@ namespace PatriaTerram.Game
 
             return steps;
         }
+
+        public List<Step> GetRealBigCounty()
+        {
+            var steps = new List<Step>();
+
+            steps.AddRange(GetFarmVillage("Farm_Village_1"));
+            steps.AddRange(GetFarmVillage("Farm_Village_2"));
+            steps.AddRange(GetFarmVillage("Farm_Village_3"));
+            steps.AddRange(GetFarmVillage("Farm_Village_4"));
+            steps.AddRange(GetFarmVillage("Farm_Village_5"));
+            steps.AddRange(GetFarmVillage("Farm_Village_6"));
+            steps.AddRange(GetFarmVillage("Farm_Village_7"));
+            steps.AddRange(GetStonepitVillage("Stonepit_Village"));
+            steps.AddRange(GetStonepitVillage("Stonepit_Village"));
+            steps.AddRange(GetStonepitVillage("Stonepit_Village"));
+            steps.AddRange(GetCapitalVillage("Capital"));
+
+            return steps;
+        }
     }
 }
