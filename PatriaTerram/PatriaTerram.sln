@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatriaTerram.Game", "Patria
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MathSupport", "MathSupport", "{9A0D8217-98C0-4296-ADE4-6D1E766564D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatriaTerram.Console", "PatriaTerram.Console\PatriaTerram.Console.csproj", "{F9268F6F-DBC2-41EE-8E00-B49C2B181DC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatriaTerram.ConsoleApp", "PatriaTerram.Console\PatriaTerram.ConsoleApp.csproj", "{F9268F6F-DBC2-41EE-8E00-B49C2B181DC5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatriaTerram.Core.Condition", "PatriaTerram.Core.Condition\PatriaTerram.Core.Condition.csproj", "{168B3F4F-B7D6-43AA-9E2F-95F81CB074C6}"
 EndProject

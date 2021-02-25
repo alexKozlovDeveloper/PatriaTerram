@@ -53,6 +53,14 @@ namespace PatriaTerram.Game
             }
         }
 
+        public int StepsCount
+        {
+            get
+            {
+                return _steps.Count;
+            }
+        }
+
         public void NextStep()
         {
             if(stepNumber >= _steps.Count) { return; }

@@ -50,12 +50,21 @@
         },
         {
           "EnvironmentTerrain": "Lake",
-          "Radius": 8,
-          "InnerRadius": 0,
-          "Priority": 10,
+          "Radius": 10,
+          "InnerRadius": 5,
+          "Priority": 5,
           "Type": 0,
           "IsPositive": true,
           "IsRequired": false
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
         }
       ]
     },
@@ -98,6 +107,24 @@
           "Type": 0,
           "IsPositive": true,
           "IsRequired": false
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
         }
       ]
     },
@@ -140,6 +167,24 @@
           "Type": 0,
           "IsPositive": true,
           "IsRequired": false
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
         }
       ]
     },
@@ -192,6 +237,24 @@
           "Type": 0,
           "IsPositive": true,
           "IsRequired": false
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
         }
       ]
     },
@@ -257,6 +320,24 @@
       ],
       "TerrainConditions": [
 
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        }
       ]
     },
     "Road": {
