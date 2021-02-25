@@ -172,11 +172,12 @@ namespace PatriaTerram.Web.Models
 
                 var building = ConditionConfigs.Buildings[buildingLayerItem.BuildingType];
                 var town = buildingLayerItem.TownName;
+                var color = point.Buildings.Count() > 1 ? building.Color.GetReduceredColor(1.25) : building.Color;
 
                 var cell = new MapCellItem()
                 {
                     Value = building.Value,
-                    Color = building.Color,
+                    Color = color,
                     Classes = new List<string> { building.Type.ToString(), "building", buildingLayerItem.TownName },
                     Image = GetBuildingImage(context, building.Type)
                 };

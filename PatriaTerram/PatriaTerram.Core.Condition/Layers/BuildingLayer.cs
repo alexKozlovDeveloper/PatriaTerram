@@ -36,6 +36,11 @@ namespace PatriaTerram.Core.Condition.Layers
             return Items.Count != 0;
         }
 
+        public bool IsHasBuildings(BuildingType buildingType, string town)
+        {
+            return Items.Any(a => a.BuildingType == buildingType && a.TownName == town);
+        }
+
         public int Count()
         {
             return Items.Count;

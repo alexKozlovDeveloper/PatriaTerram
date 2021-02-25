@@ -3,9 +3,12 @@
     public enum BuildingType
     {
         TownHall,
+        FarmTownHall,
+        StonepitTownHall,
         Sawmill,
         Stonepit,
         Farm,
+        Mill,
         Warehouse,
         FishermanHouse,
         House,

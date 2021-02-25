@@ -12,7 +12,7 @@
         {
           "EnvironmentBuilding": "TownHall",
           "TownCondition": "AnyTown",
-          "Radius": 15,
+          "Radius": 30,
           "InnerRadius": 0,
           "Priority": 30,
           "Type": 1,
@@ -352,265 +352,689 @@
       "TerrainConditions": []
     }
   },
-   "main":{
-      "TownHall":{
-         "Type":0,
-         "Color":{
-            "R":255,
-            "G":20,
-            "B":147
-         },
-         "Value":0,
-         "BuildingConditions":[
-            {
-               "EnvironmentBuilding":0,
-               "TownCondition":1,
-               "Radius":15,
-               "InnerRadius":0,
-               "Priority":30,
-               "Type":1,
-               "IsPositive":false,
-               "IsRequired":true
-            }
-         ],
-         "TerrainConditions":[
-            {
-               "EnvironmentTerrain":8,
-               "Radius":15,
-               "InnerRadius":0,
-               "Priority":10,
-               "Type":0,
-               "IsPositive":true,
-               "IsRequired":false
-            },
-            {
-               "EnvironmentTerrain":4,
-               "Radius":7,
-               "InnerRadius":0,
-               "Priority":5,
-               "Type":0,
-               "IsPositive":true,
-               "IsRequired":false
-            },
-            {
-               "EnvironmentTerrain":6,
-               "Radius":5,
-               "InnerRadius":0,
-               "Priority":5,
-               "Type":0,
-               "IsPositive":true,
-               "IsRequired":false
-            },
-            {
-               "EnvironmentTerrain":3,
-               "Radius":8,
-               "InnerRadius":0,
-               "Priority":10,
-               "Type":0,
-               "IsPositive":true,
-               "IsRequired":false
-            }
-         ]
+  "main": {
+    "TownHall": {
+      "Type": "TownHall",
+      "Color": {
+        "R": 255,
+        "G": 20,
+        "B": 147
       },
-      "Sawmill":{
-         "Type":1,
-         "Color":{
-            "R":153,
-            "G":51,
-            "B":255
-         },
-         "Value":0,
-         "BuildingConditions":[
-            {
-               "EnvironmentBuilding":0,
-               "TownCondition":0,
-               "Radius":15,
-               "InnerRadius":5,
-               "Priority":25,
-               "Type":2,
-               "IsPositive":true,
-               "IsRequired":true
-            },
-            {
-               "EnvironmentBuilding":1,
-               "TownCondition":0,
-               "Radius":3,
-               "InnerRadius":0,
-               "Priority":45,
-               "Type":1,
-               "IsPositive":false,
-               "IsRequired":true
-            }
-         ],
-         "TerrainConditions":[
-            {
-               "EnvironmentTerrain":4,
-               "Radius":5,
-               "InnerRadius":0,
-               "Priority":45,
-               "Type":0,
-               "IsPositive":true,
-               "IsRequired":false
-            }
-         ]
+      "Value": 0,
+      "BuildingConditions": [
+        {
+          "EnvironmentBuilding": "TownHall",
+          "TownCondition": "AnyTown",
+          "Radius": 15,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentBuilding": "FarmTownHall",
+          "TownCondition": "AnyTown",
+          "Radius": 15,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentBuilding": "StonepitTownHall",
+          "TownCondition": "AnyTown",
+          "Radius": 15,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        }
+      ],
+      "TerrainConditions": [
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 10,
+          "InnerRadius": 5,
+          "Priority": 10,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 10,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ]
+    },
+    "FarmTownHall": {
+      "Type": "FarmTownHall",
+      "Color": {
+        "R": 255,
+        "G": 20,
+        "B": 147
       },
-      "Stonepit":{
-         "Type":2,
-         "Color":{
-            "R":0,
-            "G":0,
-            "B":0
-         },
-         "Value":0,
-         "BuildingConditions":[
-            {
-               "EnvironmentBuilding":0,
-               "TownCondition":0,
-               "Radius":15,
-               "InnerRadius":0,
-               "Priority":15,
-               "Type":1,
-               "IsPositive":true,
-               "IsRequired":true
-            },
-            {
-               "EnvironmentBuilding":2,
-               "TownCondition":0,
-               "Radius":2,
-               "InnerRadius":0,
-               "Priority":50,
-               "Type":1,
-               "IsPositive":false,
-               "IsRequired":false
-            }
-         ],
-         "TerrainConditions":[
-            {
-               "EnvironmentTerrain":8,
-               "Radius":5,
-               "InnerRadius":0,
-               "Priority":50,
-               "Type":0,
-               "IsPositive":true,
-               "IsRequired":false
-            }
-         ]
+      "Value": 0,
+      "BuildingConditions": [
+        {
+          "EnvironmentBuilding": "TownHall",
+          "TownCondition": "AnyTown",
+          "Radius": 15,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentBuilding": "FarmTownHall",
+          "TownCondition": "AnyTown",
+          "Radius": 15,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentBuilding": "StonepitTownHall",
+          "TownCondition": "AnyTown",
+          "Radius": 15,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ],
+      "TerrainConditions": [
+        {
+          "EnvironmentTerrain": "Wood",
+          "Radius": 7,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": "LinearDecrease",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentTerrain": "FertileSoil",
+          "Radius": 5,
+          "InnerRadius": 0,
+          "Priority": 25,
+          "Type": "LinearDecrease",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 10,
+          "InnerRadius": 5,
+          "Priority": 10,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 10,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ]
+    },
+    "StonepitTownHall": {
+      "Type": "StonepitTownHall",
+      "Color": {
+        "R": 255,
+        "G": 20,
+        "B": 147
       },
-      "Farm":{
-         "Type":3,
-         "Color":{
-            "R":240,
-            "G":230,
-            "B":140
-         },
-         "Value":0,
-         "BuildingConditions":[
-            {
-               "EnvironmentBuilding":0,
-               "TownCondition":0,
-               "Radius":15,
-               "InnerRadius":0,
-               "Priority":15,
-               "Type":1,
-               "IsPositive":true,
-               "IsRequired":true
-            },
-            {
-               "EnvironmentBuilding":1,
-               "TownCondition":0,
-               "Radius":3,
-               "InnerRadius":0,
-               "Priority":50,
-               "Type":1,
-               "IsPositive":false,
-               "IsRequired":false
-            },
-            {
-               "EnvironmentBuilding":3,
-               "TownCondition":0,
-               "Radius":5,
-               "InnerRadius":0,
-               "Priority":20,
-               "Type":1,
-               "IsPositive":true,
-               "IsRequired":false
-            }
-         ],
-         "TerrainConditions":[
-            {
-               "EnvironmentTerrain":6,
-               "Radius":5,
-               "InnerRadius":0,
-               "Priority":50,
-               "Type":0,
-               "IsPositive":true,
-               "IsRequired":false
-            }
-         ]
+      "Value": 0,
+      "BuildingConditions": [
+        {
+          "EnvironmentBuilding": "TownHall",
+          "TownCondition": "AnyTown",
+          "Radius": 15,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentBuilding": "FarmTownHall",
+          "TownCondition": "AnyTown",
+          "Radius": 15,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentBuilding": "StonepitTownHall",
+          "TownCondition": "AnyTown",
+          "Radius": 15,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ],
+      "TerrainConditions": [
+        {
+          "EnvironmentTerrain": "Stone",
+          "Radius": 3,
+          "InnerRadius": 0,
+          "Priority": 200,
+          "Type": "LinearDecrease",
+          "IsPositive": true,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 10,
+          "InnerRadius": 5,
+          "Priority": 10,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 10,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ]
+    },
+    "Sawmill": {
+      "Type": "Sawmill",
+      "Color": {
+        "R": 153,
+        "G": 51,
+        "B": 255
       },
-      "House":{
-         "Type":6,
-         "Color":{
-            "R":102,
-            "G":51,
-            "B":0
-         },
-         "Value":0,
-         "BuildingConditions":[
-            {
-               "EnvironmentBuilding":1,
-               "TownCondition":0,
-               "Radius":15,
-               "InnerRadius":0,
-               "Priority":15,
-               "Type":1,
-               "IsPositive":true,
-               "IsRequired":false
-            },
-            {
-               "EnvironmentBuilding":2,
-               "TownCondition":0,
-               "Radius":15,
-               "InnerRadius":0,
-               "Priority":15,
-               "Type":1,
-               "IsPositive":true,
-               "IsRequired":false
-            },
-            {
-               "EnvironmentBuilding":3,
-               "TownCondition":0,
-               "Radius":5,
-               "InnerRadius":0,
-               "Priority":20,
-               "Type":1,
-               "IsPositive":true,
-               "IsRequired":false
-            },
-            {
-               "EnvironmentBuilding":0,
-               "TownCondition":0,
-               "Radius":15,
-               "InnerRadius":0,
-               "Priority":20,
-               "Type":0,
-               "IsPositive":true,
-               "IsRequired":true
-            },
-            {
-               "EnvironmentBuilding":6,
-               "TownCondition":0,
-               "Radius":5,
-               "InnerRadius":0,
-               "Priority":15,
-               "Type":0,
-               "IsPositive":true,
-               "IsRequired":false
-            }
-         ],
-         "TerrainConditions":[
-            
-         ]
-      }
-   }
+      "Value": 0,
+      "BuildingConditions": [
+        {
+          "EnvironmentBuilding": "TownHall",
+          "TownCondition": 0,
+          "Radius": 10,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "FarmTownHall",
+          "TownCondition": 0,
+          "Radius": 10,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "StonepitTownHall",
+          "TownCondition": 0,
+          "Radius": 10,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "Sawmill",
+          "TownCondition": 0,
+          "Radius": 6,
+          "InnerRadius": 0,
+          "Priority": 45,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ],
+      "TerrainConditions": [
+        {
+          "EnvironmentTerrain": "Wood",
+          "Radius": 4,
+          "InnerRadius": 0,
+          "Priority": 45,
+          "Type": 0,
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ]
+    },
+    "Stonepit": {
+      "Type": "Stonepit",
+      "Color": {
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
+      "Value": 0,
+      "BuildingConditions": [
+        {
+          "EnvironmentBuilding": "TownHall",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "FarmTownHall",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "StonepitTownHall",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "Stonepit",
+          "TownCondition": 0,
+          "Radius": 2,
+          "InnerRadius": 0,
+          "Priority": 50,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ],
+      "TerrainConditions": [
+        {
+          "EnvironmentTerrain": "Stone",
+          "Radius": 3,
+          "InnerRadius": 0,
+          "Priority": 50,
+          "Type": 0,
+          "IsPositive": true,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ]
+    },
+    "Farm": {
+      "Type": "Farm",
+      "Color": {
+        "R": 240,
+        "G": 230,
+        "B": 140
+      },
+      "Value": 0,
+      "BuildingConditions": [
+        //{
+        //  "EnvironmentBuilding": "TownHall",
+        //  "TownCondition": 0,
+        //  "Radius": 5,
+        //  "InnerRadius": 5,
+        //  "Priority": 100,
+        //  "Type": "OneLevel",
+        //  "IsPositive": true,
+        //  "IsRequired": false
+        //},
+        //{
+        //  "EnvironmentBuilding": "FarmTownHall",
+        //  "TownCondition": 0,
+        //  "Radius": 5,
+        //  "InnerRadius": 5,
+        //  "Priority": 100,
+        //  "Type": "OneLevel",
+        //  "IsPositive": true,
+        //  "IsRequired": false
+        //},
+        //{
+        //  "EnvironmentBuilding": "StonepitTownHall",
+        //  "TownCondition": 0,
+        //  "Radius": 5,
+        //  "InnerRadius": 5,
+        //  "Priority": 100,
+        //  "Type": "OneLevel",
+        //  "IsPositive": true,
+        //  "IsRequired": false
+        //},
+        {
+          "EnvironmentBuilding": "Sawmill",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 0,
+          "Priority": 20,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "Farm",
+          "TownCondition": 0,
+          "Radius": 2,
+          "InnerRadius": 0,
+          "Priority": 20,
+          "Type": "LinearDecrease",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "Mill",
+          "TownCondition": 0,
+          "Radius": 3,
+          "InnerRadius": 0,
+          "Priority": 50,
+          "Type": "LinearDecrease",
+          "IsPositive": true,
+          "IsRequired": true
+        }
+      ],
+      "TerrainConditions": [
+        {
+          "EnvironmentTerrain": "FertileSoil",
+          "Radius": 4,
+          "InnerRadius": 0,
+          "Priority": 50,
+          "Type": "LinearDecrease",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ]
+    },
+    "House": {
+      "Type": "House",
+      "Color": {
+        "R": 102,
+        "G": 51,
+        "B": 0
+      },
+      "Value": 0,
+      "BuildingConditions": [
+        {
+          "EnvironmentBuilding": "TownHall",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "FarmTownHall",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "StonepitTownHall",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "House",
+          "TownCondition": 0,
+          "Radius": 3,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "LinearDecrease",
+          "IsPositive": true,
+          "IsRequired": false
+        }
+      ],
+      "TerrainConditions": [
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ]
+    },
+    "Road": {
+      "Type": "Road",
+      "Color": {
+        "R": 140,
+        "G": 70,
+        "B": 25
+      },
+      "Value": 0,
+      "BuildingConditions": [],
+      "TerrainConditions": []
+    },
+    "Mill": {
+      "Type": "Mill",
+      "Color": {
+        "R": 102,
+        "G": 0,
+        "B": 102
+      },
+      "Value": 0,
+      "BuildingConditions": [
+        {
+          "EnvironmentBuilding": "FarmTownHall",
+          "TownCondition": 0,
+          "Radius": 7,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "RingOneLevel",
+          "IsPositive": true,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentBuilding": "Mill",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ],
+      "TerrainConditions": [
+        {
+          "EnvironmentTerrain": "FertileSoil",
+          "Radius": 5,
+          "InnerRadius": 0,
+          "Priority": 100,
+          "Type": 0,
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ]
+    },
+    "Market": {
+      "Type": "Market",
+      "Color": {
+        "R": 255,
+        "G": 0,
+        "B": 0
+      },
+      "Value": 0,
+      "BuildingConditions": [
+        {
+          "EnvironmentBuilding": "TownHall",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "FarmTownHall",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "StonepitTownHall",
+          "TownCondition": 0,
+          "Radius": 5,
+          "InnerRadius": 5,
+          "Priority": 100,
+          "Type": "OneLevel",
+          "IsPositive": true,
+          "IsRequired": false
+        },
+        {
+          "EnvironmentBuilding": "House",
+          "TownCondition": 0,
+          "Radius": 4,
+          "InnerRadius": 0,
+          "Priority": 70,
+          "Type": "LinearDecrease",
+          "IsPositive": true,
+          "IsRequired": true
+        }
+      ],
+      "TerrainConditions": [
+        {
+          "EnvironmentTerrain": "Ocean",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        },
+        {
+          "EnvironmentTerrain": "Lake",
+          "Radius": 1,
+          "InnerRadius": 0,
+          "Priority": 5,
+          "Type": 0,
+          "IsPositive": false,
+          "IsRequired": true
+        }
+      ]
+    }
+  }
 }

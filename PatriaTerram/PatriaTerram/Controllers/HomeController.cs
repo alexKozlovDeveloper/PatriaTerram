@@ -11,6 +11,7 @@ using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Factoryes;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Interfaces;
+using PatriaTerram.Core.Logging;
 using PatriaTerram.Game;
 using PatriaTerram.Game.Entityes;
 using PatriaTerram.Game.Enums;
@@ -33,23 +34,27 @@ namespace PatriaTerram.Controllers
             Configs.TerrainsJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\Terrains.json";
             ConditionConfigs.TerrainsJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\Buildings.json";
 
-            var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"]);
-            var model = factory.GetPalette();
+            var tailor = new StoryTailor(new ConsoleLogger());
 
-            var stepFactory = new StepFactory();
-            var steps = stepFactory.GetTwoKingdoms();
+            var model = tailor.Tell();
 
-            var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
+            //var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"]);
+            //var model = factory.GetPalette();
 
-            while (game.IsHasSteps)
-            {
-                game.NextStep();
-            }
+            //var stepFactory = new StepFactory();
+            //var steps = stepFactory.GetTwoKingdoms();
 
-            game.ResolveRoads(new List<BuildingType> { BuildingType.TownHall, BuildingType.Sawmill, BuildingType.Stonepit });
+            //var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
 
-            //model.MovePointsXAxis(20);
-            //model.MovePointsYAxis(20);
+            //while (game.IsHasSteps)
+            //{
+            //    game.NextStep();
+            //}
+
+            //game.ResolveRoads(new List<BuildingType> { BuildingType.TownHall, BuildingType.Sawmill, BuildingType.Stonepit });
+
+            model.MovePointsXAxis(20);
+            model.MovePointsYAxis(20);
 
             var viewModel = new PaletteView(model);
 

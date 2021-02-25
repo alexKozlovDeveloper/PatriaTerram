@@ -46,6 +46,26 @@ namespace PatriaTerram.Core.Condition.Helpers
             return result;
         }
 
+        public static List<Coord> GetAllBuildingCoords(this Palette<ConditionPalettePoint> palette, BuildingType buildingType, string townName)
+        {
+            var result = new List<Coord>();
+
+            for (int x = 0; x < palette.Width; x++)
+            {
+                for (int y = 0; y < palette.Height; y++)
+                {
+                    var point = palette[x, y];
+
+                    if (point.Buildings.IsHasBuildings(buildingType, townName))
+                    {
+                        result.Add(new Coord(x, y));
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public static List<Coord> GetAllBuildingCoords(this Palette<ConditionPalettePoint> palette)
         {
             var result = new List<Coord>();

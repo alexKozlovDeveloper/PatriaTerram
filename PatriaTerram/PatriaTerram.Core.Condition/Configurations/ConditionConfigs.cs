@@ -26,7 +26,8 @@ namespace PatriaTerram.Core.Condition.Configurations
                     _buildings = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<BuildingType, Building>>>(json);
                 }
 
-                return _buildings["test"];
+                //return _buildings["test"]; 
+                return _buildings["main"]; 
             }
         }
 
@@ -119,6 +120,18 @@ namespace PatriaTerram.Core.Condition.Configurations
                         },
                         {
                             BuildingType.Road,
+                            5
+                        },
+                        {
+                            BuildingType.Mill,
+                            5
+                        },
+                        {
+                            BuildingType.StonepitTownHall,
+                            5
+                        },
+                        {
+                            BuildingType.FarmTownHall,
                             5
                         }
                     };

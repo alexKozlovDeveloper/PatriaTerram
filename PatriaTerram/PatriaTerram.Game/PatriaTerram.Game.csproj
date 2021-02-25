@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entityes\Step.cs" />
     <Compile Include="StepFactory.cs" />
+    <Compile Include="StoryTailor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AStarAlgorithm\AStarAlgorithm.csproj">

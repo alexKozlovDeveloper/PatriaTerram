@@ -2,12 +2,14 @@
 using PatriaTerram.Core.Condition.Configurations;
 using PatriaTerram.Core.Condition.Configurations.Entityes;
 using PatriaTerram.Core.Condition.Enums;
+using PatriaTerram.Core.Condition.Helpers;
 using PatriaTerram.Core.Condition.Models;
 using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Factoryes;
 using PatriaTerram.Core.Helpers;
+using PatriaTerram.Core.Logging;
 using PatriaTerram.Core.Models;
 using PatriaTerram.Game;
 using System;
@@ -22,35 +24,14 @@ namespace PatriaTerram.ConsoleApp
     {
         static void Main()
         {
-            Console.WriteLine($"Starting...");
-            var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"]);
+            var tailor = new StoryTailor(new ConsoleLogger());
 
-            Console.WriteLine($"Creating Palette...");
-            var model = factory.GetPalette();
-
-            Console.WriteLine($"Getting Steps...");
-            var stepFactory = new StepFactory();
-            var steps = stepFactory.GetTwoKingdoms();
-
-            var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
-
-            Console.WriteLine($"Resolving Steps...");
-
-            for (int i = 1; game.IsHasSteps; i++)
-            {
-                Console.WriteLine($"Resolving Step [{i} / {game.StepsCount}]...");
-                game.NextStep();
-            }
-
-            Console.WriteLine($"Resolving Roads...");
-            game.ResolveRoads(new List<BuildingType> { BuildingType.TownHall, BuildingType.Sawmill, BuildingType.Stonepit });
+            var model = tailor.Tell();
 
             var path = $"result{DateTime.Now.ToString("yyyy_MM_dd HH-mm-ss")}.png";
 
             Console.WriteLine($"Writing Image...");            
             WriteImage(model, path);
-
-            Console.WriteLine($"Finishing...");
         }
 
         private static void WriteImage(Palette<ConditionPalettePoint> model, string path)

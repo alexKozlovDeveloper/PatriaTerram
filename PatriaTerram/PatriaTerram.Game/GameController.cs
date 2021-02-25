@@ -110,5 +110,34 @@ namespace PatriaTerram.Game
                 }
             }
         }
+
+        public void ResolveRoads(string townName)
+        {
+            var roadBuilder = new RoadBuilder(_map);
+
+            var buildingCoords = new List<Coord>();
+
+            buildingCoords.AddRange(_map.GetAllBuildingCoords(BuildingType.Mill, townName));
+            buildingCoords.AddRange(_map.GetAllBuildingCoords(BuildingType.Sawmill, townName));
+            buildingCoords.AddRange(_map.GetAllBuildingCoords(BuildingType.Stonepit, townName));
+
+            var destCoords = new List<Coord>();
+
+            destCoords.AddRange(_map.GetAllBuildingCoords(BuildingType.Market, townName));
+            destCoords.AddRange(_map.GetAllBuildingCoords(BuildingType.TownHall, townName));
+            destCoords.AddRange(_map.GetAllBuildingCoords(BuildingType.FarmTownHall, townName));
+            destCoords.AddRange(_map.GetAllBuildingCoords(BuildingType.StonepitTownHall, townName));
+
+            for (int i = 0; i < buildingCoords.Count; i++)
+            {
+                for (int j = 0; j < destCoords.Count; j++)
+                {
+                    var start = buildingCoords[i];
+                    var finish = destCoords[j];
+
+                    roadBuilder.Build(start, finish, "World_Roads");
+                }
+            }
+        }
     }
 }

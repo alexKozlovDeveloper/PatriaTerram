@@ -49,6 +49,7 @@
     <Compile Include="Configurations\Configs.cs" />
     <Compile Include="Enums\TerrainType.cs" />
     <Compile Include="Example.cs" />
+    <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\PalettePointColorHelper.cs" />
     <Compile Include="Helpers\RangeHelper.cs" />
     <Compile Include="Interfaces\ILayer.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="Factoryes\SamplePaletteFactory.cs" />
     <Compile Include="Factoryes\TerrainPaletteFactory.cs" />
     <Compile Include="Interfaces\IPaletteFactory.cs" />
+    <Compile Include="Logging\ConsoleLogger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\TerrainPalettePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
