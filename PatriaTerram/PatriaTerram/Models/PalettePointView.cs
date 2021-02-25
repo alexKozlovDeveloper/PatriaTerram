@@ -7,13 +7,13 @@ using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PatriaTerram.Web.Models
 {
     public class PalettePointView
     {
         public List<MapCellItem> Cells { get; set; }
-
         public List<string> Classes { get; set; }
 
         public PalettePointView()
@@ -41,28 +41,36 @@ namespace PatriaTerram.Web.Models
 
                 if(terrainType == TerrainType.Result)
                 {
-                    var resultColor = point.GetPointColor();
+                    /// Old result
+                    //var resultColor = point.GetPointColor();
 
-                    color = new Color
+                    //color = new Color
+                    //{
+                    //    R = (int)(resultColor.R * terrainColorValue),
+                    //    G = (int)(resultColor.G * terrainColorValue),
+                    //    B = (int)(resultColor.B * terrainColorValue)
+                    //};
+                    /// Old result end
+
+                    var texturedCell = GetResultTexturedCell(context, point);
+                    Cells.Add(texturedCell);
+                }
+                else
+                {
+                    var cell = new MapCellItem()
                     {
-                        R = (int)(resultColor.R * terrainColorValue),
-                        G = (int)(resultColor.G * terrainColorValue),
-                        B = (int)(resultColor.B * terrainColorValue)
+                        Value = itemValue,
+                        Color = color,
+                        Classes = new List<string> { terrain.Type.ToString() },
+                        Image = GetTerrainImage(context, terrainType)
                     };
+
+                    Cells.Add(cell);
                 }
 
-                var cell = new MapCellItem() 
-                {
-                    Value = itemValue,
-                    Color = color,
-                    Classes = new List<string> { terrain.Type.ToString() },
-                    Image = GetTerrainImage(context, terrainType)
-                };
-
-                Cells.Add(cell);
-
-                context.AddLayer(terrain.Type.ToString(), $".{terrain.Type.ToString()}");
+                context.AddLayer(terrain.Type.ToString(), $".{terrain.Type}");
             }
+
 
             foreach (var terrainCondition in point.TerrainConditions.GetAll())
             {
@@ -174,7 +182,6 @@ namespace PatriaTerram.Web.Models
             else
             {
                 Classes.Add("point-without-building");
-
             }
         }
 
@@ -196,6 +203,22 @@ namespace PatriaTerram.Web.Models
             }
 
             return string.Empty;
+        }
+
+        private MapCellItem GetResultTexturedCell(PaletteContext context, TerrainPalettePoint point)
+        {
+            var texturedType = (TerrainType)point.Terrains.GetAll()
+                                                 .Select(a => (int)a.TerrainType)
+                                                 .Max();
+
+            var cell = new MapCellItem()
+            {
+                Value = point.Terrains.GetTerrainValue(texturedType),
+                Classes = new List<string> { TerrainType.Result.ToString() },
+                Image = GetTerrainImage(context, texturedType)
+            };
+
+            return cell;
         }
     }
 }

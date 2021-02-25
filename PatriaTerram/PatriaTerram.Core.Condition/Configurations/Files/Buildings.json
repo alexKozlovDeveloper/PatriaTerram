@@ -1,7 +1,7 @@
 {
   "test": {
     "TownHall": {
-      "Type": 0,
+      "Type": "TownHall",
       "Color": {
         "R": 255,
         "G": 20,
@@ -10,8 +10,8 @@
       "Value": 0,
       "BuildingConditions": [
         {
-          "EnvironmentBuilding": 0,
-          "TownCondition": 1,
+          "EnvironmentBuilding": "TownHall",
+          "TownCondition": "AnyTown",
           "Radius": 15,
           "InnerRadius": 0,
           "Priority": 30,
@@ -22,7 +22,7 @@
       ],
       "TerrainConditions": [
         {
-          "EnvironmentTerrain": 8,
+          "EnvironmentTerrain": "Stone",
           "Radius": 15,
           "InnerRadius": 0,
           "Priority": 10,
@@ -31,7 +31,7 @@
           "IsRequired": false
         },
         {
-          "EnvironmentTerrain": 4,
+          "EnvironmentTerrain": "Wood",
           "Radius": 7,
           "InnerRadius": 0,
           "Priority": 5,
@@ -40,7 +40,7 @@
           "IsRequired": false
         },
         {
-          "EnvironmentTerrain": 6,
+          "EnvironmentTerrain": "FertileSoil",
           "Radius": 5,
           "InnerRadius": 0,
           "Priority": 5,
@@ -49,7 +49,7 @@
           "IsRequired": false
         },
         {
-          "EnvironmentTerrain": 3,
+          "EnvironmentTerrain": "Lake",
           "Radius": 8,
           "InnerRadius": 0,
           "Priority": 10,
@@ -60,7 +60,7 @@
       ]
     },
     "Sawmill": {
-      "Type": 1,
+      "Type": "Sawmill",
       "Color": {
         "R": 153,
         "G": 51,
@@ -69,7 +69,7 @@
       "Value": 0,
       "BuildingConditions": [
         {
-          "EnvironmentBuilding": 0,
+          "EnvironmentBuilding": "TownHall",
           "TownCondition": 0,
           "Radius": 15,
           "InnerRadius": 5,
@@ -79,7 +79,7 @@
           "IsRequired": true
         },
         {
-          "EnvironmentBuilding": 1,
+          "EnvironmentBuilding": "Sawmill",
           "TownCondition": 0,
           "Radius": 3,
           "InnerRadius": 0,
@@ -91,7 +91,7 @@
       ],
       "TerrainConditions": [
         {
-          "EnvironmentTerrain": 4,
+          "EnvironmentTerrain": "Wood",
           "Radius": 5,
           "InnerRadius": 0,
           "Priority": 45,
@@ -102,7 +102,7 @@
       ]
     },
     "Stonepit": {
-      "Type": 2,
+      "Type": "Stonepit",
       "Color": {
         "R": 0,
         "G": 0,
@@ -133,7 +133,7 @@
       ],
       "TerrainConditions": [
         {
-          "EnvironmentTerrain": 8,
+          "EnvironmentTerrain": "Stone",
           "Radius": 5,
           "InnerRadius": 0,
           "Priority": 50,
@@ -144,7 +144,7 @@
       ]
     },
     "Farm": {
-      "Type": 3,
+      "Type": "Farm",
       "Color": {
         "R": 240,
         "G": 230,
@@ -185,7 +185,7 @@
       ],
       "TerrainConditions": [
         {
-          "EnvironmentTerrain": 6,
+          "EnvironmentTerrain": "FertileSoil",
           "Radius": 5,
           "InnerRadius": 0,
           "Priority": 50,
@@ -196,7 +196,7 @@
       ]
     },
     "House": {
-      "Type": 6,
+      "Type": "House",
       "Color": {
         "R": 102,
         "G": 51,
@@ -260,15 +260,15 @@
       ]
     },
     "Road": {
-      "Type": 8,
+      "Type": "Road",
       "Color": {
         "R": 140,
         "G": 70,
         "B": 25
       },
       "Value": 0,
-      "BuildingConditions": [ ],
-      "TerrainConditions": [ ]
+      "BuildingConditions": [],
+      "TerrainConditions": []
     }
   },
    "main":{

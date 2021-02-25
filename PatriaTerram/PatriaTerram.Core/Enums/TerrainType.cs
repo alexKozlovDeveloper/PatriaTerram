@@ -2,15 +2,15 @@
 {
     public enum TerrainType
     {
-        Altitude = 0,
-        Ground = 1,
-        Ocean = 2,
-        Lake = 3,
-        Wood = 4,
-        Mountains = 5,
-        FertileSoil = 6,
-        Beach = 7,
-        Stone = 8,
-        Result = 9
+        Result = 0,
+        Altitude = 1,
+        Ground = 2,
+        Ocean = 3,
+        Beach = 5,
+        Mountains = 6,
+        Lake = 4,
+        FertileSoil = 7,
+        Wood = 8,
+        Stone = 9,
     }
 }
