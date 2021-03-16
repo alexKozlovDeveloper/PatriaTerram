@@ -30,9 +30,9 @@ namespace PatriaTerram.Controllers
 
         public ActionResult Map()
         {
-            Configs.PaletteConfigurationJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\PaletteConfigurations.json";
-            Configs.TerrainsJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\Terrains.json";
-            ConditionConfigs.TerrainsJsonFilePath = @"C:\Users\alexk\OneDrive\Документы\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\Buildings.json";
+            Configs.PaletteConfigurationJsonFilePath = @"D:\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\PaletteConfigurations.json";
+            Configs.TerrainsJsonFilePath = @"D:\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\Terrains.json";
+            ConditionConfigs.TerrainsJsonFilePath = @"D:\GitHub\PatriaTerram\PatriaTerram\PatriaTerram\bin\Configurations\Files\Buildings.json";
 
             var tailor = new StoryTailor(new ConsoleLogger());
 
