@@ -22,7 +22,7 @@ namespace PatriaTerram.Core.Condition.Layers
                     TownName = townName
                 };
 
-                Items.Add(item);
+                AddItem(item);
             }
 
             item.Value = value;
@@ -42,32 +42,12 @@ namespace PatriaTerram.Core.Condition.Layers
 
         public bool IsHasCondition(string townName, BuildingType buildingType)
         {
-            return Items.Any(a => a.TownName == townName && a.BuildingType == buildingType);
+            return GetAll().Any(a => a.TownName == townName && a.BuildingType == buildingType);
         }
 
         public ResultConditionLayerItem GetItem(string townName, BuildingType buildingType)
         {
-            return Items.FirstOrDefault(a => a.TownName == townName && a.BuildingType == buildingType);
-        }
-
-        public int GetMaxValue()
-        {
-            if (Items.Count == 0)
-            {
-                return 0;
-            }
-
-            return Items.Select(a => a.Value).Max();
-        }
-
-        public int GetMinValue()
-        {
-            if (Items.Count == 0)
-            {
-                return 0;
-            }
-
-            return Items.Select(a => a.Value).Min();
+            return GetAll().FirstOrDefault(a => a.TownName == townName && a.BuildingType == buildingType);
         }
     }
 }

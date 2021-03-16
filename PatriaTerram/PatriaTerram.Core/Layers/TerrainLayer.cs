@@ -11,7 +11,7 @@ namespace PatriaTerram.Core.Layers
 
         public bool IsHasTerrain(TerrainType terrainType)
         {
-            return Items.Any(a => a.TerrainType == terrainType);
+            return GetAll().Any(a => a.TerrainType == terrainType);
         }
 
         public void AddTerrain(TerrainType terrainType, int value)
@@ -22,17 +22,17 @@ namespace PatriaTerram.Core.Layers
                 Value = value
             };
 
-            Items.Add(item);
+            AddItem(item);
         }
 
         public TerrainLayerItem GetTerrain(TerrainType terrainType)
         {
-            return Items.FirstOrDefault(a => a.TerrainType == terrainType);
+            return GetAll().FirstOrDefault(a => a.TerrainType == terrainType);
         }
 
         public List<TerrainType> GetTerrainTypes()
         {
-            return Items.Select(a => a.TerrainType).ToList();
+            return GetAll().Select(a => a.TerrainType).ToList();
         }
 
         public int GetTerrainValue(TerrainType terrainType)
@@ -45,11 +45,6 @@ namespace PatriaTerram.Core.Layers
             }
 
             return item.Value;
-        }
-
-        public int GetMaxTerrainValue()
-        {
-            return Items.Select(a => a.Value).Max();
         }
     }
 }

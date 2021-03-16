@@ -1,5 +1,6 @@
 ﻿using PatriaTerram.Core.Condition.Configurations;
 using PatriaTerram.Core.Condition.Enums;
+using PatriaTerram.Core.Condition.Factoryes;
 using PatriaTerram.Core.Condition.Helpers;
 using PatriaTerram.Core.Condition.Models;
 using PatriaTerram.Core.Configurations;
@@ -26,7 +27,7 @@ namespace PatriaTerram.Game
         public Palette<ConditionPalettePoint> Tell()
         {
             _log.Log($"Starting...");
-            var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"]);
+            var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"], new ConditionPalettePointFactory());
 
             _log.Log($"Creating Palette...");
             var model = factory.GetPalette();
@@ -34,7 +35,8 @@ namespace PatriaTerram.Game
             _log.Log($"Getting Steps...");
             var stepFactory = new StepFactory();
 
-            var steps = stepFactory.GetBigCounty();
+            //var steps = stepFactory.GetBigCounty();
+            var steps = stepFactory.GetTwoKingdoms();
 
             var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
 

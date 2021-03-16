@@ -13,35 +13,15 @@ namespace PatriaTerram.Core.Condition.Layers
 
         public bool IsHasCondition(string townName, BuildingType buildingType, BuildingType environmentBuildingType)
         {
-            return Items.Any(a => a.TownName == townName 
+            return GetAll().Any(a => a.TownName == townName 
                                && a.BuildingType == buildingType 
                                && a.EnvironmentBuildingType == environmentBuildingType);
         }
 
         public List<BuildingConditionLayerItem> GetCondiotions(string townName, BuildingType buildingType)
         {
-            return Items.Where(a => a.TownName == townName 
+            return GetAll().Where(a => a.TownName == townName 
                                  && a.BuildingType == buildingType).ToList();
-        }
-
-        public int GetMaxValue()
-        {
-            if(Items.Count == 0)
-            {
-                return 0;
-            }
-
-            return Items.Select(a => a.Value).Max();
-        }
-
-        public int GetMinValue()
-        {
-            if (Items.Count == 0)
-            {
-                return 0;
-            }
-
-            return Items.Select(a => a.Value).Min();
         }
 
         public int GetValue(string townName, BuildingType buildingType, BuildingType environmentBuildingType)
@@ -58,7 +38,7 @@ namespace PatriaTerram.Core.Condition.Layers
 
         public int GetValue(BuildingType buildingType, BuildingType environmentBuildingType)
         {
-            var items = Items.Where(a => a.BuildingType == buildingType && a.EnvironmentBuildingType == environmentBuildingType);
+            var items = GetAll().Where(a => a.BuildingType == buildingType && a.EnvironmentBuildingType == environmentBuildingType);
 
             if (items.Any() == false)
             {
@@ -81,7 +61,7 @@ namespace PatriaTerram.Core.Condition.Layers
                     Condition = condition
                 };
 
-                Items.Add(item);
+                AddItem(item);
             }
 
             item.Value = value;
@@ -102,7 +82,7 @@ namespace PatriaTerram.Core.Condition.Layers
                     Condition = condition
                 };
 
-                Items.Add(item);
+                AddItem(item);
             }
             else
             {
@@ -112,7 +92,7 @@ namespace PatriaTerram.Core.Condition.Layers
 
         public BuildingConditionLayerItem GetItem(string townName, BuildingType buildingType, BuildingType environmentBuildingType)
         {
-            return Items.FirstOrDefault(a => a.TownName == townName 
+            return GetAll().FirstOrDefault(a => a.TownName == townName 
                                           && a.BuildingType == buildingType 
                                           && a.EnvironmentBuildingType == environmentBuildingType);
         }

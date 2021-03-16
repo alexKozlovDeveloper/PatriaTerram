@@ -8,7 +8,7 @@ namespace PatriaTerram.Core.Condition.Models
 {
     public class ConditionPalettePoint : TerrainPalettePoint
     {
-        public ConditionPalettePoint()
+        public ConditionPalettePoint(int x, int y) : base(x, y)
         {
             _layers = new List<ILayer>
             {

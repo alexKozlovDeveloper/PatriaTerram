@@ -7,10 +7,16 @@ namespace PatriaTerram.Core.Models
 {
     public class TerrainPalettePoint
     {
+        public int X { get; set; }
+        public int Y { get; set; }
+
         protected List<ILayer> _layers;
 
-        public TerrainPalettePoint()
+        public TerrainPalettePoint(int x, int y)
         {
+            X = x;
+            Y = y;
+
             _layers = new List<ILayer>
             {
                 new TerrainLayer()
@@ -27,6 +33,11 @@ namespace PatriaTerram.Core.Models
             }
 
             return (T)layer;
+        }
+
+        public IEnumerable<ILayer> GetLayers()
+        {
+            return _layers;
         }
 
         public TerrainLayer Terrains => GetLayer<TerrainLayer>("Terrain");

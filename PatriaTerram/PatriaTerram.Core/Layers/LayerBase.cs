@@ -1,21 +1,53 @@
 ﻿using PatriaTerram.Core.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PatriaTerram.Core.Layers
 {
     public abstract class LayerBase<T> : ILayer where T : ILayerItem
     {
         public virtual string Name { get; }
-        protected List<T> Items { get; private set; }
+        private List<T> Items { get; set; }
+
+        public int ItemsCount { get { return Items.Count; } }
 
         public LayerBase()
         {
             Items = new List<T>();
         }
 
-        public List<T> GetAll()
+        public event ILayerHelper.AddItemHandler AddItemEvent;
+
+        public IEnumerable<T> GetAll()
         {
             return Items;
+        }
+
+        public int GetMaxValue()
+        {
+            if (Items.Count == 0)
+            {
+                return 0;
+            }
+
+            return Items.Select(a => a.Value).Max();
+        }
+
+        public int GetMinValue()
+        {
+            if (Items.Count == 0)
+            {
+                return 0;
+            }
+
+            return Items.Select(a => a.Value).Min();
+        }
+
+        public void AddItem(T item)
+        {
+            Items.Add(item);
+
+            AddItemEvent(Name, item.Descriptor, item.Value);
         }
     }
 }

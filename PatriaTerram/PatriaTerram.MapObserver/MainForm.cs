@@ -126,7 +126,7 @@ namespace PatriaTerram.MapObserver
                 SmoothingSize = int.Parse(SmoothingSizeTextBox.Text as string)
             };
 
-            var factory = new TerrainPaletteFactory<TerrainPalettePoint>(config);
+            var factory = new TerrainPaletteFactory<TerrainPalettePoint>(config, new TerrainPalettePointFactory());
 
             var palette = factory.GetPalette();
 

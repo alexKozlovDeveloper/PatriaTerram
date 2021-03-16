@@ -98,7 +98,7 @@ namespace PatriaTerram.Web.Models
                 {
                     var point = palette[x, y];
 
-                    var maxPointTerrainValue = point.Terrains.GetMaxTerrainValue();
+                    var maxPointTerrainValue = point.Terrains.GetMaxValue();
 
                     if (maxPointTerrainValue > max)
                     {

@@ -1,36 +1,53 @@
 ﻿using AStarAlgorithm.Entityes;
+using PatriaTerram.Core.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PatriaTerram.Core.Models
 {
-    public class Palette<Point>
+    public class Palette<Point> where Point : TerrainPalettePoint
     {
+        public PaletteStatistics Statistics { get; private set; }
+
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+
         private Point[][] _points;
 
-        public int Width
-        {
-            get
-            {
-                if (_points == null) { return 0; }
+        private IPalettePointFactory<Point> _pointFactory;
 
-                return _points.Length;
-            }
-        }
-        public int Height
+        public Palette(int width, int height, IPalettePointFactory<Point> pointFactory)
         {
-            get
-            {
-                if (_points == null) { return 0; }
-                if (_points.Length == 0) { return 0; }
-                if (_points[0] == null) { return 0; }
+            Width = width;
+            Height = height;
 
-                return _points[0].Length;
-            }
+            _pointFactory = pointFactory;
+
+            Statistics = new PaletteStatistics();
+
+            CreateEmptyPoints();
         }
 
-        public Palette(Point[][] points)
+        private void CreateEmptyPoints()
         {
-            _points = points;
+            _points = new Point[Width][];
+
+            for (int i = 0; i < Width; i++)
+            {
+                _points[i] = new Point[Height];
+
+                for (int j = 0; j < Height; j++)
+                {
+                    var point = _pointFactory.Create(i, j);
+
+                    foreach (var layer in point.GetLayers())
+                    {
+                        layer.AddItemEvent += Statistics.AddLayerValue;
+                    }
+
+                    _points[i][j] = point;
+                }
+            }
         }
 
         public Point this[int i, int j]

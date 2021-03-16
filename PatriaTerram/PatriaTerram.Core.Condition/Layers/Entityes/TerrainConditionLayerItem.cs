@@ -11,5 +11,6 @@ namespace PatriaTerram.Core.Condition.Layers.Entityes
         public TerrainType EnvironmentTerrainType { get; set; }
         public int Value { get; set; }
         public TerrainCondition Condition { get; set; }
+        public string Descriptor { get { return $"{BuildingType}-{EnvironmentTerrainType}"; } }
     }
 }

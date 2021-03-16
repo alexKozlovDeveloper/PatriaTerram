@@ -18,12 +18,12 @@ namespace PatriaTerram.Core.Condition.Layers
                 TownName = townName
             };
 
-            Items.Add(item);
+            AddItem(item);
         }
 
         public void AddIfNotExist(BuildingType buildingType, string townName)
         {
-            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.TownName == townName);
+            var item = GetAll().FirstOrDefault(a => a.BuildingType == buildingType && a.TownName == townName);
 
             if(item == null)
             {
@@ -33,22 +33,22 @@ namespace PatriaTerram.Core.Condition.Layers
 
         public bool IsHasAnyBuildings()
         {
-            return Items.Count != 0;
+            return ItemsCount != 0;
         }
 
         public bool IsHasBuildings(BuildingType buildingType, string town)
         {
-            return Items.Any(a => a.BuildingType == buildingType && a.TownName == town);
+            return GetAll().Any(a => a.BuildingType == buildingType && a.TownName == town);
         }
 
         public int Count()
         {
-            return Items.Count;
+            return ItemsCount;
         }
 
         public List<BuildingType> GetBuildingTypes() 
         {
-            return Items.Select(a => a.BuildingType).ToList();
+            return GetAll().Select(a => a.BuildingType).ToList();
         }
     }
 }

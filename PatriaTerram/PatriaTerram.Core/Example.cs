@@ -8,7 +8,7 @@ namespace PatriaTerram.Core
     {
         public static Palette<TerrainPalettePoint> GetTerrainPalette()
         {
-            var factory = new TerrainPaletteFactory<TerrainPalettePoint>(Configs.PaletteConfigs["main"]);
+            var factory = new TerrainPaletteFactory<TerrainPalettePoint>(Configs.PaletteConfigs["main"], new TerrainPalettePointFactory());
 
             var model = factory.GetPalette();
 

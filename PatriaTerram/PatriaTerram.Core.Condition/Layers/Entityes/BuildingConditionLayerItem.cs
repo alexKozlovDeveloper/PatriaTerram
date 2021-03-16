@@ -12,5 +12,6 @@ namespace PatriaTerram.Core.Condition.Layers.Entityes
         public int Value { get; set; }
         public BuildingCondition Condition { get; set; }
 
+        public string Descriptor { get { return $"{TownName}-{BuildingType}-{EnvironmentBuildingType}"; } }
     }
 }

@@ -12,9 +12,7 @@ namespace PatriaTerram.Core.Configurations
         public static string PaletteConfigurationJsonFilePath = @"Configurations\Files\PaletteConfigurations.json";
 
         private static Dictionary<TerrainType, Terrain> _terrains;
-        private static Dictionary<string, PaletteConfiguration> _paletteConfigs;
-
-        
+        private static Dictionary<string, PaletteConfiguration> _paletteConfigs;        
 
         public static Dictionary<TerrainType, Terrain> Terrains
         {

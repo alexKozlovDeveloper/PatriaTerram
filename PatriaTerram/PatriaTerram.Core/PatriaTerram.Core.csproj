@@ -45,10 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\Constants.cs" />
     <Compile Include="Configurations\Configs.cs" />
+    <Compile Include="Configurations\Constants.cs" />
     <Compile Include="Enums\TerrainType.cs" />
     <Compile Include="Example.cs" />
+    <Compile Include="Factoryes\TerrainPalettePointFactory.cs" />
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\PalettePointColorHelper.cs" />
     <Compile Include="Helpers\RangeHelper.cs" />
@@ -57,16 +58,17 @@
     <Compile Include="Configurations\Entityes\PaletteConfiguration.cs" />
     <Compile Include="Configurations\Entityes\Range.cs" />
     <Compile Include="Configurations\Entityes\Color.cs" />
+    <Compile Include="Interfaces\IPalettePointFactory.cs" />
     <Compile Include="Layers\Entityes\TerrainLayerItem.cs" />
     <Compile Include="Layers\LayerBase.cs" />
     <Compile Include="Layers\TerrainLayer.cs" />
     <Compile Include="Configurations\Entityes\Terrain.cs" />
-    <Compile Include="Factoryes\SamplePaletteFactory.cs" />
     <Compile Include="Factoryes\TerrainPaletteFactory.cs" />
     <Compile Include="Interfaces\IPaletteFactory.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Models\Palette.cs" />
+    <Compile Include="Models\PaletteStatistics.cs" />
     <Compile Include="Models\TerrainPalettePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

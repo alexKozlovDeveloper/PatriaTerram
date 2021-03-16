@@ -13,7 +13,7 @@ namespace PatriaTerram.Core.Condition.Layers
 
         public void AddConditionValue(BuildingType buildingType, TerrainType environmentTerrain, int value, TerrainCondition condition)
         {
-            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == environmentTerrain);
+            var item = GetAll().FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == environmentTerrain);
 
             if (item == null)
             {
@@ -25,7 +25,7 @@ namespace PatriaTerram.Core.Condition.Layers
                     Condition = condition
                 };
 
-                Items.Add(item);
+                AddItem(item);
             }
             else
             {
@@ -35,32 +35,12 @@ namespace PatriaTerram.Core.Condition.Layers
 
         public bool IsHasCondition(BuildingType buildingType, TerrainType environment)
         {
-            return Items.Any(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == environment);
-        }
-
-        public int GetMaxValue()
-        {
-            if (Items.Count == 0)
-            {
-                return 0;
-            }
-
-            return Items.Select(a => a.Value).Max();
-        }
-
-        public int GetMinValue()
-        {
-            if (Items.Count == 0)
-            {
-                return 0;
-            }
-
-            return Items.Select(a => a.Value).Min();
+            return GetAll().Any(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == environment);
         }
 
         public int GetValue(BuildingType buildingType, TerrainType terrainType)
         {
-            var item = Items.FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == terrainType);
+            var item = GetAll().FirstOrDefault(a => a.BuildingType == buildingType && a.EnvironmentTerrainType == terrainType);
 
             if (item == null)
             {

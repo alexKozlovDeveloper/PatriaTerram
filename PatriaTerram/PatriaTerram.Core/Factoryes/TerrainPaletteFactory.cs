@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace PatriaTerram.Core.Factoryes
 {
-    public class TerrainPaletteFactory<Point> : IPaletteFactory<Point> where Point : TerrainPalettePoint, new()
+    public class TerrainPaletteFactory<Point> : IPaletteFactory<Point> where Point : TerrainPalettePoint
     {
         private int _width;
         private int _height;
@@ -27,8 +27,9 @@ namespace PatriaTerram.Core.Factoryes
         private Range _lakeRange;
 
         private PerlinNoiseGenerator _generator;
+        private IPalettePointFactory<Point> _pointFactory;
 
-        public TerrainPaletteFactory(PaletteConfiguration config)
+        public TerrainPaletteFactory(PaletteConfiguration config, IPalettePointFactory<Point> pointFactory)
         {
             _width = config.Width;
             _height = config.Height;
@@ -46,13 +47,14 @@ namespace PatriaTerram.Core.Factoryes
             _maxAltitudeValue = config.MaxAltitudeValue;
 
             _generator = new PerlinNoiseGenerator(_seed, _maxAltitudeValue);
+            _pointFactory = pointFactory;
         }
 
         public Palette<Point> GetPalette()
         {
-            Palette<Point> model = CreateEmptyPalette(_width, _height);
+            Palette<Point> model = new Palette<Point>(_width, _height, _pointFactory);
             var terrains = Configs.Terrains;
-
+            
             var altitudeMatrix = _generator.GetPerlinNoiseMatrix(_width, _smoothingSize);
             var oceanMatrix = altitudeMatrix.ClearTopValue(_oceanEdge);
             var groundMatrix = altitudeMatrix.ClearBottomValue(_oceanEdge + _beachSize);
@@ -141,23 +143,6 @@ namespace PatriaTerram.Core.Factoryes
             }
 
             return false;
-        }
-
-        private Palette<Point> CreateEmptyPalette(int width, int height)
-        {
-            var points = new Point[width][];
-
-            for (int i = 0; i < width; i++)
-            {
-                points[i] = new Point[height];
-
-                for (int j = 0; j < height; j++)
-                {
-                    points[i][j] = new Point();
-                }
-            }
-
-            return new Palette<Point>(points);
         }
     }
 }
