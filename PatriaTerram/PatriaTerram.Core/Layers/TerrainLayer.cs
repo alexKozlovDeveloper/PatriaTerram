@@ -27,7 +27,12 @@ namespace PatriaTerram.Core.Layers
 
         public TerrainLayerItem GetTerrain(TerrainType terrainType)
         {
-            return GetAll().FirstOrDefault(a => a.TerrainType == terrainType);
+            //return GetAll().FirstOrDefault(a => a.TerrainType == terrainType);
+
+            //var item1 = GetAll().FirstOrDefault(a => a.TerrainType == terrainType);
+            //var item2 = GetItem(a => a.TerrainType == terrainType);
+
+            return GetItem(a => a.TerrainType == terrainType);
         }
 
         public List<TerrainType> GetTerrainTypes()

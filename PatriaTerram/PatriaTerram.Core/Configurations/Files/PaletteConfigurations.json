@@ -51,6 +51,32 @@
     "BeachSize": 10,
     "SmoothingSize": 2
   },
+  "web_small": {
+    "Width": 32,
+    "Height": 32,
+    "Seed": 666,
+    "MaxAltitudeValue": 256,
+    "OceanEdge": 90,
+    "MountainsEdge": 170,
+    "FertileSoilRange": {
+      "Bottom": 120,
+      "Top": 150
+    },
+    "WoodRange": {
+      "Bottom": 150,
+      "Top": 170
+    },
+    "StoneRange": {
+      "Bottom": 195,
+      "Top": 255
+    },
+    "LakeRange": {
+      "Bottom": 200,
+      "Top": 255
+    },
+    "BeachSize": 10,
+    "SmoothingSize": 2
+  },
   "BigWorld": {
     "Width": 128,
     "Height": 128,

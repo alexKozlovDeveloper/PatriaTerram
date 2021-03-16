@@ -1,4 +1,5 @@
 ﻿using PatriaTerram.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -48,6 +49,11 @@ namespace PatriaTerram.Core.Layers
             Items.Add(item);
 
             AddItemEvent(Name, item.Descriptor, item.Value);
+        }
+
+        public T GetItem(Func<T, bool> func)
+        {
+            return Items.FirstOrDefault(a => func(a));
         }
     }
 }

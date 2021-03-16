@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
 using PatriaTerram.Core.Condition.Configurations;
-using PatriaTerram.Core.Condition.Configurations.Entityes;
 using PatriaTerram.Core.Condition.Enums;
-using PatriaTerram.Core.Condition.Helpers;
 using PatriaTerram.Core.Condition.Models;
-using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Configurations.Entityes;
 using PatriaTerram.Core.Enums;
-using PatriaTerram.Core.Factoryes;
 using PatriaTerram.Core.Helpers;
 using PatriaTerram.Core.Logging;
 using PatriaTerram.Core.Models;

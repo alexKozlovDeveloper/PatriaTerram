@@ -168,8 +168,11 @@ namespace PatriaTerram.Game
         {
             var steps = new List<Step>();
 
-            steps.AddRange(GetStartedPack("Farm_1"));
-            steps.AddRange(GetStartedPack("Farm_2"));
+            //steps.AddRange(GetStartedPack("Farm_1"));
+            //steps.AddRange(GetStartedPack("Farm_2"));
+
+            steps.AddRange(GetFarmVillage("Farm_Village_1"));
+            steps.AddRange(GetFarmVillage("Farm_Village_2"));
 
             return steps;
         }

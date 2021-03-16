@@ -1,4 +1,5 @@
 ﻿using PatriaTerram.Core.Configurations.Entityes;
+using System;
 using System.Collections.Generic;
 
 namespace PatriaTerram.Core.Models
@@ -34,6 +35,18 @@ namespace PatriaTerram.Core.Models
                     range.Bottom = value;
                 }
             }
+        }
+
+        public string GetReport()
+        {
+            var resutl = "";
+
+            foreach (KeyValuePair<string, Range> item in LayerMinMaxValues)
+            {
+                resutl += $"{item.Key}-[{item.Value.Bottom}-{item.Value.Top}]" + Environment.NewLine;
+            }
+
+            return resutl;
         }
     }
 }

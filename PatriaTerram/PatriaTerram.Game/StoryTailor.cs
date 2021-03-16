@@ -27,7 +27,7 @@ namespace PatriaTerram.Game
         public Palette<ConditionPalettePoint> Tell()
         {
             _log.Log($"Starting...");
-            var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web"], new ConditionPalettePointFactory());
+            var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web_small"], new ConditionPalettePointFactory());
 
             _log.Log($"Creating Palette...");
             var model = factory.GetPalette();
@@ -36,7 +36,8 @@ namespace PatriaTerram.Game
             var stepFactory = new StepFactory();
 
             //var steps = stepFactory.GetBigCounty();
-            var steps = stepFactory.GetTwoKingdoms();
+            //var steps = stepFactory.GetTwoKingdoms();
+            var steps = stepFactory.GetFarmVillage("Farm_1");
 
             var game = new GameController(model, steps, ConditionConfigs.Buildings.Values);
 
@@ -60,6 +61,8 @@ namespace PatriaTerram.Game
             game.ResolveRoads(new List<BuildingType> { BuildingType.TownHall, BuildingType.FarmTownHall, BuildingType.StonepitTownHall });
 
             _log.Log($"Finishing...");
+
+            var res = model.Statistics.GetReport();
 
             return model;
         }
