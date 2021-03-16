@@ -65,6 +65,8 @@ namespace PatriaTerram.Core.Condition.Layers
             }
 
             item.Value = value;
+
+            ThrowUpdateItemValueEvent(item.Descriptor, item.Value);
         }
 
         public void AddConditionValue(string townName, BuildingType buildingType, BuildingType environmentBuildingType, int value, BuildingCondition condition)
@@ -87,6 +89,8 @@ namespace PatriaTerram.Core.Condition.Layers
             else
             {
                 item.Value += value;
+
+                ThrowUpdateItemValueEvent(item.Descriptor, item.Value);
             }
         }
 

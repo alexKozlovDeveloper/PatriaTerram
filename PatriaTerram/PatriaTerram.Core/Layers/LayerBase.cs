@@ -17,7 +17,7 @@ namespace PatriaTerram.Core.Layers
             Items = new List<T>();
         }
 
-        public event ILayerHelper.AddItemHandler AddItemEvent;
+        public event ILayerHelper.AddItemHandler UpdateItemValueEvent;
 
         public IEnumerable<T> GetAll()
         {
@@ -44,16 +44,16 @@ namespace PatriaTerram.Core.Layers
             return Items.Select(a => a.Value).Min();
         }
 
+        protected void ThrowUpdateItemValueEvent(string descriptor, int value)
+        {
+            UpdateItemValueEvent(Name, descriptor, value);
+        }
+
         public void AddItem(T item)
         {
             Items.Add(item);
 
-            AddItemEvent(Name, item.Descriptor, item.Value);
-        }
-
-        public T GetItem(Func<T, bool> func)
-        {
-            return Items.FirstOrDefault(a => func(a));
+            ThrowUpdateItemValueEvent(item.Descriptor, item.Value);
         }
     }
 }

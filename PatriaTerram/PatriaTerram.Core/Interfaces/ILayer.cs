@@ -4,7 +4,7 @@
     {
         string Name { get; }
 
-        event ILayerHelper.AddItemHandler AddItemEvent;
+        event ILayerHelper.AddItemHandler UpdateItemValueEvent;
     }
 
     public static class ILayerHelper 

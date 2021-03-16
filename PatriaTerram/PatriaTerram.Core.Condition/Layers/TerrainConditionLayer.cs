@@ -30,6 +30,8 @@ namespace PatriaTerram.Core.Condition.Layers
             else
             {
                 item.Value += value;
+
+                ThrowUpdateItemValueEvent(item.Descriptor, item.Value);
             }
         }
 

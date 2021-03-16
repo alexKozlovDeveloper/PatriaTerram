@@ -62,7 +62,7 @@ namespace PatriaTerram.Game
 
             _log.Log($"Finishing...");
 
-            var res = model.Statistics.GetReport();
+            var d = model.Statistics.GetReport();
 
             return model;
         }
