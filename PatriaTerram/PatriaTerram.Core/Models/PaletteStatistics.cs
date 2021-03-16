@@ -13,7 +13,7 @@ namespace PatriaTerram.Core.Models
             LayerMinMaxValues = new Dictionary<string, Range>();
         }
 
-        public void AddLayerValue(string layerName, string descriptor, int value)
+        public void UpdateLayerItemValue(string layerName, string descriptor, int value)
         {
             var key = $"{layerName}-{descriptor}";
 

@@ -42,7 +42,7 @@ namespace PatriaTerram.Core.Models
 
                     foreach (var layer in point.GetLayers())
                     {
-                        layer.UpdateItemValueEvent += Statistics.AddLayerValue;
+                        layer.UpdateItemValueEvent += Statistics.UpdateLayerItemValue;
                     }
 
                     _points[i][j] = point;

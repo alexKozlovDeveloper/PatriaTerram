@@ -7,6 +7,7 @@ namespace PatriaTerram.Core.Layers.Entityes
     {
         public TerrainType TerrainType { get; set; }
         public int Value { get; set; }
+
         public string Descriptor { get { return $"{TerrainType}"; } }
     }
 }
