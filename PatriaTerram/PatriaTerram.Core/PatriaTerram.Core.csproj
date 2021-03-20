@@ -69,6 +69,7 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\PaletteStatistics.cs" />
+    <Compile Include="Models\PaletteStatisticsItem.cs" />
     <Compile Include="Models\TerrainPalettePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

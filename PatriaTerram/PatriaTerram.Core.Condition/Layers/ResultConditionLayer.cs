@@ -1,5 +1,6 @@
 ﻿using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Condition.Layers.Entityes;
+using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Layers;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace PatriaTerram.Core.Condition.Layers
 {
     public class ResultConditionLayer : LayerBase<ResultConditionLayerItem>
     {
-        public override string Name { get { return "ResultCondition"; } }
+        public override string Name { get { return Constants.ResultConditionLayer; } }
 
         public void UpdateValue(string townName, BuildingType buildingType, int value)
         {

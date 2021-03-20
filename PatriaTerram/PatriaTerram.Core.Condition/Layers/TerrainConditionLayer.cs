@@ -1,6 +1,7 @@
 ﻿using PatriaTerram.Core.Condition.Configurations.Entityes;
 using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Condition.Layers.Entityes;
+using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Layers;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace PatriaTerram.Core.Condition.Layers
 {
     public class TerrainConditionLayer : LayerBase<TerrainConditionLayerItem>
     {
-        public override string Name { get { return "TerrainCondition"; } }
+        public override string Name { get { return Constants.TerrainConditionLayer; } }
 
         public void AddConditionValue(BuildingType buildingType, TerrainType environmentTerrain, int value, TerrainCondition condition)
         {

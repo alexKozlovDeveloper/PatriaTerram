@@ -87,7 +87,7 @@ namespace PatriaTerram.Web.Models
                 var env = terrainCondition.EnvironmentTerrainType;
                 var type = terrainCondition.BuildingType;
                 var value = terrainCondition.Value;
-                var terrainConditionColorValue = value / (double)context.PaletteStatistics.LayerMinMaxValues[terrainCondition.Descriptor].Top * 255;
+                var terrainConditionColorValue = value / (double)context.PaletteStatistics.DescriptorValueRanges[terrainCondition.Descriptor].Top * 255;
 
                 if (value == 0) { continue; }
 
@@ -114,7 +114,7 @@ namespace PatriaTerram.Web.Models
                 var type = buildingCondition.BuildingType;
                 var value = buildingCondition.Value;
                 var town = buildingCondition.TownName;
-                var buildingConditionColorValue = (value / (double)context.PaletteStatistics.LayerMinMaxValues[buildingCondition.Descriptor].Top) * 255;
+                var buildingConditionColorValue = (value / (double)context.PaletteStatistics.DescriptorValueRanges[buildingCondition.Descriptor].Top) * 255;
 
                 if (value == 0) { continue; }
 
@@ -141,7 +141,7 @@ namespace PatriaTerram.Web.Models
                 var type = resultCondition.BuildingType;
                 var value = resultCondition.Value;
                 var town = resultCondition.TownName;
-                var resultConditionColorResult = (value / (double)context.PaletteStatistics.LayerMinMaxValues[resultCondition.Descriptor].Top) * 255;
+                var resultConditionColorResult = (value / (double)context.PaletteStatistics.DescriptorValueRanges[resultCondition.Descriptor].Top) * 255;
 
                 if (value == 0) { continue; }
 

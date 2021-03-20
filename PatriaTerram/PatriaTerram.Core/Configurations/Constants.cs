@@ -23,5 +23,11 @@
         public const string Market = "market"; 
 
         public const string AnyBuilding = "AnyBuilding";
+
+        public const string TerrainLayer = "Terrain";
+        public const string BuildingConditionLayer = "BuildingCondition";
+        public const string BuildingLayer = "Building";
+        public const string ResultConditionLayer = "ResultCondition";
+        public const string TerrainConditionLayer = "TerrainCondition";
     }
 }

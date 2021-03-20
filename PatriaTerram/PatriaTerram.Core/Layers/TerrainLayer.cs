@@ -1,4 +1,5 @@
-﻿using PatriaTerram.Core.Enums;
+﻿using PatriaTerram.Core.Configurations;
+using PatriaTerram.Core.Enums;
 using PatriaTerram.Core.Layers.Entityes;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ namespace PatriaTerram.Core.Layers
 {
     public class TerrainLayer : LayerBase<TerrainLayerItem>
     {
-        public override string Name { get { return "Terrain"; } }
+        public override string Name { get { return Constants.TerrainLayer; } }
 
         public bool IsHasTerrain(TerrainType terrainType)
         {

@@ -1,5 +1,6 @@
 ﻿using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Condition.Layers.Entityes;
+using PatriaTerram.Core.Configurations;
 using PatriaTerram.Core.Layers;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace PatriaTerram.Core.Condition.Layers
 {
     public class BuildingLayer : LayerBase<BuildingLayerItem>
     {
-        public override string Name { get { return "Building"; } }
+        public override string Name { get { return Constants.BuildingLayer; } }
 
         public void AddBuilding(BuildingType buildingType, string townName = null)
         {

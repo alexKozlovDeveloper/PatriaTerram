@@ -46,24 +46,10 @@ namespace PatriaTerram.Web.Models
 
         private int GetMaxTerrainValue(Palette<ConditionPalettePoint> palette)
         {
-            var max = 0;
-
-            for (int x = 0; x < palette.Width; x++)
-            {
-                for (int y = 0; y < palette.Height; y++)
-                {
-                    var point = palette[x, y];
-
-                    var maxPointTerrainValue = point.Terrains.GetMaxValue();
-
-                    if (maxPointTerrainValue > max)
-                    {
-                        max = maxPointTerrainValue;
-                    }
-                }
-            }
-
-            return max;
+            return palette.Statistics
+                .GetLayerValueRanges(Constants.TerrainLayer)
+                .Select(a => a.Value.Top)
+                .Max();
         }
 
         public void AddLayer(string layer, string classes)
