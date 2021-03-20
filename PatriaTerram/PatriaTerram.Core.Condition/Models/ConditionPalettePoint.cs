@@ -10,14 +10,10 @@ namespace PatriaTerram.Core.Condition.Models
     {
         public ConditionPalettePoint(int x, int y) : base(x, y)
         {
-            _layers = new List<ILayer>
-            {
-                new TerrainLayer(),
-                new TerrainConditionLayer(),
-                new BuildingConditionLayer(),                
-                new ResultConditionLayer(),
-                new BuildingLayer()
-            };
+            _layers.Add(new TerrainConditionLayer());
+            _layers.Add(new BuildingConditionLayer());
+            _layers.Add(new ResultConditionLayer());
+            _layers.Add(new BuildingLayer());
         }
 
         public TerrainConditionLayer TerrainConditions => GetLayer<TerrainConditionLayer>("TerrainCondition");

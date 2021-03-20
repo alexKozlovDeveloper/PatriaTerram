@@ -37,6 +37,8 @@ namespace PatriaTerram.Core.Models
             }
         }
 
+
+        //TODO: remove
         public string GetReport()
         {
             var resutl = "";

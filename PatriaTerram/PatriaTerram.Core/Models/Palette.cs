@@ -7,12 +7,15 @@ namespace PatriaTerram.Core.Models
 {
     public class Palette<Point> where Point : TerrainPalettePoint
     {
-        public PaletteStatistics Statistics { get; private set; }
-
         public int Width { get; private set; }
         public int Height { get; private set; }
 
+        public PaletteStatistics Statistics { get; private set; }
+
+        public IEnumerable<Point> AllPoints { get { return _allPoints; } }
+
         private Point[][] _points;
+        private List<Point> _allPoints;
 
         private IPalettePointFactory<Point> _pointFactory;
 
@@ -48,6 +51,9 @@ namespace PatriaTerram.Core.Models
                     _points[i][j] = point;
                 }
             }
+
+            _allPoints = new List<Point>(Width * Height);
+            _points.ToList().ForEach(a => _allPoints.AddRange(a));
         }
 
         public Point this[int i, int j]
@@ -68,24 +74,6 @@ namespace PatriaTerram.Core.Models
                 return _points[coord.X][coord.Y]; 
             }
             set { _points[coord.X][coord.Y] = value; }
-        }
-
-        public IEnumerable<Point> AllPoints
-        {
-            get
-            {
-                var items = new List<Point>();
-
-                for (int x = 0; x < Width; x++)
-                {
-                    for (int y = 0; y < Height; y++)
-                    {
-                        items.Add(this[x, y]);
-                    }
-                }
-
-                return items;
-            }
         }
     }
 }

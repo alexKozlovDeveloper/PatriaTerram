@@ -10,7 +10,7 @@ namespace PatriaTerram.Core.Models
         public int X { get; set; }
         public int Y { get; set; }
 
-        protected List<ILayer> _layers;
+        protected readonly List<ILayer> _layers;
 
         public TerrainPalettePoint(int x, int y)
         {
