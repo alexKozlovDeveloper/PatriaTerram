@@ -15,7 +15,8 @@ namespace PatriaTerram.Core.Models
 
         public void UpdateLayerItemValue(string layerName, string descriptor, int value)
         {
-            var key = $"{layerName}-{descriptor}";
+            //var key = $"{layerName}-{descriptor}";
+            var key = $"{descriptor}";
 
             if(LayerMinMaxValues.ContainsKey(key) == false)
             {

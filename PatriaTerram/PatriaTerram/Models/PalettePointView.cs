@@ -82,13 +82,12 @@ namespace PatriaTerram.Web.Models
                 context.AddLayer(terrain.Type.ToString(), $".{terrain.Type}");
             }
 
-
             foreach (var terrainCondition in point.TerrainConditions.GetAll())
             {
                 var env = terrainCondition.EnvironmentTerrainType;
                 var type = terrainCondition.BuildingType;
                 var value = terrainCondition.Value;
-                var terrainConditionColorValue = value / (double)context.MaxConditions[$"{type}-{env}"] * 255;
+                var terrainConditionColorValue = value / (double)context.PaletteStatistics.LayerMinMaxValues[terrainCondition.Descriptor].Top * 255;
 
                 if (value == 0) { continue; }
 
@@ -115,7 +114,7 @@ namespace PatriaTerram.Web.Models
                 var type = buildingCondition.BuildingType;
                 var value = buildingCondition.Value;
                 var town = buildingCondition.TownName;
-                var buildingConditionColorValue = (value / (double)context.MaxConditions[$"{type}-{env}"]) * 255;
+                var buildingConditionColorValue = (value / (double)context.PaletteStatistics.LayerMinMaxValues[buildingCondition.Descriptor].Top) * 255;
 
                 if (value == 0) { continue; }
 
@@ -138,11 +137,11 @@ namespace PatriaTerram.Web.Models
 
             foreach (var resultCondition in point.ResultConditions.GetAll())
             {
-                var env = "Result";
+                var env = Constants.Result;
                 var type = resultCondition.BuildingType;
                 var value = resultCondition.Value;
                 var town = resultCondition.TownName;
-                var resultConditionColorResult = (value / (double)context.MaxConditions[$"{type}-{env}"]) * 255;
+                var resultConditionColorResult = (value / (double)context.PaletteStatistics.LayerMinMaxValues[resultCondition.Descriptor].Top) * 255;
 
                 if (value == 0) { continue; }
 
