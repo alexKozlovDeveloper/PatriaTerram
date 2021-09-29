@@ -1,5 +1,6 @@
 ﻿using PatriaTerram.Core.Condition.Enums;
 using PatriaTerram.Core.Configurations.Entityes;
+using PatriaTerram.Core.Enums;
 using System.Collections.Generic;
 
 namespace PatriaTerram.Core.Condition.Configurations.Entityes
@@ -14,6 +15,7 @@ namespace PatriaTerram.Core.Condition.Configurations.Entityes
 
         public List<BuildingCondition> BuildingConditions { get; set; }
         public List<TerrainCondition> TerrainConditions { get; set; }
+        public TerrainType[] IntolerableTerrains { get; set; }
 
         public Building() 
         {

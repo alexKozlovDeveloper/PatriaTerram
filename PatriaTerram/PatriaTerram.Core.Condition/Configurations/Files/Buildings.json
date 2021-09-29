@@ -412,6 +412,12 @@
           "IsPositive": false,
           "IsRequired": true
         }
+      ],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
       ]
     },
     "FarmTownHall": {
@@ -475,7 +481,7 @@
         },
         {
           "EnvironmentTerrain": "Lake",
-          "Radius": 10,
+          "Radius": 1,
           "InnerRadius": 5,
           "Priority": 10,
           "Type": "OneLevel",
@@ -491,6 +497,12 @@
           "IsPositive": false,
           "IsRequired": true
         }
+      ],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
       ]
     },
     "StonepitTownHall": {
@@ -561,6 +573,12 @@
           "IsPositive": false,
           "IsRequired": true
         }
+      ],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
       ]
     },
     "Sawmill": {
@@ -641,6 +659,12 @@
           "IsPositive": false,
           "IsRequired": true
         }
+      ],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
       ]
     },
     "Stonepit": {
@@ -721,6 +745,12 @@
           "IsPositive": false,
           "IsRequired": true
         }
+      ],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
       ]
     },
     "Farm": {
@@ -821,6 +851,12 @@
           "IsPositive": false,
           "IsRequired": true
         }
+      ],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
       ]
     },
     "House": {
@@ -892,6 +928,12 @@
           "IsPositive": false,
           "IsRequired": true
         }
+      ],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
       ]
     },
     "Road": {
@@ -903,7 +945,13 @@
       },
       "Value": 0,
       "BuildingConditions": [],
-      "TerrainConditions": []
+      "TerrainConditions": [],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
+      ]
     },
     "Mill": {
       "Type": "Mill",
@@ -963,6 +1011,12 @@
           "IsPositive": false,
           "IsRequired": true
         }
+      ],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
       ]
     },
     "Market": {
@@ -1034,6 +1088,12 @@
           "IsPositive": false,
           "IsRequired": true
         }
+      ],
+      "IntolerableTerrains": [
+        "Ocean",
+        "Mountains",
+        "Beach",
+        "Lake"
       ]
     }
   }

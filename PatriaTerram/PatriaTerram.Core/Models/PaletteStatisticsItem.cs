@@ -7,5 +7,10 @@ namespace PatriaTerram.Core.Models
         public string Layer { get; set; }
         public string Descriptor { get; set; }
         public Range ValueRange { get; set; }
+
+        public override string ToString()
+        {
+            return $"({Layer}) {Descriptor} [{ValueRange.Bottom}-{ValueRange.Top}]";
+        }
     }
 }

@@ -133,13 +133,13 @@ namespace PatriaTerram.Core.Condition.Helpers
             return townNames;
         }
 
-        public static Dictionary<string, Range> GetConditionRanges(this Palette<ConditionPalettePoint> palette, List<string> allTownNames, Building building)
+        public static Dictionary<string, Range> GetConditionRanges(this Palette<ConditionPalettePoint> palette, IEnumerable<string> allTownNames, Building building)
         {
             var conditionRanges = new Dictionary<string, Range>();
 
             foreach (var buildingCondition in building.BuildingConditions)
             {
-                if(allTownNames.Count == 0)
+                if(allTownNames.Count() == 0)
                 {
                     conditionRanges.Add(buildingCondition.EnvironmentBuilding.ToString(), new Range { Top = 0, Bottom = 0 });
                     continue;

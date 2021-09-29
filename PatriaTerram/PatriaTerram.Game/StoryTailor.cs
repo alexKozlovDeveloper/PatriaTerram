@@ -27,7 +27,10 @@ namespace PatriaTerram.Game
         public Palette<ConditionPalettePoint> Tell()
         {
             _log.Log($"Starting...");
-            var factory = new TerrainPaletteFactory<ConditionPalettePoint>(Configs.PaletteConfigs["web_small"], new ConditionPalettePointFactory());
+            var factory = new TerrainPaletteFactory<ConditionPalettePoint>(
+                                Configs.PaletteConfigs["web_small"], 
+                                new ConditionPalettePointFactory()
+                                );
 
             _log.Log($"Creating Palette...");
             var model = factory.GetPalette();
@@ -62,6 +65,7 @@ namespace PatriaTerram.Game
 
             _log.Log($"Finishing...");
 
+            // TODO: remove
             var d = model.Statistics.GetReport();
 
             return model;

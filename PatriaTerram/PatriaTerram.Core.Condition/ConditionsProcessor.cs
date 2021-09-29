@@ -65,6 +65,8 @@ namespace PatriaTerram.Core.Conditions
 
             var items = _palette.GetConditionRanges(allTownNames, building);
 
+            var d = _palette.Statistics.DescriptorValueRanges;
+
             foreach (var point in _palette.AllPoints)
             {
                 resolver.Resolve(point, townName, building, items);

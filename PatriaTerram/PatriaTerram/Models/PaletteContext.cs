@@ -18,9 +18,11 @@ namespace PatriaTerram.Web.Models
     {
         public int MaxTerrainValue { get; set; }
         public PaletteStatistics PaletteStatistics { get; set; }
+        public IEnumerable<string> TownNames { get; set; }
+
         public Dictionary<string, Dictionary<string, Range>> TownConditionRanges { get; set; }
         public Dictionary<string, string> Layers { get; set; }
-        public List<string> TownNames { get; set; }
+
         public Dictionary<TerrainType, string> TerrainTextureMaping { get; set; }
         public Dictionary<BuildingType, string> BuildingTextureMaping { get; set; }
 
@@ -30,26 +32,17 @@ namespace PatriaTerram.Web.Models
             TownNames = new List<string>();
             TownConditionRanges = new Dictionary<string, Dictionary<string, Range>>();
 
-            TownNames = palette.GetAllTownNames();
+            PaletteStatistics = palette.Statistics;
+            TownNames = PaletteStatistics.GetAllTownNames();
+            MaxTerrainValue = PaletteStatistics.GetMaxTerrainValue();
+
             TerrainTextureMaping = ImageConfigs.TerrainTextureMaping;
             BuildingTextureMaping = ImageConfigs.BuildingTextureMaping;
-
-            PaletteStatistics = palette.Statistics;
 
             foreach (var building in ConditionConfigs.Buildings.Values)
             {
                 TownConditionRanges.Add(building.Type.ToString(), palette.GetConditionRanges(TownNames, building));
-            }
-
-            MaxTerrainValue = GetMaxTerrainValue(palette);
-        }
-
-        private int GetMaxTerrainValue(Palette<ConditionPalettePoint> palette)
-        {
-            return palette.Statistics
-                .GetLayerValueRanges(Constants.TerrainLayer)
-                .Select(a => a.Value.Top)
-                .Max();
+            }            
         }
 
         public void AddLayer(string layer, string classes)

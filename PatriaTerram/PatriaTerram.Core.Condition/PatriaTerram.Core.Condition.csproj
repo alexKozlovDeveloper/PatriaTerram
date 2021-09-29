@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Buildings\BuildingBuilder.cs" />
     <Compile Include="Factoryes\ConditionPalettePointFactory.cs" />
+    <Compile Include="Helpers\PaletteStatisticsHelper.cs" />
     <Compile Include="Helpers\TownHelper.cs" />
     <Compile Include="Roads\PassabilityMatrixConverter.cs" />
     <Compile Include="Roads\RoadBuilder.cs" />
